@@ -65,3 +65,4 @@ buck-out/
 # react-native-ultimate-config
 rnuc.xcconfig
 .env
+android/app/release.keystore.properties
