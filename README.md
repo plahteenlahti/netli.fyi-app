@@ -1,3 +1,16 @@
+# Netli.fyi – React Native app for managing Netlify sites
+
+## Running
+```bash
+yarn 
+npx pod-install
+yarn rnuc
+
+yarn ios # or 
+yarn android
+```
+
+
 ## Generating boot screen
 
 ```bash
