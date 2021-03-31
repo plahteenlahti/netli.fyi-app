@@ -1,3 +1,5 @@
+
+
 <p align="center">
   <h1 align="center">Netli.fyi</h1>
   <h4 align="center">React Native app for managing Netlify sites</h4>
@@ -6,10 +8,14 @@
 <p align="center">
   <a href="https://apps.apple.com/app/id1547834539">Download iOS</a> • <a href="https://play.google.com/store/apps/details?id=deploy.nyxo.app">Download Android</a> 
 <br><br>
+    <a href="https://testflight.apple.com/join/cTsXZE42">iOS Beta</a> • <a href="https://play.google.com/apps/testing/deploy.nyxo.app">Android Beta</a> 
 </p>
 
-- [Public beta for iOS](https://testflight.apple.com/join/cTsXZE42)
-- [Public beta for Android](https://play.google.com/apps/testing/deploy.nyxo.app)
+<p align="center">
+  <img height="300" src="https://user-images.githubusercontent.com/7436554/113141380-4e067c00-9232-11eb-9aa4-0a1f9bdd0323.png" />
+</p>
+
+<hr></hr>
 
 
 ## Getting Started
