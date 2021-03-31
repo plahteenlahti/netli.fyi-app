@@ -31,7 +31,7 @@ Run the following commands to get the project running
 ```bash
 yarn # install packages
 npx pod-install # install pods for iOS
-yarn rnuc # generates configuration file based on the .env files
+yarn rnuc .env # generates configuration file based on the .env files
 
 yarn ios # or 
 yarn android # to run on emulator
