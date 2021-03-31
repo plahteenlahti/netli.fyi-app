@@ -7,8 +7,7 @@
 
 <p align="center">
   <a href="https://apps.apple.com/app/id1547834539">Download iOS</a> • <a href="https://play.google.com/store/apps/details?id=deploy.nyxo.app">Download Android</a> 
-<br><br>
-    <a href="https://testflight.apple.com/join/cTsXZE42">iOS Beta</a> • <a href="https://play.google.com/apps/testing/deploy.nyxo.app">Android Beta</a> 
+  <a href="https://testflight.apple.com/join/cTsXZE42">iOS Beta</a> • <a href="https://play.google.com/apps/testing/deploy.nyxo.app">Android Beta</a> 
 </p>
 
 <p align="center">
