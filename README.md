@@ -5,6 +5,19 @@
   <h4 align="center">React Native app for managing Netlify sites</h4>
 </p>
 
+<div align="center">
+  <br/>
+  <a align="center" href="https://github.com/plahteenlahti?tab=followers">
+    <img src="https://img.shields.io/github/followers/plahteenlahti?label=Follow%20%40plahteenlahti&style=social" />
+  </a>
+  <br/>
+  <a align="center" href="https://twitter.com/plahteenlahti">
+    <img src="https://img.shields.io/twitter/follow/plahteenlahti?label=Follow%20%40plahteenlahti&style=social" />
+  </a>
+</div>
+<br/>
+
+
 <p align="center">
   <a href="https://apps.apple.com/app/id1547834539">Download iOS</a> • <a href="https://play.google.com/store/apps/details?id=deploy.nyxo.app">Download Android</a> 
   <a href="https://testflight.apple.com/join/cTsXZE42">iOS Beta</a> • <a href="https://play.google.com/apps/testing/deploy.nyxo.app">Android Beta</a> 
