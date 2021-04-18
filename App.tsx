@@ -17,7 +17,6 @@ import { navigationRef } from './src/navigators/RootNavigation'
 import { SiteStack } from './src/navigators/SiteStack'
 import { persistor, store } from './src/store/store'
 import { darkTheme, lightTheme } from './src/styles/theme'
-import { setI18nConfig } from './src/utilities/time'
 
 enableScreens()
 
@@ -27,9 +26,7 @@ const App = () => {
   const colorScheme = useColorScheme()
 
   useEffect(() => {
-    const init = async () => {
-      setI18nConfig()
-    }
+    const init = async () => {}
 
     init().finally(async () => {
       await RNBootSplash.hide({ fade: true })

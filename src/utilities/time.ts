@@ -5,20 +5,8 @@ import {
   formatRelative,
   Locale
 } from 'date-fns'
-import { enUS, fi } from 'date-fns/locale'
 import I18n from 'i18n-js'
-import { isDate } from 'lodash'
-import { I18nManager } from 'react-native'
-import { findBestAvailableLanguage } from 'react-native-localize'
-
-export const setI18nConfig = (): void => {
-  const fallback = { languageTag: 'en', isRTL: false }
-
-  const { languageTag, isRTL } =
-    findBestAvailableLanguage(['fi', 'en']) || fallback
-  I18nManager.forceRTL(isRTL)
-  I18n.locale = languageTag
-}
+import isDate from 'lodash/isDate'
 
 export const localizedFormat = (
   date: Date | number,
@@ -35,8 +23,7 @@ export const localizedFormat = (
     return '-'
   }
   return format(date, f, {
-    ...options,
-    locale: I18n.currentLocale() === 'fi' ? fi : enUS
+    ...options
   })
 }
 
@@ -50,8 +37,7 @@ export const localizedDuration = (
   }
 ): string => {
   return formatDuration(duration, {
-    ...options,
-    locale: I18n.currentLocale() === 'fi' ? fi : enUS
+    ...options
   })
 }
 
@@ -67,7 +53,6 @@ export const localizedRelativeFormat = (
     return '-'
   }
   return formatRelative(date, baseDate, {
-    ...options,
-    locale: I18n.currentLocale() === 'fi' ? fi : enUS
+    ...options
   })
 }
