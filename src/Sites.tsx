@@ -10,7 +10,7 @@ import styled from 'styled-components/native'
 import { getSites } from './api/netlify'
 import { SiteListItemSkeleton } from './components/SiteListItemSkeleton'
 import { SiteListItem } from './components/SiteListItem'
-import { RootStackParamList } from './navigators/SiteStack'
+import { RootStackParamList } from './navigators/RootStack'
 import { RootState } from './store/reducers'
 import { NetlifySite } from './typings/netlify.d'
 

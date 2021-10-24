@@ -7,15 +7,18 @@ import { useSelector } from 'react-redux'
 import styled from 'styled-components/native'
 import { getSiteDeploys } from '../api/netlify'
 import { DeployItem } from '../components/DeployItem'
-import { RootStackParamList } from '../navigators/SiteStack'
+import { RootStackParamList } from '../navigators/RootStack'
 import { RootState } from '../store/reducers'
 import { Deploy } from '../typings/netlify.d'
 
 type SiteScreenNavigationProp = StackNavigationProp<
-  RootStackParamList,
+  RootStackParamList['App']['BuildsStack'],
   'Deploys'
 >
-type SiteScreenRouteProp = RouteProp<RootStackParamList, 'Deploys'>
+type SiteScreenRouteProp = RouteProp<
+  RootStackParamList['App']['BuildsStack'],
+  'Deploys'
+>
 
 type Props = {
   navigation: SiteScreenNavigationProp

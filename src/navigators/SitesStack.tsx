@@ -3,39 +3,29 @@ import { Linking, Platform, Pressable } from 'react-native'
 import { createNativeStackNavigator } from 'react-native-screens/native-stack'
 import FontAwesome5 from 'react-native-vector-icons/FontAwesome5'
 import { useSelector } from 'react-redux'
-import styled, { ThemeContext } from 'styled-components/native'
+import { ThemeContext } from 'styled-components'
+import styled from 'styled-components/native'
 import { ListHeader } from '../components/ListHeader'
 import { Sites } from '../Sites'
 import { RootState } from '../store/reducers'
-import { Authorize } from '../views/Authorize'
 import { Deploy } from '../views/Deploy'
 import { Deploys } from '../views/Deploys'
 import { Profile } from '../views/Profile'
 import { Site } from '../views/Site'
 import { Submission } from '../views/Submission'
 import { Submissions } from '../views/Submissions'
+import { RootStackParamList } from './RootStack'
 
-export type RootStackParamList = {
-  Authorize: undefined
-  Sites: undefined
-  Site: { name: string; url: string; siteID: string }
-
-  Deploys: { siteID: string; name: string }
-  Deploy: { name: string; buildID: string }
-
-  Submissions: { siteID: string; name: string }
-  Submission: { submissionID: string; name: string }
-
-  Profile: undefined
-}
-
-const Stack = createNativeStackNavigator<RootStackParamList>()
+const Stack = createNativeStackNavigator<
+  RootStackParamList['App']['SitesStack']
+>()
 
 type ScreenOptions = any
 
-export const SiteStack: FC = () => {
+export const SitesStack: FC = () => {
   const { accentColor, primaryTextColor, mode } = useContext(ThemeContext)
   const accessToken = useSelector((state: RootState) => state.app.accessToken)
+
   const openSite = (url: string) => {
     Linking.openURL(`https://${url}`)
   }
@@ -65,21 +55,12 @@ export const SiteStack: FC = () => {
 
   return (
     <Stack.Navigator
-      initialRouteName={!accessToken ? 'Authorize' : 'Sites'}
       screenOptions={{
         headerTintColor: accentColor,
         headerTitleStyle: {
           color: primaryTextColor
         }
       }}>
-      <Stack.Screen
-        options={{
-          headerShown: false,
-          stackPresentation: 'fullScreenModal'
-        }}
-        name="Authorize"
-        component={Authorize}
-      />
       <Stack.Screen
         options={{
           ...headerSettings,

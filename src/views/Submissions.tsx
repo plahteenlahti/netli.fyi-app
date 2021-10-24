@@ -7,7 +7,7 @@ import { useSelector } from 'react-redux'
 import styled from 'styled-components/native'
 import { getSiteSubmissions } from '../api/netlify'
 import { SubmissionItem } from '../components/SubmissionItem'
-import { RootStackParamList } from '../navigators/SiteStack'
+import { RootStackParamList } from '../navigators/RootStack'
 import { RootState } from '../store/reducers'
 import { Submission } from '../typings/netlify.d'
 

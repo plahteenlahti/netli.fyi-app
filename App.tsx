@@ -14,7 +14,7 @@ import { Provider } from 'react-redux'
 import { PersistGate } from 'redux-persist/integration/react'
 import { ThemeProvider } from 'styled-components/native'
 import { navigationRef } from './src/navigators/RootNavigation'
-import { SiteStack } from './src/navigators/SiteStack'
+import { SiteStack } from './src/navigators/RootStack'
 import { persistor, store } from './src/store/store'
 import { darkTheme, lightTheme } from './src/styles/theme'
 

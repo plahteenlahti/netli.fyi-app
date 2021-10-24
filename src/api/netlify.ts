@@ -157,26 +157,21 @@ export const getSites = async ({
 >): Promise<Array<NetlifySite>> => {
   const [_, { accessToken }] = queryKey
   try {
-    const response = await fetch(`${BASE_URL}/sites`, {
-      headers: {
-        Authorization: `Bearer ${accessToken}`
+    const response = await fetch(
+      `${BASE_URL}/sites?filter=all&sort_by=updated_at`,
+      {
+        headers: {
+          Authorization: `Bearer ${accessToken}`
+        }
       }
-    })
-
-    const sites = (await response.json()) as Array<NetlifySite>
-
-    return sites.sort((a, b) =>
-      isBefore(
-        new Date(a.published_deploy?.published_at),
-        new Date(b.published_deploy?.published_at)
-      )
-        ? 1
-        : -1
     )
+
+    return response.json()
   } catch (error) {
     return error
   }
 }
+
 export const getDeploy = async ({
   queryKey
 }: QueryFunctionContext<

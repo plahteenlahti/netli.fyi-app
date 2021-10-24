@@ -12,13 +12,19 @@ import { DeploysPreview } from '../components/DeploysPreview'
 import { NoPreview } from '../components/NoPreview'
 import { SiteInformation } from '../components/SiteInformation'
 import { SubmissionsPreview } from '../components/SubmissionsPreview'
-import { RootStackParamList } from '../navigators/SiteStack'
+import { RootStackParamList } from '../navigators/RootStack'
 import { RootState } from '../store/reducers'
 
 const { width } = Dimensions.get('window')
 
-type SiteScreenNavigationProp = StackNavigationProp<RootStackParamList, 'Site'>
-type SiteScreenRouteProp = RouteProp<RootStackParamList, 'Site'>
+type SiteScreenNavigationProp = StackNavigationProp<
+  RootStackParamList['App']['SitesStack'],
+  'Site'
+>
+type SiteScreenRouteProp = RouteProp<
+  RootStackParamList['App']['SitesStack'],
+  'Site'
+>
 
 type Props = {
   navigation: SiteScreenNavigationProp

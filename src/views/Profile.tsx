@@ -10,16 +10,19 @@ import { getAccounts, getUser } from '../api/netlify'
 import { AccountCard } from '../components/AccountCard'
 import { Card } from '../components/Card'
 import { CardTitle } from '../components/CardTitle'
-import { RootStackParamList } from '../navigators/SiteStack'
+import { RootStackParamList } from '../navigators/RootStack'
 import { RootState } from '../store/reducers'
 import { setAccessToken } from '../store/reducers/app'
 import { localizedRelativeFormat } from '../utilities/time'
 
 type ProfileScreenNavigationProp = StackNavigationProp<
-  RootStackParamList,
+  RootStackParamList['App']['SitesStack'],
   'Profile'
 >
-type ProfileScreenRouteProp = RouteProp<RootStackParamList, 'Profile'>
+type ProfileScreenRouteProp = RouteProp<
+  RootStackParamList['App']['SitesStack'],
+  'Profile'
+>
 
 type Props = {
   navigation: ProfileScreenNavigationProp

@@ -6,14 +6,17 @@ import { useSelector } from 'react-redux'
 import styled from 'styled-components/native'
 import { getSubmission } from '../api/netlify'
 import { Card } from '../components/Card'
-import { RootStackParamList } from '../navigators/SiteStack'
+import { RootStackParamList } from '../navigators/RootStack'
 import { RootState } from '../store/reducers'
 
 type SiteScreenNavigationProp = StackNavigationProp<
-  RootStackParamList,
+  RootStackParamList['App']['SitesStack'],
   'Submission'
 >
-type SiteScreenRouteProp = RouteProp<RootStackParamList, 'Submission'>
+type SiteScreenRouteProp = RouteProp<
+  RootStackParamList['App']['SitesStack'],
+  'Submission'
+>
 
 type Props = {
   navigation: SiteScreenNavigationProp

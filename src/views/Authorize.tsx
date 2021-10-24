@@ -7,7 +7,7 @@ import { ClipPath, Defs, Image, Svg, Text, TSpan } from 'react-native-svg'
 import { useDispatch } from 'react-redux'
 import styled from 'styled-components/native'
 import { AuthorizeButton } from '../components/AuthorizeButton'
-import { RootStackParamList } from '../navigators/SiteStack'
+import { RootStackParamList } from '../navigators/RootStack'
 import { setAccessToken } from '../store/reducers/app'
 import configuration from 'react-native-ultimate-config'
 
@@ -45,7 +45,7 @@ export const Authorize: FC<Props> = ({ navigation }) => {
     try {
       const { accessToken: newAccessToken } = await authorize(config)
       dispatch(setAccessToken(newAccessToken))
-      navigation.replace('Sites')
+      navigation.replace('App')
     } catch (error) {
       console.warn(error)
     }
