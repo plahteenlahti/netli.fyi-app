@@ -1,13 +1,10 @@
-import React, { FC, useContext } from 'react'
+import { createNativeStackNavigator } from '@react-navigation/native-stack'
+import React, { FC } from 'react'
 import { Linking, Platform, Pressable } from 'react-native'
-import { createNativeStackNavigator } from 'react-native-screens/native-stack'
 import FontAwesome5 from 'react-native-vector-icons/FontAwesome5'
-import { useSelector } from 'react-redux'
-import { ThemeContext } from 'styled-components'
-import styled from 'styled-components/native'
+import styled, { useTheme } from 'styled-components/native'
 import { ListHeader } from '../components/ListHeader'
 import { Sites } from '../Sites'
-import { RootState } from '../store/reducers'
 import { Deploy } from '../views/Deploy'
 import { Deploys } from '../views/Deploys'
 import { Profile } from '../views/Profile'
@@ -16,42 +13,43 @@ import { Submission } from '../views/Submission'
 import { Submissions } from '../views/Submissions'
 import { RootStackParamList } from './RootStack'
 
-const Stack = createNativeStackNavigator<
-  RootStackParamList['App']['SitesStack']
->()
+const Stack = createNativeStackNavigator<RootStackParamList['App']['Sites']>()
 
 type ScreenOptions = any
 
 export const SitesStack: FC = () => {
-  const { accentColor, primaryTextColor, mode } = useContext(ThemeContext)
-  const accessToken = useSelector((state: RootState) => state.app.accessToken)
+  const { accentColor, primaryTextColor, mode } = useTheme()
 
   const openSite = (url: string) => {
     Linking.openURL(`https://${url}`)
   }
 
-  const headerSettings = (Platform.OS === 'ios'
-    ? {
-        headerTranslucent: true,
-        headerLargeTitle: true,
-        headerTopInsetEnabled: true,
-        headerStyle: {
-          backgroundColor: 'transparent',
-          blurEffect: mode
+  const headerSettings = (
+    Platform.OS === 'ios'
+      ? {
+          headerTranslucent: true,
+          headerLargeTitle: true,
+          headerTopInsetEnabled: true,
+          headerStyle: {
+            backgroundColor: 'transparent',
+            blurEffect: mode
+          }
         }
-      }
-    : {}) as ScreenOptions
+      : {}
+  ) as ScreenOptions
 
-  const headerSmallSettings = (Platform.OS === 'ios'
-    ? {
-        headerTranslucent: true,
-        headerTopInsetEnabled: true,
-        headerStyle: {
-          backgroundColor: 'transparent',
-          blurEffect: mode
+  const headerSmallSettings = (
+    Platform.OS === 'ios'
+      ? {
+          headerTranslucent: true,
+          headerTopInsetEnabled: true,
+          headerStyle: {
+            backgroundColor: 'transparent',
+            blurEffect: mode
+          }
         }
-      }
-    : {}) as ScreenOptions
+      : {}
+  ) as ScreenOptions
 
   return (
     <Stack.Navigator
@@ -67,7 +65,7 @@ export const SitesStack: FC = () => {
           title: 'Netli.fyi',
           headerRight: () => <ListHeader />
         }}
-        name="Sites"
+        name="SiteList"
         component={Sites}
       />
       <Stack.Screen

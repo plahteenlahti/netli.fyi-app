@@ -1,10 +1,8 @@
 import React, { FC } from 'react'
-import Animated, { Easing, interpolate } from 'react-native-reanimated'
-import { loop, useValue } from 'react-native-redash/lib/module/v1'
+import Animated, { Easing } from 'react-native-reanimated'
+import { useValue } from 'react-native-redash/lib/module/v1'
 import styled from 'styled-components/native'
 import { AnimatedBone } from './AnimatedBone'
-
-const { useCode, set, cond, eq } = Animated
 
 export const DEFAULT_EASING: Animated.EasingFunction = Easing.bezier(
   0.5,
@@ -21,40 +19,40 @@ type Props = {
 }
 
 export const SiteListItemSkeleton: FC<Props> = ({ isLoading }) => {
-  const animationValue = useValue(0)
-  const loading = useValue(isLoading ? 1 : 0)
+  // const animationValue = useValue(0)
+  // const loading = useValue(isLoading ? 1 : 0)
 
-  useCode(
-    () =>
-      cond(eq(loading, 1), [
-        set(
-          animationValue,
-          loop({
-            duration: DEFAULT_DURATION,
-            easing: DEFAULT_EASING
-          })
-        )
-      ]),
-    [loading, animationValue]
-  )
+  // useCode(
+  //   () =>
+  //     cond(eq(loading, 1), [
+  //       set(
+  //         animationValue,
+  //         loop({
+  //           duration: DEFAULT_DURATION,
+  //           easing: DEFAULT_EASING
+  //         })
+  //       )
+  //     ]),
+  //   [loading, animationValue]
+  // )
 
-  const animatedStyle: any = {
-    transform: [
-      {
-        translateX: interpolate(animationValue, {
-          inputRange: [0, 1],
-          outputRange: [-100, 100]
-        })
-      }
-    ]
-  }
+  // const animatedStyle: any = {
+  //   transform: [
+  //     {
+  //       translateX: interpolate(animationValue, {
+  //         inputRange: [0, 1],
+  //         outputRange: [-100, 100]
+  //       })
+  //     }
+  //   ]
+  // }
 
   return (
     <Card>
-      <PreviewSkeleton animatedStyle={animatedStyle} />
+      <PreviewSkeleton />
       <Column>
-        <SiteNameSkeleton animatedStyle={animatedStyle} />
-        <DomainSkeleton animatedStyle={animatedStyle} />
+        <SiteNameSkeleton />
+        <DomainSkeleton />
       </Column>
     </Card>
   )

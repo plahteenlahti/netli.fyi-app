@@ -1,14 +1,14 @@
 import React, { FC } from 'react'
 import { useQuery } from 'react-query'
-import { useSelector } from 'react-redux'
 import styled from 'styled-components/native'
-
 import { getUser } from '../api/netlify'
 import { navigate } from '../navigators/RootNavigation'
-import { RootState } from '../store/reducers'
+import { useAppSelector } from '../store/store'
 
 export const ListHeader: FC = () => {
-  const accessToken = useSelector((state: RootState) => state.app.accessToken)
+  const accessToken = useAppSelector(
+    ({ accounts }) => accounts.selectedAccount?.accessToken
+  )
   const { data: user } = useQuery(['profile', { accessToken }], getUser)
 
   const goToProfile = () => {

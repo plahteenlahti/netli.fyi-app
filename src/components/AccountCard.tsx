@@ -6,26 +6,38 @@ import { PlaceholderIcon } from './PlaceholderIcon'
 
 type Props = {
   account: Account
+  selected: boolean
 }
 
-export const AccountCard: FC<Props> = ({ account }) => {
+export const AccountCard: FC<Props> = ({ account, selected }) => {
   return (
     <Card>
-      <CardTitle>
-        {account?.team_logo_url ? (
-          <TeamLogo source={{ uri: account?.team_logo_url }} />
-        ) : (
-          <PlaceholderIcon />
-        )}
+      <HContainer>
+        <VContainer>
+          <CardTitle>
+            {account?.team_logo_url ? (
+              <TeamLogo source={{ uri: account?.team_logo_url }} />
+            ) : (
+              <PlaceholderIcon />
+            )}
 
-        <AccountName>{account.name}</AccountName>
-      </CardTitle>
+            <AccountName>{account.name}</AccountName>
+          </CardTitle>
 
-      <TypeContainer>
-        <Type>{account.type_name}</Type>
-      </TypeContainer>
+          <TypeContainer>
+            <Type>{account.type_name}</Type>
+          </TypeContainer>
 
-      <BillingAccount>Billing email: {account.billing_email}</BillingAccount>
+          <BillingAccount>
+            Billing email: {account.billing_email}
+          </BillingAccount>
+
+          <DataText>
+            {account.capabilities.bandwidth.used}
+            {account.capabilities.bandwidth.included}
+          </DataText>
+        </VContainer>
+      </HContainer>
     </Card>
   )
 }
@@ -44,6 +56,12 @@ const TypeContainer = styled.View`
   right: 16px;
   top: 12px;
 `
+
+const HContainer = styled.View`
+  flex-direction: row;
+`
+
+const VContainer = styled.View``
 
 const Type = styled.Text`
   text-transform: uppercase;
@@ -66,4 +84,9 @@ const AccountName = styled.Text`
   color: ${({ theme }) => theme.primaryTextColor};
   font-size: 15px;
   margin-left: 8px;
+`
+
+const DataText = styled.Text`
+  color: ${({ theme }) => theme.secondaryTextColor};
+  font-size: 13px;
 `

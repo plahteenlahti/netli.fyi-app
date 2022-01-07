@@ -1,30 +1,30 @@
-import React, { FC, useContext } from 'react'
+import { createNativeStackNavigator } from '@react-navigation/native-stack'
+import React, { FC } from 'react'
 import { Platform } from 'react-native'
-import { createNativeStackNavigator } from 'react-native-screens/native-stack'
-import { ThemeContext } from 'styled-components'
+import { useTheme } from 'styled-components/native'
+import { Builds } from '../views/Builds'
 import { Deploy } from '../views/Deploy'
-import { Deploys } from '../views/Deploys'
 import { RootStackParamList } from './RootStack'
 
-const Stack = createNativeStackNavigator<
-  RootStackParamList['App']['BuildsStack']
->()
+const Stack = createNativeStackNavigator<RootStackParamList['App']['Builds']>()
 
 type ScreenOptions = any
 
 export const BuildsStack: FC = () => {
-  const { accentColor, primaryTextColor, mode } = useContext(ThemeContext)
+  const { accentColor, primaryTextColor, mode } = useTheme()
 
-  const headerSmallSettings = (Platform.OS === 'ios'
-    ? {
-        headerTranslucent: true,
-        headerTopInsetEnabled: true,
-        headerStyle: {
-          backgroundColor: 'transparent',
-          blurEffect: mode
+  const headerSmallSettings = (
+    Platform.OS === 'ios'
+      ? {
+          headerTranslucent: true,
+          headerTopInsetEnabled: true,
+          headerStyle: {
+            backgroundColor: 'transparent',
+            blurEffect: mode
+          }
         }
-      }
-    : {}) as ScreenOptions
+      : {}
+  ) as ScreenOptions
 
   return (
     <Stack.Navigator
@@ -35,19 +35,20 @@ export const BuildsStack: FC = () => {
         }
       }}>
       <Stack.Screen
-        name="Deploys"
-        component={Deploys}
+        name="Builds"
+        component={Builds}
         initialParams={{
           name: ''
         }}
         options={({ route }) => ({
           stackAnimation: 'slide_from_right',
           ...headerSmallSettings,
+          headerShown: false,
           title: route.params.name
         })}
       />
       <Stack.Screen
-        name="Deploy"
+        name="Build"
         component={Deploy}
         options={({ route }) => ({
           stackAnimation: 'slide_from_right',

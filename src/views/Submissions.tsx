@@ -9,6 +9,7 @@ import { getSiteSubmissions } from '../api/netlify'
 import { SubmissionItem } from '../components/SubmissionItem'
 import { RootStackParamList } from '../navigators/RootStack'
 import { RootState } from '../store/reducers'
+import { useAppSelector } from '../store/store'
 import { Submission } from '../typings/netlify.d'
 
 type SiteScreenNavigationProp = StackNavigationProp<
@@ -23,7 +24,9 @@ type Props = {
 }
 
 export const Submissions: FC<Props> = ({ navigation, route }) => {
-  const accessToken = useSelector((state: RootState) => state.app.accessToken)
+  const accessToken = useAppSelector(
+    ({ accounts }) => accounts.selectedAccount?.accessToken
+  )
   const { siteID } = route.params
 
   const { data: submissions } = useQuery(

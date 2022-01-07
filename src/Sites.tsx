@@ -1,24 +1,22 @@
 import { RouteProp } from '@react-navigation/native'
 import { StackNavigationProp } from '@react-navigation/stack'
-import React, { FC, useEffect, useState } from 'react'
-import { ListRenderItem, Platform, RefreshControl } from 'react-native'
-import { FlatList } from 'react-native-gesture-handler'
-import { SafeAreaView } from 'react-native-safe-area-context'
-import { useQuery } from 'react-query'
-import { useSelector } from 'react-redux'
+import React, { FC, useEffect, useLayoutEffect, useState } from 'react'
+import { ListRenderItem, RefreshControl } from 'react-native'
 import styled from 'styled-components/native'
-import { getSites } from './api/netlify'
-import { SiteListItemSkeleton } from './components/SiteListItemSkeleton'
 import { SiteListItem } from './components/SiteListItem'
+// import { SiteListItemSkeleton } from './components/SiteListItemSkeleton'
+import { useSites } from './hooks/site'
 import { RootStackParamList } from './navigators/RootStack'
-import { RootState } from './store/reducers'
 import { NetlifySite } from './typings/netlify.d'
 
 type SitesScreenNavigationProp = StackNavigationProp<
-  RootStackParamList,
+  RootStackParamList['App']['Sites'],
   'Profile'
 >
-type SitesScreenRouteProp = RouteProp<RootStackParamList, 'Sites'>
+type SitesScreenRouteProp = RouteProp<
+  RootStackParamList['App']['Sites'],
+  'SiteList'
+>
 
 type Props = {
   navigation: SitesScreenNavigationProp
@@ -34,13 +32,17 @@ const placeHolderItems = Array.from({ length: 10 }, (v, i) => i).map(
 )
 
 export const Sites: FC<Props> = ({ navigation }) => {
-  const accessToken = useSelector((state: RootState) => state.app.accessToken)
   const [init, setInit] = useState(false)
+  const [search, setSearch] = useState('')
+  const { data: sites, isLoading, isSuccess, isError, refetch } = useSites()
 
-  const { data: sites, isLoading, isSuccess, isError, refetch } = useQuery(
-    ['sites', { accessToken }],
-    getSites
-  )
+  useLayoutEffect(() => {
+    navigation.setOptions({
+      headerSearchBarOptions: {
+        onChangeText: (event) => setSearch(event.nativeEvent.text)
+      }
+    })
+  }, [navigation])
 
   useEffect(() => {
     if (!init && (isSuccess || isError)) {
@@ -57,7 +59,7 @@ export const Sites: FC<Props> = ({ navigation }) => {
       })
     }
     if (isLoading) {
-      return <SiteListItemSkeleton isLoading={isLoading} key={item.id} />
+      return <></>
     }
 
     return (
@@ -73,10 +75,7 @@ export const Sites: FC<Props> = ({ navigation }) => {
   }
 
   return (
-    <Container
-      edges={
-        Platform.OS === 'ios' ? ['top', 'right', 'left'] : ['right', 'left']
-      }>
+    <Container>
       <FlatList
         contentInsetAdjustmentBehavior="automatic"
         scrollToOverflowEnabled
@@ -86,13 +85,26 @@ export const Sites: FC<Props> = ({ navigation }) => {
             onRefresh={refetch}
           />
         }
-        data={isLoading ? placeHolderItems : sites}
+        data={
+          isLoading
+            ? placeHolderItems
+            : sites?.filter((site) => {
+                let pattern =
+                  '.*' + search.toLowerCase().split('').join('.*') + '.*'
+                const re = new RegExp(pattern)
+                return re.test(`${site?.name}`.toLowerCase())
+              })
+        }
         renderItem={renderItem}
       />
     </Container>
   )
 }
 
-const Container = styled(SafeAreaView)`
+const FlatList = styled.FlatList`
+  padding: 16px;
+`
+
+const Container = styled.View`
   flex: 1;
 `

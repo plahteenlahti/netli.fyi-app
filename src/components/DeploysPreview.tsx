@@ -4,6 +4,7 @@ import FontAwesome5 from 'react-native-vector-icons/FontAwesome5'
 import styled from 'styled-components/native'
 import { Deploy } from '../typings/netlify.d'
 import { Card } from './Card'
+import { CardTitle } from './CardTitle'
 import { DeployItem } from './DeployItem'
 import { Text } from './Typography'
 
@@ -27,10 +28,7 @@ export const DeploysPreview: FC<Props> = ({ deploys, siteID, siteName }) => {
 
   return (
     <>
-      <TitleContainer>
-        <ThemedIcon name="code-branch" size={15} solid />
-        <CardTitle type="Title 3">Deploys</CardTitle>
-      </TitleContainer>
+      <CardTitle icon="code-branch" title="Deploys" />
       <Card>
         {shownDeploys?.map((deploy, index) => {
           const navigate = () => {
@@ -60,12 +58,6 @@ export const DeploysPreview: FC<Props> = ({ deploys, siteID, siteName }) => {
     </>
   )
 }
-
-const CardTitle = styled(Text)`
-  font-size: 16px;
-  font-weight: 600;
-  margin-left: 8px;
-`
 
 const TitleContainer = styled.View`
   flex-direction: row;

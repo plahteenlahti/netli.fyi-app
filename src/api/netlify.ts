@@ -152,9 +152,7 @@ export const getAccounts = async ({
 
 export const getSites = async ({
   queryKey
-}: QueryFunctionContext<
-  ['_key', { accessToken: string; siteID: string }]
->): Promise<Array<NetlifySite>> => {
+}: QueryFunctionContext<['_key', { accessToken: string; siteID: string }]>) => {
   const [_, { accessToken }] = queryKey
   try {
     const response = await fetch(

@@ -1,23 +1,26 @@
-import React, from 'react'
+import React from 'react'
 import styled from 'styled-components/native'
-import { SafeAreaView } from 'react-native-safe-area-context'
-
+import { Card } from '../components/Card'
+import { BuildItem } from '../components/list-items/build'
+import { useBuilds } from '../hooks/build'
 
 export const Builds = () => {
-    return (
-        <Container
-        edges={
-          Platform.OS === 'ios' ? ['top', 'right', 'left'] : ['right', 'left']
-        }>
+  const { data } = useBuilds('plahteenlahti-6nrl7-g')
 
-
-
-        </Container>
-    )
+  return (
+    <Container>
+      <ScrollView>
+        <Card>
+          {data?.map((build) => (
+            <BuildItem key={build?.id} build={build} />
+          ))}
+        </Card>
+      </ScrollView>
+    </Container>
+  )
 }
 
-
-const Container = styled(SafeAreaView)`
+const Container = styled.View`
   flex: 1;
 `
 

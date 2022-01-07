@@ -4,19 +4,15 @@ const appSlice = createSlice({
   name: 'appSlice',
   initialState: {
     theme: 'light',
-    followSystemTheme: true,
-    accessToken: undefined
+    followSystemTheme: true
   },
   reducers: {
     toggleTheme: (state, action) => {
       state.theme = action.payload
-    },
-    setAccessToken: (state, action) => {
-      state.accessToken = action.payload
     }
   }
 })
 
-export const { toggleTheme, setAccessToken } = appSlice.actions
+export const { toggleTheme } = appSlice.actions
 
 export default appSlice.reducer

@@ -1,18 +1,15 @@
-import React, { FC, useContext } from 'react'
-import { Linking, Platform } from 'react-native'
-import { createNativeStackNavigator } from 'react-native-screens/native-stack'
-import FontAwesome5 from 'react-native-vector-icons/FontAwesome5'
-import { useSelector } from 'react-redux'
-import styled, { ThemeContext } from 'styled-components/native'
-import { RootState } from '../store/reducers'
+import { createNativeStackNavigator } from '@react-navigation/native-stack'
+import React, { FC } from 'react'
+import { useTheme } from 'styled-components/native'
+import { useAppSelector } from '../store/store'
 import { Authorize } from '../views/Authorize'
 import { TabStack } from './TabStack'
 
 export type RootStackParamList = {
   Authorize: undefined
   App: {
-    SitesStack: {
-      Sites: undefined
+    Sites: {
+      SiteList: undefined
       Site: { name: string; url: string; siteID: string }
       Deploys: { siteID: string; name: string }
       Deploy: { name: string; buildID: string }
@@ -20,46 +17,20 @@ export type RootStackParamList = {
       Submission: { submissionID: string; name: string }
       Profile: undefined
     }
-    BuildsStack: {
-      Deploys: { siteID: string; name: string }
-      Deploy: { name: string; buildID: string }
+    Builds: {
+      Builds: { siteID: string; name: string }
+      Build: { name: string; buildID: string }
     }
   }
 }
 
 const Stack = createNativeStackNavigator<RootStackParamList>()
 
-type ScreenOptions = any
-
 export const SiteStack: FC = () => {
-  const { accentColor, primaryTextColor, mode } = useContext(ThemeContext)
-  const accessToken = useSelector((state: RootState) => state.app.accessToken)
-  const openSite = (url: string) => {
-    Linking.openURL(`https://${url}`)
-  }
-
-  const headerSettings = (Platform.OS === 'ios'
-    ? {
-        headerTranslucent: true,
-        headerLargeTitle: true,
-        headerTopInsetEnabled: true,
-        headerStyle: {
-          backgroundColor: 'transparent',
-          blurEffect: mode
-        }
-      }
-    : {}) as ScreenOptions
-
-  const headerSmallSettings = (Platform.OS === 'ios'
-    ? {
-        headerTranslucent: true,
-        headerTopInsetEnabled: true,
-        headerStyle: {
-          backgroundColor: 'transparent',
-          blurEffect: mode
-        }
-      }
-    : {}) as ScreenOptions
+  const { accentColor, primaryTextColor } = useTheme()
+  const accessToken = useAppSelector(
+    ({ accounts }) => accounts.selectedAccount?.accessToken
+  )
 
   return (
     <Stack.Navigator
@@ -88,7 +59,3 @@ export const SiteStack: FC = () => {
     </Stack.Navigator>
   )
 }
-
-const IconBrowser = styled(FontAwesome5).attrs(({ theme }) => ({
-  color: theme.accentColor
-}))``

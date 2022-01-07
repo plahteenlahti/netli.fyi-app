@@ -17,6 +17,7 @@ import { navigationRef } from './src/navigators/RootNavigation'
 import { SiteStack } from './src/navigators/RootStack'
 import { persistor, store } from './src/store/store'
 import { darkTheme, lightTheme } from './src/styles/theme'
+import { theme, LumiThemeProvider } from 'react-native-lumi'
 
 enableScreens()
 
@@ -47,10 +48,12 @@ const App = () => {
                   colorScheme === 'dark' ? 'light-content' : 'dark-content'
                 }
               />
-              <ThemeProvider
-                theme={colorScheme === 'dark' ? darkTheme : lightTheme}>
-                <SiteStack />
-              </ThemeProvider>
+              <LumiThemeProvider>
+                <ThemeProvider
+                  theme={colorScheme === 'dark' ? darkTheme : lightTheme}>
+                  <SiteStack />
+                </ThemeProvider>
+              </LumiThemeProvider>
             </QueryClientProvider>
           </NavigationContainer>
         </PersistGate>
