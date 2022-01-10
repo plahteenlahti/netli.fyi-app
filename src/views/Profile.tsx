@@ -1,4 +1,4 @@
-import { RouteProp } from '@react-navigation/native'
+import { RouteProp, StackActions } from '@react-navigation/native'
 import { NativeStackNavigationProp } from '@react-navigation/native-stack'
 import React, { FC } from 'react'
 import { Alert, RefreshControl } from 'react-native'
@@ -11,7 +11,7 @@ import { CardTitle } from '../components/CardTitle'
 import { IconRow } from '../components/IconRow'
 import { useAccounts, useUser } from '../hooks/user'
 import { SiteNavigation } from '../navigators/SitesStack'
-import { removeAccount } from '../store/reducers/accounts'
+import { removeAllAccounts } from '../store/reducers/accounts'
 import { localizedRelativeFormat } from '../utilities/time'
 const image = require('../assets/images/icon.png')
 
@@ -41,8 +41,8 @@ export const Profile: FC<Props> = ({ navigation }) => {
           text: 'Logout',
           style: 'destructive',
           onPress: () => {
-            navigation.navigate('Authorize', {})
-            dispatch(removeAccount())
+            navigation.dispatch(StackActions.replace('Authorize'))
+            dispatch(removeAllAccounts())
           }
         }
       ]

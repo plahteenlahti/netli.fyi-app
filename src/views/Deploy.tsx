@@ -1,6 +1,5 @@
 import { RouteProp } from '@react-navigation/native'
 import { NativeStackNavigationProp } from '@react-navigation/native-stack'
-import { StackNavigationProp } from '@react-navigation/stack'
 import React, { FC, useEffect, useState } from 'react'
 import { Platform, RefreshControl } from 'react-native'
 import { SafeAreaView } from 'react-native-safe-area-context'
@@ -9,12 +8,11 @@ import { Card } from '../components/Card'
 import { DataField } from '../components/DataField'
 import { Text } from '../components/Typography'
 import { useDeploy } from '../hooks/deploy'
-import { RootStackParamList } from '../navigators/RootStack'
 import { SiteNavigation } from '../navigators/SitesStack'
 import { Deploy as TypeDeploy } from '../typings/netlify.d'
 
-type Navigation = NativeStackNavigationProp<SiteNavigation, 'Profile'>
-type Route = RouteProp<SiteNavigation, 'Profile'>
+type Navigation = NativeStackNavigationProp<SiteNavigation, 'Deploy'>
+type Route = RouteProp<SiteNavigation, 'Deploy'>
 
 type Props = {
   navigation: Navigation

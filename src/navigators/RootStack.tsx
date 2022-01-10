@@ -36,7 +36,7 @@ export const SiteStack: FC = () => {
       <Stack.Screen
         options={{
           headerShown: false,
-          stackPresentation: 'fullScreenModal'
+          presentation: 'fullScreenModal'
         }}
         name="Authorize"
         component={Authorize}

@@ -1,4 +1,4 @@
-import { RouteProp } from '@react-navigation/native'
+import { RouteProp, StackActions } from '@react-navigation/native'
 import { NativeStackNavigationProp } from '@react-navigation/native-stack'
 import React, { FC, useState } from 'react'
 import { Dimensions, Linking } from 'react-native'
@@ -53,7 +53,7 @@ export const Authorize: FC<Props> = ({ navigation }) => {
           accessToken: newAccessToken
         })
       )
-      navigation.replace('App', {})
+      navigation.dispatch(StackActions.replace('App'))
     } catch (error) {
       console.warn(error)
     }
@@ -68,7 +68,7 @@ export const Authorize: FC<Props> = ({ navigation }) => {
           accessToken: personalAccessToken
         })
       )
-      navigation.replace('App', {})
+      navigation.dispatch(StackActions.replace('App'))
     } catch (error) {
       console.warn(error)
     }

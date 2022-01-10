@@ -5,7 +5,6 @@ import {
   formatRelative,
   Locale
 } from 'date-fns'
-import I18n from 'i18n-js'
 import isDate from 'lodash/isDate'
 
 export const localizedFormat = (

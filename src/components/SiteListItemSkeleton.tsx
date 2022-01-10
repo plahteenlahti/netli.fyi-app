@@ -1,6 +1,5 @@
 import React, { FC } from 'react'
 import Animated, { Easing } from 'react-native-reanimated'
-import { useValue } from 'react-native-redash/lib/module/v1'
 import styled from 'styled-components/native'
 import { AnimatedBone } from './AnimatedBone'
 
@@ -18,7 +17,7 @@ type Props = {
   isLoading: boolean
 }
 
-export const SiteListItemSkeleton: FC<Props> = ({ isLoading }) => {
+export const SiteListItemSkeleton: FC<Props> = ({}) => {
   // const animationValue = useValue(0)
   // const loading = useValue(isLoading ? 1 : 0)
 

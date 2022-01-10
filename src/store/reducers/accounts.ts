@@ -34,6 +34,9 @@ const accountsSlice = createSlice({
         (account) => account.accessToken !== action.payload?.accessToken
       )
     },
+    removeAllAccounts: (state) => {
+      state.accounts = []
+    },
     setSelectedAccount: (state, action: PayloadAction<Account>) => {
       state.selectedAccount = action.payload
     }
@@ -44,7 +47,8 @@ export const {
   addAccount,
   removeAccount,
   setSelectedAccount,
-  addAccountFirstTime
+  addAccountFirstTime,
+  removeAllAccounts
 } = accountsSlice.actions
 
 export default accountsSlice.reducer
