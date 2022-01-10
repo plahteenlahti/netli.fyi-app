@@ -54,29 +54,9 @@ const Type = styled.Text`
   color: ${({ theme }) => theme.primaryTextColor};
 `
 
-const Branch = styled.Text`
-  font-size: 13px;
-  color: ${({ theme }) => theme.secondaryTextColor};
-`
-
 const Column = styled.View`
   flex: 1;
   margin-left: 8px;
-`
-
-const Skipped = styled.View`
-  background-color: ${({ theme }) => theme.primaryBackground};
-  padding: 2px;
-  border-radius: 25px;
-  width: 70px;
-  align-items: center;
-  justify-content: center;
-`
-
-const SkippedText = styled.Text`
-  color: ${({ theme }) => theme.primaryTextColor};
-  font-size: 12px;
-  font-weight: 500;
 `
 
 const Chevron = styled(FontAwesome5).attrs(({ theme }) => ({

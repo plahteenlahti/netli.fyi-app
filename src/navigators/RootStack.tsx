@@ -8,15 +8,7 @@ import { TabStack } from './TabStack'
 export type RootStackParamList = {
   Authorize: undefined
   App: {
-    Sites: {
-      SiteList: undefined
-      Site: { name: string; url: string; siteID: string }
-      Deploys: { siteID: string; name: string }
-      Deploy: { name: string; buildID: string }
-      Submissions: { siteID: string; name: string }
-      Submission: { submissionID: string; name: string }
-      Profile: undefined
-    }
+    Sites: undefined
     Builds: {
       Builds: { siteID: string; name: string }
       Build: { name: string; buildID: string }

@@ -1,12 +1,12 @@
 import { useNavigation } from '@react-navigation/native'
+import { NativeStackNavigationProp } from '@react-navigation/native-stack'
 import React, { FC } from 'react'
-import FontAwesome5 from 'react-native-vector-icons/FontAwesome5'
 import styled from 'styled-components/native'
+import { SiteNavigation } from '../../navigators/SitesStack'
 import { Hook } from '../../typings/netlify'
 import { Card } from '../Card'
 import { CardTitle } from '../CardTitle'
 import { HookItem } from '../list-items/hook'
-import { Text } from '../Typography'
 
 type Props = {
   hooks?: Array<Hook>
@@ -14,8 +14,10 @@ type Props = {
   siteName: string
 }
 
+type Navigation = NativeStackNavigationProp<SiteNavigation, 'Site'>
+
 export const HooksPreview: FC<Props> = ({ hooks, siteName }) => {
-  const navigation = useNavigation()
+  const navigation = useNavigation<Navigation>()
   const shownHooks = hooks?.slice(0, 5)
 
   const goToDeploys = () => {}
@@ -28,7 +30,7 @@ export const HooksPreview: FC<Props> = ({ hooks, siteName }) => {
           const navigate = () => {
             navigation.navigate('Hook', {
               name: siteName,
-              buildID: hook?.id
+              hookID: hook?.id
             })
           }
 
@@ -52,16 +54,6 @@ export const HooksPreview: FC<Props> = ({ hooks, siteName }) => {
     </>
   )
 }
-
-const TitleContainer = styled.View`
-  flex-direction: row;
-  align-items: center;
-  margin: 8px 16px;
-`
-
-const ThemedIcon = styled(FontAwesome5).attrs(({ theme }) => ({
-  color: theme.secondaryTextColor
-}))``
 
 const Container = styled.View``
 

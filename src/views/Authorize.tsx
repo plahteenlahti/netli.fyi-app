@@ -1,5 +1,5 @@
 import { RouteProp } from '@react-navigation/native'
-import { StackNavigationProp } from '@react-navigation/stack'
+import { NativeStackNavigationProp } from '@react-navigation/native-stack'
 import React, { FC, useState } from 'react'
 import { Dimensions, Linking } from 'react-native'
 import { authorize } from 'react-native-app-auth'
@@ -13,7 +13,7 @@ import { useAppDispatch } from '../store/store'
 
 const { width } = Dimensions.get('window')
 
-type AuthorizationScreenNavigationProp = StackNavigationProp<
+type AuthorizationScreenNavigationProp = NativeStackNavigationProp<
   RootStackParamList,
   'Authorize'
 >

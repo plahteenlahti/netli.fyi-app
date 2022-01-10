@@ -1,7 +1,8 @@
 import { RouteProp } from '@react-navigation/native'
-import { StackNavigationProp } from '@react-navigation/stack'
+import { NativeStackNavigationProp } from '@react-navigation/native-stack'
 import React, { FC } from 'react'
 import { Alert, RefreshControl } from 'react-native'
+import { Card as LumiCard } from 'react-native-lumi'
 import { useDispatch } from 'react-redux'
 import styled from 'styled-components/native'
 import { AccountCard } from '../components/AccountCard'
@@ -9,24 +10,17 @@ import { Card } from '../components/Card'
 import { CardTitle } from '../components/CardTitle'
 import { IconRow } from '../components/IconRow'
 import { useAccounts, useUser } from '../hooks/user'
-import { RootStackParamList } from '../navigators/RootStack'
-import { setAccessToken } from '../store/reducers/app'
+import { SiteNavigation } from '../navigators/SitesStack'
+import { removeAccount } from '../store/reducers/accounts'
 import { localizedRelativeFormat } from '../utilities/time'
-import { Card as LumiCard } from 'react-native-lumi'
 const image = require('../assets/images/icon.png')
 
-type ProfileScreenNavigationProp = StackNavigationProp<
-  RootStackParamList['App']['SitesStack'],
-  'Profile'
->
-type ProfileScreenRouteProp = RouteProp<
-  RootStackParamList['App']['SitesStack'],
-  'Profile'
->
+type Navigation = NativeStackNavigationProp<SiteNavigation, 'Profile'>
+type Route = RouteProp<SiteNavigation, 'Profile'>
 
 type Props = {
-  navigation: ProfileScreenNavigationProp
-  route: ProfileScreenRouteProp
+  navigation: Navigation
+  route: Route
 }
 
 export const Profile: FC<Props> = ({ navigation }) => {
@@ -47,8 +41,8 @@ export const Profile: FC<Props> = ({ navigation }) => {
           text: 'Logout',
           style: 'destructive',
           onPress: () => {
-            navigation.navigate('Authorize')
-            dispatch(setAccessToken(''))
+            navigation.navigate('Authorize', {})
+            dispatch(removeAccount())
           }
         }
       ]
@@ -93,7 +87,7 @@ export const Profile: FC<Props> = ({ navigation }) => {
 
         <CardTitle icon="user" title="Accounts" />
         {accounts?.map((account) => {
-          return <AccountCard key={account.id} account={account} />
+          return <AccountCard selected key={account.id} account={account} />
         })}
         <LumiCard>
           <CardTitle

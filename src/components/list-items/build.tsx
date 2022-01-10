@@ -1,7 +1,6 @@
 import React, { FC } from 'react'
 import styled from 'styled-components/native'
 import { Build } from '../../typings/netlify'
-import { Text } from '../Typography'
 
 type Props = {
   build: Build

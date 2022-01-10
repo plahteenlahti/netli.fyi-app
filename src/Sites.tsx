@@ -1,45 +1,53 @@
 import { RouteProp } from '@react-navigation/native'
-import { StackNavigationProp } from '@react-navigation/stack'
+import { NativeStackNavigationProp } from '@react-navigation/native-stack'
 import React, { FC, useEffect, useLayoutEffect, useState } from 'react'
-import { ListRenderItem, RefreshControl } from 'react-native'
+import { FlatList, ListRenderItem, RefreshControl } from 'react-native'
 import styled from 'styled-components/native'
 import { SiteListItem } from './components/SiteListItem'
 // import { SiteListItemSkeleton } from './components/SiteListItemSkeleton'
 import { useSites } from './hooks/site'
-import { RootStackParamList } from './navigators/RootStack'
+import { SiteNavigation } from './navigators/SitesStack'
 import { NetlifySite } from './typings/netlify.d'
 
-type SitesScreenNavigationProp = StackNavigationProp<
-  RootStackParamList['App']['Sites'],
-  'Profile'
->
-type SitesScreenRouteProp = RouteProp<
-  RootStackParamList['App']['Sites'],
-  'SiteList'
->
+type Navigation = NativeStackNavigationProp<SiteNavigation, 'SiteList'>
+type SitesScreenRouteProp = RouteProp<SiteNavigation, 'SiteList'>
 
 type Props = {
-  navigation: SitesScreenNavigationProp
+  navigation: Navigation
   route: SitesScreenRouteProp
 }
 
-const placeHolderItems = Array.from({ length: 10 }, (v, i) => i).map(
-  (_, index) => ({
-    key: `${index}`,
-    custom_domain: 'domain',
-    default_domain: 'default'
-  })
-)
+type PlaceholderItem = {
+  key: string
+  id: string
+  custom_domain: 'domain'
+  default_domain: 'default'
+  screenshot_url: undefined
+  published_deploy: undefined
+}
+
+const placeHolderItems: Array<PlaceholderItem> = Array.from(
+  { length: 10 },
+  (v, i) => i
+).map((_, index) => ({
+  key: `${index}`,
+  id: `${index}`,
+  custom_domain: 'domain',
+  default_domain: 'default',
+  screenshot_url: undefined,
+  published_deploy: undefined
+}))
 
 export const Sites: FC<Props> = ({ navigation }) => {
   const [init, setInit] = useState(false)
-  const [search, setSearch] = useState('')
+  const [search, setSearch] = useState<string | undefined>('')
   const { data: sites, isLoading, isSuccess, isError, refetch } = useSites()
 
   useLayoutEffect(() => {
     navigation.setOptions({
       headerSearchBarOptions: {
-        onChangeText: (event) => setSearch(event.nativeEvent.text)
+        onChangeText: (event) => setSearch(event.nativeEvent.text),
+        onCancelButtonPress: () => setSearch('')
       }
     })
   }, [navigation])
@@ -50,7 +58,9 @@ export const Sites: FC<Props> = ({ navigation }) => {
     }
   }, [isLoading, init, isSuccess, isError])
 
-  const renderItem: ListRenderItem<NetlifySite> = ({ item }) => {
+  const renderItem: ListRenderItem<NetlifySite | PlaceholderItem> = ({
+    item
+  }) => {
     const navigateToSite = () => {
       navigation.navigate('Site', {
         siteID: `${item.id}`,
@@ -76,7 +86,7 @@ export const Sites: FC<Props> = ({ navigation }) => {
 
   return (
     <Container>
-      <FlatList
+      <List
         contentInsetAdjustmentBehavior="automatic"
         scrollToOverflowEnabled
         refreshControl={
@@ -90,7 +100,7 @@ export const Sites: FC<Props> = ({ navigation }) => {
             ? placeHolderItems
             : sites?.filter((site) => {
                 let pattern =
-                  '.*' + search.toLowerCase().split('').join('.*') + '.*'
+                  '.*' + search?.toLowerCase().split('').join('.*') + '.*'
                 const re = new RegExp(pattern)
                 return re.test(`${site?.name}`.toLowerCase())
               })
@@ -101,8 +111,16 @@ export const Sites: FC<Props> = ({ navigation }) => {
   )
 }
 
-const FlatList = styled.FlatList`
+const List = styled(
+  FlatList as new () => FlatList<NetlifySite | PlaceholderItem>
+).attrs(() => ({
+  contentContainerStyle: {
+    borderRadius: 8,
+    overflow: 'hidden'
+  }
+}))`
   padding: 16px;
+  border-radius: 8px;
 `
 
 const Container = styled.View`

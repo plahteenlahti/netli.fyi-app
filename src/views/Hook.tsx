@@ -1,53 +1,31 @@
 import { RouteProp } from '@react-navigation/native'
-import { StackNavigationProp } from '@react-navigation/stack'
+import { NativeStackNavigationProp } from '@react-navigation/native-stack'
 import React, { FC } from 'react'
-import { useQuery } from 'react-query'
-import { useSelector } from 'react-redux'
 import styled from 'styled-components/native'
-import { getSubmission } from '../api/netlify'
 import { Card } from '../components/Card'
-import { RootStackParamList } from '../navigators/RootStack'
-import { RootState } from '../store/reducers'
+import { useHook } from '../hooks/hook'
+import { SiteNavigation } from '../navigators/SitesStack'
 
-type SiteScreenNavigationProp = StackNavigationProp<
-  RootStackParamList['App']['Sites'],
-  'Submission'
->
-type SiteScreenRouteProp = RouteProp<
-  RootStackParamList['App']['Sites'],
-  'Submission'
->
+type Navigation = NativeStackNavigationProp<SiteNavigation, 'Hook'>
+type Route = RouteProp<SiteNavigation, 'Hook'>
 
 type Props = {
-  navigation: SiteScreenNavigationProp
-  route: SiteScreenRouteProp
+  navigation: Navigation
+  route: Route
 }
 
 export const Submission: FC<Props> = ({ route }) => {
-  const accessToken = useSelector(
-    (state: RootState) => state.accounts.selectedAccount
-  )
-  const { submissionID } = route.params
-
-  const { data: submission } = useQuery(
-    ['submission', { submissionID, accessToken }],
-    getSubmission
-  )
+  const { hookID } = route.params
+  const { data: hook } = useHook(hookID)
 
   return (
     <Container>
       <ScrollView>
         <Card>
           <Row>
-            <Title>Form</Title>
-            <Description>{submission?.form_name}</Description>
+            <Title>Hook</Title>
+            <Description>{hook?.form_name}</Description>
           </Row>
-          {submission?.ordered_human_fields?.map((field) => (
-            <Row key={field.name}>
-              <Title>{field.title}</Title>
-              <Description>{field.value}</Description>
-            </Row>
-          ))}
         </Card>
       </ScrollView>
     </Container>

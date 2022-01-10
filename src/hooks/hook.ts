@@ -24,3 +24,21 @@ export const useHooks = (siteID: string) => {
     }
   )
 }
+
+export const useHook = (hookID: string) => {
+  const accessToken = useToken()
+
+  return useQuery<Hook, Error>(['hooks', { hookID, accessToken }], async () => {
+    try {
+      const response = await fetch(`${BASE_URL}/hooks/${hookID}`, {
+        headers: {
+          Authorization: `Bearer ${accessToken}`
+        }
+      })
+
+      return response.json()
+    } catch (error) {
+      return error
+    }
+  })
+}

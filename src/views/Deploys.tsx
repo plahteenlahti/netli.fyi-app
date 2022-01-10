@@ -1,38 +1,24 @@
 import { RouteProp } from '@react-navigation/native'
-import { StackNavigationProp } from '@react-navigation/stack'
+import { NativeStackNavigationProp } from '@react-navigation/native-stack'
 import React, { FC } from 'react'
 import { FlatList, ListRenderItem } from 'react-native'
-import { useQuery } from 'react-query'
-import { useSelector } from 'react-redux'
 import styled from 'styled-components/native'
-import { getSiteDeploys } from '../api/netlify'
 import { DeployItem } from '../components/DeployItem'
-import { RootStackParamList } from '../navigators/RootStack'
-import { RootState } from '../store/reducers'
+import { useDeploys } from '../hooks/deploy'
+import { SiteNavigation } from '../navigators/SitesStack'
 import { Deploy } from '../typings/netlify.d'
 
-type SiteScreenNavigationProp = StackNavigationProp<
-  RootStackParamList['App']['BuildsStack'],
-  'Deploys'
->
-type SiteScreenRouteProp = RouteProp<
-  RootStackParamList['App']['BuildsStack'],
-  'Deploys'
->
+type Navigation = NativeStackNavigationProp<SiteNavigation, 'Deploys'>
+type Route = RouteProp<SiteNavigation, 'Deploys'>
 
 type Props = {
-  navigation: SiteScreenNavigationProp
-  route: SiteScreenRouteProp
+  navigation: Navigation
+  route: Route
 }
 
 export const Deploys: FC<Props> = ({ route, navigation }) => {
-  const accessToken = useSelector((state: RootState) => state.app.accessToken)
   const { siteID } = route.params
-
-  const { data: deploys } = useQuery(
-    ['deploys', { siteID, accessToken }],
-    getSiteDeploys
-  )
+  const { data: deploys } = useDeploys(siteID)
 
   const renderItem: ListRenderItem<Deploy> = ({ item: deploy, index }) => {
     const navigate = () => {

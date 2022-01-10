@@ -31,7 +31,7 @@ const accountsSlice = createSlice({
     },
     removeAccount: (state, action: PayloadAction<Account>) => {
       state.accounts = state.accounts.filter(
-        (account) => account.accessToken !== action.payload.accessToken
+        (account) => account.accessToken !== action.payload?.accessToken
       )
     },
     setSelectedAccount: (state, action: PayloadAction<Account>) => {

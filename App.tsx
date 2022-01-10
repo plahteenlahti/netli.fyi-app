@@ -7,6 +7,7 @@ import React, { useEffect } from 'react'
 import { StatusBar, useColorScheme } from 'react-native'
 import RNBootSplash from 'react-native-bootsplash'
 import 'react-native-gesture-handler'
+import { LumiThemeProvider } from 'react-native-lumi'
 import { SafeAreaProvider } from 'react-native-safe-area-context'
 import { enableScreens } from 'react-native-screens'
 import { QueryClient, QueryClientProvider } from 'react-query'
@@ -17,7 +18,6 @@ import { navigationRef } from './src/navigators/RootNavigation'
 import { SiteStack } from './src/navigators/RootStack'
 import { persistor, store } from './src/store/store'
 import { darkTheme, lightTheme } from './src/styles/theme'
-import { theme, LumiThemeProvider } from 'react-native-lumi'
 
 enableScreens()
 

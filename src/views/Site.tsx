@@ -1,5 +1,5 @@
 import { RouteProp } from '@react-navigation/native'
-import { StackNavigationProp } from '@react-navigation/stack'
+import { NativeStackNavigationProp } from '@react-navigation/native-stack'
 import React, { FC, useEffect, useState } from 'react'
 import { Dimensions, Platform, RefreshControl } from 'react-native'
 import { SafeAreaView } from 'react-native-safe-area-context'
@@ -14,19 +14,16 @@ import { useDeploys } from '../hooks/deploy'
 import { useHooks } from '../hooks/hook'
 import { useSite } from '../hooks/site'
 import { useSubmissions } from '../hooks/submissions'
-import { RootStackParamList } from '../navigators/RootStack'
+import { SiteNavigation } from '../navigators/SitesStack'
 
 const { width } = Dimensions.get('window')
 
-type SiteScreenNavigationProp = StackNavigationProp<
-  RootStackParamList['App']['Sites'],
-  'Site'
->
-type SiteScreenRouteProp = RouteProp<RootStackParamList['App']['Sites'], 'Site'>
+type Navigation = NativeStackNavigationProp<SiteNavigation, 'Site'>
+type Route = RouteProp<SiteNavigation, 'Site'>
 
 type Props = {
-  navigation: SiteScreenNavigationProp
-  route: SiteScreenRouteProp
+  navigation: Navigation
+  route: Route
 }
 
 export const Site: FC<Props> = ({ route }) => {

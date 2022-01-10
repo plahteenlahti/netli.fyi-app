@@ -11,9 +11,19 @@ import { Profile } from '../views/Profile'
 import { Site } from '../views/Site'
 import { Submission } from '../views/Submission'
 import { Submissions } from '../views/Submissions'
-import { RootStackParamList } from './RootStack'
 
-const Stack = createNativeStackNavigator<RootStackParamList['App']['Sites']>()
+export type SiteNavigation = {
+  SiteList: undefined
+  Site: { name: string; url: string; siteID: string }
+  Hook: { name: string; hookID: string }
+  Deploys: { siteID: string; name: string }
+  Deploy: { name: string; buildID: string }
+  Submissions: { siteID: string; name: string }
+  Submission: { submissionID: string; name: string }
+  Profile: undefined
+}
+
+const Stack = createNativeStackNavigator<SiteNavigation>()
 
 type ScreenOptions = any
 

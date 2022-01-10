@@ -9,7 +9,7 @@ type Props = {
   selected: boolean
 }
 
-export const AccountCard: FC<Props> = ({ account, selected }) => {
+export const AccountCard: FC<Props> = ({ account }) => {
   return (
     <Card>
       <HContainer>

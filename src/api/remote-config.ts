@@ -26,19 +26,18 @@ export const fetchGetJSON = (
     .catch(catchNetworkError('GET', url))
 }
 
-const catchNetworkError = (type: requestType, url: string) => (
-  error: Error
-) => {
-  if (error.message === 'Network request failed') {
-    throw new NetworkError({
-      message: `Fetch ${type} to '${url}' failed, Network request failed`,
-      statusCode: 500,
-      errorCode: 500
-    })
-  }
+const catchNetworkError =
+  (type: requestType, url: string) => (error: Error) => {
+    if (error.message === 'Network request failed') {
+      throw new NetworkError({
+        message: `Fetch ${type} to '${url}' failed, Network request failed`,
+        statusCode: 500,
+        errorCode: 500
+      })
+    }
 
-  throw error
-}
+    throw error
+  }
 
 const throwError = (
   type: requestType,

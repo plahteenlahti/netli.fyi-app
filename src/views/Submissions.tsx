@@ -1,38 +1,24 @@
 import { RouteProp } from '@react-navigation/native'
-import { StackNavigationProp } from '@react-navigation/stack'
+import { NativeStackNavigationProp } from '@react-navigation/native-stack'
 import React, { FC } from 'react'
 import { FlatList, ListRenderItem } from 'react-native'
-import { useQuery } from 'react-query'
-import { useSelector } from 'react-redux'
 import styled from 'styled-components/native'
-import { getSiteSubmissions } from '../api/netlify'
 import { SubmissionItem } from '../components/SubmissionItem'
-import { RootStackParamList } from '../navigators/RootStack'
-import { RootState } from '../store/reducers'
-import { useAppSelector } from '../store/store'
+import { useSubmissions } from '../hooks/submissions'
+import { SiteNavigation } from '../navigators/SitesStack'
 import { Submission } from '../typings/netlify.d'
 
-type SiteScreenNavigationProp = StackNavigationProp<
-  RootStackParamList,
-  'Submissions'
->
-type SiteScreenRouteProp = RouteProp<RootStackParamList, 'Submissions'>
+type Navigation = NativeStackNavigationProp<SiteNavigation, 'Deploys'>
+type Route = RouteProp<SiteNavigation, 'Deploys'>
 
 type Props = {
-  navigation: SiteScreenNavigationProp
-  route: SiteScreenRouteProp
+  navigation: Navigation
+  route: Route
 }
 
 export const Submissions: FC<Props> = ({ navigation, route }) => {
-  const accessToken = useAppSelector(
-    ({ accounts }) => accounts.selectedAccount?.accessToken
-  )
   const { siteID } = route.params
-
-  const { data: submissions } = useQuery(
-    ['submissions', { siteID, accessToken }],
-    getSiteSubmissions
-  )
+  const { data: submissions } = useSubmissions(siteID)
 
   const renderItem: ListRenderItem<Submission> = ({ item: submission }) => {
     const navigate = () => {
