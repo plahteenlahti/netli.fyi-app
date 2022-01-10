@@ -1,6 +1,6 @@
 import React, { FC } from 'react'
 import styled from 'styled-components/native'
-import { words } from 'lodash'
+import words from 'lodash/words'
 import { Linking } from 'react-native'
 
 type Props = {

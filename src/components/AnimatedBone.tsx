@@ -17,7 +17,7 @@ const useLayout = () => {
 }
 
 type Props = {
-  animatedStyle: ViewStyle
+  animatedStyle?: ViewStyle
   style?: any
 }
 

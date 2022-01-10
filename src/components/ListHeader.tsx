@@ -1,19 +1,13 @@
 import React, { FC } from 'react'
-import { useQuery } from 'react-query'
-import { useSelector } from 'react-redux'
 import styled from 'styled-components/native'
-
-import { getUser } from '../api/netlify'
+import { useUser } from '../hooks/user'
 import { navigate } from '../navigators/RootNavigation'
-import { RootState } from '../store/reducers'
 
 export const ListHeader: FC = () => {
-  const accessToken = useSelector((state: RootState) => state.app.accessToken)
-  const { data: user } = useQuery(['profile', { accessToken }], getUser)
+  const { data: user } = useUser()
 
   const goToProfile = () => {
     navigate('Profile', {})
-    // navigation.navigate('Profile')
   }
 
   return (

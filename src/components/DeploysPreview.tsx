@@ -1,11 +1,12 @@
 import { useNavigation } from '@react-navigation/native'
+import { NativeStackNavigationProp } from '@react-navigation/native-stack'
 import React, { FC } from 'react'
-import FontAwesome5 from 'react-native-vector-icons/FontAwesome5'
 import styled from 'styled-components/native'
+import { SiteNavigation } from '../navigators/SitesStack'
 import { Deploy } from '../typings/netlify.d'
 import { Card } from './Card'
+import { CardTitle } from './CardTitle'
 import { DeployItem } from './DeployItem'
-import { Text } from './Typography'
 
 type Props = {
   deploys?: Array<Deploy>
@@ -13,8 +14,10 @@ type Props = {
   siteName: string
 }
 
+type Navigation = NativeStackNavigationProp<SiteNavigation, 'Site'>
+
 export const DeploysPreview: FC<Props> = ({ deploys, siteID, siteName }) => {
-  const navigation = useNavigation()
+  const navigation = useNavigation<Navigation>()
 
   const shownDeploys = deploys?.slice(0, 5)
 
@@ -27,16 +30,13 @@ export const DeploysPreview: FC<Props> = ({ deploys, siteID, siteName }) => {
 
   return (
     <>
-      <TitleContainer>
-        <ThemedIcon name="code-branch" size={15} solid />
-        <CardTitle type="Title 3">Deploys</CardTitle>
-      </TitleContainer>
+      <CardTitle icon="code-branch" title="Deploys" />
       <Card>
         {shownDeploys?.map((deploy, index) => {
           const navigate = () => {
             navigation.navigate('Deploy', {
               name: siteName,
-              buildID: deploy?.id
+              buildID: `${deploy?.id}`
             })
           }
 
@@ -60,22 +60,6 @@ export const DeploysPreview: FC<Props> = ({ deploys, siteID, siteName }) => {
     </>
   )
 }
-
-const CardTitle = styled(Text)`
-  font-size: 16px;
-  font-weight: 600;
-  margin-left: 8px;
-`
-
-const TitleContainer = styled.View`
-  flex-direction: row;
-  align-items: center;
-  margin: 8px 16px;
-`
-
-const ThemedIcon = styled(FontAwesome5).attrs(({ theme }) => ({
-  color: theme.secondaryTextColor
-}))``
 
 const Container = styled.View``
 

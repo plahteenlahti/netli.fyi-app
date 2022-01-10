@@ -1,28 +1,22 @@
 import { RouteProp } from '@react-navigation/native'
-import { StackNavigationProp } from '@react-navigation/stack'
+import { NativeStackNavigationProp } from '@react-navigation/native-stack'
 import React, { FC, useEffect, useState } from 'react'
-import { useQuery } from 'react-query'
-import { useSelector } from 'react-redux'
-import styled from 'styled-components/native'
-import { getDeploy } from '../api/netlify'
-import { RootStackParamList } from '../navigators/SiteStack'
-import { RootState } from '../store/reducers'
-import { Card } from '../components/Card'
-import { Text } from '../components/Typography'
-import { DataField } from '../components/DataField'
-import { Deploy as TypeDeploy } from '../typings/netlify.d'
-import { SafeAreaView } from 'react-native-safe-area-context'
 import { Platform, RefreshControl } from 'react-native'
+import { SafeAreaView } from 'react-native-safe-area-context'
+import styled from 'styled-components/native'
+import { Card } from '../components/Card'
+import { DataField } from '../components/DataField'
+import { Text } from '../components/Typography'
+import { useDeploy } from '../hooks/deploy'
+import { SiteNavigation } from '../navigators/SitesStack'
+import { Deploy as TypeDeploy } from '../typings/netlify.d'
 
-type DeployScreenNavigationProp = StackNavigationProp<
-  RootStackParamList,
-  'Deploy'
->
-type DeployRouteProp = RouteProp<RootStackParamList, 'Deploy'>
+type Navigation = NativeStackNavigationProp<SiteNavigation, 'Deploy'>
+type Route = RouteProp<SiteNavigation, 'Deploy'>
 
 type Props = {
-  navigation: DeployScreenNavigationProp
-  route: DeployRouteProp
+  navigation: Navigation
+  route: Route
 }
 
 type Key = keyof TypeDeploy
@@ -36,13 +30,9 @@ export const Deploy: FC<Props> = ({
     params: { buildID }
   }
 }) => {
-  const accessToken = useSelector((state: RootState) => state.app.accessToken)
   const [init, setInit] = useState(false)
 
-  const { data, isLoading, refetch, isSuccess, isError } = useQuery(
-    ['build', { buildID, accessToken }],
-    getDeploy
-  )
+  const { data, isLoading, refetch, isSuccess, isError } = useDeploy(buildID)
 
   useEffect(() => {
     if (!init && (isSuccess || isError)) {

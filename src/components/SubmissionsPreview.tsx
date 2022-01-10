@@ -5,19 +5,24 @@ import { Text } from './Typography'
 import FontAwesome5 from 'react-native-vector-icons/FontAwesome5'
 import { SubmissionItem } from './SubmissionItem'
 import { useNavigation } from '@react-navigation/native'
+import { NativeStackNavigationProp } from '@react-navigation/native-stack'
+import { SiteNavigation } from '../navigators/SitesStack'
 
 type Props = {
   submissions?: Array<Submission>
   siteID: string
   siteName: string
 }
+
+type Navigation = NativeStackNavigationProp<SiteNavigation, 'Site'>
+
 export const SubmissionsPreview: FC<Props> = ({
   submissions,
   siteID,
   siteName
 }) => {
   const shownSubmissions = submissions?.slice(0, 3)
-  const navigation = useNavigation()
+  const navigation = useNavigation<Navigation>()
 
   const goToSubmissions = () => {
     navigation.navigate('Submissions', {
@@ -38,7 +43,7 @@ export const SubmissionsPreview: FC<Props> = ({
           const navigate = () => {
             navigation.navigate('Submission', {
               name: siteName,
-              submissionID: submission?.id
+              submissionID: `${submission?.id}`
             })
           }
 

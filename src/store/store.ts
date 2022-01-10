@@ -1,32 +1,58 @@
-import rootReducer from './reducers'
-import { configureStore, getDefaultMiddleware } from '@reduxjs/toolkit'
+import { configureStore } from '@reduxjs/toolkit'
+import { MMKV } from 'react-native-mmkv'
+import { TypedUseSelectorHook, useDispatch, useSelector } from 'react-redux'
 import {
-  persistStore,
-  persistReducer,
   FLUSH,
-  REHYDRATE,
   PAUSE,
   PERSIST,
+  persistReducer,
+  persistStore,
   PURGE,
-  REGISTER
+  REGISTER,
+  REHYDRATE,
+  Storage
 } from 'redux-persist'
-import AsyncStorage from '@react-native-async-storage/async-storage'
+import rootReducer from './reducers'
+
+export const storage = new MMKV()
+
+export type RootState = ReturnType<typeof store.getState>
+export type AppDispatch = typeof store.dispatch
+
+export const reduxStorage: Storage = {
+  setItem: (key, value) => {
+    storage.set(key, value)
+    return Promise.resolve(true)
+  },
+  getItem: (key) => {
+    const value = storage.getString(key)
+    return Promise.resolve(value)
+  },
+  removeItem: (key) => {
+    storage.delete(key)
+    return Promise.resolve()
+  }
+}
 
 const persistConfig = {
   key: 'root',
-  version: 1,
-  storage: AsyncStorage
+  version: 2,
+  storage: reduxStorage
 }
 
 const persistedReducer = persistReducer(persistConfig, rootReducer)
 
 export const store = configureStore({
   reducer: persistedReducer,
-  middleware: getDefaultMiddleware({
-    serializableCheck: {
-      ignoredActions: [FLUSH, REHYDRATE, PAUSE, PERSIST, PURGE, REGISTER]
-    }
-  })
+  middleware: (getDefaultMiddleware) =>
+    getDefaultMiddleware({
+      serializableCheck: {
+        ignoredActions: [FLUSH, REHYDRATE, PAUSE, PERSIST, PURGE, REGISTER]
+      }
+    })
 })
 
 export const persistor = persistStore(store)
+
+export const useAppDispatch = () => useDispatch<AppDispatch>()
+export const useAppSelector: TypedUseSelectorHook<RootState> = useSelector

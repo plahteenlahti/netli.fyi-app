@@ -1,4 +1,4 @@
-import { isDate } from 'lodash'
+import isDate from 'lodash/isDate'
 import { localizedRelativeFormat } from './time'
 
 type Field = 'url' | 'date' | 'boolean'

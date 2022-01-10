@@ -1,33 +1,22 @@
 import { RouteProp } from '@react-navigation/native'
-import { StackNavigationProp } from '@react-navigation/stack'
+import { NativeStackNavigationProp } from '@react-navigation/native-stack'
 import React, { FC } from 'react'
-import { useQuery } from 'react-query'
-import { useSelector } from 'react-redux'
 import styled from 'styled-components/native'
-import { getSubmission } from '../api/netlify'
 import { Card } from '../components/Card'
-import { RootStackParamList } from '../navigators/SiteStack'
-import { RootState } from '../store/reducers'
+import { useSubmission } from '../hooks/submissions'
+import { SiteNavigation } from '../navigators/SitesStack'
 
-type SiteScreenNavigationProp = StackNavigationProp<
-  RootStackParamList,
-  'Submission'
->
-type SiteScreenRouteProp = RouteProp<RootStackParamList, 'Submission'>
+type Navigation = NativeStackNavigationProp<SiteNavigation, 'Submission'>
+type Route = RouteProp<SiteNavigation, 'Submission'>
 
 type Props = {
-  navigation: SiteScreenNavigationProp
-  route: SiteScreenRouteProp
+  navigation: Navigation
+  route: Route
 }
 
 export const Submission: FC<Props> = ({ route }) => {
-  const accessToken = useSelector((state: RootState) => state.app.accessToken)
   const { submissionID } = route.params
-
-  const { data: submission } = useQuery(
-    ['submission', { submissionID, accessToken }],
-    getSubmission
-  )
+  const { data: submission } = useSubmission(submissionID)
 
   return (
     <Container>

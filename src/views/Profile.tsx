@@ -1,47 +1,52 @@
-import { RouteProp } from '@react-navigation/native'
-import { StackNavigationProp } from '@react-navigation/stack'
+import { RouteProp, StackActions } from '@react-navigation/native'
+import { NativeStackNavigationProp } from '@react-navigation/native-stack'
 import React, { FC } from 'react'
-import { RefreshControl } from 'react-native'
-import FontAwesome5 from 'react-native-vector-icons/FontAwesome5'
-import { useQuery } from 'react-query'
-import { useDispatch, useSelector } from 'react-redux'
+import { Alert, RefreshControl } from 'react-native'
+import { Card as LumiCard } from 'react-native-lumi'
+import { useDispatch } from 'react-redux'
 import styled from 'styled-components/native'
-import { getAccounts, getUser } from '../api/netlify'
 import { AccountCard } from '../components/AccountCard'
 import { Card } from '../components/Card'
 import { CardTitle } from '../components/CardTitle'
-import { RootStackParamList } from '../navigators/SiteStack'
-import { RootState } from '../store/reducers'
-import { setAccessToken } from '../store/reducers/app'
+import { IconRow } from '../components/IconRow'
+import { useAccounts, useUser } from '../hooks/user'
+import { SiteNavigation } from '../navigators/SitesStack'
+import { removeAllAccounts } from '../store/reducers/accounts'
 import { localizedRelativeFormat } from '../utilities/time'
+const image = require('../assets/images/icon.png')
 
-type ProfileScreenNavigationProp = StackNavigationProp<
-  RootStackParamList,
-  'Profile'
->
-type ProfileScreenRouteProp = RouteProp<RootStackParamList, 'Profile'>
+type Navigation = NativeStackNavigationProp<SiteNavigation, 'Profile'>
+type Route = RouteProp<SiteNavigation, 'Profile'>
 
 type Props = {
-  navigation: ProfileScreenNavigationProp
-  route: ProfileScreenRouteProp
+  navigation: Navigation
+  route: Route
 }
 
 export const Profile: FC<Props> = ({ navigation }) => {
-  const accessToken = useSelector((state: RootState) => state.app.accessToken)
-
   const dispatch = useDispatch()
-  const { data: user, isLoading, refetch } = useQuery(
-    ['profile', { accessToken }],
-    getUser
-  )
-  const { data: accounts } = useQuery(
-    ['accounts', { accessToken }],
-    getAccounts
-  )
+  const { data: user, isLoading, refetch } = useUser()
+  const { data: accounts } = useAccounts()
 
   const logout = () => {
-    navigation.navigate('Authorize')
-    dispatch(setAccessToken(''))
+    Alert.alert(
+      'Logging out?',
+      'Are you sure you want to log out of Netli.fyi?',
+      [
+        {
+          text: 'Cancel',
+          style: 'cancel'
+        },
+        {
+          text: 'Logout',
+          style: 'destructive',
+          onPress: () => {
+            navigation.dispatch(StackActions.replace('Authorize'))
+            dispatch(removeAllAccounts())
+          }
+        }
+      ]
+    )
   }
 
   const lastLogin = user?.last_login
@@ -65,22 +70,61 @@ export const Profile: FC<Props> = ({ navigation }) => {
               <Name>{user?.full_name}</Name>
               <Detail>{user?.email}</Detail>
             </Information>
-
-            <Logout onPress={logout}>
-              <LogoutText>Log out</LogoutText>
-              <LogoutIcon />
-            </Logout>
           </Row>
 
           <Detail>Last login {lastLogin}</Detail>
           <Detail>Account created {accountCreated}</Detail>
           <Detail>Sites created {user?.site_count}</Detail>
+          <BottomSection>
+            <Logout onPress={logout}>
+              <LogoutText>Add another account</LogoutText>
+            </Logout>
+            <Logout onPress={logout}>
+              <LogoutText>Log out</LogoutText>
+            </Logout>
+          </BottomSection>
         </Card>
 
         <CardTitle icon="user" title="Accounts" />
         {accounts?.map((account) => {
-          return <AccountCard key={account.id} account={account} />
+          return <AccountCard selected key={account.id} account={account} />
         })}
+        <LumiCard>
+          <CardTitle
+            icon="meteor"
+            title="Extras"
+            extra="Netli.fyi is a free service that helps you manage your websites. It's
+          built by a single person (Perttu Lähteenlahti), and is fully open
+          source. Below you can find some links to the source code and the
+          documentation."
+          />
+        </LumiCard>
+        <Card>
+          <IconContainer>
+            <Icon resizeMode="cover" source={image} />
+          </IconContainer>
+          <Row>
+            <Title>Support Netli.fyi</Title>
+            <Description />
+          </Row>
+        </Card>
+        <Card>
+          <IconRow icon="twitter" brands title="Twitter" action={() => {}} />
+          <IconRow icon="envelope" title="Contact" solid action={() => {}} />
+          <IconRow
+            icon="heart"
+            title="Rate Netli.fyi"
+            solid
+            action={() => {}}
+          />
+          <IconRow
+            icon="code"
+            title="Source Code"
+            solid
+            last
+            action={() => {}}
+          />
+        </Card>
       </ScrollView>
     </Container>
   )
@@ -93,6 +137,7 @@ const Container = styled.SafeAreaView`
 const ScrollView = styled.ScrollView`
   background-color: ${({ theme }) => theme.primaryBackground};
   flex: 1;
+  padding-bottom: 32px;
 `
 
 const Row = styled.View`
@@ -111,8 +156,6 @@ const Detail = styled.Text`
   margin-bottom: 4px;
 `
 
-// const Title = styled.Text``
-
 const Avatar = styled.Image`
   height: 60px;
   width: 60px;
@@ -124,27 +167,39 @@ const Information = styled.View`
   justify-content: center;
 `
 
-// const AuthenticateButton = styled.TouchableOpacity``
-
-// const AuthenticateButtonText = styled.Text`
-//   color: ${({ theme }) => theme.primaryTextColor};
-// `
-
 const Logout = styled.TouchableOpacity`
-  position: absolute;
   flex-direction: row;
   align-items: center;
-  top: 0;
-  right: 0;
+  justify-content: center;
+  padding: 16px 0px 16px;
+  border-top-width: 1px;
+  border-top-color: ${({ theme }) => theme.borderColor};
 `
-
-const LogoutIcon = styled(FontAwesome5).attrs(({ theme }) => ({
-  name: 'sign-out-alt',
-  size: 15,
-  color: theme.secondaryTextColor
-}))``
 
 const LogoutText = styled.Text`
-  color: ${({ theme }) => theme.secondaryTextColor};
+  color: ${({ theme }) => theme.accentColor};
+  font-size: 15px;
   margin-right: 8px;
 `
+
+const BottomSection = styled.View`
+  margin-top: 16px;
+`
+
+const IconContainer = styled.View`
+  margin-top: 50px;
+  height: 64px;
+  width: 64px;
+  overflow: hidden;
+  border-radius: 18px;
+  margin-bottom: 30px;
+`
+
+const Icon = styled.Image`
+  height: 100%;
+  width: 100%;
+`
+
+const Title = styled.Text``
+
+const Description = styled.Text``

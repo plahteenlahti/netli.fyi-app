@@ -1,24 +1,54 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit'
 
-type State = Array<{
+export type Account = {
+  createdAt: string
   accessToken: string
-}>
+  name: string
+}
 
-const initialState: State = []
+type State = {
+  selectedAccount: undefined | Account
+  accounts: Array<Account>
+  selectedTeam: string | undefined
+}
+
+const initialState: State = {
+  selectedAccount: undefined,
+  accounts: [],
+  selectedTeam: undefined
+}
 
 const accountsSlice = createSlice({
   name: 'accountsSlice',
   initialState,
   reducers: {
-    addAccount: (state, action: PayloadAction<{ accessToken: string }>) => {
-      state.push(action.payload)
+    addAccountFirstTime: (state, action: PayloadAction<Account>) => {
+      state.accounts.push(action.payload)
+      state.selectedAccount = action.payload
     },
-    removeAccount: (state, action) => {
-      state = state.filter((accessToken) => accessToken !== action.payload)
+    addAccount: (state, action: PayloadAction<Account>) => {
+      state.accounts.push(action.payload)
+    },
+    removeAccount: (state, action: PayloadAction<Account>) => {
+      state.accounts = state.accounts.filter(
+        (account) => account.accessToken !== action.payload?.accessToken
+      )
+    },
+    removeAllAccounts: (state) => {
+      state.accounts = []
+    },
+    setSelectedAccount: (state, action: PayloadAction<Account>) => {
+      state.selectedAccount = action.payload
     }
   }
 })
 
-export const { addAccount } = accountsSlice.caseReducers
+export const {
+  addAccount,
+  removeAccount,
+  setSelectedAccount,
+  addAccountFirstTime,
+  removeAllAccounts
+} = accountsSlice.actions
 
 export default accountsSlice.reducer

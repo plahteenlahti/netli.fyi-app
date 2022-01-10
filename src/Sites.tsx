@@ -1,46 +1,56 @@
 import { RouteProp } from '@react-navigation/native'
-import { StackNavigationProp } from '@react-navigation/stack'
-import React, { FC, useEffect, useState } from 'react'
-import { ListRenderItem, Platform, RefreshControl } from 'react-native'
-import { FlatList } from 'react-native-gesture-handler'
-import { SafeAreaView } from 'react-native-safe-area-context'
-import { useQuery } from 'react-query'
-import { useSelector } from 'react-redux'
+import { NativeStackNavigationProp } from '@react-navigation/native-stack'
+import React, { FC, useEffect, useLayoutEffect, useState } from 'react'
+import { FlatList, ListRenderItem, RefreshControl } from 'react-native'
 import styled from 'styled-components/native'
-import { getSites } from './api/netlify'
-import { SiteListItemSkeleton } from './components/SiteListItemSkeleton'
 import { SiteListItem } from './components/SiteListItem'
-import { RootStackParamList } from './navigators/SiteStack'
-import { RootState } from './store/reducers'
+// import { SiteListItemSkeleton } from './components/SiteListItemSkeleton'
+import { useSites } from './hooks/site'
+import { SiteNavigation } from './navigators/SitesStack'
 import { NetlifySite } from './typings/netlify.d'
 
-type SitesScreenNavigationProp = StackNavigationProp<
-  RootStackParamList,
-  'Profile'
->
-type SitesScreenRouteProp = RouteProp<RootStackParamList, 'Sites'>
+type Navigation = NativeStackNavigationProp<SiteNavigation, 'SiteList'>
+type SitesScreenRouteProp = RouteProp<SiteNavigation, 'SiteList'>
 
 type Props = {
-  navigation: SitesScreenNavigationProp
+  navigation: Navigation
   route: SitesScreenRouteProp
 }
 
-const placeHolderItems = Array.from({ length: 10 }, (v, i) => i).map(
-  (_, index) => ({
-    key: `${index}`,
-    custom_domain: 'domain',
-    default_domain: 'default'
-  })
-)
+type PlaceholderItem = {
+  key: string
+  id: string
+  custom_domain: 'domain'
+  default_domain: 'default'
+  screenshot_url: undefined
+  published_deploy: undefined
+}
+
+const placeHolderItems: Array<PlaceholderItem> = Array.from(
+  { length: 10 },
+  (v, i) => i
+).map((_, index) => ({
+  key: `${index}`,
+  id: `${index}`,
+  custom_domain: 'domain',
+  default_domain: 'default',
+  screenshot_url: undefined,
+  published_deploy: undefined
+}))
 
 export const Sites: FC<Props> = ({ navigation }) => {
-  const accessToken = useSelector((state: RootState) => state.app.accessToken)
   const [init, setInit] = useState(false)
+  const [search, setSearch] = useState<string | undefined>('')
+  const { data: sites, isLoading, isSuccess, isError, refetch } = useSites()
 
-  const { data: sites, isLoading, isSuccess, isError, refetch } = useQuery(
-    ['sites', { accessToken }],
-    getSites
-  )
+  useLayoutEffect(() => {
+    navigation.setOptions({
+      headerSearchBarOptions: {
+        onChangeText: (event) => setSearch(event.nativeEvent.text),
+        onCancelButtonPress: () => setSearch('')
+      }
+    })
+  }, [navigation])
 
   useEffect(() => {
     if (!init && (isSuccess || isError)) {
@@ -48,7 +58,9 @@ export const Sites: FC<Props> = ({ navigation }) => {
     }
   }, [isLoading, init, isSuccess, isError])
 
-  const renderItem: ListRenderItem<NetlifySite> = ({ item }) => {
+  const renderItem: ListRenderItem<NetlifySite | PlaceholderItem> = ({
+    item
+  }) => {
     const navigateToSite = () => {
       navigation.navigate('Site', {
         siteID: `${item.id}`,
@@ -57,7 +69,7 @@ export const Sites: FC<Props> = ({ navigation }) => {
       })
     }
     if (isLoading) {
-      return <SiteListItemSkeleton isLoading={isLoading} key={item.id} />
+      return <></>
     }
 
     return (
@@ -73,11 +85,8 @@ export const Sites: FC<Props> = ({ navigation }) => {
   }
 
   return (
-    <Container
-      edges={
-        Platform.OS === 'ios' ? ['top', 'right', 'left'] : ['right', 'left']
-      }>
-      <FlatList
+    <Container>
+      <List
         contentInsetAdjustmentBehavior="automatic"
         scrollToOverflowEnabled
         refreshControl={
@@ -86,13 +95,34 @@ export const Sites: FC<Props> = ({ navigation }) => {
             onRefresh={refetch}
           />
         }
-        data={isLoading ? placeHolderItems : sites}
+        data={
+          isLoading
+            ? placeHolderItems
+            : sites?.filter((site) => {
+                let pattern =
+                  '.*' + search?.toLowerCase().split('').join('.*') + '.*'
+                const re = new RegExp(pattern)
+                return re.test(`${site?.name}`.toLowerCase())
+              })
+        }
         renderItem={renderItem}
       />
     </Container>
   )
 }
 
-const Container = styled(SafeAreaView)`
+const List = styled(
+  FlatList as new () => FlatList<NetlifySite | PlaceholderItem>
+).attrs(() => ({
+  contentContainerStyle: {
+    borderRadius: 8,
+    overflow: 'hidden'
+  }
+}))`
+  padding: 16px;
+  border-radius: 8px;
+`
+
+const Container = styled.View`
   flex: 1;
 `

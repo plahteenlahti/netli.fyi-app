@@ -95,6 +95,23 @@ export type NetlifySite = {
   url?: string
 }
 
+export type Hook = {
+  id: string
+  site_id: string
+  form_id: null | string
+  form_name: null | string
+  user_id: string
+  type: string
+  event: string
+  data: unknown
+  success: boolean
+  created_at: string
+  updated_at: string
+  actor: string
+  disabled: boolean
+  restricted: boolean
+}
+
 export type Deploy = {
   summary?: {
     status?: string
@@ -179,6 +196,14 @@ export type Account = {
       included: number
       used: number
     }
+    bandwidth: {
+      included: number
+      used: number
+    }
+    build_minutes: {
+      included: number
+      used: number
+    }
     collaborators: {
       included: number
       used: number
@@ -233,10 +258,34 @@ export type Submission = {
 }
 
 export type Build = {
+  sha: string
+  done: true
+  error: null
+  created_at: string
+  started_at: string
+  site_id: string
+  build_time: number
+  state: 'done' | 'skipped'
+  subdomain: string
+  custom_domain: string
+  context: string
+  branch: string
+  commit_ref: string
+  commit_url: string
+  review_id: null
+  review_url: null
+  title: string
+  deploy_time: number
+  links: {
+    permalink: string
+    alias: string
+    branch: null | string
+  }
   id: string
   deploy_id: string
-  sha: string
-  done: boolean
-  error: string
-  created_at: string
+  error_message: null
+  deploy_state: 'ready'
+  deploy_ssl_url: string
+  committer: string
+  priority: null
 }

@@ -1,48 +1,39 @@
 import { RouteProp } from '@react-navigation/native'
-import { StackNavigationProp } from '@react-navigation/stack'
+import { NativeStackNavigationProp } from '@react-navigation/native-stack'
 import React, { FC, useEffect, useState } from 'react'
 import { Dimensions, Platform, RefreshControl } from 'react-native'
 import { SafeAreaView } from 'react-native-safe-area-context'
-import { useQuery } from 'react-query'
-import { useSelector } from 'react-redux'
 import styled from 'styled-components/native'
-import { getSite, getSiteDeploys, getSiteSubmissions } from '../api/netlify'
 import { BuildSettings } from '../components/BuildSettings'
 import { DeploysPreview } from '../components/DeploysPreview'
 import { NoPreview } from '../components/NoPreview'
+import { HooksPreview } from '../components/previews/hook'
 import { SiteInformation } from '../components/SiteInformation'
 import { SubmissionsPreview } from '../components/SubmissionsPreview'
-import { RootStackParamList } from '../navigators/SiteStack'
-import { RootState } from '../store/reducers'
+import { useDeploys } from '../hooks/deploy'
+import { useHooks } from '../hooks/hook'
+import { useSite } from '../hooks/site'
+import { useSubmissions } from '../hooks/submissions'
+import { SiteNavigation } from '../navigators/SitesStack'
 
 const { width } = Dimensions.get('window')
 
-type SiteScreenNavigationProp = StackNavigationProp<RootStackParamList, 'Site'>
-type SiteScreenRouteProp = RouteProp<RootStackParamList, 'Site'>
+type Navigation = NativeStackNavigationProp<SiteNavigation, 'Site'>
+type Route = RouteProp<SiteNavigation, 'Site'>
 
 type Props = {
-  navigation: SiteScreenNavigationProp
-  route: SiteScreenRouteProp
+  navigation: Navigation
+  route: Route
 }
 
 export const Site: FC<Props> = ({ route }) => {
-  const accessToken = useSelector((state: RootState) => state.app.accessToken)
   const [init, setInit] = useState(false)
 
   const { siteID, name } = route.params
-  const { data: site, isLoading, refetch, isSuccess, isError } = useQuery(
-    ['site', { siteID, accessToken }],
-    getSite
-  )
-  const { data: deploys } = useQuery(
-    ['deploys', { siteID, accessToken }],
-    getSiteDeploys
-  )
-
-  const { data: submissions } = useQuery(
-    ['submissions', { siteID, accessToken }],
-    getSiteSubmissions
-  )
+  const { data: site, isLoading, refetch, isSuccess, isError } = useSite(siteID)
+  const { data: deploys } = useDeploys(siteID)
+  const { data: submissions } = useSubmissions(siteID)
+  const { data: hooks } = useHooks(siteID)
 
   useEffect(() => {
     if (!init && (isSuccess || isError)) {
@@ -79,10 +70,16 @@ export const Site: FC<Props> = ({ route }) => {
         </Card>
 
         <SiteInformation site={site} name={name} />
+
         <BuildSettings site={site} />
         {deploys && deploys?.length > 0 ? (
           <DeploysPreview siteID={siteID} siteName={name} deploys={deploys} />
         ) : null}
+
+        {hooks && hooks?.length > 0 ? (
+          <HooksPreview siteID={siteID} siteName={name} hooks={hooks} />
+        ) : null}
+
         {submissions && submissions?.length > 0 ? (
           <SubmissionsPreview
             siteID={siteID}
