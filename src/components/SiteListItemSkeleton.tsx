@@ -18,34 +18,6 @@ type Props = {
 }
 
 export const SiteListItemSkeleton: FC<Props> = ({}) => {
-  // const animationValue = useValue(0)
-  // const loading = useValue(isLoading ? 1 : 0)
-
-  // useCode(
-  //   () =>
-  //     cond(eq(loading, 1), [
-  //       set(
-  //         animationValue,
-  //         loop({
-  //           duration: DEFAULT_DURATION,
-  //           easing: DEFAULT_EASING
-  //         })
-  //       )
-  //     ]),
-  //   [loading, animationValue]
-  // )
-
-  // const animatedStyle: any = {
-  //   transform: [
-  //     {
-  //       translateX: interpolate(animationValue, {
-  //         inputRange: [0, 1],
-  //         outputRange: [-100, 100]
-  //       })
-  //     }
-  //   ]
-  // }
-
   return (
     <Card>
       <PreviewSkeleton />
