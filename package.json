@@ -33,6 +33,7 @@
     "react-native": "0.69.4",
     "react-native-app-auth": "^6.4.3",
     "react-native-bootsplash": "^4.2.3",
+    "react-native-dev-menu": "^4.1.1",
     "react-native-gesture-handler": "^2.5.0",
     "react-native-linear-gradient": "^2.6.2",
     "react-native-lumi": "^0.1.1",
