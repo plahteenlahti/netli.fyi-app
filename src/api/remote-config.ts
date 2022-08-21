@@ -17,7 +17,7 @@ export const fetchGetJSON = (
     headers: requestHeaders,
     credentials
   })
-    .then((response) => {
+    .then(response => {
       if (response.status >= 400) {
         throwError('GET', response, response.status)
       }
@@ -54,5 +54,5 @@ const throwError = (
 const getUrl = (config: string) => `https://netli.fyi/remote-config/${config}`
 
 export const fetchRemoteConfig = (id: string) => {
-  return fetchGetJSON(getUrl(id)).then((resp) => resp.json())
+  return fetchGetJSON(getUrl(id)).then(resp => resp.json())
 }

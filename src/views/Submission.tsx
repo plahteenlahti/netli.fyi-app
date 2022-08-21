@@ -26,7 +26,7 @@ export const Submission: FC<Props> = ({ route }) => {
             <Title>Form</Title>
             <Description>{submission?.form_name}</Description>
           </Row>
-          {submission?.ordered_human_fields?.map((field) => (
+          {submission?.ordered_human_fields?.map(field => (
             <Row key={field.name}>
               <Title>{field.title}</Title>
               <Description>{field.value}</Description>

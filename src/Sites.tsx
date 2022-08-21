@@ -46,7 +46,7 @@ export const Sites: FC<Props> = ({ navigation }) => {
   useLayoutEffect(() => {
     navigation.setOptions({
       headerSearchBarOptions: {
-        onChangeText: (event) => setSearch(event.nativeEvent.text),
+        onChangeText: event => setSearch(event.nativeEvent.text),
         onCancelButtonPress: () => setSearch('')
       }
     })
@@ -98,7 +98,7 @@ export const Sites: FC<Props> = ({ navigation }) => {
         data={
           isLoading
             ? placeHolderItems
-            : sites?.filter((site) => {
+            : sites?.filter(site => {
                 let pattern =
                   '.*' + search?.toLowerCase().split('').join('.*') + '.*'
                 const re = new RegExp(pattern)

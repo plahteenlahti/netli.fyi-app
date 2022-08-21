@@ -56,7 +56,7 @@ export const Deploy: FC<Props> = ({
         }>
         <CardTitle type="Title 3">Deploy summary</CardTitle>
         <Summary>
-          {data?.summary?.messages?.map((message) => (
+          {data?.summary?.messages?.map(message => (
             <Row key={message.title}>
               <Title>{message.title}</Title>
               <Description>{message.description}</Description>

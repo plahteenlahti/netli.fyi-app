@@ -86,7 +86,7 @@ export const Profile: FC<Props> = ({ navigation }) => {
         </Card>
 
         <CardTitle icon="user" title="Accounts" />
-        {accounts?.map((account) => {
+        {accounts?.map(account => {
           return <AccountCard selected key={account.id} account={account} />
         })}
         <LumiCard>

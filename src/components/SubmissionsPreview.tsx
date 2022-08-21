@@ -39,7 +39,7 @@ export const SubmissionsPreview: FC<Props> = ({
       </TitleContainer>
 
       <Card>
-        {shownSubmissions?.map((submission) => {
+        {shownSubmissions?.map(submission => {
           const navigate = () => {
             navigation.navigate('Submission', {
               name: siteName,

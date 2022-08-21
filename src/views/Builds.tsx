@@ -11,7 +11,7 @@ export const Builds = () => {
     <Container>
       <ScrollView>
         <Card>
-          {data?.map((build) => (
+          {data?.map(build => (
             <BuildItem key={build?.id} build={build} />
           ))}
         </Card>
