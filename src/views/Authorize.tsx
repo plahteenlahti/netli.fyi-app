@@ -131,7 +131,7 @@ export const Authorize: FC<Props> = ({ navigation }) => {
         <ORSection>
           <InputContainer>
             <Input
-              onChangeText={(text) => setPersonalAccessToken(text)}
+              onChangeText={text => setPersonalAccessToken(text)}
               placeholder="Personal access token"
             />
             <AuthorizeButtonSmall onPress={authenticateWithToken}>

@@ -15,9 +15,9 @@
             <BuildableReference
                BuildableIdentifier = "primary"
                BlueprintIdentifier = "13B07F861A680F5B00A75B9A"
-               BuildableName = "Deploy.app"
-               BlueprintName = "Deploy"
-               ReferencedContainer = "container:Deploy.xcodeproj">
+               BuildableName = "Netli.fyi.app"
+               BlueprintName = "Netli.fyi"
+               ReferencedContainer = "container:Netli.fyi.xcodeproj">
             </BuildableReference>
          </BuildActionEntry>
       </BuildActionEntries>
@@ -33,9 +33,9 @@
             <BuildableReference
                BuildableIdentifier = "primary"
                BlueprintIdentifier = "00E356ED1AD99517003FC87E"
-               BuildableName = "DeployTests.xctest"
-               BlueprintName = "DeployTests"
-               ReferencedContainer = "container:Deploy.xcodeproj">
+               BuildableName = "Netli.fyiTests.xctest"
+               BlueprintName = "Netli.fyiTests"
+               ReferencedContainer = "container:Netli.fyi.xcodeproj">
             </BuildableReference>
          </TestableReference>
       </Testables>
@@ -55,9 +55,9 @@
          <BuildableReference
             BuildableIdentifier = "primary"
             BlueprintIdentifier = "13B07F861A680F5B00A75B9A"
-            BuildableName = "Deploy.app"
-            BlueprintName = "Deploy"
-            ReferencedContainer = "container:Deploy.xcodeproj">
+            BuildableName = "Netli.fyi.app"
+            BlueprintName = "Netli.fyi"
+            ReferencedContainer = "container:Netli.fyi.xcodeproj">
          </BuildableReference>
       </BuildableProductRunnable>
    </LaunchAction>
@@ -72,9 +72,9 @@
          <BuildableReference
             BuildableIdentifier = "primary"
             BlueprintIdentifier = "13B07F861A680F5B00A75B9A"
-            BuildableName = "Deploy.app"
-            BlueprintName = "Deploy"
-            ReferencedContainer = "container:Deploy.xcodeproj">
+            BuildableName = "Netli.fyi.app"
+            BlueprintName = "Netli.fyi"
+            ReferencedContainer = "container:Netli.fyi.xcodeproj">
          </BuildableReference>
       </BuildableProductRunnable>
    </ProfileAction>

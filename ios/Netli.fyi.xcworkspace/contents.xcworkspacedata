@@ -2,7 +2,7 @@
 <Workspace
    version = "1.0">
    <FileRef
-      location = "group:/Users/perttu/Projects/netli.fyi-app/ios/Netli.fyi.xcodeproj">
+      location = "group:Netli.fyi.xcodeproj">
    </FileRef>
    <FileRef
       location = "group:Pods/Pods.xcodeproj">
