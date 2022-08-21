@@ -1,14 +1,9 @@
 import React, { FC } from 'react'
-import Animated, { Easing } from 'react-native-reanimated'
+import { Easing } from 'react-native-reanimated'
 import styled from 'styled-components/native'
 import { AnimatedBone } from './AnimatedBone'
 
-export const DEFAULT_EASING: Animated.EasingFunction = Easing.bezier(
-  0.5,
-  0,
-  0.25,
-  1
-)
+export const DEFAULT_EASING = Easing.bezier(0.5, 0, 0.25, 1)
 export const boneColor = '#E1E9EE'
 export const highlightColor = '#F2F8FC'
 export const DEFAULT_DURATION = 1200
