@@ -133,7 +133,6 @@ export const Authorize: FC<Props> = ({ navigation }) => {
             <Input
               onChangeText={text => setPersonalAccessToken(text)}
               placeholder="Personal access token"
-              value="wTB3vBHU5t7OQNU7-nOKa6mMTVABTt_fhMwwMtL7Cjk"
             />
             <AuthorizeButtonSmall onPress={authenticateWithToken}>
               <ButtonText>Authorize</ButtonText>
