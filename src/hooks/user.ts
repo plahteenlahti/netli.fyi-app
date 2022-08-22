@@ -1,13 +1,11 @@
-import { useQuery } from 'react-query'
-import { useAppSelector } from '../store/store'
+import { useQuery } from '@tanstack/react-query'
 import { Account, User } from '../typings/netlify'
+import { useToken } from './useToken'
 
 const BASE_URL = 'https://api.netlify.com/api/v1'
 
 export const useUser = () => {
-  const accessToken = useAppSelector(
-    ({ accounts }) => accounts.selectedAccount?.accessToken
-  )
+  const accessToken = useToken()
 
   return useQuery<User, Error>(['profile', { accessToken }], async () => {
     try {
@@ -25,9 +23,7 @@ export const useUser = () => {
 }
 
 export const useAccounts = () => {
-  const accessToken = useAppSelector(
-    ({ accounts }) => accounts.selectedAccount?.accessToken
-  )
+  const accessToken = useToken()
   return useQuery<Array<Account>, Error>(
     ['accounts', { accessToken }],
     async () => {

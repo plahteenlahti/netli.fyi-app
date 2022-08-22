@@ -1,4 +1,4 @@
-import { useQuery } from 'react-query'
+import { useQuery } from '@tanstack/react-query'
 import { Submission } from '../typings/netlify'
 import { useToken } from './useToken'
 

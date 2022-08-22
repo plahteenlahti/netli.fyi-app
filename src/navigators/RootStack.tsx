@@ -1,7 +1,7 @@
 import { createNativeStackNavigator } from '@react-navigation/native-stack'
 import React, { FC } from 'react'
 import { useTheme } from 'styled-components/native'
-import { useAppSelector } from '../store/store'
+import { useToken } from '../hooks/useToken'
 import { Authorize } from '../views/Authorize'
 import { TabStack } from './TabStack'
 
@@ -20,9 +20,7 @@ const Stack = createNativeStackNavigator<RootStackParamList>()
 
 export const SiteStack: FC = () => {
   const { accentColor, primaryTextColor } = useTheme()
-  const accessToken = useAppSelector(
-    ({ accounts }) => accounts.selectedAccount?.accessToken
-  )
+  const accessToken = useToken()
 
   return (
     <Stack.Navigator
