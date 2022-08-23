@@ -1,3 +1,4 @@
+
 #import "AppDelegate.h"
 
 #import <React/RCTBridge.h>
@@ -6,6 +7,8 @@
 
 #import <React/RCTAppSetupUtils.h>
 #import "RNBootSplash.h"
+#import <Firebase.h>
+
 
 #if RCT_NEW_ARCH_ENABLED
 #import <React/CoreModulesPlugins.h>
@@ -35,6 +38,8 @@ static NSString *const kRNConcurrentRoot = @"concurrentRoot";
   RCTAppSetupPrepareApp(application);
 
   RCTBridge *bridge = [[RCTBridge alloc] initWithDelegate:self launchOptions:launchOptions];
+  
+  [FIRApp configure];
 
 #if RCT_NEW_ARCH_ENABLED
   _contextContainer = std::make_shared<facebook::react::ContextContainer const>();
@@ -45,7 +50,7 @@ static NSString *const kRNConcurrentRoot = @"concurrentRoot";
 #endif
 
   NSDictionary *initProps = [self prepareInitialProps];
-  UIView *rootView = RCTAppSetupDefaultRootView(bridge, @"Deploy", initProps);
+  UIView *rootView = RCTAppSetupDefaultRootView(bridge, @"Netlifyi", initProps);
 
   if (@available(iOS 13.0, *)) {
     rootView.backgroundColor = [UIColor systemBackgroundColor];
