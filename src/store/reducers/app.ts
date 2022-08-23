@@ -15,13 +15,9 @@ const initialState: State = {
 
 export const toggleAnalytics = createAsyncThunk(
   'analytics/enable',
-  async (value: boolean, { rejectWithValue }) => {
-    try {
-      await analytics().setAnalyticsCollectionEnabled(value)
-      return value
-    } catch (error) {
-      return rejectWithValue(error.response.data)
-    }
+  async (value: boolean) => {
+    await analytics().setAnalyticsCollectionEnabled(value)
+    return value
   }
 )
 

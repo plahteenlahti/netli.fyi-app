@@ -14,6 +14,7 @@ import { useAccounts, useUser } from '../hooks/user'
 import { SiteNavigation } from '../navigators/SitesStack'
 import { removeAllAccounts } from '../store/reducers/accounts'
 import { toggleAnalytics } from '../store/reducers/app'
+import { useAppDispatch } from '../store/store'
 import { localizedRelativeFormat } from '../utilities/time'
 const image = require('../assets/images/icon.png')
 
@@ -26,7 +27,7 @@ type Props = {
 }
 
 export const Profile: FC<Props> = ({ navigation }) => {
-  const dispatch = useDispatch()
+  const dispatch = useAppDispatch()
   const { data: user, isLoading, refetch } = useUser()
   const { data: accounts } = useAccounts()
 
