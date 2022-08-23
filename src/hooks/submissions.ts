@@ -1,8 +1,7 @@
 import { useQuery } from '@tanstack/react-query'
 import { Submission } from '../typings/netlify'
+import { BASE_URL } from '../utilities/constants'
 import { useToken } from './useToken'
-
-const BASE_URL = 'https://api.netlify.com/api/v1'
 
 export const useSubmissions = (siteID: string) => {
   const accessToken = useToken()

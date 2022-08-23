@@ -1,13 +1,15 @@
+import { useNavigation } from '@react-navigation/native'
+import { NativeStackNavigationProp } from '@react-navigation/native-stack'
 import React, { FC } from 'react'
 import styled from 'styled-components/native'
 import { useUser } from '../hooks/user'
-import { navigate } from '../navigators/RootNavigation'
+import { SiteNavigation } from '../navigators/SitesStack'
 
 export const ListHeader: FC = () => {
   const { data: user } = useUser()
-
+  const navigation = useNavigation<NativeStackNavigationProp<SiteNavigation>>()
   const goToProfile = () => {
-    navigate('Profile', {})
+    navigation.navigate('Profile')
   }
 
   return (

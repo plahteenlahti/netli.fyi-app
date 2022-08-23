@@ -1,0 +1,46 @@
+{
+  "project_info": {
+    "project_number": "309040560224",
+    "project_id": "netlifyi",
+    "storage_bucket": "netlifyi.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:309040560224:android:b31e74a8cb92452b3d6b05",
+        "android_client_info": {
+          "package_name": "deploy.nyxo.app"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "309040560224-qaa84dtdqqc4a191occb1k62kn60htqh.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAPLyMdkc9abKi4AOfl-anY-GkQhK7xlBk"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "309040560224-qaa84dtdqqc4a191occb1k62kn60htqh.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "309040560224-8ur8m58f5ol96sn386ju74ronsd9roim.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "app.nyxo.deploy"
+              }
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

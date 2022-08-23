@@ -1,6 +1,6 @@
 //
 //  File.swift
-//  Deploy
+//  Netlifyi
 //
 //  Created by Perttu Lähteenlahti on 24.10.2021.
 //

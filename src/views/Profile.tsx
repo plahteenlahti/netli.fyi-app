@@ -9,9 +9,12 @@ import { AccountCard } from '../components/AccountCard'
 import { Card } from '../components/Card'
 import { CardTitle } from '../components/CardTitle'
 import { IconRow } from '../components/IconRow'
+import { useRemoteValue } from '../config/remote-config'
 import { useAccounts, useUser } from '../hooks/user'
 import { SiteNavigation } from '../navigators/SitesStack'
 import { removeAllAccounts } from '../store/reducers/accounts'
+import { toggleAnalytics } from '../store/reducers/app'
+import { useAppDispatch } from '../store/store'
 import { localizedRelativeFormat } from '../utilities/time'
 const image = require('../assets/images/icon.png')
 
@@ -24,9 +27,16 @@ type Props = {
 }
 
 export const Profile: FC<Props> = ({ navigation }) => {
-  const dispatch = useDispatch()
+  const dispatch = useAppDispatch()
   const { data: user, isLoading, refetch } = useUser()
   const { data: accounts } = useAccounts()
+
+  const _toggleAnalytics = () => {
+    dispatch(toggleAnalytics(true))
+  }
+
+  const value = useRemoteValue('iap_enabled')
+  console.log(value)
 
   const logout = () => {
     Alert.alert(
@@ -76,6 +86,9 @@ export const Profile: FC<Props> = ({ navigation }) => {
           <Detail>Account created {accountCreated}</Detail>
           <Detail>Sites created {user?.site_count}</Detail>
           <BottomSection>
+            <Logout onPress={_toggleAnalytics}>
+              <LogoutText>Toggle Analytics</LogoutText>
+            </Logout>
             <Logout onPress={logout}>
               <LogoutText>Add another account</LogoutText>
             </Logout>

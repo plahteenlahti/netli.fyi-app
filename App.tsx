@@ -1,9 +1,10 @@
 import {
   DarkTheme,
   DefaultTheme,
-  NavigationContainer
+  NavigationContainer,
+  NavigationContainerRef
 } from '@react-navigation/native'
-import React, { useEffect } from 'react'
+import React, { useEffect, useRef } from 'react'
 import { StatusBar, useColorScheme } from 'react-native'
 import RNBootSplash from 'react-native-bootsplash'
 import 'react-native-gesture-handler'
@@ -14,10 +15,11 @@ import { QueryClient, QueryClientProvider } from '@tanstack/react-query'
 import { Provider } from 'react-redux'
 import { PersistGate } from 'redux-persist/integration/react'
 import { ThemeProvider } from 'styled-components/native'
-import { navigationRef } from './src/navigators/RootNavigation'
-import { SiteStack } from './src/navigators/RootStack'
+import { RootStackParamList, SiteStack } from './src/navigators/RootStack'
 import { persistor, store } from './src/store/store'
 import { darkTheme, lightTheme } from './src/styles/theme'
+import analytics from '@react-native-firebase/analytics'
+import { useRemoteConfig } from './src/config/remote-config'
 
 enableScreens()
 
@@ -25,6 +27,7 @@ const queryClient = new QueryClient()
 
 const App = () => {
   const colorScheme = useColorScheme()
+  useRemoteConfig()
 
   useEffect(() => {
     const init = async () => {}
@@ -34,13 +37,33 @@ const App = () => {
     })
   }, [])
 
+  const routeNameRef = useRef<string>()
+  const navigationRef = useRef<NavigationContainerRef<RootStackParamList>>(null)
+
   return (
     <SafeAreaProvider>
       <Provider store={store}>
         <PersistGate loading={null} persistor={persistor}>
           <NavigationContainer
             ref={navigationRef}
-            theme={colorScheme === 'dark' ? DarkTheme : DefaultTheme}>
+            theme={colorScheme === 'dark' ? DarkTheme : DefaultTheme}
+            onReady={() => {
+              routeNameRef.current =
+                navigationRef.current?.getCurrentRoute()?.name
+            }}
+            onStateChange={async () => {
+              const previousRouteName = routeNameRef.current
+              const currentRouteName =
+                navigationRef.current?.getCurrentRoute()?.name
+
+              if (previousRouteName !== currentRouteName) {
+                await analytics().logScreenView({
+                  screen_name: currentRouteName,
+                  screen_class: currentRouteName
+                })
+              }
+              routeNameRef.current = currentRouteName
+            }}>
             <QueryClientProvider client={queryClient}>
               <StatusBar
                 translucent
