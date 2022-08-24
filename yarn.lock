@@ -7828,6 +7828,11 @@ react-native-mmkv@^2.4.3:
   resolved "https://registry.yarnpkg.com/react-native-mmkv/-/react-native-mmkv-2.4.3.tgz#6bb4c2d5e328513da11faab1371d056a189adbd0"
   integrity sha512-0hYNOTbsjJ5j5cpX+qjwReGIxuYE9MWRsyPQ72fTOvzmEjYXCF4Wr2VQoqx8R6W1/Uinekvln7dGvJ4RExmHhQ==
 
+react-native-purchases@^5.0.0:
+  version "5.0.0"
+  resolved "https://registry.yarnpkg.com/react-native-purchases/-/react-native-purchases-5.0.0.tgz#18cdfe6a45c9b3501ab85290e80726a22b4a8481"
+  integrity sha512-rQMS5t3sybCLKElghM/H60PABZfU8afp5IXdPGEFseY+rqnYJQKxQFq1w+DFpTN6kmwK92J6V5elrnVF1m0Ugg==
+
 react-native-reanimated@^2.10.0:
   version "2.10.0"
   resolved "https://registry.yarnpkg.com/react-native-reanimated/-/react-native-reanimated-2.10.0.tgz#ed53be66bbb553b5b5e93e93ef4217c87b8c73db"

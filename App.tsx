@@ -5,7 +5,7 @@ import {
   NavigationContainerRef
 } from '@react-navigation/native'
 import React, { useEffect, useRef } from 'react'
-import { StatusBar, useColorScheme } from 'react-native'
+import { StatusBar, useColorScheme, Platform } from 'react-native'
 import RNBootSplash from 'react-native-bootsplash'
 import 'react-native-gesture-handler'
 import { LumiThemeProvider } from 'react-native-lumi'
@@ -20,6 +20,7 @@ import { persistor, store } from './src/store/store'
 import { darkTheme, lightTheme } from './src/styles/theme'
 import analytics from '@react-native-firebase/analytics'
 import { useRemoteConfig } from './src/config/remote-config'
+import { usePurchases } from './src/hooks/purchases'
 
 enableScreens()
 
@@ -28,6 +29,7 @@ const queryClient = new QueryClient()
 const App = () => {
   const colorScheme = useColorScheme()
   useRemoteConfig()
+  usePurchases()
 
   useEffect(() => {
     const init = async () => {}

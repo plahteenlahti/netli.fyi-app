@@ -7,6 +7,7 @@ type DefaultValues = {
   iap_enabled: boolean
   netlify_oauth_settings: string
   version: number
+  revenuecat_key: string
 }
 
 const VALUES: DefaultValues = {
@@ -16,7 +17,8 @@ const VALUES: DefaultValues = {
     clientSecret: configuration.client_secret,
     redirectUrl: configuration.redirect_url
   }),
-  version: 0.1
+  version: 0.1,
+  revenuecat_key: configuration.revenuecat_key
 }
 
 export const useRemoteConfig = () => {
