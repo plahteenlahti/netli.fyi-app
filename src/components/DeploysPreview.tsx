@@ -7,6 +7,7 @@ import { Deploy } from '../typings/netlify.d'
 import { Card } from './Card'
 import { CardTitle } from './CardTitle'
 import { DeployItem } from './DeployItem'
+import { DeployChart } from './deploys/DeployChart'
 
 type Props = {
   deploys?: Array<Deploy>
@@ -31,6 +32,11 @@ export const DeploysPreview: FC<Props> = ({ deploys, siteID, siteName }) => {
   return (
     <>
       <CardTitle icon="code-branch" title="Deploys" />
+
+      <Card>
+        <DeployChart siteID={siteID} />
+      </Card>
+
       <Card>
         {shownDeploys?.map((deploy, index) => {
           const navigate = () => {

@@ -31,7 +31,7 @@ export const Site: FC<Props> = ({ route }) => {
 
   const { siteID, name } = route.params
   const { data: site, isLoading, refetch, isSuccess, isError } = useSite(siteID)
-  const { data: deploys } = useDeploys(siteID)
+  const { data: deploys } = useDeploys(siteID, { per_page: 3 })
   const { data: submissions } = useSubmissions(siteID)
   const { data: hooks } = useHooks(siteID)
 
