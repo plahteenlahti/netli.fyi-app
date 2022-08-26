@@ -200,8 +200,17 @@ export type Account = {
       included: number
       used: number
     }
+    collaborators: {
+      included: number
+      used: number
+    }
     build_minutes: {
       included: number
+      used: number
+    }
+    concurrent_builds: {
+      included: number
+      max: number
       used: number
     }
     collaborators: {

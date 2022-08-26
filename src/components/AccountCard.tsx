@@ -1,12 +1,23 @@
 import React, { FC } from 'react'
+import Animated from 'react-native-reanimated'
 import styled from 'styled-components/native'
 import { Account } from '../typings/netlify.d'
+import { UsageCard } from './account/UsageCard'
 import { Card } from './Card'
 import { PlaceholderIcon } from './PlaceholderIcon'
 
 type Props = {
   account: Account
   selected: boolean
+}
+
+const getBarWidth = (val: number, max: number, min: number) => {
+  const normalized = (val - min) / (max - min)
+  if (normalized < 0.05) {
+    return '5%'
+  } else {
+    return normalized * 100 + '%'
+  }
 }
 
 export const AccountCard: FC<Props> = ({ account }) => {
@@ -32,10 +43,24 @@ export const AccountCard: FC<Props> = ({ account }) => {
             Billing email: {account.billing_email}
           </BillingAccount>
 
-          <DataText>
-            {account.capabilities.bandwidth.used}
-            {account.capabilities.bandwidth.included}
-          </DataText>
+          <UsageCard
+            min={0}
+            max={account.capabilities.bandwidth.included}
+            value={account.capabilities.bandwidth.used}
+            title="Bandwith used"
+          />
+          <UsageCard
+            min={0}
+            max={account.capabilities.build_minutes.included}
+            value={account.capabilities.build_minutes.used}
+            title="Build minutes used"
+          />
+          <UsageCard
+            min={0}
+            max={account.capabilities.sites.included}
+            value={account.capabilities.sites.used}
+            title="Sites"
+          />
         </VContainer>
       </HContainer>
     </Card>
@@ -61,7 +86,9 @@ const HContainer = styled.View`
   flex-direction: row;
 `
 
-const VContainer = styled.View``
+const VContainer = styled.View`
+  flex: 1;
+`
 
 const Type = styled.Text`
   text-transform: uppercase;
@@ -89,4 +116,17 @@ const AccountName = styled.Text`
 const DataText = styled.Text`
   color: ${({ theme }) => theme.secondaryTextColor};
   font-size: 13px;
+`
+
+const ProgressBarOuter = styled.View`
+  height: 4px;
+  border-radius: 4px;
+  width: 100%;
+  background-color: ${({ theme }) => theme.primaryBackground};
+`
+
+const ProgressBarInner = styled(Animated.View)`
+  border-radius: 4px;
+  height: 100%;
+  background-color: ${({ theme }) => theme.accentColor};
 `
