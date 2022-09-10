@@ -1,13 +1,13 @@
 import { RouteProp } from '@react-navigation/native'
 import { NativeStackNavigationProp } from '@react-navigation/native-stack'
 import React, { FC, useEffect, useState } from 'react'
-import { Dimensions, Platform, RefreshControl } from 'react-native'
+import { Platform, RefreshControl } from 'react-native'
 import { SafeAreaView } from 'react-native-safe-area-context'
 import styled from 'styled-components/native'
 import { BuildSettings } from '../components/BuildSettings'
 import { DeploysPreview } from '../components/DeploysPreview'
-import { NoPreview } from '../components/NoPreview'
 import { HooksPreview } from '../components/previews/hook'
+import { SitePreview } from '../components/site/SitePreview'
 import { SiteInformation } from '../components/SiteInformation'
 import { SubmissionsPreview } from '../components/SubmissionsPreview'
 import { useDeploys } from '../hooks/deploy'
@@ -15,8 +15,6 @@ import { useHooks } from '../hooks/hook'
 import { useSite } from '../hooks/site'
 import { useSubmissions } from '../hooks/submissions'
 import { SiteNavigation } from '../navigators/SitesStack'
-
-const { width } = Dimensions.get('window')
 
 type Navigation = NativeStackNavigationProp<SiteNavigation, 'Site'>
 type Route = RouteProp<SiteNavigation, 'Site'>
@@ -55,19 +53,7 @@ export const Site: FC<Props> = ({ route }) => {
             onRefresh={refetch}
           />
         }>
-        <Card>
-          <PreviewContainer>
-            {site?.screenshot_url ? (
-              <SitePreview
-                resizeMode="contain"
-                source={{ uri: site?.screenshot_url }}
-                height={undefined}
-              />
-            ) : (
-              <NoSitePreview />
-            )}
-          </PreviewContainer>
-        </Card>
+        <SitePreview screenshot_url={site?.screenshot_url} />
 
         <SiteInformation site={site} name={name} />
 
@@ -108,22 +94,4 @@ const Card = styled.View`
   border-radius: 8px;
   box-shadow: rgba(0, 0, 0, 0.06) 0px 0px 1px;
   elevation: 2;
-`
-
-const SitePreview = styled.Image`
-  width: 100%;
-  height: ${(width - 2 * 16 - 2 * 8) * 0.625}px;
-  background-color: rgba(0, 0, 0, 0.54);
-  border-radius: 8px;
-  overflow: hidden;
-`
-
-const PreviewContainer = styled.View`
-  border-radius: 4px;
-  overflow: hidden;
-  width: 100%;
-`
-
-const NoSitePreview = styled(NoPreview)`
-  height: ${(width - 2 * 16 - 2 * 8) * 0.625}px;
 `
