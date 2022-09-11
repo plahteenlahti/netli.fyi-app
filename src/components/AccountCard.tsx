@@ -1,6 +1,10 @@
+import { NativeStackNavigationProp } from '@react-navigation/native-stack'
 import React, { FC } from 'react'
+import { TouchableOpacity } from 'react-native'
 import Animated from 'react-native-reanimated'
 import styled from 'styled-components/native'
+import { usePrefetchAccount } from '../hooks/account'
+import { SiteNavigation } from '../navigators/SitesStack'
 import { Account } from '../typings/netlify.d'
 import { UsageCard } from './account/UsageCard'
 import { Card } from './Card'
@@ -8,62 +12,65 @@ import { PlaceholderIcon } from './PlaceholderIcon'
 
 type Props = {
   account: Account
-  selected: boolean
+  navigation: NativeStackNavigationProp<SiteNavigation, 'Profile'>
 }
 
-const getBarWidth = (val: number, max: number, min: number) => {
-  const normalized = (val - min) / (max - min)
-  if (normalized < 0.05) {
-    return '5%'
-  } else {
-    return normalized * 100 + '%'
+export const AccountCard: FC<Props> = ({ account, navigation }) => {
+  const prefetchAccount = usePrefetchAccount()
+
+  const navigateToAccount = () => {
+    navigation.navigate('Account', { accountID: account.id })
   }
-}
 
-export const AccountCard: FC<Props> = ({ account }) => {
+  const onPressIn = () => {
+    prefetchAccount(account.id)
+  }
+
   return (
-    <Card>
-      <HContainer>
-        <VContainer>
-          <CardTitle>
-            {account?.team_logo_url ? (
-              <TeamLogo source={{ uri: account?.team_logo_url }} />
-            ) : (
-              <PlaceholderIcon />
-            )}
+    <TouchableOpacity onPressIn={onPressIn} onPress={navigateToAccount}>
+      <Card>
+        <HContainer>
+          <VContainer>
+            <CardTitle>
+              {account?.team_logo_url ? (
+                <TeamLogo source={{ uri: account?.team_logo_url }} />
+              ) : (
+                <PlaceholderIcon />
+              )}
 
-            <AccountName>{account.name}</AccountName>
-          </CardTitle>
+              <AccountName>{account.name}</AccountName>
+            </CardTitle>
 
-          <TypeContainer>
-            <Type>{account.type_name}</Type>
-          </TypeContainer>
+            <TypeContainer>
+              <Type>{account.type_name}</Type>
+            </TypeContainer>
 
-          <BillingAccount>
-            Billing email: {account.billing_email}
-          </BillingAccount>
+            <BillingAccount>
+              Billing email: {account.billing_email}
+            </BillingAccount>
 
-          <UsageCard
-            min={0}
-            max={account.capabilities.bandwidth.included}
-            value={account.capabilities.bandwidth.used}
-            title="Bandwith used"
-          />
-          <UsageCard
-            min={0}
-            max={account.capabilities.build_minutes.included}
-            value={account.capabilities.build_minutes.used}
-            title="Build minutes used"
-          />
-          <UsageCard
-            min={0}
-            max={account.capabilities.sites.included}
-            value={account.capabilities.sites.used}
-            title="Sites"
-          />
-        </VContainer>
-      </HContainer>
-    </Card>
+            <UsageCard
+              min={0}
+              max={account.capabilities.bandwidth.included}
+              value={account.capabilities.bandwidth.used}
+              title="Bandwith used"
+            />
+            <UsageCard
+              min={0}
+              max={account.capabilities.build_minutes.included}
+              value={account.capabilities.build_minutes.used}
+              title="Build minutes used"
+            />
+            <UsageCard
+              min={0}
+              max={account.capabilities.sites.included}
+              value={account.capabilities.sites.used}
+              title="Sites"
+            />
+          </VContainer>
+        </HContainer>
+      </Card>
+    </TouchableOpacity>
   )
 }
 

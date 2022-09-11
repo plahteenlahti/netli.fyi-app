@@ -16,6 +16,8 @@ export const darkTheme: DefaultTheme = {
   boneSecondary: '#333333'
 }
 
+export type Color = keyof DefaultTheme
+
 export const lightTheme: DefaultTheme = {
   mode: 'light',
   accentColor: '#ea4c89',

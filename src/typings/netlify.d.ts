@@ -44,7 +44,7 @@ export type NetlifySite = {
     form_processing?: boolean
     geo_ip?: boolean
     id?: string
-    ipv6_domain?: string
+    ipvnumber_domain?: string
     managed_dns?: boolean
     prerendering?: boolean
     proxying?: boolean
@@ -231,6 +231,36 @@ export type Account = {
   updated_at: string
   team_logo_url: string
   type_slug: string
+
+  site_capabilities: {
+    title: string
+    asset_acceleration: boolean
+    form_processing: boolean
+    cdn_propagation: string
+    domain_aliases: boolean
+    secure_site: boolean
+    secure_site_context: boolean
+    prerendering: boolean
+    proxying: boolean
+    ssl: string
+    rate_cents: number
+    yearly_rate_cents: number
+    ipvnumber_domain: string
+    branch_deploy: boolean
+    managed_dns: boolean
+    geo_ip: boolean
+    split_testing: boolean
+    id: string
+  }
+  saml_enabled: boolean
+  default: boolean
+  has_builds: boolean
+  enforce_saml: string
+  team_logo_url: null
+  can_start_trial: boolean
+  on_trial: boolean
+  gitlab_self_hosted_config: null
+  github_enterprise_config: null
 }
 
 export type Submission = {
@@ -268,13 +298,13 @@ export type Submission = {
 
 export type Build = {
   sha: string
-  done: true
+  done: boolean
   error: null
   created_at: string
   started_at: string
   site_id: string
   build_time: number
-  state: 'done' | 'skipped'
+  state: string
   subdomain: string
   custom_domain: string
   context: string
@@ -293,7 +323,7 @@ export type Build = {
   id: string
   deploy_id: string
   error_message: null
-  deploy_state: 'ready'
+  deploy_state: string
   deploy_ssl_url: string
   committer: string
   priority: null

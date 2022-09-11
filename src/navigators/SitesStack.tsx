@@ -5,6 +5,7 @@ import FontAwesome5 from 'react-native-vector-icons/FontAwesome5'
 import styled, { useTheme } from 'styled-components/native'
 import { ListHeader } from '../components/ListHeader'
 import { Sites } from '../Sites'
+import { Account } from '../views/Account'
 import { Deploy } from '../views/Deploy'
 import { Deploys } from '../views/Deploys'
 import { Profile } from '../views/Profile'
@@ -21,6 +22,7 @@ export type SiteNavigation = {
   Submissions: { siteID: string; name: string }
   Submission: { submissionID: string; name: string }
   Profile: undefined
+  Account: { accountID: string }
 }
 
 const Stack = createNativeStackNavigator<SiteNavigation>()
@@ -134,6 +136,14 @@ export const SitesStack: FC = () => {
       <Stack.Screen
         name="Profile"
         component={Profile}
+        options={{
+          ...headerSmallSettings
+        }}
+      />
+
+      <Stack.Screen
+        name="Account"
+        component={Account}
         options={{
           ...headerSmallSettings
         }}
