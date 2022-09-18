@@ -1,6 +1,9 @@
 import React, { FC } from 'react'
 import FontAwesome5 from 'react-native-vector-icons/FontAwesome5'
-import styled, { css } from 'styled-components/native'
+import styled from 'styled-components/native'
+import { HContainer } from './layout/Container'
+import { RowContainer } from './row/RowContainer'
+import { Text } from './text/Text'
 
 type Props = {
   icon: string
@@ -8,7 +11,7 @@ type Props = {
   solid?: boolean
   title: string
   action: () => void
-  last?: boolean
+  hideDivider?: boolean
 }
 
 export const IconRow: FC<Props> = ({
@@ -17,28 +20,29 @@ export const IconRow: FC<Props> = ({
   action,
   brands,
   solid,
-  last
+  hideDivider
 }) => {
   return (
     <CardRow onPress={action}>
-      <CardIcon name={icon} size={20} brands={brands} solid={solid} />
-      <Column last={last}>
-        <CardText>{title}</CardText>
-        <Chevron name="chevron-right" size={15} brands />
-      </Column>
+      <RowContainer hideDivider={hideDivider}>
+        <HContainer justifyContent="space-between" flex={1}>
+          <HContainer>
+            <CardIcon name={icon} size={16} brands={brands} solid={solid} />
+            <CardText>{title}</CardText>
+          </HContainer>
+
+          <Chevron name="chevron-right" size={15} brands />
+        </HContainer>
+      </RowContainer>
     </CardRow>
   )
 }
 
 const CardIcon = styled(FontAwesome5).attrs(({ theme }) => ({
-  color: theme.accentColor
+  color: theme.secondaryTextColor
 }))`
   margin-right: 16px;
 `
-
-type ItemProps = {
-  last?: boolean
-}
 
 const CardRow = styled.TouchableOpacity`
   flex-direction: row;
@@ -49,23 +53,7 @@ const Chevron = styled(FontAwesome5).attrs(({ theme }) => ({
   color: theme.secondaryTextColor
 }))``
 
-const Column = styled.View<ItemProps>`
-  flex-direction: row;
-  align-items: center;
-  justify-content: space-between;
-  padding: 10px 0px;
-
-  flex: 1;
-  ${({ last }) =>
-    last
-      ? css``
-      : css`
-          border-bottom-width: 1px;
-          border-bottom-color: ${({ theme }) => theme.borderColor};
-        `}
-`
-
-const CardText = styled.Text`
+const CardText = styled(Text)`
   font-size: 15px;
   color: ${({ theme }) => theme.primaryTextColor};
 `

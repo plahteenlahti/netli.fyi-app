@@ -1,42 +1,49 @@
-import { useQuery } from '@tanstack/react-query'
-import { Account, User } from '../typings/netlify'
+import {
+  QueryFunctionContext,
+  useQuery,
+  useQueryClient
+} from '@tanstack/react-query'
+import { User } from '../typings/netlify'
 import { BASE_URL } from '../utilities/constants'
 import { useToken } from './useToken'
 
-export const useUser = () => {
-  const accessToken = useToken()
-
-  return useQuery<User, Error>(['profile', { accessToken }], async () => {
-    try {
-      const response = await fetch(`${BASE_URL}/user`, {
-        headers: {
-          Authorization: `Bearer ${accessToken}`
-        }
-      })
-
-      return response.json()
-    } catch (error) {
-      return error
+const getUser = async ({
+  queryKey
+}: QueryFunctionContext<
+  ['profile', { accessToken: string }]
+>): Promise<User> => {
+  const [_key, { accessToken }] = queryKey
+  const response = await fetch(`${BASE_URL}/user`, {
+    headers: {
+      Authorization: `Bearer ${accessToken}`
     }
   })
+
+  const isJson = response.headers
+    .get('content-type')
+    ?.includes('application/json')
+  const data = isJson ? await response.json() : null
+
+  if (!response.ok) {
+    const error = (data && data.message) || response.status
+    throw new Error(error)
+  }
+
+  return data
 }
 
-export const useAccounts = () => {
+export const usePrefetchUser = () => {
+  const queryClient = useQueryClient()
   const accessToken = useToken()
-  return useQuery<Array<Account>, Error>(
-    ['accounts', { accessToken }],
-    async () => {
-      try {
-        const response = await fetch(`${BASE_URL}/accounts`, {
-          headers: {
-            Authorization: `Bearer ${accessToken}`
-          }
-        })
 
-        return response.json()
-      } catch (error) {
-        return error
-      }
-    }
-  )
+  const call = async () => {
+    await queryClient.prefetchQuery(['profile', { accessToken }], getUser)
+  }
+
+  return call
+}
+
+export const useUser = () => {
+  const accessToken = useToken()
+  return useQuery(['profile', { accessToken }], getUser)
 }

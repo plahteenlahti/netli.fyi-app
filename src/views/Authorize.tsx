@@ -172,7 +172,7 @@ const Divider = styled.View`
   position: absolute;
 `
 
-const DividerText = styled.Text`
+const DividerText = styled(Text)`
   background-color: ${({ theme }) => theme.primaryBackground};
   color: ${({ theme }) => theme.secondaryTextColor};
   padding: 0px 20px;
@@ -194,7 +194,7 @@ const AuthorizeButtonSmall = styled.TouchableOpacity`
   border-radius: 8px;
 `
 
-const ButtonText = styled.Text`
+const ButtonText = styled(Text)`
   color: white;
 `
 
@@ -202,9 +202,10 @@ const Input = styled.TextInput`
   padding: 16px;
   background-color: ${({ theme }) => theme.secondaryBackground};
   border-radius: 8px;
+  font-family: 'Inter-Medium';
 `
 
-const HelpText = styled.Text`
+const HelpText = styled(Text)`
   margin-top: 16px;
   font-size: 13px;
   color: ${({ theme }) => theme.secondaryTextColor};
@@ -213,7 +214,7 @@ const HelpText = styled.Text`
 
 const InputContainer = styled.View``
 
-const HelpTextLink = styled.Text`
+const HelpTextLink = styled(Text)`
   color: ${({ theme }) => theme.accentColor};
 `
 
@@ -242,7 +243,7 @@ const Container = styled.SafeAreaView`
   background-color: ${({ theme }) => theme.primaryBackground};
 `
 
-const Summary = styled.Text`
+const Summary = styled(Text)`
   margin-top: 16px;
   text-align: center;
   color: ${({ theme }) => theme.primaryTextColor};

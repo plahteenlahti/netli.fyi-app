@@ -1,22 +1,27 @@
 import { RouteProp, StackActions } from '@react-navigation/native'
 import { NativeStackNavigationProp } from '@react-navigation/native-stack'
 import React, { FC } from 'react'
-import { Alert, RefreshControl } from 'react-native'
-import { Card as LumiCard } from 'react-native-lumi'
-import { useDispatch } from 'react-redux'
+import { Alert, Linking, RefreshControl } from 'react-native'
 import styled from 'styled-components/native'
 import { AccountCard } from '../components/AccountCard'
 import { Card } from '../components/Card'
 import { CardTitle } from '../components/CardTitle'
 import { IconRow } from '../components/IconRow'
+import { ButtonRow } from '../components/row/ButtonRow'
+import { InfoRow } from '../components/row/InfoRow'
+import { NavigationRow } from '../components/row/NavigationRow'
+import { ToggleRow } from '../components/row/ToggleRow'
+import { Text } from '../components/text/Text'
 import { useRemoteValue } from '../config/remote-config'
-import { useAccounts, useUser } from '../hooks/user'
+import { useAccounts } from '../hooks/account'
+import { useUser } from '../hooks/user'
 import { SiteNavigation } from '../navigators/SitesStack'
 import { removeAllAccounts } from '../store/reducers/accounts'
 import { toggleAnalytics } from '../store/reducers/app'
-import { useAppDispatch } from '../store/store'
+import { useAppDispatch, useAppSelector } from '../store/store'
+import { sendEmail } from '../utilities/mail'
 import { localizedRelativeFormat } from '../utilities/time'
-const image = require('../assets/images/icon.png')
+import remoteConfig from '@react-native-firebase/remote-config'
 
 type Navigation = NativeStackNavigationProp<SiteNavigation, 'Profile'>
 type Route = RouteProp<SiteNavigation, 'Profile'>
@@ -28,15 +33,34 @@ type Props = {
 
 export const Profile: FC<Props> = ({ navigation }) => {
   const dispatch = useAppDispatch()
-  const { data: user, isLoading, refetch } = useUser()
-  const { data: accounts } = useAccounts()
+  const user = useUser()
+  const accounts = useAccounts()
+  const analyticsEnabled = useAppSelector(({ app }) => app.analyticsEnabled)
+
+  const editableFeatureFlags = useRemoteValue('userEditableFeatureFlagsEnabled')
+
+  const parameters = remoteConfig().getAll()
+
+  Object.entries(parameters).forEach($ => {
+    const [key, entry] = $
+    console.log('Key: ', key)
+    console.log('Source: ', entry.getSource())
+    console.log('Value: ', entry.asString())
+  })
+
+  const multiAccountEnabled = useRemoteValue('multiAccountEnabled')
 
   const _toggleAnalytics = () => {
-    dispatch(toggleAnalytics(true))
+    dispatch(toggleAnalytics(!analyticsEnabled))
   }
 
-  const value = useRemoteValue('iap_enabled')
-  console.log(value)
+  const navigateToFeatureFlags = () => {
+    navigation.navigate('FeatureFlags')
+  }
+
+  const navigateToProfiles = () => {
+    navigation.navigate('Profiles')
+  }
 
   const logout = () => {
     Alert.alert(
@@ -59,83 +83,114 @@ export const Profile: FC<Props> = ({ navigation }) => {
     )
   }
 
-  const lastLogin = user?.last_login
-    ? localizedRelativeFormat(new Date(`${user?.last_login}`), new Date())
+  const lastLogin = user.data?.last_login
+    ? localizedRelativeFormat(new Date(`${user.data?.last_login}`), new Date())
     : ''
 
-  const accountCreated = user?.created_at
-    ? localizedRelativeFormat(new Date(`${user?.created_at}`), new Date())
+  const accountCreated = user.data?.created_at
+    ? localizedRelativeFormat(new Date(`${user.data?.created_at}`), new Date())
     : ''
 
   return (
     <Container>
       <ScrollView
         refreshControl={
-          <RefreshControl refreshing={isLoading} onRefresh={refetch} />
+          <RefreshControl
+            refreshing={user.isLoading}
+            onRefresh={user.refetch}
+          />
         }>
         <Card>
           <Row>
-            <Avatar resizeMode="contain" source={{ uri: user?.avatar_url }} />
+            <Avatar
+              resizeMode="contain"
+              source={{ uri: user.data?.avatar_url }}
+            />
             <Information>
-              <Name>{user?.full_name}</Name>
-              <Detail>{user?.email}</Detail>
+              <Name>{user.data?.full_name}</Name>
+              <Detail>{user.data?.email}</Detail>
             </Information>
           </Row>
 
-          <Detail>Last login {lastLogin}</Detail>
-          <Detail>Account created {accountCreated}</Detail>
-          <Detail>Sites created {user?.site_count}</Detail>
-          <BottomSection>
-            <Logout onPress={_toggleAnalytics}>
-              <LogoutText>Toggle Analytics</LogoutText>
-            </Logout>
-            <Logout onPress={logout}>
-              <LogoutText>Add another account</LogoutText>
-            </Logout>
-            <Logout onPress={logout}>
-              <LogoutText>Log out</LogoutText>
-            </Logout>
-          </BottomSection>
+          <InfoRow title="Last login" value={lastLogin} />
+          <InfoRow title="Account created" value={accountCreated} />
+          <InfoRow title="Sites created" value={user.data?.site_count} />
+          {editableFeatureFlags && (
+            <NavigationRow
+              title="Feature flags"
+              value={5}
+              onPress={navigateToFeatureFlags}
+            />
+          )}
+          <ToggleRow
+            value={analyticsEnabled}
+            onChange={_toggleAnalytics}
+            title="Analytics"
+            subtitle="I want to help improve the app by sharing my usage statistics."
+          />
+          {multiAccountEnabled && (
+            <NavigationRow
+              title="Add another account"
+              onPress={navigateToProfiles}
+            />
+          )}
+          <ButtonRow
+            hideDivider
+            title="Log out"
+            type="destructive"
+            onPress={logout}
+          />
         </Card>
 
         <CardTitle icon="user" title="Accounts" />
-        {accounts?.map(account => {
-          return <AccountCard selected key={account.id} account={account} />
+        {accounts.data?.map(account => {
+          return (
+            <AccountCard
+              navigation={navigation}
+              key={account.id}
+              account={account}
+            />
+          )
         })}
-        <LumiCard>
-          <CardTitle
-            icon="meteor"
-            title="Extras"
-            extra="Netli.fyi is a free service that helps you manage your websites. It's
+
+        <CardTitle
+          icon="meteor"
+          title="Extras"
+          extra="Netli.fyi is a free service that helps you manage your websites. It's
           built by a single person (Perttu Lähteenlahti), and is fully open
           source. Below you can find some links to the source code and the
           documentation."
+        />
+
+        <Card>
+          <IconRow
+            icon="twitter"
+            brands
+            title="Twitter"
+            action={() => Linking.openURL('https://twitter.com/plahteenlahti')}
           />
-        </LumiCard>
-        <Card>
-          <IconContainer>
-            <Icon resizeMode="cover" source={image} />
-          </IconContainer>
-          <Row>
-            <Title>Support Netli.fyi</Title>
-            <Description />
-          </Row>
-        </Card>
-        <Card>
-          <IconRow icon="twitter" brands title="Twitter" action={() => {}} />
-          <IconRow icon="envelope" title="Contact" solid action={() => {}} />
+          <IconRow
+            icon="envelope"
+            title="Contact"
+            solid
+            action={() =>
+              sendEmail('perttu@lahteenlahti.com', 'About Netli.fyi', 'Hello!')
+            }
+          />
           <IconRow
             icon="heart"
             title="Rate Netli.fyi"
             solid
-            action={() => {}}
+            action={() => {}} // TODO add rating link
           />
           <IconRow
             icon="code"
             title="Source Code"
             solid
-            last
-            action={() => {}}
+            hideDivider
+            action={() =>
+              Linking.openURL('https://github.com/plahteenlahti/netli.fyi-app')
+            }
           />
         </Card>
       </ScrollView>
@@ -158,12 +213,12 @@ const Row = styled.View`
   margin-bottom: 8px;
 `
 
-const Name = styled.Text`
+const Name = styled(Text)`
   font-size: 16px;
   color: ${({ theme }) => theme.primaryTextColor};
 `
 
-const Detail = styled.Text`
+const Detail = styled(Text)`
   font-size: 13px;
   color: ${({ theme }) => theme.secondaryTextColor};
   margin-bottom: 4px;
@@ -179,40 +234,3 @@ const Information = styled.View`
   margin-left: 8px;
   justify-content: center;
 `
-
-const Logout = styled.TouchableOpacity`
-  flex-direction: row;
-  align-items: center;
-  justify-content: center;
-  padding: 16px 0px 16px;
-  border-top-width: 1px;
-  border-top-color: ${({ theme }) => theme.borderColor};
-`
-
-const LogoutText = styled.Text`
-  color: ${({ theme }) => theme.accentColor};
-  font-size: 15px;
-  margin-right: 8px;
-`
-
-const BottomSection = styled.View`
-  margin-top: 16px;
-`
-
-const IconContainer = styled.View`
-  margin-top: 50px;
-  height: 64px;
-  width: 64px;
-  overflow: hidden;
-  border-radius: 18px;
-  margin-bottom: 30px;
-`
-
-const Icon = styled.Image`
-  height: 100%;
-  width: 100%;
-`
-
-const Title = styled.Text``
-
-const Description = styled.Text``

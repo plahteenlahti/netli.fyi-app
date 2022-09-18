@@ -1,6 +1,7 @@
 import React, { FC } from 'react'
 import styled from 'styled-components/native'
 import { Build } from '../../typings/netlify'
+import { Text } from '../text/Text'
 
 type Props = {
   build: Build
@@ -29,29 +30,29 @@ const Container = styled.View`
   border-bottom-color: ${({ theme }) => theme.borderColor};
 `
 
-const Title = styled.Text`
+const Title = styled(Text)`
   color: ${({ theme }) => theme.primaryTextColor};
   font-size: 14px;
   margin-bottom: 4px;
 `
 
-const Bold = styled.Text`
+const Bold = styled(Text)`
   font-weight: bold;
 `
 
-const Normal = styled.Text`
+const Normal = styled(Text)`
   font-weight: 400;
 `
 
-const Status = styled.Text`
+const Status = styled(Text)`
   color: ${({ theme }) => theme.successColor};
 `
 
-const Description = styled.Text`
+const Description = styled(Text)`
   color: ${({ theme }) => theme.secondaryTextColor};
   font-size: 12px;
 `
 
-const Committer = styled.Text`
+const Committer = styled(Text)`
   color: ${({ theme }) => theme.accentColor};
 `

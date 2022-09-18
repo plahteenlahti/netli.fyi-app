@@ -1,6 +1,7 @@
 import React, { FC } from 'react'
 import Svg, { Path } from 'react-native-svg'
 import styled from 'styled-components/native'
+import { Text } from './text/Text'
 
 type Props = {
   onPress: () => void
@@ -31,7 +32,7 @@ const Button = styled.TouchableOpacity`
   elevation: 3;
 `
 
-const ButtonText = styled.Text`
+const ButtonText = styled(Text)`
   font-size: 15px;
   font-weight: 500;
   margin-left: 16px;

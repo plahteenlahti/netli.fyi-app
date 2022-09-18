@@ -1,6 +1,7 @@
 import React, { FC } from 'react'
 import styled from 'styled-components/native'
 import { Card } from './Card'
+import { Text } from './text/Text'
 
 export const AuthorizeCard: FC = () => {
   return (
@@ -10,7 +11,7 @@ export const AuthorizeCard: FC = () => {
   )
 }
 
-const Title = styled.Text`
+const Title = styled(Text)`
   color: ${({ theme }) => theme.primaryTextColor};
   font-size: 17px;
   text-align: center;

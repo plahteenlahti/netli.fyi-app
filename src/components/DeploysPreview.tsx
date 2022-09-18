@@ -7,6 +7,7 @@ import { Deploy } from '../typings/netlify.d'
 import { Card } from './Card'
 import { CardTitle } from './CardTitle'
 import { DeployItem } from './DeployItem'
+import { Text } from './text/Text'
 
 type Props = {
   deploys?: Array<Deploy>
@@ -69,7 +70,7 @@ const ShowMoreButton = styled.TouchableOpacity`
   padding: 16px;
 `
 
-const ButtonText = styled.Text`
+const ButtonText = styled(Text)`
   text-align: center;
   color: ${({ theme }) => theme.accentColor};
   font-size: 13px;

@@ -7,6 +7,7 @@ import { Hook } from '../../typings/netlify'
 import { Card } from '../Card'
 import { CardTitle } from '../CardTitle'
 import { HookItem } from '../list-items/hook'
+import { Text } from '../text/Text'
 
 type Props = {
   hooks?: Array<Hook>
@@ -63,7 +64,7 @@ const ShowMoreButton = styled.TouchableOpacity`
   padding: 16px;
 `
 
-const ButtonText = styled.Text`
+const ButtonText = styled(Text)`
   text-align: center;
   color: ${({ theme }) => theme.accentColor};
   font-size: 13px;

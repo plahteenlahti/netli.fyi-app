@@ -6,7 +6,7 @@ import { SafeAreaView } from 'react-native-safe-area-context'
 import styled from 'styled-components/native'
 import { Card } from '../components/Card'
 import { DataField } from '../components/DataField'
-import { Text } from '../components/Typography'
+import { Text } from '../components/text/Text'
 import { useDeploy } from '../hooks/deploy'
 import { SiteNavigation } from '../navigators/SitesStack'
 import { Deploy as TypeDeploy } from '../typings/netlify.d'
@@ -54,7 +54,7 @@ export const Deploy: FC<Props> = ({
             onRefresh={refetch}
           />
         }>
-        <CardTitle type="Title 3">Deploy summary</CardTitle>
+        <CardTitle type="title-3">Deploy summary</CardTitle>
         <Summary>
           {data?.summary?.messages?.map(message => (
             <Row key={message.title}>
@@ -106,12 +106,12 @@ const Row = styled.View`
   border-bottom-width: 1px;
   border-bottom-color: ${({ theme }) => theme.borderColor};
 `
-const Title = styled.Text`
+const Title = styled(Text)`
   color: ${({ theme }) => theme.primaryTextColor};
   font-weight: 500;
   margin-bottom: 4px;
 `
-const Description = styled.Text`
+const Description = styled(Text)`
   color: ${({ theme }) => theme.secondaryTextColor};
 `
 

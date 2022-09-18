@@ -2,6 +2,7 @@ import React, { FC } from 'react'
 import styled from 'styled-components/native'
 import words from 'lodash/words'
 import { Linking } from 'react-native'
+import { Text } from './text/Text'
 
 type Props = {
   title: string
@@ -71,11 +72,11 @@ export const DataField: FC<Props> = ({ title, value }) => {
   }
 }
 
-const Key = styled.Text`
+const Key = styled(Text)`
   flex: 1;
   color: ${({ theme }) => theme.primaryTextColor};
 `
-const Value = styled.Text`
+const Value = styled(Text)`
   text-align: right;
   flex: 1;
   color: ${({ theme }) => theme.primaryTextColor};

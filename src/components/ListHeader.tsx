@@ -2,13 +2,18 @@ import { useNavigation } from '@react-navigation/native'
 import { NativeStackNavigationProp } from '@react-navigation/native-stack'
 import React, { FC } from 'react'
 import styled from 'styled-components/native'
+import { usePrefetchAccounts } from '../hooks/account'
 import { useUser } from '../hooks/user'
 import { SiteNavigation } from '../navigators/SitesStack'
 
 export const ListHeader: FC = () => {
-  const { data: user } = useUser()
+  const user = useUser()
+  const prefetchAccounts = usePrefetchAccounts()
+
   const navigation = useNavigation<NativeStackNavigationProp<SiteNavigation>>()
   const goToProfile = () => {
+    // prefetch user data so things feel instant
+    prefetchAccounts()
     navigation.navigate('Profile')
   }
 
@@ -18,7 +23,7 @@ export const ListHeader: FC = () => {
         <ProfilePicture
           borderRadius={130}
           resizeMode="contain"
-          source={{ uri: user?.avatar_url }}
+          source={{ uri: user.data?.avatar_url }}
         />
       </Avatar>
     </Container>
