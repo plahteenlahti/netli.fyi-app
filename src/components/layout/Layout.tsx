@@ -7,9 +7,15 @@ type Props = {
 }
 
 export const Layout = ({ children }: Props) => {
-  return <Container>{children}</Container>
+  return (
+    <Container>
+      <ScrollView>{children}</ScrollView>
+    </Container>
+  )
 }
 
 const Container = styled(SafeAreaView)`
   flex: 1;
 `
+
+const ScrollView = styled.ScrollView``

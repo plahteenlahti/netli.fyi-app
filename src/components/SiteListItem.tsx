@@ -4,7 +4,7 @@ import { TouchableOpacity } from 'react-native'
 import styled from 'styled-components/native'
 import { localizedRelativeFormat } from '../utilities/time'
 import { NoPreview } from './NoPreview'
-import { Text } from './Typography'
+import { Text } from './text/Text'
 
 type Props = {
   navigateToSite: () => void
@@ -34,7 +34,7 @@ export const SiteListItem: FC<Props> = ({
           </PreviewContainer>
 
           <Column>
-            <SiteName type="Body">{custom_domain || default_domain}</SiteName>
+            <SiteName type="body">{custom_domain || default_domain}</SiteName>
             <Domain numberOfLines={2}>
               {`Last deploy ${localizedRelativeFormat(
                 new Date(`${updated_at}`),
@@ -84,7 +84,7 @@ const SiteName = styled(Text)`
   margin-bottom: 8px;
 `
 
-const Domain = styled.Text`
+const Domain = styled(Text)`
   font-size: 13px;
   color: ${({ theme }) => theme.secondaryTextColor};
   flex: 1;

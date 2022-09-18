@@ -1,12 +1,12 @@
 import React, { FC } from 'react'
 import styled from 'styled-components/native'
 import { Submission } from '../typings/netlify.d'
-import { Text } from './Typography'
 import FontAwesome5 from 'react-native-vector-icons/FontAwesome5'
 import { SubmissionItem } from './SubmissionItem'
 import { useNavigation } from '@react-navigation/native'
 import { NativeStackNavigationProp } from '@react-navigation/native-stack'
 import { SiteNavigation } from '../navigators/SitesStack'
+import { Text } from './text/Text'
 
 type Props = {
   submissions?: Array<Submission>
@@ -35,7 +35,7 @@ export const SubmissionsPreview: FC<Props> = ({
     <>
       <TitleContainer>
         <Icon name="envelope" size={15} solid />
-        <CardTitle type="Title 3">Recent form submissions</CardTitle>
+        <CardTitle type="title-3">Recent form submissions</CardTitle>
       </TitleContainer>
 
       <Card>
@@ -99,7 +99,7 @@ const ShowMoreButton = styled.TouchableOpacity`
   padding: 16px;
 `
 
-const ButtonText = styled.Text`
+const ButtonText = styled(Text)`
   text-align: center;
   color: ${({ theme }) => theme.accentColor};
   font-size: 13px;

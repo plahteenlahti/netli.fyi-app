@@ -3,6 +3,7 @@ import FontAwesome5 from 'react-native-vector-icons/FontAwesome5'
 import styled, { css } from 'styled-components/native'
 import { Deploy } from '../typings/netlify.d'
 import { localizedDuration } from '../utilities/time'
+import { Text } from './text/Text'
 
 type Props = {
   last: boolean
@@ -71,17 +72,17 @@ const Container = styled.TouchableOpacity<ItemProps>`
   justify-content: space-between;
 `
 
-const DeployText = styled.Text`
+const DeployText = styled(Text)`
   padding-right: 16px;
   margin-bottom: 6px;
 `
 
-const Type = styled.Text`
+const Type = styled(Text)`
   font-weight: 500;
   color: ${({ theme }) => theme.primaryTextColor};
 `
 
-const Branch = styled.Text`
+const Branch = styled(Text)`
   font-size: 13px;
   color: ${({ theme }) => theme.secondaryTextColor};
 `
@@ -100,7 +101,7 @@ const Skipped = styled.View`
   justify-content: center;
 `
 
-const SkippedText = styled.Text`
+const SkippedText = styled(Text)`
   color: ${({ theme }) => theme.primaryTextColor};
   font-size: 12px;
   font-weight: 500;

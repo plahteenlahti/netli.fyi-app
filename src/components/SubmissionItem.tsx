@@ -2,7 +2,7 @@ import FontAwesome5 from 'react-native-vector-icons/FontAwesome5'
 import React, { FC } from 'react'
 import styled from 'styled-components/native'
 import { Submission } from '../typings/netlify.d'
-import { Text } from './Typography'
+import { Text } from './text/Text'
 
 type Props = {
   submission: Submission
@@ -14,7 +14,7 @@ export const SubmissionItem: FC<Props> = ({ submission, navigate }) => {
     <Button onPress={navigate}>
       <Container>
         <Sender>{submission.email}</Sender>
-        <Branch type="Caption 2">{submission?.body?.substr(0, 50)}...</Branch>
+        <Branch type="subtitle">{submission?.body?.substr(0, 50)}...</Branch>
       </Container>
       <Chevron name="chevron-right" size={15} solid />
     </Button>
@@ -35,7 +35,7 @@ const Button = styled.TouchableOpacity`
   align-items: center;
 `
 
-const Sender = styled.Text`
+const Sender = styled(Text)`
   color: ${({ theme }) => theme.primaryTextColor};
   font-size: 13px;
   font-weight: 500;

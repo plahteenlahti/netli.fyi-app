@@ -6,7 +6,7 @@ import { NetlifySite } from '../typings/netlify.d'
 import { localizedFormat, localizedRelativeFormat } from '../utilities/time'
 import { Card } from './Card'
 import { CardTitle } from './CardTitle'
-import { Text } from './Typography'
+import { Text } from './text/Text'
 
 type Props = {
   site: NetlifySite | undefined
@@ -24,14 +24,14 @@ const Summary: FC<Props> = ({ site }) => {
   return (
     <SummaryText>
       {repoUrl ? (
-        <Text type="Footnote">
+        <Text type="subtitle">
           Deploys from{' '}
           <Link onPress={openRepo}>{site?.build_settings?.provider}</Link>.
         </Text>
       ) : null}{' '}
-      {ownedBy ? <Text type="Footnote">Owned by {ownedBy}.</Text> : null}{' '}
+      {ownedBy ? <Text type="subtitle">Owned by {ownedBy}.</Text> : null}{' '}
       {lastPublish ? (
-        <Text type="Footnote">
+        <Text type="subtitle">
           Last published on {localizedFormat(new Date(lastPublish), 'MMM co.')}
         </Text>
       ) : null}
@@ -128,15 +128,15 @@ const ToolsIcon = styled(FontAwesome5).attrs(({ theme }) => ({
   margin-right: 8px;
 `
 
-const Title = styled.Text`
+const Title = styled(Text)`
   color: ${({ theme }) => theme.primaryTextColor};
 `
 
-const Link = styled.Text`
+const Link = styled(Text)`
   color: ${({ theme }) => theme.accentColor};
   text-transform: capitalize;
 `
 
-const SummaryText = styled.Text`
+const SummaryText = styled(Text)`
   line-height: 20px;
 `

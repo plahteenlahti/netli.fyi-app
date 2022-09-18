@@ -19,10 +19,10 @@
 		5B8FC86428B4203D00FEC776 /* FontAwesome5_Brands.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 5BDB4F9325A60BC3008F7EAF /* FontAwesome5_Brands.ttf */; };
 		5B8FC86528B4204300FEC776 /* FontAwesome5_Regular.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 5BDB4F9425A60BC3008F7EAF /* FontAwesome5_Regular.ttf */; };
 		5B8FC86728B4219A00FEC776 /* FontAwesome5_Solid.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 5B8FC86628B4219A00FEC776 /* FontAwesome5_Solid.ttf */; };
-		BDD11EA1F51A6681A9E90931 /* Pods_Netli_fyi.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1F320DE4F0D336B49D2879C6 /* Pods_Netli_fyi.framework */; };
 		A19F414FEB964EABB51C92D8 /* Inter-Bold.otf in Resources */ = {isa = PBXBuildFile; fileRef = EAB9FB4F0AF9489FB5664791 /* Inter-Bold.otf */; };
-		CDD85EC55587445E9D73B569 /* Inter-Medium.otf in Resources */ = {isa = PBXBuildFile; fileRef = 0D417F704B06414D8423107B /* Inter-Medium.otf */; };
+		BDD11EA1F51A6681A9E90931 /* Pods_Netli_fyi.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1F320DE4F0D336B49D2879C6 /* Pods_Netli_fyi.framework */; };
 		CAFF79A49F254772A1E7A08A /* Inter-Regular.otf in Resources */ = {isa = PBXBuildFile; fileRef = 1A94B1D3BD8741F3AA2B84A8 /* Inter-Regular.otf */; };
+		CDD85EC55587445E9D73B569 /* Inter-Medium.otf in Resources */ = {isa = PBXBuildFile; fileRef = 0D417F704B06414D8423107B /* Inter-Medium.otf */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -41,9 +41,11 @@
 		00E356F11AD99517003FC87E /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		00E356F21AD99517003FC87E /* NetlifyiTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = NetlifyiTests.m; sourceTree = "<group>"; };
 		0683B25333C8BA3E4B46461A /* Pods-Deploy.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Deploy.release.xcconfig"; path = "Target Support Files/Pods-Deploy/Pods-Deploy.release.xcconfig"; sourceTree = "<group>"; };
+		0D417F704B06414D8423107B /* Inter-Medium.otf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = undefined; includeInIndex = 0; lastKnownFileType = unknown; name = "Inter-Medium.otf"; path = "../src/assets/fonts/Inter-Medium.otf"; sourceTree = "<group>"; };
 		12B498E3F1C382FEF49986D1 /* Pods-Netli.fyi.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Netli.fyi.release.xcconfig"; path = "Target Support Files/Pods-Netli.fyi/Pods-Netli.fyi.release.xcconfig"; sourceTree = "<group>"; };
 		13B07F961A680F5B00A75B9A /* Netli.fyi.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Netli.fyi.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		1601EE4C7C6356EB88B5F08F /* Pods-Deploy-DeployTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Deploy-DeployTests.debug.xcconfig"; path = "Target Support Files/Pods-Deploy-DeployTests/Pods-Deploy-DeployTests.debug.xcconfig"; sourceTree = "<group>"; };
+		1A94B1D3BD8741F3AA2B84A8 /* Inter-Regular.otf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = undefined; includeInIndex = 0; lastKnownFileType = unknown; name = "Inter-Regular.otf"; path = "../src/assets/fonts/Inter-Regular.otf"; sourceTree = "<group>"; };
 		1F320DE4F0D336B49D2879C6 /* Pods_Netli_fyi.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Netli_fyi.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		2A7AD1CCCE181EAB696A385E /* Pods-Netli.fyi-Netli.fyiTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Netli.fyi-Netli.fyiTests.release.xcconfig"; path = "Target Support Files/Pods-Netli.fyi-Netli.fyiTests/Pods-Netli.fyi-Netli.fyiTests.release.xcconfig"; sourceTree = "<group>"; };
 		5B12D2C42725DE2800193C7D /* Netlifyi-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "Netlifyi-Bridging-Header.h"; sourceTree = "<group>"; };
@@ -67,11 +69,9 @@
 		AB4E995EFE1840597C0B3B14 /* Pods-Deploy-DeployTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Deploy-DeployTests.release.xcconfig"; path = "Target Support Files/Pods-Deploy-DeployTests/Pods-Deploy-DeployTests.release.xcconfig"; sourceTree = "<group>"; };
 		B17493B96FC4F9CDECFF2132 /* Pods_Netli_fyi_Netli_fyiTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Netli_fyi_Netli_fyiTests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		C89B1896B9C8E49B6D44E08C /* Pods-Deploy.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Deploy.debug.xcconfig"; path = "Target Support Files/Pods-Deploy/Pods-Deploy.debug.xcconfig"; sourceTree = "<group>"; };
+		EAB9FB4F0AF9489FB5664791 /* Inter-Bold.otf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = undefined; includeInIndex = 0; lastKnownFileType = unknown; name = "Inter-Bold.otf"; path = "../src/assets/fonts/Inter-Bold.otf"; sourceTree = "<group>"; };
 		ED297162215061F000B7C4FE /* JavaScriptCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = JavaScriptCore.framework; path = System/Library/Frameworks/JavaScriptCore.framework; sourceTree = SDKROOT; };
 		ED2971642150620600B7C4FE /* JavaScriptCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = JavaScriptCore.framework; path = Platforms/AppleTVOS.platform/Developer/SDKs/AppleTVOS12.0.sdk/System/Library/Frameworks/JavaScriptCore.framework; sourceTree = DEVELOPER_DIR; };
-		EAB9FB4F0AF9489FB5664791 /* Inter-Bold.otf */ = {isa = PBXFileReference; name = "Inter-Bold.otf"; path = "../src/assets/fonts/Inter-Bold.otf"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = unknown; explicitFileType = undefined; includeInIndex = 0; };
-		0D417F704B06414D8423107B /* Inter-Medium.otf */ = {isa = PBXFileReference; name = "Inter-Medium.otf"; path = "../src/assets/fonts/Inter-Medium.otf"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = unknown; explicitFileType = undefined; includeInIndex = 0; };
-		1A94B1D3BD8741F3AA2B84A8 /* Inter-Regular.otf */ = {isa = PBXFileReference; name = "Inter-Regular.otf"; path = "../src/assets/fonts/Inter-Regular.otf"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = unknown; explicitFileType = undefined; includeInIndex = 0; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -194,15 +194,15 @@
 			sourceTree = "<group>";
 		};
 		9EDC87793F614BEC8DB4516C /* Resources */ = {
-			isa = "PBXGroup";
+			isa = PBXGroup;
 			children = (
 				EAB9FB4F0AF9489FB5664791 /* Inter-Bold.otf */,
 				0D417F704B06414D8423107B /* Inter-Medium.otf */,
 				1A94B1D3BD8741F3AA2B84A8 /* Inter-Regular.otf */,
 			);
 			name = Resources;
-			sourceTree = "<group>";
 			path = "";
+			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
 

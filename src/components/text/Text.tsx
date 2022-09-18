@@ -40,6 +40,7 @@ type Props = {
   style?: StyleProp<TextStyle>
   uppercase?: boolean
   lineHeight?: keyof typeof lineHeightOptions
+  letterSpacing?: keyof typeof letterSpacing
   alignCenter?: boolean
   size?: keyof typeof fontSize
   fontFamily?: FontFamily
@@ -67,4 +68,69 @@ const AppText = styled(RNText)<Props>`
   font-family: ${({ fontFamily }) =>
     fontFamily ? fontFamily : 'Inter-Medium'};
   font-size: ${({ size }) => (size ? fontSize[size] : fontSize[15])};
+`
+
+// Large Title	Regular	34	41
+// Title 1	Regular	28	34
+// Title 2	Regular	22	28
+// Title 3	Regular	20	25
+// Headline	Semi-Bold	17	22
+// Body	Regular	17	22
+// Callout	Regular	16	21
+// Subhead	Regular	15	20
+// Footnote	Regular	13	18
+// Caption 1	Regular	12	16
+// Caption 2	Regular	11	13
+const largeTitle = css`
+  font-size: 34px;
+  line-height: 41px;
+`
+
+const title1 = css`
+  font-size: 28px;
+  line-height: 34px;
+`
+
+const title2 = css`
+  font-size: 28px;
+  line-height: 22px;
+`
+const title3 = css`
+  font-size: 20px;
+  line-height: 25px;
+`
+
+const headline = css`
+  font-size: 17px;
+  line-height: 22px;
+  font-weight: bold;
+`
+
+const body = css`
+  font-size: 17px;
+  line-height: 22px;
+`
+
+const callout = css`
+  font-size: 16px;
+  line-height: 21px;
+`
+const subhead = css`
+  font-size: 15px;
+  line-height: 20px;
+`
+
+const footnote = css`
+  font-size: 13px;
+  line-height: 18px;
+`
+
+const caption1 = css`
+  font-size: 12px;
+  line-height: 16px;
+`
+
+const caption2 = css`
+  font-size: 11px;
+  line-height: 13px;
 `

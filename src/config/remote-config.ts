@@ -7,6 +7,8 @@ type DefaultValues = {
   iap_enabled: boolean
   netlify_oauth_settings: string
   version: number
+  userEditableFeatureFlagsEnabled: boolean
+  multiAccountEnabled: false
 }
 
 const VALUES: DefaultValues = {
@@ -16,6 +18,8 @@ const VALUES: DefaultValues = {
     clientSecret: configuration.client_secret,
     redirectUrl: configuration.redirect_url
   }),
+  userEditableFeatureFlagsEnabled: false,
+  multiAccountEnabled: false,
   version: 0.1
 }
 
@@ -26,7 +30,10 @@ export const useRemoteConfig = () => {
       .then(() => remoteConfig().fetchAndActivate())
       .then(fetchedRemotely => {
         if (fetchedRemotely) {
-          console.log('Configs were retrieved from the backend and activated.')
+          console.log(
+            'Configs were retrieved from the backend and activated.',
+            fetchedRemotely
+          )
         } else {
           console.log(
             'No configs were fetched from the backend, and the local configs were already activated'

@@ -4,6 +4,7 @@ import styled from 'styled-components/native'
 import { NetlifySite } from '../typings/netlify.d'
 import { Card } from './Card'
 import { CardTitle } from './CardTitle'
+import { Text } from './text/Text'
 
 type Props = {
   site?: NetlifySite
@@ -47,6 +48,6 @@ const Icon = styled(FontAwesome5).attrs(({ theme }) => ({
   margin-right: 8px;
 `
 
-const Title = styled.Text`
+const Title = styled(Text)`
   color: ${({ theme }) => theme.primaryTextColor};
 `

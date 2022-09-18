@@ -18,7 +18,7 @@ export const Card: FC<Props> = ({ children, style, padding = true }) => {
 const Container = styled.View<Props>`
   background-color: ${({ theme }) => theme.secondaryBackground};
   padding: ${({ padding }) => (padding ? ' 8px 16px' : '0px')};
-  margin: 0px 16px;
+  margin: 0px 16px 16px;
   border-radius: 8px;
   box-shadow: rgba(0, 0, 0, 0.06) 0px 0px 1px;
   elevation: 3;

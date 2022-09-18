@@ -13,7 +13,6 @@ const getUser = async ({
   ['profile', { accessToken: string }]
 >): Promise<User> => {
   const [_key, { accessToken }] = queryKey
-  console.log('getting user')
   const response = await fetch(`${BASE_URL}/user`, {
     headers: {
       Authorization: `Bearer ${accessToken}`

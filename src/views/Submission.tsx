@@ -3,6 +3,7 @@ import { NativeStackNavigationProp } from '@react-navigation/native-stack'
 import React, { FC } from 'react'
 import styled from 'styled-components/native'
 import { Card } from '../components/Card'
+import { Text } from '../components/text/Text'
 import { useSubmission } from '../hooks/submissions'
 import { SiteNavigation } from '../navigators/SitesStack'
 
@@ -51,12 +52,12 @@ const Row = styled.View`
   border-bottom-width: 1px;
   border-bottom-color: ${({ theme }) => theme.borderColor};
 `
-const Title = styled.Text`
+const Title = styled(Text)`
   color: ${({ theme }) => theme.primaryTextColor};
   font-weight: 500;
   margin-bottom: 4px;
 `
-const Description = styled.Text`
+const Description = styled(Text)`
   color: ${({ theme }) => theme.secondaryTextColor};
   line-height: 20px;
 `

@@ -19,7 +19,11 @@ export const Account = ({ route }: Props) => {
       <Card>
         <InfoRow title="Name" value={account.data?.name} />
         <InfoRow title="Billing name" value={account.data?.billing_name} />
-        <InfoRow title="Billing email" value={account.data?.billing_email} />
+        <InfoRow
+          title="Billing email"
+          hideDivider
+          value={account.data?.billing_email}
+        />
       </Card>
 
       <Card>
@@ -28,7 +32,11 @@ export const Account = ({ route }: Props) => {
           title="Asset acceleration"
           value={account.data?.site_capabilities.cdn_propagation}
         />
-        <InfoRow title="Billing email" value={account.data?.billing_email} />
+        <InfoRow
+          title="Billing email"
+          hideDivider
+          value={account.data?.billing_email}
+        />
       </Card>
     </Layout>
   )

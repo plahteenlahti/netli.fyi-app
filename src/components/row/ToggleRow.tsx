@@ -19,9 +19,9 @@ export const ToggleRow = ({
     <RowContainer>
       <Column>
         <Text>{title}</Text>
-        <Text lineHeight="looser" size={12} color="secondaryTextColor">
+        <Subtitle lineHeight="looser" size={12} color="secondaryTextColor">
           {subtitle}
-        </Text>
+        </Subtitle>
       </Column>
       <Toggle onChange={onChange} {...switchProps} />
     </RowContainer>
@@ -33,4 +33,8 @@ const Toggle = styled(Switch)``
 const Column = styled.View`
   flex: 1;
   padding-right: 24px;
+`
+
+const Subtitle = styled(Text)`
+  margin-top: 4px;
 `

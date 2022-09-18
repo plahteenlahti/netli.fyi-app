@@ -15,7 +15,6 @@ const getAccounts = async ({
   Array<Account>
 > => {
   const [_key, { accessToken }] = queryKey
-  console.log('getting accounts')
   const response = await fetch(`${BASE_URL}/accounts`, {
     headers: {
       Authorization: `Bearer ${accessToken}`
@@ -57,7 +56,6 @@ export const getAccount = async ({
   ['accounts', { accessToken: string; accountID: string }]
 >): Promise<Account> => {
   const [_key, { accessToken, accountID }] = queryKey
-  console.log('getting accounts')
   const response = await fetch(`${BASE_URL}/accounts/${accountID}`, {
     headers: {
       Authorization: `Bearer ${accessToken}`
