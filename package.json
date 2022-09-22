@@ -1,5 +1,5 @@
 {
-  "name": "deploy",
+  "name": "netli.fyi",
   "version": "0.0.1",
   "private": true,
   "scripts": {
@@ -16,7 +16,13 @@
     "clean:node": "rm -rf node_modules && yarn",
     "clean": "yarn clean:ios && yarn clean:node && yarn pod && yarn env",
     "x": "cd ios/ && xed . &&  cd ..",
-    "generate-icon": "yarn react-native generate-bootsplash src/assets/images/app-icon.png     --background-color=F5FCFF     --logo-width=100     --assets-path=assets     --flavor=main"
+    "generate-icon": "yarn react-native generate-bootsplash src/assets/images/app-icon.png     --background-color=F5FCFF     --logo-width=100     --assets-path=assets     --flavor=main",
+    "np": "np --no-publish",
+    "postversion": "react-native-version"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/plahteenlahti/netli.fyi-app.git"
   },
   "dependencies": {
     "@react-native-async-storage/async-storage": "^1.17.9",
@@ -72,9 +78,11 @@
     "eslint": "^7.32.0",
     "jest": "^26.6.3",
     "metro-react-native-babel-preset": "^0.70.3",
+    "np": "^7.6.2",
     "patch-package": "^6.4.7",
     "postinstall-postinstall": "^2.1.0",
     "react-native-svg-transformer": "^1.0.0",
+    "react-native-version": "^4.0.0",
     "react-test-renderer": "18.0.0",
     "typescript": "^4.7.4",
     "typescript-styled-plugin": "^0.18.2"
