@@ -83,6 +83,10 @@ jobs:
         with:
           ruby-version: '3.0'
 
+      - name: Install gems
+        working-directory: ./fastlane
+        run: bundle install
+
       - name: Build & Distribute to Testflight
         working-directory: ./fastlane
         run: bundle exec fastlane ios ${{ steps.extract_env.outputs.ENV }}

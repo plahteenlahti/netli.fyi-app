@@ -40,7 +40,7 @@ jobs:
           ruby-version: '3.0'
 
       - name: Install gems
-        working-directory: ./app/fastlane
+        working-directory: ./fastlane
         run: bundle install
 
       - name: git branch
@@ -57,7 +57,7 @@ jobs:
 
       # Set version in the new app-release/v*.*.* branch
       - name: Version set iOS & Android
-        working-directory: ./app/fastlane
+        working-directory: ./fastlane
         run: bundle exec fastlane set_version
         env:
           VERSION: ${{ steps.extract_version_tag.outputs.VERSION }}
@@ -71,7 +71,7 @@ jobs:
         run: git checkout main
 
       - name: Version set iOS & Android
-        working-directory: ./app/fastlane
+        working-directory: ./fastlane
         run: bundle exec fastlane set_version
         env:
           VERSION: ${{ steps.extract_version_tag.outputs.VERSION }}
@@ -91,5 +91,5 @@ jobs:
       - name: Send iOS "bump failed" slack Notification
         if: always() && job.status == 'failure'
         shell: bash
-        working-directory: ./app/utils
+        working-directory: ./utils
         run: node sendSlackMsg.js --author "$(git log -1 --pretty=format:'%an')" --commitMsg "$(git log -1 --pretty=%B)" --branch "$(git branch --show-current)" --title 'App-release-branch job failed 💥' --url ${{secrets.SLACK_WEBHOOK}} --channel mobile-builds-ios --actionUrl "$GITHUB_SERVER_URL/$GITHUB_REPOSITORY/actions/runs/$GITHUB_RUN_ID" --commitUrl "$GITHUB_SERVER_URL/$GITHUB_REPOSITORY/commit/$GITHUB_SHA"
