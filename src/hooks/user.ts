@@ -37,7 +37,10 @@ export const usePrefetchUser = () => {
   const accessToken = useToken()
 
   const call = async () => {
-    await queryClient.prefetchQuery(['profile', { accessToken }], getUser)
+    await queryClient.prefetchQuery(
+      ['profile', { accessToken: `${accessToken}` }],
+      getUser
+    )
   }
 
   return call
@@ -45,5 +48,5 @@ export const usePrefetchUser = () => {
 
 export const useUser = () => {
   const accessToken = useToken()
-  return useQuery(['profile', { accessToken }], getUser)
+  return useQuery(['profile', { accessToken: `${accessToken}` }], getUser)
 }

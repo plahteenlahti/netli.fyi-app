@@ -160,78 +160,76 @@ platform :ios do
       keychain_password: ENV["MATCH_KEYCHAIN_PASSWORD"],
       api_key_path: "./ios/authkey.json",
     )
-		desc "Convenience function for building and distributing different envs of iOS app"
-		lane :build_distribute_app do |options|
-	
-	
-			copy_env_file(env: options[:env])
-	
-	
-			version = get_version_number(xcodeproj: "./ios/Netli.fyi.xcodeproj")
-	
-			# Get commit before fastlane tools adds commit
-			commit = last_git_commit
-			commitMsg = commit[:message]
-			commitAuthor = commit[:author]
-	
-			sh("git pull --no-tags")
-	
-	
-			sync_or_bump_ios_version_number
-	
-			build_number = get_build_number(xcodeproj: "./ios/Netli.fyi.xcodeproj")
-	
-			decrypt
-	
-			certificates
-	
-			gym(
-				scheme: options[:env], 
-				workspace: "./ios/Netli.fyi.xcworkspace", 
-				clean: true, 
-				configuration: options[:env],
-			)
-	
-			if ENV['CI']
-				upload_to_testflight(
-					api_key_path: "./ios/authkey.json",
-					skip_waiting_for_build_processing: true,
-				)
-	
-				
-				newVersion = get_version_number(xcodeproj: "./ios/Netli.fyi.xcodeproj")
-				
-				send_slack_msg(
-					env: options[:env],
-					OS: "ios",
-					commitMsg: commitMsg,
-					commitAuthor: commitAuthor,
-					version: newVersion,
-					build_number: build_number
-				)
-			end
-			
-		end
-	
-		
-		desc "Push a new prod build to TestFlight"
-		lane :prod do
-	
-			build_distribute_app(env: "Netli.fyi")
-	
-		end
-		
-		desc "Push a new dev build to TestFlight"
-		lane :dev do
-	
-			build_distribute_app(env: "Netli.fyi Dev")
-	
-		end
-	
-	end
+  end
+
+  desc "Convenience function for building and distributing different envs of iOS app"
+  lane :build_distribute_app do |options|
 
 
+    # copy_env_file(env: options[:env])
 
+
+    version = get_version_number(xcodeproj: "./ios/Netli.fyi.xcodeproj")
+
+    # Get commit before fastlane tools adds commit
+    commit = last_git_commit
+    commitMsg = commit[:message]
+    commitAuthor = commit[:author]
+
+    sh("git pull --no-tags")
+
+
+    sync_or_bump_ios_version_number
+
+    build_number = get_build_number(xcodeproj: "./ios/Netli.fyi.xcodeproj")
+
+    decrypt
+
+    certificates
+
+    gym(
+      scheme: options[:env], 
+      workspace: "./ios/Netli.fyi.xcworkspace", 
+      clean: true, 
+      configuration: options[:env],
+    )
+
+    if ENV['CI']
+      upload_to_testflight(
+        api_key_path: "./ios/authkey.json",
+        skip_waiting_for_build_processing: true,
+      )
+
+      
+      newVersion = get_version_number(xcodeproj: "./ios/Netli.fyi.xcodeproj")
+      
+      send_slack_msg(
+        env: options[:env],
+        OS: "ios",
+        commitMsg: commitMsg,
+        commitAuthor: commitAuthor,
+        version: newVersion,
+        build_number: build_number
+      )
+    end
+    
+  end
+
+  
+  desc "Push a new prod build to TestFlight"
+  lane :prod do
+
+    build_distribute_app(env: "Netli.fyi")
+
+  end
+  
+  desc "Push a new dev build to TestFlight"
+  lane :dev do
+
+    build_distribute_app(env: "Netli.fyi Dev")
+
+  end
+	
 	desc 'Build the iOS application.'
 	private_lane :build do
 		certificates
@@ -240,6 +238,3 @@ platform :ios do
 	end
 end
 
-platform :android do
-  # Android Lanes
-endmatch
