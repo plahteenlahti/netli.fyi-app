@@ -1,0 +1,95 @@
+name: Make release branch
+
+on:
+  push:
+    tags:
+      - v*.*.*
+
+jobs:
+  make-release-branch:
+    strategy:
+      matrix:
+        node-version: [16.x]
+    runs-on: macos-latest
+    timeout-minutes: 30
+    steps:
+      - uses: actions/checkout@v2
+        with:
+          token: ${{ secrets.MY_GITHUB_API_TOKEN }} # Use own token in order to trigger subsequent jobs
+
+      - name: git status
+        run: git status
+
+      - name: Get the version
+        run: echo ::set-output name=VERSION::${GITHUB_REF#refs/tags/v}
+        id: extract_version_tag
+
+      - name: Select Xcode Version
+        uses: maxim-lobanov/setup-xcode@v1
+        with:
+          xcode-version: '12.4.0'
+
+      - name: Cache ruby dependencies
+        uses: actions/cache@v2
+        with:
+          path: '**/vendor/bundle'
+          key: ${{ runner.os }}-gems-${{ hashFiles('**/Gemfile.lock') }}
+
+      - uses: ruby/setup-ruby@v1
+        with:
+          ruby-version: '3.0'
+
+      - name: Install gems
+        working-directory: ./app/fastlane
+        run: bundle install
+
+      - name: git branch
+        run: git branch app-release/v${{ steps.extract_version_tag.outputs.VERSION }}
+
+      - name: git status
+        run: git status
+
+      - name: checkout new branch
+        run: git checkout app-release/v${{ steps.extract_version_tag.outputs.VERSION }}
+
+      - name: print version
+        run: echo ${{ steps.extract_version_tag.outputs.VERSION }}
+
+      # Set version in the new app-release/v*.*.* branch
+      - name: Version set iOS & Android
+        working-directory: ./app/fastlane
+        run: bundle exec fastlane set_version
+        env:
+          VERSION: ${{ steps.extract_version_tag.outputs.VERSION }}
+          MY_GITHUB_API_TOKEN: ${{ secrets.MY_GITHUB_API_TOKEN}}
+
+      - name: set app-release branch git upstream
+        run: git push --set-upstream origin app-release/v${{ steps.extract_version_tag.outputs.VERSION }}
+
+      # Set version in main branch as well
+      - name: Checkout main branch
+        run: git checkout main
+
+      - name: Version set iOS & Android
+        working-directory: ./app/fastlane
+        run: bundle exec fastlane set_version
+        env:
+          VERSION: ${{ steps.extract_version_tag.outputs.VERSION }}
+          MY_GITHUB_API_TOKEN: ${{ secrets.MY_GITHUB_API_TOKEN}}
+
+      - name: set main branch git upstream
+        run: git push --set-upstream origin main
+
+      - name: Make Github release with automatic release notes
+        uses: ncipollo/release-action@v1
+        with:
+          token: ${{ secrets.GITHUB_TOKEN }}
+          allowUpdates: false
+          generateReleaseNotes: true
+          name: '${{ steps.extract_version_tag.outputs.VERSION }}'
+
+      - name: Send iOS "bump failed" slack Notification
+        if: always() && job.status == 'failure'
+        shell: bash
+        working-directory: ./app/utils
+        run: node sendSlackMsg.js --author "$(git log -1 --pretty=format:'%an')" --commitMsg "$(git log -1 --pretty=%B)" --branch "$(git branch --show-current)" --title 'App-release-branch job failed 💥' --url ${{secrets.SLACK_WEBHOOK}} --channel mobile-builds-ios --actionUrl "$GITHUB_SERVER_URL/$GITHUB_REPOSITORY/actions/runs/$GITHUB_RUN_ID" --commitUrl "$GITHUB_SERVER_URL/$GITHUB_REPOSITORY/commit/$GITHUB_SHA"
