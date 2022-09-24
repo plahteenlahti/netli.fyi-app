@@ -67,3 +67,4 @@ buck-out/
 rnuc.xcconfig
 .env
 android/app/release.keystore.properties
+ios/authKey.json

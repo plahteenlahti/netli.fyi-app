@@ -1,0 +1,110 @@
+name: Build iOS app
+
+on:
+  push:
+    branches:
+      - main
+      - app-release/**
+
+jobs:
+  build-ios-app:
+    strategy:
+      matrix:
+        node-version: [16.x]
+    runs-on: macos-latest
+    timeout-minutes: 45
+    steps:
+      - uses: actions/checkout@v2
+
+      - name: Cancel if triggering commit was made by CI to prevent infinite loop
+        if: startsWith(github.event.head_commit.message, '[CI]')
+        uses: andymckay/cancel-action@0.2
+
+      # If branch name === dev then env = dev
+      # If branch name === prototype then env = prototype
+      # If branch name contains app-release/ then env = prod
+      - name: Extract env name
+        shell: bash
+        run: |
+          if [[ "${GITHUB_REF#refs/heads/}" == "dev" ]]; then
+              echo "::set-output name=ENV::dev"
+          fi
+          if [[ "${GITHUB_REF#refs/heads/}" == *app-release/* ]]; then
+              echo "::set-output name=ENV::prod"
+          fi
+        id: extract_env
+
+      # only applicable to prod env
+      - name: Extract version number # could remove this
+        if: steps.extract_env.outputs.ENV == 'prod'
+        shell: bash
+        run: echo "##[set-output name=VERSION;]$(echo ${GITHUB_REF#refs/heads/app-release/v})"
+        id: extract_version
+
+      - name: Select Xcode Version
+        uses: maxim-lobanov/setup-xcode@v1
+        with:
+          xcode-version: '^13.0.0'
+
+      - name: Install SSH key
+        uses: shimataro/ssh-key-action@v2
+        with:
+          key: ${{ secrets.SSH_KEY }}
+          known_hosts: ${{ secrets.KNOWN_HOSTS }}
+
+      - name: Cache ruby dependencies
+        uses: actions/cache@v2
+        with:
+          path: '**/vendor/bundle'
+          key: ${{ runner.os }}-gems-${{ hashFiles('**/Gemfile.lock') }}
+
+      - name: Cache pods
+        id: cache-pods
+        uses: actions/cache@v2
+        with:
+          path: '**/ios/pods'
+          key: ${{ runner.os }}-modules-${{ hashFiles('**/Podfile.lock') }}
+
+      - name: Cache node_modules
+        id: cache-node-modules
+        uses: actions/cache@v2
+        with:
+          path: '**/node_modules'
+          key: ${{ runner.os }}-modules-${{ hashFiles('**/yarn.lock') }}
+
+      - name: Install node_modules dependencies
+        run: yarn --frozen-lockfile
+
+      - name: Install ios pods
+        working-directory: ./ios
+        run: pod install
+
+      - uses: ruby/setup-ruby@v1
+        with:
+          ruby-version: '3.0'
+
+      - name: Build & Distribute to Testflight
+        working-directory: ./fastlane
+        run: bundle exec fastlane ios ${{ steps.extract_env.outputs.ENV }}
+        env:
+          MY_GITHUB_API_TOKEN: ${{ secrets.MY_GITHUB_API_TOKEN }}
+          MATCH_PASSWORD: ${{ secrets.MATCH_PASSWORD }} # Match password used to decrypt our Match git repo
+          FASTLANE_USER: ${{ secrets.FASTLANE_USER }} # App store connect user email
+          FASTLANE_PASSWORD: ${{ secrets.FASTLANE_PASSWORD }} # App store connect user password
+          MATCH_KEYCHAIN_NAME: 'continuos-integration'
+          MATCH_KEYCHAIN_PASSWORD: 'continuos-integration'
+          CI: true # maybe not needed
+          APPSTORE_AUTHKEY: ${{ secrets.APPSTORE_AUTHKEY }} # Used to get around App Store Connect 2FA
+          SLACK_URL: ${{ secrets.SLACK_WEBHOOK }}
+
+      - name: Send "build failed" slack Notification
+        if: always() && job.status == 'failure'
+        shell: bash
+        working-directory: ./utils
+        run: node sendSlackMsg.js --author "$(git log -1 --pretty=format:'%an')" --commitMsg "$(git log -1 --pretty=%B)" --branch "$(git branch --show-current)" --title '${{ steps.extract_env.outputs.ENV }} build failed 💥' --url ${{secrets.SLACK_WEBHOOK}} --channel builds --actionUrl "$GITHUB_SERVER_URL/$GITHUB_REPOSITORY/actions/runs/$GITHUB_RUN_ID" --commitUrl "$GITHUB_SERVER_URL/$GITHUB_REPOSITORY/commit/$GITHUB_SHA" --OS iOS
+
+      - name: Send "build cancelled" slack Notification
+        if: always() && job.status == 'cancelled' && steps.extract_env.outputs.ENV == 'prod'
+        shell: bash
+        working-directory: ./utils
+        run: node sendSlackMsg.js --author "$(git log -1 --pretty=format:'%an')" --commitMsg "$(git log -1 --pretty=%B)" --branch "$(git branch --show-current)" --title '${{ steps.extract_env.outputs.ENV }} build cancelled 🙈' --url ${{secrets.SLACK_WEBHOOK}} --channel builds --actionUrl "$GITHUB_SERVER_URL/$GITHUB_REPOSITORY/actions/runs/$GITHUB_RUN_ID" --commitUrl "$GITHUB_SERVER_URL/$GITHUB_REPOSITORY/commit/$GITHUB_SHA" --OS iOS
