@@ -1,0 +1,245 @@
+fastlane_version '2.53.1'
+
+before_all do
+  if ENV['CI']
+    sh("git status")
+    ensure_git_status_clean(
+      show_uncommitted_changes: true,
+      show_diff: true
+    )
+    sh("git fetch --no-tags")
+  end
+end
+
+desc 'Match or bump iOS version number with Android'
+lane :sync_or_bump_ios_version_number do |options|
+  # If Android build number is ahead of iOS set iOS's build number to match iOS. 
+  # Otherwise only bump iOS version number by one.
+  ios_build_number = get_build_number(xcodeproj: './ios/Netli.fyi.xcodeproj') 
+  android_build_number = android_get_version_code(gradle_file: "./android/app/build.gradle")
+  if android_build_number < ios_build_number
+    newNumber = ios_build_number.to_i + 1
+  elsif android_build_number > ios_build_number
+    newNumber = android_build_number.to_i
+  else # version numbers are same size
+    newNumber = ios_build_number.to_i + 1
+  end
+  increment_build_number(
+    xcodeproj: "./ios/Netli.fyi.xcodeproj",
+    build_number: newNumber,
+  )  
+  commit_version_bump(
+    message: "[CI] Bump iOS build to: " + newNumber.to_s,
+    xcodeproj: "./ios/Netli.fyi.xcodeproj" 
+  )
+  push_to_git_remote(
+    tags: false
+  )
+end
+
+desc 'Match or bump Android version number with iOS'
+lane :sync_or_bump_android_version_number do |options|
+  # If iOS build number is ahead of Android set Androids build number to match iOS. 
+  # Otherwise only bump Android version number by one.
+  # get_build_number_from_xcodeproj comes from a plugin that doesn't use avgTool.
+  ios_build_number = get_build_number_from_xcodeproj(xcodeproj: './ios/Netli.fyi.xcodeproj') 
+  android_build_number = android_get_version_code(gradle_file: "./android/app/build.gradle")
+  if android_build_number < ios_build_number
+    newNumber = ios_build_number.to_i
+  elsif android_build_number > ios_build_number
+    newNumber = android_build_number.to_i + 1
+  else # version numbers are same size
+    newNumber = android_build_number.to_i + 1
+  end
+  android_set_version_code(
+    gradle_file: "./android/app/build.gradle",
+    version_code: newNumber,
+  )
+  git_commit(path: [
+    "./android/app/build.gradle"
+    ], message: "[CI] Bump android build to: " + newNumber.to_s, skip_git_hooks: true)
+  push_to_git_remote(
+    tags: false
+  )
+end
+
+desc 'Set version Android && iOS'
+lane :set_version do |options|
+  
+  sh("git config --global user.name 'Runner'")
+  sh("git config --global user.email 'runner@example.com'")
+
+  old_version_arr = get_version_number(xcodeproj: "./ios/Netli.fyi.xcodeproj").split(".")
+  new_version_arr = ENV["VERSION"].split(".")
+
+  # We make sure that we don't introduce downgrades. If new version has smaller number then we just skip this lane. 
+  # For example, we normally update version code in dev branch when we add a release tag, but if we are making
+  # a hotfix and dev is already ahead we don't want to downgrade dev.
+  is_downgrade = Gem::Version.new(get_version_number(xcodeproj: "./ios/Netli.fyi.xcodeproj")) > Gem::Version.new(ENV["VERSION"])
+  if is_downgrade
+    puts "Downgrades are not allowed."
+    next
+  end
+
+  should_bump_version = (old_version_arr[0] < new_version_arr[0]) || (old_version_arr[1] < new_version_arr[1])
+  if should_bump_version
+    new_number = android_get_version_code(gradle_file: "./android/app/build.gradle").to_i + 100
+    android_set_version_code(
+      gradle_file: "./android/app/build.gradle",
+      version_code: new_number,
+    )
+    increment_build_number(
+      xcodeproj: "./ios/Netli.fyi.xcodeproj",
+      build_number: new_number,
+    ) 
+  end
+  
+  # Android
+  android_set_version_name(
+    version_name: ENV["VERSION"],
+    gradle_file: "./android/app/build.gradle"
+  )
+
+  # iOS
+  increment_version_number(
+    version_number: ENV["VERSION"],
+    xcodeproj: "./ios/Netli.fyi.xcodeproj"
+  )
+
+  increment_version_number_in_xcodeproj(
+    version_number: ENV["VERSION"],
+    xcodeproj: "./ios/Netli.fyi.xcodeproj",
+    target: 'Netli.fyi'
+  )
+
+  git_commit(path: [
+    "./android/app/build.gradle",
+    "./ios/Netli.fyi.xcodeproj/project.pbxproj",
+    "./ios/Netli.fyiTests/Info.plist",
+    "./ios/Netli.fyi/Info.plist"
+    ], message: "[CI VERSION] v" + ENV["VERSION"], skip_git_hooks: true)
+
+end
+
+
+platform :ios do
+	# iOS Lanes
+	desc 'Decrypt authkey.json for Testflight'
+  lane :decrypt do
+    sh("../ios/decrypt_secret.sh")
+  end
+
+	desc 'Fetch certificates and provisioning profiles'
+	lane :certificates do
+
+		if ENV['CI']
+      create_keychain(
+        name: ENV['MATCH_KEYCHAIN_NAME'],
+        password: ENV["MATCH_KEYCHAIN_PASSWORD"],
+        default_keychain: true,
+        unlock: true,
+        timeout: 3600,
+        lock_when_sleeps: false
+      )
+    end
+
+		match(
+      app_identifier: 'app.nyxo.netli.fyi.dev', 
+      type: 'appstore', 
+      readonly: ENV['CI'], # if CI set to true
+      keychain_name: ENV['MATCH_KEYCHAIN_NAME'],
+      keychain_password: ENV["MATCH_KEYCHAIN_PASSWORD"],
+      api_key_path: "./ios/authkey.json",
+    )
+
+		match(
+      app_identifier: 'app.nyxo.netli.fyi', 
+      type: 'appstore', 
+      readonly: ENV['CI'], # if CI set to true
+      keychain_name: ENV['MATCH_KEYCHAIN_NAME'],
+      keychain_password: ENV["MATCH_KEYCHAIN_PASSWORD"],
+      api_key_path: "./ios/authkey.json",
+    )
+		desc "Convenience function for building and distributing different envs of iOS app"
+		lane :build_distribute_app do |options|
+	
+	
+			copy_env_file(env: options[:env])
+	
+	
+			version = get_version_number(xcodeproj: "./ios/Netli.fyi.xcodeproj")
+	
+			# Get commit before fastlane tools adds commit
+			commit = last_git_commit
+			commitMsg = commit[:message]
+			commitAuthor = commit[:author]
+	
+			sh("git pull --no-tags")
+	
+	
+			sync_or_bump_ios_version_number
+	
+			build_number = get_build_number(xcodeproj: "./ios/Netli.fyi.xcodeproj")
+	
+			decrypt
+	
+			certificates
+	
+			gym(
+				scheme: options[:env], 
+				workspace: "./ios/Netli.fyi.xcworkspace", 
+				clean: true, 
+				configuration: options[:env],
+			)
+	
+			if ENV['CI']
+				upload_to_testflight(
+					api_key_path: "./ios/authkey.json",
+					skip_waiting_for_build_processing: true,
+				)
+	
+				
+				newVersion = get_version_number(xcodeproj: "./ios/Netli.fyi.xcodeproj")
+				
+				send_slack_msg(
+					env: options[:env],
+					OS: "ios",
+					commitMsg: commitMsg,
+					commitAuthor: commitAuthor,
+					version: newVersion,
+					build_number: build_number
+				)
+			end
+			
+		end
+	
+		
+		desc "Push a new prod build to TestFlight"
+		lane :prod do
+	
+			build_distribute_app(env: "Netli.fyi")
+	
+		end
+		
+		desc "Push a new dev build to TestFlight"
+		lane :dev do
+	
+			build_distribute_app(env: "Netli.fyi Dev")
+	
+		end
+	
+	end
+
+
+
+	desc 'Build the iOS application.'
+	private_lane :build do
+		certificates
+		increment_build_number(xcodeproj: './ios/Netli.fyi.xcodeproj')
+		gym(scheme: 'Netli.fyi', project: './ios/Netli.fyi.xcodeproj')
+	end
+end
+
+platform :android do
+  # Android Lanes
+endmatch
