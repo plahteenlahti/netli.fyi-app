@@ -26,7 +26,7 @@ jobs:
       - name: Extract env name
         shell: bash
         run: |
-          if [[ "${GITHUB_REF#refs/heads/}" == "dev" ]]; then
+          if [[ "${GITHUB_REF#refs/heads/}" == "main" ]]; then
               echo "::set-output name=ENV::dev"
           fi
           if [[ "${GITHUB_REF#refs/heads/}" == *app-release/* ]]; then
