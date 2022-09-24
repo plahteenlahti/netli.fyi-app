@@ -37,7 +37,7 @@ jobs:
 
       - uses: ruby/setup-ruby@v1
         with:
-          ruby-version: '3.0'
+          ruby-version: '3.1.2'
 
       - name: Install gems
         working-directory: ./fastlane
