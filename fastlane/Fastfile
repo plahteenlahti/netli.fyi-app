@@ -177,8 +177,7 @@ platform :ios do
     commitAuthor = commit[:author]
 
     sh("git pull --no-tags")
-
-
+    
     sync_or_bump_ios_version_number
 
     build_number = get_build_number(xcodeproj: "./ios/Netli.fyi.xcodeproj")
