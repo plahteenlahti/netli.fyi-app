@@ -57,6 +57,7 @@ buck-out/
 **/fastlane/Preview.html
 **/fastlane/screenshots
 **/fastlane/test_output
+/fastlane/vendor
 # Bundle artifact
 *.jsbundle
 # Ruby / CocoaPods
@@ -68,3 +69,4 @@ rnuc.xcconfig
 .env
 android/app/release.keystore.properties
 ios/authKey.json
+
