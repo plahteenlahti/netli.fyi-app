@@ -1,0 +1,18 @@
+apple_id("tools@fenrir.digital") # Your Apple email address
+
+itc_team_id("123933565") # App Store Connect Team ID
+team_id("68A7FT779W") # Developer Portal Team ID
+    
+for_lane :prod do
+    app_identifier "app.nyxo.netli.fyi"
+    package_name("app.nyxo.netli.fyi")
+end
+  
+for_lane :dev do
+    app_identifier "app.nyxo.netli.fyi.dev"
+    package_name("app.nyxo.netli.fyi.dev")
+end
+
+
+# For more information about the Appfile, see:
+#     https://docs.fastlane.tools/advanced/#appfile
