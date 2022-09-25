@@ -146,6 +146,7 @@ platform :ios do
 		match(
       app_identifier: 'app.nyxo.netli.fyi.dev', 
       type: 'appstore', 
+      git_basic_authorization: Base64.strict_encode64(MY_GITHUB_API_TOKEN)
       readonly: ENV['CI'], # if CI set to true
       keychain_name: ENV['MATCH_KEYCHAIN_NAME'],
       keychain_password: ENV["MATCH_KEYCHAIN_PASSWORD"],
@@ -155,6 +156,7 @@ platform :ios do
 		match(
       app_identifier: 'app.nyxo.netli.fyi', 
       type: 'appstore', 
+      git_basic_authorization: Base64.strict_encode64(MY_GITHUB_API_TOKEN)
       readonly: ENV['CI'], # if CI set to true
       keychain_name: ENV['MATCH_KEYCHAIN_NAME'],
       keychain_password: ENV["MATCH_KEYCHAIN_PASSWORD"],
