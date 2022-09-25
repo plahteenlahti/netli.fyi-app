@@ -27,7 +27,7 @@ jobs:
       - name: Select Xcode Version
         uses: maxim-lobanov/setup-xcode@v1
         with:
-          xcode-version: '12.4.0'
+          xcode-version: '^13.0.0'
 
       - name: Cache ruby dependencies
         uses: actions/cache@v2
