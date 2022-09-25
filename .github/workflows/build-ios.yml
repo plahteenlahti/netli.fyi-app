@@ -52,12 +52,6 @@ jobs:
           key: ${{ secrets.SSH_KEY }}
           known_hosts: ${{ secrets.KNOWN_HOSTS }}
 
-      - name: Cache ruby dependencies
-        uses: actions/cache@v2
-        with:
-          path: '**/vendor/bundle'
-          key: ${{ runner.os }}-gems-${{ hashFiles('**/Gemfile.lock') }}
-
       - name: Cache pods
         id: cache-pods
         uses: actions/cache@v2
@@ -82,6 +76,7 @@ jobs:
       - uses: ruby/setup-ruby@v1
         with:
           ruby-version: '3.1.2'
+          bundler-cache: true
 
       - name: Install gems
         working-directory: ./fastlane
