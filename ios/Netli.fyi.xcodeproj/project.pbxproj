@@ -48,6 +48,7 @@
 		1A94B1D3BD8741F3AA2B84A8 /* Inter-Regular.otf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = "Inter-Regular.otf"; path = "../src/assets/fonts/Inter-Regular.otf"; sourceTree = "<group>"; };
 		1F320DE4F0D336B49D2879C6 /* Pods_Netli_fyi.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Netli_fyi.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		2A7AD1CCCE181EAB696A385E /* Pods-Netli.fyi-Netli.fyiTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Netli.fyi-Netli.fyiTests.release.xcconfig"; path = "Target Support Files/Pods-Netli.fyi-Netli.fyiTests/Pods-Netli.fyi-Netli.fyiTests.release.xcconfig"; sourceTree = "<group>"; };
+		58693EC126A72A690820B9D6 /* Pods-Netli.fyi.release dev.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Netli.fyi.release dev.xcconfig"; path = "Target Support Files/Pods-Netli.fyi/Pods-Netli.fyi.release dev.xcconfig"; sourceTree = "<group>"; };
 		5B12D2C42725DE2800193C7D /* Netlifyi-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "Netlifyi-Bridging-Header.h"; sourceTree = "<group>"; };
 		5B12D2C62725DE2800193C7D /* File.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = File.swift; sourceTree = "<group>"; };
 		5B8FC85128B3CCD400FEC776 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
@@ -72,6 +73,7 @@
 		EAB9FB4F0AF9489FB5664791 /* Inter-Bold.otf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = "Inter-Bold.otf"; path = "../src/assets/fonts/Inter-Bold.otf"; sourceTree = "<group>"; };
 		ED297162215061F000B7C4FE /* JavaScriptCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = JavaScriptCore.framework; path = System/Library/Frameworks/JavaScriptCore.framework; sourceTree = SDKROOT; };
 		ED2971642150620600B7C4FE /* JavaScriptCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = JavaScriptCore.framework; path = Platforms/AppleTVOS.platform/Developer/SDKs/AppleTVOS12.0.sdk/System/Library/Frameworks/JavaScriptCore.framework; sourceTree = DEVELOPER_DIR; };
+		FF3B69361FBDBB6D86C0CFEA /* Pods-Netli.fyi-Netli.fyiTests.release dev.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Netli.fyi-Netli.fyiTests.release dev.xcconfig"; path = "Target Support Files/Pods-Netli.fyi-Netli.fyiTests/Pods-Netli.fyi-Netli.fyiTests.release dev.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -189,6 +191,8 @@
 				12B498E3F1C382FEF49986D1 /* Pods-Netli.fyi.release.xcconfig */,
 				A66205F8B1885496D7D43EF5 /* Pods-Netli.fyi-Netli.fyiTests.debug.xcconfig */,
 				2A7AD1CCCE181EAB696A385E /* Pods-Netli.fyi-Netli.fyiTests.release.xcconfig */,
+				58693EC126A72A690820B9D6 /* Pods-Netli.fyi.release dev.xcconfig */,
+				FF3B69361FBDBB6D86C0CFEA /* Pods-Netli.fyi-Netli.fyiTests.release dev.xcconfig */,
 			);
 			path = Pods;
 			sourceTree = "<group>";
@@ -368,7 +372,6 @@
 				"${BUILT_PRODUCTS_DIR}/RCTTypeSafety/RCTTypeSafety.framework",
 				"${BUILT_PRODUCTS_DIR}/RNBootSplash/RNBootSplash.framework",
 				"${BUILT_PRODUCTS_DIR}/RNCAsyncStorage/RNCAsyncStorage.framework",
-				"${BUILT_PRODUCTS_DIR}/RNCMaskedView/RNCMaskedView.framework",
 				"${BUILT_PRODUCTS_DIR}/RNGestureHandler/RNGestureHandler.framework",
 				"${BUILT_PRODUCTS_DIR}/RNReanimated/RNReanimated.framework",
 				"${BUILT_PRODUCTS_DIR}/RNSVG/RNSVG.framework",
@@ -422,7 +425,6 @@
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/RCTTypeSafety.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/RNBootSplash.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/RNCAsyncStorage.framework",
-				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/RNCMaskedView.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/RNGestureHandler.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/RNReanimated.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/RNSVG.framework",
@@ -486,7 +488,6 @@
 				"${BUILT_PRODUCTS_DIR}/RCTTypeSafety/RCTTypeSafety.framework",
 				"${BUILT_PRODUCTS_DIR}/RNBootSplash/RNBootSplash.framework",
 				"${BUILT_PRODUCTS_DIR}/RNCAsyncStorage/RNCAsyncStorage.framework",
-				"${BUILT_PRODUCTS_DIR}/RNCMaskedView/RNCMaskedView.framework",
 				"${BUILT_PRODUCTS_DIR}/RNGestureHandler/RNGestureHandler.framework",
 				"${BUILT_PRODUCTS_DIR}/RNReanimated/RNReanimated.framework",
 				"${BUILT_PRODUCTS_DIR}/RNSVG/RNSVG.framework",
@@ -540,7 +541,6 @@
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/RCTTypeSafety.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/RNBootSplash.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/RNCAsyncStorage.framework",
-				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/RNCMaskedView.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/RNGestureHandler.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/RNReanimated.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/RNSVG.framework",
@@ -845,7 +845,7 @@
 		};
 		5B76EB8B28DCC3C5007A8C0E /* Release Dev */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 12B498E3F1C382FEF49986D1 /* Pods-Netli.fyi.release.xcconfig */;
+			baseConfigurationReference = 58693EC126A72A690820B9D6 /* Pods-Netli.fyi.release dev.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_INCLUDE_ALL_APPICON_ASSETS = NO;
@@ -872,7 +872,7 @@
 		};
 		5B76EB8C28DCC3C5007A8C0E /* Release Dev */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 2A7AD1CCCE181EAB696A385E /* Pods-Netli.fyi-Netli.fyiTests.release.xcconfig */;
+			baseConfigurationReference = FF3B69361FBDBB6D86C0CFEA /* Pods-Netli.fyi-Netli.fyiTests.release dev.xcconfig */;
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				BUNDLE_LOADER = "$(TEST_HOST)";

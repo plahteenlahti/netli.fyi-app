@@ -26,7 +26,6 @@
   },
   "dependencies": {
     "@react-native-async-storage/async-storage": "^1.17.9",
-    "@react-native-community/masked-view": "^0.1.10",
     "@react-native-firebase/analytics": "^15.3.0",
     "@react-native-firebase/app": "^15.3.0",
     "@react-native-firebase/crashlytics": "^15.3.0",
