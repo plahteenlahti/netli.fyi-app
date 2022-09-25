@@ -1,4 +1,4 @@
-fastlane_version '2.53.1'
+fastlane_version '2.210.1'
 
 before_all do
   if ENV['CI']
