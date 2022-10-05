@@ -1,4 +1,4 @@
-git_url("git@github.com:plahteenlahti/fenrir-digital-certificates.git")
+git_url("https://github.com/plahteenlahti/fenrir-digital-certificates.git")
 
 storage_mode("git")
 
