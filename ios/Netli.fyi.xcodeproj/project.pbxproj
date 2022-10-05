@@ -42,12 +42,14 @@
 		00E356F21AD99517003FC87E /* NetlifyiTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = NetlifyiTests.m; sourceTree = "<group>"; };
 		0683B25333C8BA3E4B46461A /* Pods-Deploy.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Deploy.release.xcconfig"; path = "Target Support Files/Pods-Deploy/Pods-Deploy.release.xcconfig"; sourceTree = "<group>"; };
 		0D417F704B06414D8423107B /* Inter-Medium.otf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = "Inter-Medium.otf"; path = "../src/assets/fonts/Inter-Medium.otf"; sourceTree = "<group>"; };
+		0E77287D5E7CBABB643C58FD /* Pods-Netli.fyi.prod.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Netli.fyi.prod.xcconfig"; path = "Target Support Files/Pods-Netli.fyi/Pods-Netli.fyi.prod.xcconfig"; sourceTree = "<group>"; };
 		12B498E3F1C382FEF49986D1 /* Pods-Netli.fyi.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Netli.fyi.release.xcconfig"; path = "Target Support Files/Pods-Netli.fyi/Pods-Netli.fyi.release.xcconfig"; sourceTree = "<group>"; };
 		13B07F961A680F5B00A75B9A /* Netli.fyi.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Netli.fyi.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		1601EE4C7C6356EB88B5F08F /* Pods-Deploy-DeployTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Deploy-DeployTests.debug.xcconfig"; path = "Target Support Files/Pods-Deploy-DeployTests/Pods-Deploy-DeployTests.debug.xcconfig"; sourceTree = "<group>"; };
 		1A94B1D3BD8741F3AA2B84A8 /* Inter-Regular.otf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = "Inter-Regular.otf"; path = "../src/assets/fonts/Inter-Regular.otf"; sourceTree = "<group>"; };
 		1F320DE4F0D336B49D2879C6 /* Pods_Netli_fyi.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Netli_fyi.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		2A7AD1CCCE181EAB696A385E /* Pods-Netli.fyi-Netli.fyiTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Netli.fyi-Netli.fyiTests.release.xcconfig"; path = "Target Support Files/Pods-Netli.fyi-Netli.fyiTests/Pods-Netli.fyi-Netli.fyiTests.release.xcconfig"; sourceTree = "<group>"; };
+		3D612380E12C4F05DA90D919 /* Pods-Netli.fyi-Netli.fyiTests.prod.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Netli.fyi-Netli.fyiTests.prod.xcconfig"; path = "Target Support Files/Pods-Netli.fyi-Netli.fyiTests/Pods-Netli.fyi-Netli.fyiTests.prod.xcconfig"; sourceTree = "<group>"; };
 		58693EC126A72A690820B9D6 /* Pods-Netli.fyi.release dev.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Netli.fyi.release dev.xcconfig"; path = "Target Support Files/Pods-Netli.fyi/Pods-Netli.fyi.release dev.xcconfig"; sourceTree = "<group>"; };
 		5B12D2C42725DE2800193C7D /* Netlifyi-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "Netlifyi-Bridging-Header.h"; sourceTree = "<group>"; };
 		5B12D2C62725DE2800193C7D /* File.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = File.swift; sourceTree = "<group>"; };
@@ -66,6 +68,7 @@
 		5BDB4F9425A60BC3008F7EAF /* FontAwesome5_Regular.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = FontAwesome5_Regular.ttf; sourceTree = "<group>"; };
 		5BEB41DE261488730042550C /* rnuc.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; path = rnuc.xcconfig; sourceTree = "<group>"; };
 		604AE30DFC323B82548E8A9A /* Pods-Netli.fyi.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Netli.fyi.debug.xcconfig"; path = "Target Support Files/Pods-Netli.fyi/Pods-Netli.fyi.debug.xcconfig"; sourceTree = "<group>"; };
+		647612C0505D27723D12B491 /* Pods-Netli.fyi-Netli.fyiTests.dev.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Netli.fyi-Netli.fyiTests.dev.xcconfig"; path = "Target Support Files/Pods-Netli.fyi-Netli.fyiTests/Pods-Netli.fyi-Netli.fyiTests.dev.xcconfig"; sourceTree = "<group>"; };
 		A66205F8B1885496D7D43EF5 /* Pods-Netli.fyi-Netli.fyiTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Netli.fyi-Netli.fyiTests.debug.xcconfig"; path = "Target Support Files/Pods-Netli.fyi-Netli.fyiTests/Pods-Netli.fyi-Netli.fyiTests.debug.xcconfig"; sourceTree = "<group>"; };
 		AB4E995EFE1840597C0B3B14 /* Pods-Deploy-DeployTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Deploy-DeployTests.release.xcconfig"; path = "Target Support Files/Pods-Deploy-DeployTests/Pods-Deploy-DeployTests.release.xcconfig"; sourceTree = "<group>"; };
 		B17493B96FC4F9CDECFF2132 /* Pods_Netli_fyi_Netli_fyiTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Netli_fyi_Netli_fyiTests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -73,6 +76,7 @@
 		EAB9FB4F0AF9489FB5664791 /* Inter-Bold.otf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = "Inter-Bold.otf"; path = "../src/assets/fonts/Inter-Bold.otf"; sourceTree = "<group>"; };
 		ED297162215061F000B7C4FE /* JavaScriptCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = JavaScriptCore.framework; path = System/Library/Frameworks/JavaScriptCore.framework; sourceTree = SDKROOT; };
 		ED2971642150620600B7C4FE /* JavaScriptCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = JavaScriptCore.framework; path = Platforms/AppleTVOS.platform/Developer/SDKs/AppleTVOS12.0.sdk/System/Library/Frameworks/JavaScriptCore.framework; sourceTree = DEVELOPER_DIR; };
+		FC689AA2423EA544C5CABDEC /* Pods-Netli.fyi.dev.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Netli.fyi.dev.xcconfig"; path = "Target Support Files/Pods-Netli.fyi/Pods-Netli.fyi.dev.xcconfig"; sourceTree = "<group>"; };
 		FF3B69361FBDBB6D86C0CFEA /* Pods-Netli.fyi-Netli.fyiTests.release dev.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Netli.fyi-Netli.fyiTests.release dev.xcconfig"; path = "Target Support Files/Pods-Netli.fyi-Netli.fyiTests/Pods-Netli.fyi-Netli.fyiTests.release dev.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -193,6 +197,10 @@
 				2A7AD1CCCE181EAB696A385E /* Pods-Netli.fyi-Netli.fyiTests.release.xcconfig */,
 				58693EC126A72A690820B9D6 /* Pods-Netli.fyi.release dev.xcconfig */,
 				FF3B69361FBDBB6D86C0CFEA /* Pods-Netli.fyi-Netli.fyiTests.release dev.xcconfig */,
+				0E77287D5E7CBABB643C58FD /* Pods-Netli.fyi.prod.xcconfig */,
+				FC689AA2423EA544C5CABDEC /* Pods-Netli.fyi.dev.xcconfig */,
+				3D612380E12C4F05DA90D919 /* Pods-Netli.fyi-Netli.fyiTests.prod.xcconfig */,
+				647612C0505D27723D12B491 /* Pods-Netli.fyi-Netli.fyiTests.dev.xcconfig */,
 			);
 			path = Pods;
 			sourceTree = "<group>";
@@ -712,7 +720,7 @@
 		};
 		00E356F71AD99517003FC87E /* prod */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 2A7AD1CCCE181EAB696A385E /* Pods-Netli.fyi-Netli.fyiTests.release.xcconfig */;
+			baseConfigurationReference = 3D612380E12C4F05DA90D919 /* Pods-Netli.fyi-Netli.fyiTests.prod.xcconfig */;
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				BUNDLE_LOADER = "$(TEST_HOST)";
@@ -762,7 +770,7 @@
 		};
 		13B07F951A680F5B00A75B9A /* prod */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 12B498E3F1C382FEF49986D1 /* Pods-Netli.fyi.release.xcconfig */;
+			baseConfigurationReference = 0E77287D5E7CBABB643C58FD /* Pods-Netli.fyi.prod.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_INCLUDE_ALL_APPICON_ASSETS = NO;
@@ -845,7 +853,7 @@
 		};
 		5B76EB8B28DCC3C5007A8C0E /* dev */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 58693EC126A72A690820B9D6 /* Pods-Netli.fyi.release dev.xcconfig */;
+			baseConfigurationReference = FC689AA2423EA544C5CABDEC /* Pods-Netli.fyi.dev.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_INCLUDE_ALL_APPICON_ASSETS = NO;
@@ -872,7 +880,7 @@
 		};
 		5B76EB8C28DCC3C5007A8C0E /* dev */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = FF3B69361FBDBB6D86C0CFEA /* Pods-Netli.fyi-Netli.fyiTests.release dev.xcconfig */;
+			baseConfigurationReference = 647612C0505D27723D12B491 /* Pods-Netli.fyi-Netli.fyiTests.dev.xcconfig */;
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				BUNDLE_LOADER = "$(TEST_HOST)";
