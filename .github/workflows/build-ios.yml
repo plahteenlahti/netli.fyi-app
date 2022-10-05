@@ -56,8 +56,8 @@ jobs:
         id: cache-pods
         uses: actions/cache@v2
         with:
-          path: '**/ios/pods'
-          key: ${{ runner.os }}-modules-${{ hashFiles('**/Podfile.lock') }}
+          path: '**/ios/Pods'
+          key: ${{ runner.os }}-pods-${{ hashFiles('**/Podfile.lock') }}
 
       - name: Cache node_modules
         id: cache-node-modules
