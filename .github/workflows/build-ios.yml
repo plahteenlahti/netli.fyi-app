@@ -27,10 +27,10 @@ jobs:
         shell: bash
         run: |
           if [[ "${GITHUB_REF#refs/heads/}" == "main" ]]; then
-              echo "::set-output name=ENV::Release Dev"
+              echo "::set-output name=ENV::dev"
           fi
           if [[ "${GITHUB_REF#refs/heads/}" == *app-release/* ]]; then
-              echo "::set-output name=ENV::Release"
+              echo "::set-output name=ENV::prod"
           fi
         id: extract_env
 

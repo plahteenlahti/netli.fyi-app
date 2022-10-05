@@ -710,7 +710,7 @@
 			};
 			name = Debug;
 		};
-		00E356F71AD99517003FC87E /* Release */ = {
+		00E356F71AD99517003FC87E /* prod */ = {
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = 2A7AD1CCCE181EAB696A385E /* Pods-Netli.fyi-Netli.fyiTests.release.xcconfig */;
 			buildSettings = {
@@ -729,7 +729,7 @@
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/Netli.fyi.app/Netli.fyi";
 			};
-			name = Release;
+			name = prod;
 		};
 		13B07F941A680F5B00A75B9A /* Debug */ = {
 			isa = XCBuildConfiguration;
@@ -760,7 +760,7 @@
 			};
 			name = Debug;
 		};
-		13B07F951A680F5B00A75B9A /* Release */ = {
+		13B07F951A680F5B00A75B9A /* prod */ = {
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = 12B498E3F1C382FEF49986D1 /* Pods-Netli.fyi.release.xcconfig */;
 			buildSettings = {
@@ -785,9 +785,9 @@
 				TARGETED_DEVICE_FAMILY = "1,2";
 				VERSIONING_SYSTEM = "apple-generic";
 			};
-			name = Release;
+			name = prod;
 		};
-		5B76EB8A28DCC3C5007A8C0E /* Release Dev */ = {
+		5B76EB8A28DCC3C5007A8C0E /* dev */ = {
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = 5BEB41DE261488730042550C /* rnuc.xcconfig */;
 			buildSettings = {
@@ -841,9 +841,9 @@
 				SDKROOT = iphoneos;
 				VALIDATE_PRODUCT = YES;
 			};
-			name = "Release Dev";
+			name = dev;
 		};
-		5B76EB8B28DCC3C5007A8C0E /* Release Dev */ = {
+		5B76EB8B28DCC3C5007A8C0E /* dev */ = {
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = 58693EC126A72A690820B9D6 /* Pods-Netli.fyi.release dev.xcconfig */;
 			buildSettings = {
@@ -868,9 +868,9 @@
 				TARGETED_DEVICE_FAMILY = "1,2";
 				VERSIONING_SYSTEM = "apple-generic";
 			};
-			name = "Release Dev";
+			name = dev;
 		};
-		5B76EB8C28DCC3C5007A8C0E /* Release Dev */ = {
+		5B76EB8C28DCC3C5007A8C0E /* dev */ = {
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = FF3B69361FBDBB6D86C0CFEA /* Pods-Netli.fyi-Netli.fyiTests.release dev.xcconfig */;
 			buildSettings = {
@@ -889,7 +889,7 @@
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/Netli.fyi.app/Netli.fyi";
 			};
-			name = "Release Dev";
+			name = dev;
 		};
 		83CBBA201A601CBA00E9B192 /* Debug */ = {
 			isa = XCBuildConfiguration;
@@ -954,7 +954,7 @@
 			};
 			name = Debug;
 		};
-		83CBBA211A601CBA00E9B192 /* Release */ = {
+		83CBBA211A601CBA00E9B192 /* prod */ = {
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = 5BEB41DE261488730042550C /* rnuc.xcconfig */;
 			buildSettings = {
@@ -1008,7 +1008,7 @@
 				SDKROOT = iphoneos;
 				VALIDATE_PRODUCT = YES;
 			};
-			name = Release;
+			name = prod;
 		};
 /* End XCBuildConfiguration section */
 
@@ -1017,31 +1017,31 @@
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				00E356F61AD99517003FC87E /* Debug */,
-				00E356F71AD99517003FC87E /* Release */,
-				5B76EB8C28DCC3C5007A8C0E /* Release Dev */,
+				00E356F71AD99517003FC87E /* prod */,
+				5B76EB8C28DCC3C5007A8C0E /* dev */,
 			);
 			defaultConfigurationIsVisible = 0;
-			defaultConfigurationName = Release;
+			defaultConfigurationName = prod;
 		};
 		13B07F931A680F5B00A75B9A /* Build configuration list for PBXNativeTarget "Netli.fyi" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				13B07F941A680F5B00A75B9A /* Debug */,
-				13B07F951A680F5B00A75B9A /* Release */,
-				5B76EB8B28DCC3C5007A8C0E /* Release Dev */,
+				13B07F951A680F5B00A75B9A /* prod */,
+				5B76EB8B28DCC3C5007A8C0E /* dev */,
 			);
 			defaultConfigurationIsVisible = 0;
-			defaultConfigurationName = Release;
+			defaultConfigurationName = prod;
 		};
 		83CBB9FA1A601CBA00E9B192 /* Build configuration list for PBXProject "Netli.fyi" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				83CBBA201A601CBA00E9B192 /* Debug */,
-				83CBBA211A601CBA00E9B192 /* Release */,
-				5B76EB8A28DCC3C5007A8C0E /* Release Dev */,
+				83CBBA211A601CBA00E9B192 /* prod */,
+				5B76EB8A28DCC3C5007A8C0E /* dev */,
 			);
 			defaultConfigurationIsVisible = 0;
-			defaultConfigurationName = Release;
+			defaultConfigurationName = prod;
 		};
 /* End XCConfigurationList section */
 	};
