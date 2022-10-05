@@ -27,16 +27,16 @@ jobs:
         shell: bash
         run: |
           if [[ "${GITHUB_REF#refs/heads/}" == "main" ]]; then
-              echo "::set-output name=ENV::dev"
+              echo "::set-output name=ENV::Release Dev"
           fi
           if [[ "${GITHUB_REF#refs/heads/}" == *app-release/* ]]; then
-              echo "::set-output name=ENV::prod"
+              echo "::set-output name=ENV::Release"
           fi
         id: extract_env
 
       # only applicable to prod env
       - name: Extract version number # could remove this
-        if: steps.extract_env.outputs.ENV == 'prod'
+        if: steps.extract_env.outputs.ENV == 'Release'
         shell: bash
         run: echo "##[set-output name=VERSION;]$(echo ${GITHUB_REF#refs/heads/app-release/v})"
         id: extract_version
@@ -103,7 +103,7 @@ jobs:
         run: node sendSlackMsg.js --author "$(git log -1 --pretty=format:'%an')" --commitMsg "$(git log -1 --pretty=%B)" --branch "$(git branch --show-current)" --title '${{ steps.extract_env.outputs.ENV }} build failed 💥' --url ${{secrets.SLACK_WEBHOOK}} --channel builds --actionUrl "$GITHUB_SERVER_URL/$GITHUB_REPOSITORY/actions/runs/$GITHUB_RUN_ID" --commitUrl "$GITHUB_SERVER_URL/$GITHUB_REPOSITORY/commit/$GITHUB_SHA" --OS iOS
 
       - name: Send "build cancelled" slack Notification
-        if: always() && job.status == 'cancelled' && steps.extract_env.outputs.ENV == 'prod'
+        if: always() && job.status == 'cancelled' && steps.extract_env.outputs.ENV == 'Netli.e'
         shell: bash
         working-directory: ./utils
         run: node sendSlackMsg.js --author "$(git log -1 --pretty=format:'%an')" --commitMsg "$(git log -1 --pretty=%B)" --branch "$(git branch --show-current)" --title '${{ steps.extract_env.outputs.ENV }} build cancelled 🙈' --url ${{secrets.SLACK_WEBHOOK}} --channel builds --actionUrl "$GITHUB_SERVER_URL/$GITHUB_REPOSITORY/actions/runs/$GITHUB_RUN_ID" --commitUrl "$GITHUB_SERVER_URL/$GITHUB_REPOSITORY/commit/$GITHUB_SHA" --OS iOS
