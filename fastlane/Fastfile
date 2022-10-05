@@ -182,7 +182,9 @@ platform :ios do
 
     build_number = get_build_number(xcodeproj: "./ios/Netli.fyi.xcodeproj")
 
-    decrypt
+    if ENV['CI']
+      decrypt
+    end
 
     certificates
 
