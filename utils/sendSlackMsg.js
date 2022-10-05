@@ -1,4 +1,5 @@
 /**
+ * Original author @Waltari10
  * This script can be used to send Slack notification
  * Made own script since https://github.com/marketplace/actions/slack-notify doesn't support Mac.
  *
