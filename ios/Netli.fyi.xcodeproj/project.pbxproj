@@ -750,7 +750,7 @@
 				CODE_SIGN_ENTITLEMENTS = Netlifyi/Netlifyi.entitlements;
 				CODE_SIGN_IDENTITY = "iPhone Distribution";
 				CODE_SIGN_STYLE = Manual;
-				CURRENT_PROJECT_VERSION = 10;
+				CURRENT_PROJECT_VERSION = 9;
 				DEVELOPMENT_TEAM = 68A7FT779W;
 				ENABLE_BITCODE = NO;
 				INFOPLIST_FILE = Netlifyi/Info.plist;
@@ -782,7 +782,7 @@
 				CODE_SIGN_ENTITLEMENTS = Netlifyi/Netlifyi.entitlements;
 				CODE_SIGN_IDENTITY = "iPhone Distribution";
 				CODE_SIGN_STYLE = Manual;
-				CURRENT_PROJECT_VERSION = 10;
+				CURRENT_PROJECT_VERSION = 9;
 				DEVELOPMENT_TEAM = 68A7FT779W;
 				INFOPLIST_FILE = Netlifyi/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
@@ -868,7 +868,7 @@
 				CODE_SIGN_ENTITLEMENTS = Netlifyi/Netlifyi.entitlements;
 				CODE_SIGN_IDENTITY = "iPhone Distribution";
 				CODE_SIGN_STYLE = Manual;
-				CURRENT_PROJECT_VERSION = 10;
+				CURRENT_PROJECT_VERSION = 9;
 				DEVELOPMENT_TEAM = 68A7FT779W;
 				INFOPLIST_FILE = Netlifyi/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
