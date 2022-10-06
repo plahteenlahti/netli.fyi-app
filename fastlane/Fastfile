@@ -222,14 +222,14 @@ platform :ios do
   desc "Push a new prod build to TestFlight"
   lane :prod do
 
-    build_distribute_app(env: "Netli.fyi")
+    build_distribute_app(env: "prod")
 
   end
   
   desc "Push a new dev build to TestFlight"
   lane :dev do
 
-    build_distribute_app(env: "Netli.fyi Dev")
+    build_distribute_app(env: "dev")
 
   end
 	
