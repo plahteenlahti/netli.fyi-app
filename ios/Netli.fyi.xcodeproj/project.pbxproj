@@ -754,6 +754,8 @@
 				DEVELOPMENT_TEAM = 68A7FT779W;
 				ENABLE_BITCODE = NO;
 				INFOPLIST_FILE = Netlifyi/Info.plist;
+				INFOPLIST_KEY_CFBundleDisplayName = Netli.fyi;
+				INFOPLIST_KEY_LSApplicationCategoryType = "public.app-category.developer-tools";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				MARKETING_VERSION = 1.5.0;
 				OTHER_LDFLAGS = (
@@ -785,6 +787,8 @@
 				CURRENT_PROJECT_VERSION = 10;
 				DEVELOPMENT_TEAM = 68A7FT779W;
 				INFOPLIST_FILE = Netlifyi/Info.plist;
+				INFOPLIST_KEY_CFBundleDisplayName = Netli.fyi;
+				INFOPLIST_KEY_LSApplicationCategoryType = "public.app-category.developer-tools";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				MARKETING_VERSION = 1.5.0;
 				OTHER_LDFLAGS = (
@@ -871,6 +875,8 @@
 				CURRENT_PROJECT_VERSION = 10;
 				DEVELOPMENT_TEAM = 68A7FT779W;
 				INFOPLIST_FILE = Netlifyi/Info.plist;
+				INFOPLIST_KEY_CFBundleDisplayName = Netli.fyi;
+				INFOPLIST_KEY_LSApplicationCategoryType = "public.app-category.developer-tools";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				MARKETING_VERSION = 1.5.0;
 				OTHER_LDFLAGS = (

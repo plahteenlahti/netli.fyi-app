@@ -3,10 +3,18 @@ import { NativeStackNavigationProp } from '@react-navigation/native-stack'
 import React, { FC, useState } from 'react'
 import { Dimensions, Linking } from 'react-native'
 import { authorize } from 'react-native-app-auth'
-import { ClipPath, Defs, Image, Svg, Text, TSpan } from 'react-native-svg'
+import {
+  ClipPath,
+  Defs,
+  Image,
+  Svg,
+  Text as SvgText,
+  TSpan
+} from 'react-native-svg'
 import configuration from 'react-native-ultimate-config'
 import styled from 'styled-components/native'
 import { AuthorizeButton } from '../components/AuthorizeButton'
+import { Text } from '../components/text/Text'
 import { RootStackParamList } from '../navigators/RootStack'
 import { addAccountFirstTime } from '../store/reducers/accounts'
 import { useAppDispatch } from '../store/store'
@@ -89,7 +97,7 @@ export const Authorize: FC<Props> = ({ navigation }) => {
             }}>
             <Defs>
               <ClipPath id="clip">
-                <Text
+                <SvgText
                   fill="red"
                   stroke="blue"
                   fontFamily="Avenir Next"
@@ -99,7 +107,7 @@ export const Authorize: FC<Props> = ({ navigation }) => {
                   fontWeight="600"
                   scale="1">
                   <TSpan>Netli.fyi</TSpan>
-                </Text>
+                </SvgText>
               </ClipPath>
             </Defs>
 

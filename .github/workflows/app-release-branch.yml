@@ -15,7 +15,7 @@ jobs:
     steps:
       - uses: actions/checkout@v2
         with:
-          token: ${{ secrets.MY_GITHUB_API_TOKEN }} # Use own token in order to trigger subsequent jobs
+          token: ${{ secrets.MY_GITHUB_API_TOKEN }}
 
       - name: git status
         run: git status
