@@ -3,7 +3,7 @@
     "workspace": "ios/Netli.fyi.xcworkspace",
     "scheme": "Netli.fyi",
     "configuration": "Release",
-    "device": "iPhone 14 Pro",
+    "device": "iPhone 13 Pro",
     "quiet": false
   },
   "android": {
