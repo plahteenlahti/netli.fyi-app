@@ -191,10 +191,10 @@ platform :ios do
     certificates
 
     gym(
-      scheme: options[:env], 
+      scheme: options[:env] == 'prod' ? 'Netli.fyi' : 'Netli.fyiDev', 
       workspace: "./ios/Netli.fyi.xcworkspace", 
       clean: true, 
-      configuration: options[:env],
+      configuration: options[:env] == 'prod' ? 'Release' : 'ReleaseDev',
     )
 
     if ENV['CI']

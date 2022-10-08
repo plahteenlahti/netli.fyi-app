@@ -806,7 +806,7 @@
 			};
 			name = Release;
 		};
-		5B76EB8A28DCC3C5007A8C0E /* dev */ = {
+		5B76EB8A28DCC3C5007A8C0E /* ReleaseDev */ = {
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = 5BEB41DE261488730042550C /* rnuc.xcconfig */;
 			buildSettings = {
@@ -860,13 +860,13 @@
 				SDKROOT = iphoneos;
 				VALIDATE_PRODUCT = YES;
 			};
-			name = dev;
+			name = ReleaseDev;
 		};
-		5B76EB8B28DCC3C5007A8C0E /* dev */ = {
+		5B76EB8B28DCC3C5007A8C0E /* ReleaseDev */ = {
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = FC689AA2423EA544C5CABDEC /* Pods-Netli.fyi.dev.xcconfig */;
 			buildSettings = {
-				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIconDev;
 				ASSETCATALOG_COMPILER_INCLUDE_ALL_APPICON_ASSETS = NO;
 				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_ENTITLEMENTS = Netlifyi/Netlifyi.entitlements;
@@ -892,9 +892,9 @@
 				TARGETED_DEVICE_FAMILY = "1,2";
 				VERSIONING_SYSTEM = "apple-generic";
 			};
-			name = dev;
+			name = ReleaseDev;
 		};
-		5B76EB8C28DCC3C5007A8C0E /* dev */ = {
+		5B76EB8C28DCC3C5007A8C0E /* ReleaseDev */ = {
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = 647612C0505D27723D12B491 /* Pods-Netli.fyi-Netli.fyiTests.dev.xcconfig */;
 			buildSettings = {
@@ -913,7 +913,7 @@
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/Netli.fyi.app/Netli.fyi";
 			};
-			name = dev;
+			name = ReleaseDev;
 		};
 		83CBBA201A601CBA00E9B192 /* Debug */ = {
 			isa = XCBuildConfiguration;
@@ -1042,7 +1042,7 @@
 			buildConfigurations = (
 				00E356F61AD99517003FC87E /* Debug */,
 				00E356F71AD99517003FC87E /* Release */,
-				5B76EB8C28DCC3C5007A8C0E /* dev */,
+				5B76EB8C28DCC3C5007A8C0E /* ReleaseDev */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
@@ -1052,7 +1052,7 @@
 			buildConfigurations = (
 				13B07F941A680F5B00A75B9A /* Debug */,
 				13B07F951A680F5B00A75B9A /* Release */,
-				5B76EB8B28DCC3C5007A8C0E /* dev */,
+				5B76EB8B28DCC3C5007A8C0E /* ReleaseDev */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
@@ -1062,7 +1062,7 @@
 			buildConfigurations = (
 				83CBBA201A601CBA00E9B192 /* Debug */,
 				83CBBA211A601CBA00E9B192 /* Release */,
-				5B76EB8A28DCC3C5007A8C0E /* dev */,
+				5B76EB8A28DCC3C5007A8C0E /* ReleaseDev */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;

@@ -36,7 +36,7 @@ jobs:
 
       # only applicable to prod env
       - name: Extract version number # could remove this
-        if: steps.extract_env.outputs.ENV == 'Release'
+        if: steps.extract_env.outputs.ENV == 'prod'
         shell: bash
         run: echo "##[set-output name=VERSION;]$(echo ${GITHUB_REF#refs/heads/app-release/v})"
         id: extract_version
