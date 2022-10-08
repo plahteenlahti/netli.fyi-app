@@ -82,7 +82,8 @@
       buildConfiguration = "Debug">
    </AnalyzeAction>
    <ArchiveAction
-      buildConfiguration = "Release"
+      buildConfiguration = "dev"
+      customArchiveName = "dev"
       revealArchiveInOrganizer = "YES">
    </ArchiveAction>
 </Scheme>

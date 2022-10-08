@@ -1,10 +1,10 @@
 {
   "ios": {
     "workspace": "ios/Netli.fyi.xcworkspace",
-    "buildCommand": "xcodebuild -workspace ios/Netli.fyi.xcworkspace -scheme prod -configuration prod -sdk iphonesimulator -derivedDataPath ios -quiet",
-    "binaryPath": "ios/build/Build/Products/prod-iphonesimulator/Netli.fyi.app",
+    "scheme": "Netli.fyi",
+    "configuration": "Release",
     "device": "iPhone 14 Pro",
-    "quiet": true
+    "quiet": false
   },
   "android": {
     "packageName": "app.nyxo.netli.fyi",
