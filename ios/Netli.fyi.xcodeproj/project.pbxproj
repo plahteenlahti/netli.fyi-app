@@ -719,9 +719,9 @@
 			};
 			name = Debug;
 		};
-		00E356F71AD99517003FC87E /* prod */ = {
+		00E356F71AD99517003FC87E /* Release */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 3D612380E12C4F05DA90D919 /* Pods-Netli.fyi-Netli.fyiTests.prod.xcconfig */;
+			baseConfigurationReference = 2A7AD1CCCE181EAB696A385E /* Pods-Netli.fyi-Netli.fyiTests.release.xcconfig */;
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				BUNDLE_LOADER = "$(TEST_HOST)";
@@ -738,7 +738,7 @@
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/Netli.fyi.app/Netli.fyi";
 			};
-			name = prod;
+			name = Release;
 		};
 		13B07F941A680F5B00A75B9A /* Debug */ = {
 			isa = XCBuildConfiguration;
@@ -754,6 +754,8 @@
 				DEVELOPMENT_TEAM = 68A7FT779W;
 				ENABLE_BITCODE = NO;
 				INFOPLIST_FILE = Netlifyi/Info.plist;
+				INFOPLIST_KEY_CFBundleDisplayName = Netli.fyi;
+				INFOPLIST_KEY_LSApplicationCategoryType = "public.app-category.developer-tools";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				MARKETING_VERSION = 1.5.0;
 				OTHER_LDFLAGS = (
@@ -772,9 +774,9 @@
 			};
 			name = Debug;
 		};
-		13B07F951A680F5B00A75B9A /* prod */ = {
+		13B07F951A680F5B00A75B9A /* Release */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 0E77287D5E7CBABB643C58FD /* Pods-Netli.fyi.prod.xcconfig */;
+			baseConfigurationReference = 12B498E3F1C382FEF49986D1 /* Pods-Netli.fyi.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_INCLUDE_ALL_APPICON_ASSETS = NO;
@@ -785,6 +787,8 @@
 				CURRENT_PROJECT_VERSION = 9;
 				DEVELOPMENT_TEAM = 68A7FT779W;
 				INFOPLIST_FILE = Netlifyi/Info.plist;
+				INFOPLIST_KEY_CFBundleDisplayName = Netli.fyi;
+				INFOPLIST_KEY_LSApplicationCategoryType = "public.app-category.developer-tools";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				MARKETING_VERSION = 1.5.0;
 				OTHER_LDFLAGS = (
@@ -800,7 +804,7 @@
 				TARGETED_DEVICE_FAMILY = "1,2";
 				VERSIONING_SYSTEM = "apple-generic";
 			};
-			name = prod;
+			name = Release;
 		};
 		5B76EB8A28DCC3C5007A8C0E /* dev */ = {
 			isa = XCBuildConfiguration;
@@ -871,6 +875,8 @@
 				CURRENT_PROJECT_VERSION = 9;
 				DEVELOPMENT_TEAM = 68A7FT779W;
 				INFOPLIST_FILE = Netlifyi/Info.plist;
+				INFOPLIST_KEY_CFBundleDisplayName = Netli.fyi;
+				INFOPLIST_KEY_LSApplicationCategoryType = "public.app-category.developer-tools";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				MARKETING_VERSION = 1.5.0;
 				OTHER_LDFLAGS = (
@@ -972,7 +978,7 @@
 			};
 			name = Debug;
 		};
-		83CBBA211A601CBA00E9B192 /* prod */ = {
+		83CBBA211A601CBA00E9B192 /* Release */ = {
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = 5BEB41DE261488730042550C /* rnuc.xcconfig */;
 			buildSettings = {
@@ -1026,7 +1032,7 @@
 				SDKROOT = iphoneos;
 				VALIDATE_PRODUCT = YES;
 			};
-			name = prod;
+			name = Release;
 		};
 /* End XCBuildConfiguration section */
 
@@ -1035,31 +1041,31 @@
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				00E356F61AD99517003FC87E /* Debug */,
-				00E356F71AD99517003FC87E /* prod */,
+				00E356F71AD99517003FC87E /* Release */,
 				5B76EB8C28DCC3C5007A8C0E /* dev */,
 			);
 			defaultConfigurationIsVisible = 0;
-			defaultConfigurationName = prod;
+			defaultConfigurationName = Release;
 		};
 		13B07F931A680F5B00A75B9A /* Build configuration list for PBXNativeTarget "Netli.fyi" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				13B07F941A680F5B00A75B9A /* Debug */,
-				13B07F951A680F5B00A75B9A /* prod */,
+				13B07F951A680F5B00A75B9A /* Release */,
 				5B76EB8B28DCC3C5007A8C0E /* dev */,
 			);
 			defaultConfigurationIsVisible = 0;
-			defaultConfigurationName = prod;
+			defaultConfigurationName = Release;
 		};
 		83CBB9FA1A601CBA00E9B192 /* Build configuration list for PBXProject "Netli.fyi" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				83CBBA201A601CBA00E9B192 /* Debug */,
-				83CBBA211A601CBA00E9B192 /* prod */,
+				83CBBA211A601CBA00E9B192 /* Release */,
 				5B76EB8A28DCC3C5007A8C0E /* dev */,
 			);
 			defaultConfigurationIsVisible = 0;
-			defaultConfigurationName = prod;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};

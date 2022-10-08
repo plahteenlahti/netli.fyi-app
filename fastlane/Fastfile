@@ -222,7 +222,7 @@ platform :ios do
   desc "Push a new prod build to TestFlight"
   lane :prod do
 
-    build_distribute_app(env: "prod")
+    build_distribute_app(env: "Release")
 
   end
   
