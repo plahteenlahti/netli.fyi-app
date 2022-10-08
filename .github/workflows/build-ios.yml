@@ -82,6 +82,19 @@ jobs:
         working-directory: ./fastlane
         run: bundle install
 
+      - name: Make envfile
+        uses: SpicyPizza/create-envfile@v1.3
+        with:
+          redirect_url: ${{ secrets.REDIRECT_URL }}
+          client_secret: ${{ secrets.CLIENT_SECRET }}
+          client_id: ${{ secrets.CLIENT_ID }}
+          revenuecat_key: ${{ secrets.REVENUECAT_KEY }}
+          file_name: .env
+          fail_on_empty: true
+
+      - name: Run rnuc
+        run: yarn env
+
       - name: Build & Distribute to Testflight
         working-directory: ./fastlane
         run: bundle exec fastlane ios ${{ steps.extract_env.outputs.ENV }}
