@@ -195,6 +195,7 @@ platform :ios do
       workspace: "./ios/Netli.fyi.xcworkspace", 
       clean: true, 
       configuration: options[:env] == 'prod' ? 'Release' : 'ReleaseDev',
+      include_bitcode: false,
     )
 
     if ENV['CI']
@@ -237,7 +238,7 @@ platform :ios do
 	private_lane :build do
 		certificates
 		increment_build_number(xcodeproj: './ios/Netli.fyi.xcodeproj')
-		gym(scheme: 'Netli.fyi', project: './ios/Netli.fyi.xcodeproj')
+		gym(scheme: 'Netli.fyi', project: './ios/Netli.fyi.xcodeproj', include_bitcode: false)
 	end
 end
 

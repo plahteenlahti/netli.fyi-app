@@ -52,19 +52,19 @@ jobs:
           key: ${{ secrets.SSH_KEY }}
           known_hosts: ${{ secrets.KNOWN_HOSTS }}
 
-      - name: Cache pods
-        id: cache-pods
-        uses: actions/cache@v2
-        with:
-          path: '**/ios/Pods'
-          key: ${{ runner.os }}-pods-${{ hashFiles('**/Podfile.lock') }}
+      # - name: Cache pods
+      #   id: cache-pods
+      #   uses: actions/cache@v2
+      #   with:
+      #     path: '**/ios/Pods'
+      #     key: ${{ runner.os }}-pods-${{ hashFiles('**/Podfile.lock') }}
 
-      - name: Cache node_modules
-        id: cache-node-modules
-        uses: actions/cache@v2
-        with:
-          path: '**/node_modules'
-          key: ${{ runner.os }}-modules-${{ hashFiles('**/yarn.lock') }}
+      # - name: Cache node_modules
+      #   id: cache-node-modules
+      #   uses: actions/cache@v2
+      #   with:
+      #     path: '**/node_modules'
+      #     key: ${{ runner.os }}-modules-${{ hashFiles('**/yarn.lock') }}
 
       - name: Install node_modules dependencies
         run: yarn --frozen-lockfile
