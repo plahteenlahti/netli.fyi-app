@@ -11,7 +11,7 @@ jobs:
     strategy:
       matrix:
         node-version: [16.x]
-    runs-on: macos-latest
+    runs-on: macos-11
     timeout-minutes: 45
     steps:
       - uses: actions/checkout@v2
