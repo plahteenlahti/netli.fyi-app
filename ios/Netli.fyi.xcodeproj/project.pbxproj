@@ -770,6 +770,7 @@
 				CODE_SIGN_STYLE = Manual;
 				CURRENT_PROJECT_VERSION = 9;
 				DEVELOPMENT_TEAM = 68A7FT779W;
+				ENABLE_BITCODE = NO;
 				INFOPLIST_FILE = Netlifyi/Info.plist;
 				INFOPLIST_KEY_CFBundleDisplayName = Netli.fyi;
 				INFOPLIST_KEY_LSApplicationCategoryType = "public.app-category.developer-tools";
@@ -858,6 +859,7 @@
 				CODE_SIGN_STYLE = Manual;
 				CURRENT_PROJECT_VERSION = 9;
 				DEVELOPMENT_TEAM = 68A7FT779W;
+				ENABLE_BITCODE = NO;
 				INFOPLIST_FILE = Netlifyi/Info.plist;
 				INFOPLIST_KEY_CFBundleDisplayName = Netli.fyi;
 				INFOPLIST_KEY_LSApplicationCategoryType = "public.app-category.developer-tools";
