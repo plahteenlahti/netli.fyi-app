@@ -150,7 +150,9 @@ platform :ios do
       git_basic_authorization: ENV['MY_GITHUB_API_TOKEN'],
       keychain_name: ENV['MATCH_KEYCHAIN_NAME'],
       keychain_password: ENV["MATCH_KEYCHAIN_PASSWORD"],
-      api_key_path: "./ios/authkey.json",
+      key_id: ENV['API_KEY_ID'],
+      issuer_id: ENV['API_KEY_ISSUER_ID'],
+      key_content: ENV['API_KEY_CONTENT'],
     )
 
 		match(
@@ -160,7 +162,9 @@ platform :ios do
       readonly: ENV['CI'], # if CI set to true
       keychain_name: ENV['MATCH_KEYCHAIN_NAME'],
       keychain_password: ENV["MATCH_KEYCHAIN_PASSWORD"],
-      api_key_path: "./ios/authkey.json",
+      key_id: ENV['API_KEY_ID'],
+      issuer_id: ENV['API_KEY_ISSUER_ID'],
+      key_content: ENV['API_KEY_CONTENT'],
     )
   end
 
@@ -200,7 +204,9 @@ platform :ios do
 
     if ENV['CI']
       upload_to_testflight(
-        api_key_path: "./ios/authkey.json",
+        key_id: ENV['API_KEY_ID'],
+        issuer_id: ENV['API_KEY_ISSUER_ID'],
+        key_content: ENV['API_KEY_CONTENT'],
         skip_waiting_for_build_processing: true,
       )
 

@@ -104,6 +104,9 @@ jobs:
           FASTLANE_PASSWORD: ${{ secrets.FASTLANE_PASSWORD }} # App store connect user password
           MATCH_KEYCHAIN_NAME: 'continuos-integration'
           MATCH_KEYCHAIN_PASSWORD: 'continuos-integration'
+          API_KEY_ID: ${{ secrets.API_KEY_ID }}
+          API_KEY_ISSUER_ID: ${{ secrets.API_KEY_ISSUER_ID }}
+          API_KEY_CONTENT: ${{ secrets.API_KEY_CONTENT }}
           CI: true # maybe not needed
           APPSTORE_AUTHKEY: ${{ secrets.APPSTORE_AUTHKEY }} # Used to get around App Store Connect 2FA
           SLACK_URL: ${{ secrets.SLACK_WEBHOOK }}
