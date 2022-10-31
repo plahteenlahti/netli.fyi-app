@@ -304,7 +304,7 @@ export type Build = {
   started_at: string
   site_id: string
   build_time: number
-  state: string
+  state: 'done'
   subdomain: string
   custom_domain: string
   context: string
