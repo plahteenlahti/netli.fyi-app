@@ -1,7 +1,12 @@
 import { RouteProp, StackActions } from '@react-navigation/native'
 import { NativeStackNavigationProp } from '@react-navigation/native-stack'
 import React, { FC, useState } from 'react'
-import { Dimensions, Linking } from 'react-native'
+import {
+  Dimensions,
+  KeyboardAvoidingView,
+  Linking,
+  Platform
+} from 'react-native'
 import { authorize } from 'react-native-app-auth'
 import {
   ClipPath,
@@ -84,81 +89,84 @@ export const Authorize: FC<Props> = ({ navigation }) => {
 
   return (
     <Container>
-      <ScrollView>
-        <Card>
-          <IconContainer>
-            <Icon resizeMode="cover" source={image} />
-          </IconContainer>
-          <Svg
-            height="50"
-            width="145"
-            style={{
-              transform: [{ scale: 1.3 }]
-            }}>
-            <Defs>
-              <ClipPath id="clip">
-                <SvgText
-                  fill="red"
-                  stroke="blue"
-                  fontFamily="Avenir Next"
-                  x="10"
-                  y="30"
-                  fontSize="35"
-                  fontWeight="600"
-                  scale="1">
-                  <TSpan>Netli.fyi</TSpan>
-                </SvgText>
-              </ClipPath>
-            </Defs>
+      <KeyboardAvoidingView
+        behavior={Platform.OS === 'ios' ? 'padding' : 'height'}>
+        <ScrollView>
+          <Card>
+            <IconContainer>
+              <Icon resizeMode="cover" source={image} />
+            </IconContainer>
+            <Svg
+              height="50"
+              width="145"
+              style={{
+                transform: [{ scale: 1.3 }]
+              }}>
+              <Defs>
+                <ClipPath id="clip">
+                  <SvgText
+                    fill="red"
+                    stroke="blue"
+                    fontFamily="Avenir Next"
+                    x="10"
+                    y="30"
+                    fontSize="35"
+                    fontWeight="600"
+                    scale="1">
+                    <TSpan>Netli.fyi</TSpan>
+                  </SvgText>
+                </ClipPath>
+              </Defs>
 
-            <Image
-              x="5%"
-              y="5%"
-              width="100%"
-              height="100%"
-              preserveAspectRatio="xMidYMid slice"
-              href={gradient}
-              clipPath="url(#clip)"
-            />
-          </Svg>
-          <Summary>
-            Netli.fyi helps you to manage your Netlify hosted sites on the go.
-            See your sites' settings, manage form submissions, and quickly see
-            your deployments.
-          </Summary>
-        </Card>
-        <ButtonContainer>
-          <AuthorizeButton onPress={authenticateWithNetlify} />
-        </ButtonContainer>
+              <Image
+                x="5%"
+                y="5%"
+                width="100%"
+                height="100%"
+                preserveAspectRatio="xMidYMid slice"
+                href={gradient}
+                clipPath="url(#clip)"
+              />
+            </Svg>
+            <Summary>
+              Netli.fyi helps you to manage your Netlify hosted sites on the go.
+              See your sites' settings, manage form submissions, and quickly see
+              your deployments.
+            </Summary>
+          </Card>
+          <ButtonContainer>
+            <AuthorizeButton onPress={authenticateWithNetlify} />
+          </ButtonContainer>
 
-        <DividerContainer>
-          <Divider />
-          <DividerText>Or authorize with</DividerText>
-        </DividerContainer>
+          <DividerContainer>
+            <Divider />
+            <DividerText>Or authorize with</DividerText>
+          </DividerContainer>
 
-        <ORSection>
-          <InputContainer>
-            <Input
-              onChangeText={text => setPersonalAccessToken(text)}
-              placeholder="Personal access token"
-            />
-            <AuthorizeButtonSmall onPress={authenticateWithToken}>
-              <ButtonText>Authorize</ButtonText>
-            </AuthorizeButtonSmall>
-          </InputContainer>
-          <HelpText>
-            You can create a personal access token{' '}
-            <HelpTextLink
-              onPress={() =>
-                Linking.openURL(
-                  'https://app.netlify.com/user/applications#personal-access-tokens'
-                )
-              }>
-              here.
-            </HelpTextLink>
-          </HelpText>
-        </ORSection>
-      </ScrollView>
+          <ORSection>
+            <InputContainer>
+              <Input
+                onChangeText={text => setPersonalAccessToken(text)}
+                placeholder="Personal access token"
+              />
+              <AuthorizeButtonSmall onPress={authenticateWithToken}>
+                <ButtonText>Authorize</ButtonText>
+              </AuthorizeButtonSmall>
+            </InputContainer>
+            <HelpText>
+              You can create a personal access token{' '}
+              <HelpTextLink
+                onPress={() =>
+                  Linking.openURL(
+                    'https://app.netlify.com/user/applications#personal-access-tokens'
+                  )
+                }>
+                here.
+              </HelpTextLink>
+            </HelpText>
+          </ORSection>
+        </ScrollView>
+      </KeyboardAvoidingView>
     </Container>
   )
 }
