@@ -1,12 +1,12 @@
 import { RouteProp } from '@react-navigation/native'
 import { NativeStackNavigationProp } from '@react-navigation/native-stack'
 import React, { FC, useEffect, useLayoutEffect, useState } from 'react'
-import { FlatList, ListRenderItem, RefreshControl } from 'react-native'
+import { ListRenderItem, RefreshControl } from 'react-native'
+import Animated, { Layout } from 'react-native-reanimated'
 import styled from 'styled-components/native'
 import { SiteListItem } from './components/SiteListItem'
-// import { SiteListItemSkeleton } from './components/SiteListItemSkeleton'
 import { useSites } from './hooks/site'
-import { SiteNavigation } from './navigators/SitesStack'
+import { SiteNavigation } from './navigators/RootStack'
 import { NetlifySite } from './typings/netlify.d'
 
 type Navigation = NativeStackNavigationProp<SiteNavigation, 'SiteList'>
@@ -87,6 +87,7 @@ export const Sites: FC<Props> = ({ navigation }) => {
   return (
     <Container>
       <List
+        layout={Layout.springify()}
         contentInsetAdjustmentBehavior="automatic"
         scrollToOverflowEnabled
         refreshControl={
@@ -112,7 +113,9 @@ export const Sites: FC<Props> = ({ navigation }) => {
 }
 
 const List = styled(
-  FlatList as new () => FlatList<NetlifySite | PlaceholderItem>
+  Animated.FlatList as new () => Animated.FlatList<
+    NetlifySite | PlaceholderItem
+  >
 ).attrs(() => ({
   contentContainerStyle: {
     borderRadius: 8,

@@ -4,11 +4,24 @@ import { SitesStack } from './SitesStack'
 import { BuildsStack } from './BuildsStack'
 import FontAwesome5 from 'react-native-vector-icons/FontAwesome5'
 import { useTheme } from 'styled-components/native'
+import { Profile } from '../views/Profile'
+import { useUser } from '../hooks/user'
+import { usePrefetchAccounts } from '../hooks/account'
+import styled from 'styled-components/native'
 
-const Tab = createBottomTabNavigator()
+export type TabParamList = {
+  Sites: undefined
+  Builds: undefined
+  Profile: undefined
+}
+
+const Tab = createBottomTabNavigator<TabParamList>()
 
 export const TabStack = () => {
   const theme = useTheme()
+  const user = useUser()
+  const prefetchAccounts = usePrefetchAccounts()
+
   return (
     <Tab.Navigator
       screenOptions={{
@@ -34,6 +47,25 @@ export const TabStack = () => {
           )
         }}
       />
+      <Tab.Screen
+        name="Profile"
+        component={Profile}
+        options={{
+          tabBarIcon: ({}) => (
+            <ProfilePicture
+              borderRadius={130}
+              resizeMode="contain"
+              source={{ uri: user.data?.avatar_url }}
+            />
+          )
+        }}
+      />
     </Tab.Navigator>
   )
 }
+
+const ProfilePicture = styled.Image`
+  height: 20px;
+  width: 20px;
+  border-radius: 130px;
+`

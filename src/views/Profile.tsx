@@ -15,13 +15,13 @@ import { Text } from '../components/text/Text'
 import { useRemoteValue } from '../config/remote-config'
 import { useAccounts } from '../hooks/account'
 import { useUser } from '../hooks/user'
-import { SiteNavigation } from '../navigators/SitesStack'
 import { removeAllAccounts } from '../store/reducers/accounts'
 import { toggleAnalytics } from '../store/reducers/app'
 import { useAppDispatch, useAppSelector } from '../store/store'
 import { sendEmail } from '../utilities/mail'
 import { localizedRelativeFormat } from '../utilities/time'
 import remoteConfig from '@react-native-firebase/remote-config'
+import { SiteNavigation } from '../navigators/RootStack'
 
 type Navigation = NativeStackNavigationProp<SiteNavigation, 'Profile'>
 type Route = RouteProp<SiteNavigation, 'Profile'>

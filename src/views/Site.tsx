@@ -14,7 +14,7 @@ import { useDeploys } from '../hooks/deploy'
 import { useHooks } from '../hooks/hook'
 import { useSite } from '../hooks/site'
 import { useSubmissions } from '../hooks/submissions'
-import { SiteNavigation } from '../navigators/SitesStack'
+import { SiteNavigation } from '../navigators/RootStack'
 
 const { width } = Dimensions.get('window')
 
@@ -61,7 +61,6 @@ export const Site: FC<Props> = ({ route }) => {
               <SitePreview
                 resizeMode="contain"
                 source={{ uri: site?.screenshot_url }}
-                height={undefined}
               />
             ) : (
               <NoSitePreview />

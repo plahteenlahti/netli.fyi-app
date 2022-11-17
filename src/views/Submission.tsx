@@ -5,7 +5,7 @@ import styled from 'styled-components/native'
 import { Card } from '../components/Card'
 import { Text } from '../components/text/Text'
 import { useSubmission } from '../hooks/submissions'
-import { SiteNavigation } from '../navigators/SitesStack'
+import { SiteNavigation } from '../navigators/RootStack'
 
 type Navigation = NativeStackNavigationProp<SiteNavigation, 'Submission'>
 type Route = RouteProp<SiteNavigation, 'Submission'>

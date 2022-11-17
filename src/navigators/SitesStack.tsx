@@ -3,7 +3,6 @@ import React, { FC } from 'react'
 import { Linking, Platform, Pressable } from 'react-native'
 import FontAwesome5 from 'react-native-vector-icons/FontAwesome5'
 import styled, { useTheme } from 'styled-components/native'
-import { ListHeader } from '../components/ListHeader'
 import { Sites } from '../Sites'
 import { Account } from '../views/Account'
 import { Deploy } from '../views/Deploy'
@@ -14,20 +13,7 @@ import { Profiles } from '../views/Profiles'
 import { Site } from '../views/Site'
 import { Submission } from '../views/Submission'
 import { Submissions } from '../views/Submissions'
-
-export type SiteNavigation = {
-  SiteList: undefined
-  Site: { name: string; url: string; siteID: string }
-  Hook: { name: string; hookID: string }
-  Deploys: { siteID: string; name: string }
-  Deploy: { name: string; buildID: string }
-  Submissions: { siteID: string; name: string }
-  Submission: { submissionID: string; name: string }
-  Profile: undefined
-  Profiles: undefined
-  Account: { accountID: string }
-  FeatureFlags: undefined
-}
+import { SiteNavigation } from './RootStack'
 
 const Stack = createNativeStackNavigator<SiteNavigation>()
 
@@ -78,8 +64,7 @@ export const SitesStack: FC = () => {
       <Stack.Screen
         options={{
           ...headerSettings,
-          title: 'Netli.fyi',
-          headerRight: () => <ListHeader />
+          title: 'Netli.fyi'
         }}
         name="SiteList"
         component={Sites}

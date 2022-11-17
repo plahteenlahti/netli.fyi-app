@@ -5,7 +5,7 @@ import { FlatList, ListRenderItem } from 'react-native'
 import styled from 'styled-components/native'
 import { SubmissionItem } from '../components/SubmissionItem'
 import { useSubmissions } from '../hooks/submissions'
-import { SiteNavigation } from '../navigators/SitesStack'
+import { SiteNavigation } from '../navigators/RootStack'
 import { Submission } from '../typings/netlify.d'
 
 type Navigation = NativeStackNavigationProp<SiteNavigation, 'Deploys'>

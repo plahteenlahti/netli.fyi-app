@@ -8,7 +8,7 @@ import { Card } from '../components/Card'
 import { DataField } from '../components/DataField'
 import { Text } from '../components/text/Text'
 import { useDeploy } from '../hooks/deploy'
-import { SiteNavigation } from '../navigators/SitesStack'
+import { SiteNavigation } from '../navigators/RootStack'
 import { Deploy as TypeDeploy } from '../typings/netlify.d'
 
 type Navigation = NativeStackNavigationProp<SiteNavigation, 'Deploy'>

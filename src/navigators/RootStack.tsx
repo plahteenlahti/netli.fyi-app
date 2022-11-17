@@ -16,6 +16,20 @@ export type RootStackParamList = {
   }
 }
 
+export type SiteNavigation = {
+  SiteList: undefined
+  Site: { name: string; url: string; siteID: string }
+  Hook: { name: string; hookID: string }
+  Deploys: { siteID: string; name: string }
+  Deploy: { name: string; buildID: string }
+  Submissions: { siteID: string; name: string }
+  Submission: { submissionID: string; name: string }
+  Profile: undefined
+  Profiles: undefined
+  Account: { accountID: string }
+  FeatureFlags: undefined
+}
+
 const Stack = createNativeStackNavigator<RootStackParamList>()
 
 export const SiteStack: FC = () => {

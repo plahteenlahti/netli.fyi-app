@@ -79,7 +79,7 @@ const Preview = styled.Image`
 `
 
 const SiteName = styled(Text)`
-  font-size: 17px;
+  font-size: 15px;
   font-weight: 500;
   margin-bottom: 8px;
 `
