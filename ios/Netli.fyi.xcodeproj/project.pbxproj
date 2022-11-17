@@ -9,6 +9,7 @@
 /* Begin PBXBuildFile section */
 		00E356F31AD99517003FC87E /* NetlifyiTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 00E356F21AD99517003FC87E /* NetlifyiTests.m */; };
 		5B12D2C72725DE2800193C7D /* File.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5B12D2C62725DE2800193C7D /* File.swift */; };
+		5B1924EC2926EDAE00E34E44 /* StoreKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5B1924EB2926EDAE00E34E44 /* StoreKit.framework */; };
 		5B8FC85228B3CCD400FEC776 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 5B8FC85128B3CCD400FEC776 /* GoogleService-Info.plist */; };
 		5B8FC85E28B40B3F00FEC776 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 5B8FC85628B40B3F00FEC776 /* Images.xcassets */; };
 		5B8FC85F28B40B3F00FEC776 /* BootSplash.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 5B8FC85728B40B3F00FEC776 /* BootSplash.storyboard */; };
@@ -49,6 +50,7 @@
 		4DA0CA1DF56024504A3A30C2 /* Pods-Netli.fyi.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Netli.fyi.release.xcconfig"; path = "Target Support Files/Pods-Netli.fyi/Pods-Netli.fyi.release.xcconfig"; sourceTree = "<group>"; };
 		5B12D2C42725DE2800193C7D /* Netlifyi-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "Netlifyi-Bridging-Header.h"; sourceTree = "<group>"; };
 		5B12D2C62725DE2800193C7D /* File.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = File.swift; sourceTree = "<group>"; };
+		5B1924EB2926EDAE00E34E44 /* StoreKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = StoreKit.framework; path = System/Library/Frameworks/StoreKit.framework; sourceTree = SDKROOT; };
 		5B8FC85128B3CCD400FEC776 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		5B8FC85328B40B2B00FEC776 /* main.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = main.m; path = Netlifyi/main.m; sourceTree = "<group>"; };
 		5B8FC85528B40B3F00FEC776 /* Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = Info.plist; path = Netlifyi/Info.plist; sourceTree = "<group>"; };
@@ -86,6 +88,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				BF062ABA398BCC30704C4E2E /* Pods_Netli_fyi.framework in Frameworks */,
+				5B1924EC2926EDAE00E34E44 /* StoreKit.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -135,6 +138,7 @@
 		2D16E6871FA4F8E400B85C8A /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				5B1924EB2926EDAE00E34E44 /* StoreKit.framework */,
 				ED297162215061F000B7C4FE /* JavaScriptCore.framework */,
 				ED2971642150620600B7C4FE /* JavaScriptCore.framework */,
 				16504EFF20C6117A62584456 /* Pods_Netli_fyi.framework */,

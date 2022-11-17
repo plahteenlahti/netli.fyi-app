@@ -9101,6 +9101,11 @@ react-native-owl@^1.1.1:
     ws "^8.2.3"
     yargs "^17.2.1"
 
+react-native-purchases@^5.2.2:
+  version "5.2.2"
+  resolved "https://registry.yarnpkg.com/react-native-purchases/-/react-native-purchases-5.2.2.tgz#a80b56814599dd884e942bdd55e4e12d11b77cf7"
+  integrity sha512-09sMXfgmKVFkXGX1ip5KrOpBJKJVHdLLS6ePdsoANzqTpB0mL0DR21WrdbVdKKbmRh+yjqXGRYMatSB62NinIQ==
+
 react-native-reanimated@^2.13.0:
   version "2.13.0"
   resolved "https://registry.yarnpkg.com/react-native-reanimated/-/react-native-reanimated-2.13.0.tgz#d64c1386626822d4dc22094b4efe028ff2c49cc9"
