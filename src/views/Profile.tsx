@@ -22,6 +22,7 @@ import { sendEmail } from '../utilities/mail'
 import { localizedRelativeFormat } from '../utilities/time'
 import remoteConfig from '@react-native-firebase/remote-config'
 import { SiteNavigation } from '../navigators/RootStack'
+import { ProfileSubscriptionPrompt } from '../components/iap/ProfileSubscriptionPrompt'
 
 type Navigation = NativeStackNavigationProp<SiteNavigation, 'Profile'>
 type Route = RouteProp<SiteNavigation, 'Profile'>
@@ -39,14 +40,14 @@ export const Profile: FC<Props> = ({ navigation }) => {
 
   const editableFeatureFlags = useRemoteValue('userEditableFeatureFlagsEnabled')
 
-  const parameters = remoteConfig().getAll()
+  // const parameters = remoteConfig().getAll()
 
-  Object.entries(parameters).forEach($ => {
-    const [key, entry] = $
-    console.log('Key: ', key)
-    console.log('Source: ', entry.getSource())
-    console.log('Value: ', entry.asString())
-  })
+  // Object.entries(parameters).forEach($ => {
+  //   const [key, entry] = $
+  //   console.log('Key: ', key)
+  //   console.log('Source: ', entry.getSource())
+  //   console.log('Value: ', entry.asString())
+  // })
 
   const multiAccountEnabled = useRemoteValue('multiAccountEnabled')
 
@@ -141,6 +142,8 @@ export const Profile: FC<Props> = ({ navigation }) => {
             onPress={logout}
           />
         </Card>
+
+        <ProfileSubscriptionPrompt />
 
         <CardTitle icon="user" title="Accounts" />
         {accounts.data?.map(account => {

@@ -1,4 +1,4 @@
 import { useAppSelector } from '../store/store'
 
-export const useToken = () => 'veUo_5Y6VIORYR6SUL6cBdu2ugrih1F8cCBXJiog0tk'
+export const useToken = () => 'yFC_fEv6cDljBmZCFHc2rh3iMl2dUEAEOQlpg_DZpmI'
 // useAppSelector(({ accounts }) => accounts.selectedAccount?.accessToken)

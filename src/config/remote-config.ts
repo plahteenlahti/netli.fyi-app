@@ -20,7 +20,7 @@ const VALUES: DefaultValues = {
   }),
   userEditableFeatureFlagsEnabled: false,
   multiAccountEnabled: false,
-  version: 0.1
+  version: 0.2
 }
 
 export const useRemoteConfig = () => {
