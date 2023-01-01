@@ -2,7 +2,11 @@ import { createNativeStackNavigator } from '@react-navigation/native-stack'
 import React, { FC } from 'react'
 import { useTheme } from 'styled-components/native'
 import { useToken } from '../hooks/useToken'
+import { Account } from '../views/Account'
 import { Authorize } from '../views/Authorize'
+import { FeatureFlags } from '../views/FeatureFlags'
+import { Profiles } from '../views/Profiles'
+import { Subscription } from '../views/Subscription'
 import { TabStack } from './TabStack'
 
 export type RootStackParamList = {
@@ -14,6 +18,11 @@ export type RootStackParamList = {
       Build: { name: string; buildID: string }
     }
   }
+  Profile: undefined
+  Profiles: undefined
+  Account: { accountID: string }
+  FeatureFlags: undefined
+  Subscription: undefined
 }
 
 export type SiteNavigation = {
@@ -24,10 +33,6 @@ export type SiteNavigation = {
   Deploy: { name: string; buildID: string }
   Submissions: { siteID: string; name: string }
   Submission: { submissionID: string; name: string }
-  Profile: undefined
-  Profiles: undefined
-  Account: { accountID: string }
-  FeatureFlags: undefined
 }
 
 const Stack = createNativeStackNavigator<RootStackParamList>()
@@ -60,6 +65,11 @@ export const SiteStack: FC = () => {
         name="App"
         component={TabStack}
       />
+
+      <Stack.Screen name="Account" component={Account} />
+      <Stack.Screen name="FeatureFlags" component={FeatureFlags} />
+      <Stack.Screen name="Profiles" component={Profiles} />
+      <Stack.Screen name="Subscription" component={Subscription} />
     </Stack.Navigator>
   )
 }

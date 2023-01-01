@@ -6,6 +6,7 @@ import styled from 'styled-components/native'
 import { AccountCard } from '../components/AccountCard'
 import { Card } from '../components/Card'
 import { CardTitle } from '../components/CardTitle'
+import { ProfileSubscriptionPrompt } from '../components/iap/ProfileSubscriptionPrompt'
 import { IconRow } from '../components/IconRow'
 import { ButtonRow } from '../components/row/ButtonRow'
 import { InfoRow } from '../components/row/InfoRow'
@@ -15,17 +16,15 @@ import { Text } from '../components/text/Text'
 import { useRemoteValue } from '../config/remote-config'
 import { useAccounts } from '../hooks/account'
 import { useUser } from '../hooks/user'
+import { RootStackParamList } from '../navigators/RootStack'
 import { removeAllAccounts } from '../store/reducers/accounts'
 import { toggleAnalytics } from '../store/reducers/app'
 import { useAppDispatch, useAppSelector } from '../store/store'
 import { sendEmail } from '../utilities/mail'
 import { localizedRelativeFormat } from '../utilities/time'
-import remoteConfig from '@react-native-firebase/remote-config'
-import { SiteNavigation } from '../navigators/RootStack'
-import { ProfileSubscriptionPrompt } from '../components/iap/ProfileSubscriptionPrompt'
 
-type Navigation = NativeStackNavigationProp<SiteNavigation, 'Profile'>
-type Route = RouteProp<SiteNavigation, 'Profile'>
+type Navigation = NativeStackNavigationProp<RootStackParamList, 'Profile'>
+type Route = RouteProp<RootStackParamList, 'Profile'>
 
 type Props = {
   navigation: Navigation
@@ -39,16 +38,6 @@ export const Profile: FC<Props> = ({ navigation }) => {
   const analyticsEnabled = useAppSelector(({ app }) => app.analyticsEnabled)
 
   const editableFeatureFlags = useRemoteValue('userEditableFeatureFlagsEnabled')
-
-  // const parameters = remoteConfig().getAll()
-
-  // Object.entries(parameters).forEach($ => {
-  //   const [key, entry] = $
-  //   console.log('Key: ', key)
-  //   console.log('Source: ', entry.getSource())
-  //   console.log('Value: ', entry.asString())
-  // })
-
   const multiAccountEnabled = useRemoteValue('multiAccountEnabled')
 
   const _toggleAnalytics = () => {

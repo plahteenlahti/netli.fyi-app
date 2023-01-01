@@ -1,31 +1,29 @@
-import React, { useEffect, useState } from 'react'
-import deviceInfoModule from 'react-native-device-info'
-import Purchases, { PurchasesOfferings } from 'react-native-purchases'
+import { useNavigation } from '@react-navigation/native'
+import { StackNavigationProp } from '@react-navigation/stack'
+import React from 'react'
+import { useCurrentOfferings } from '../../hooks/iap/subscription'
 
-const useOfferings = () => {
-  const [offerings, setOfferings] = useState<PurchasesOfferings>()
-
-  useEffect(() => {
-    const init = async () => {
-      try {
-        const bundle = deviceInfoModule.getBundleId()
-        console.log('📱', bundle)
-        const off = await Purchases.getOfferings()
-        setOfferings(off)
-      } catch (error) {
-        console.log('🙀', error)
-      }
-    }
-
-    init()
-  })
-
-  return [offerings]
-}
+import { RootStackParamList } from '../../navigators/RootStack'
+import { Card } from '../Card'
+import { NavigationRow } from '../row/NavigationRow'
 
 export const ProfileSubscriptionPrompt = () => {
-  const [offerings] = useOfferings()
+  const offerings = useCurrentOfferings()
+  const navigation = useNavigation<StackNavigationProp<RootStackParamList>>()
 
-  console.log(offerings)
-  return <></>
+  const goToSubscription = () => {
+    navigation.navigate('Subscription')
+  }
+
+  return (
+    <Card>
+      <NavigationRow
+        hideDivider
+        title="Netli.fyi Pro"
+        value="Keep it up"
+        type="navigation"
+        onPress={goToSubscription}
+      />
+    </Card>
+  )
 }

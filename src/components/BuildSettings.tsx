@@ -1,6 +1,6 @@
 import React, { FC } from 'react'
 import FontAwesome5 from 'react-native-vector-icons/FontAwesome5'
-import styled from 'styled-components/native'
+import styled, { css } from 'styled-components/native'
 import { NetlifySite } from '../typings/netlify.d'
 import { Card } from './Card'
 import { CardTitle } from './CardTitle'
@@ -21,9 +21,9 @@ export const BuildSettings: FC<Props> = ({ site }) => {
         </Row>
         <Row>
           <Icon name="terminal" />
-          <Title>{site?.build_settings?.base}</Title>
+          <Title>{site?.build_settings?.base_rel_dir}</Title>
         </Row>
-        <Row>
+        <Row last>
           <Icon name="server" />
           <Title>{site?.build_image}</Title>
         </Row>
@@ -32,20 +32,28 @@ export const BuildSettings: FC<Props> = ({ site }) => {
   )
 }
 
-const Row = styled.View`
+type RowProps = {
+  last?: boolean
+}
+const Row = styled.View<RowProps>`
   flex-direction: row;
   align-items: center;
-  margin: 4px 0px;
-  padding-bottom: 8px;
-  border-bottom-width: 1px;
-  border-bottom-color: ${({ theme }) => theme.borderColor};
+  margin: ${({ theme }) => theme.spacing(1)}px 0px;
+  ${({ last }) =>
+    last
+      ? css``
+      : css`
+          padding-bottom: ${({ theme }) => theme.spacing(2)}px;
+          border-bottom-width: 1px;
+          border-bottom-color: ${({ theme }) => theme.borderColor};
+        `}
 `
 
 const Icon = styled(FontAwesome5).attrs(({ theme }) => ({
   size: 12,
   color: theme.secondaryTextColor
 }))`
-  margin-right: 8px;
+  margin-right: ${({ theme }) => theme.spacing(1)}px;
 `
 
 const Title = styled(Text)`

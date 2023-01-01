@@ -5,6 +5,7 @@ import styled from 'styled-components/native'
 import { localizedRelativeFormat } from '../utilities/time'
 import { NoPreview } from './NoPreview'
 import { Text } from './text/Text'
+import FastImage from 'react-native-fast-image'
 
 type Props = {
   navigateToSite: () => void
@@ -69,7 +70,7 @@ const Column = styled.View`
   flex: 1;
 `
 
-const Preview = styled.Image`
+const Preview = styled(FastImage)`
   height: 100%;
   width: 100%;
   border-radius: 4px;

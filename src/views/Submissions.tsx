@@ -8,8 +8,8 @@ import { useSubmissions } from '../hooks/submissions'
 import { SiteNavigation } from '../navigators/RootStack'
 import { Submission } from '../typings/netlify.d'
 
-type Navigation = NativeStackNavigationProp<SiteNavigation, 'Deploys'>
-type Route = RouteProp<SiteNavigation, 'Deploys'>
+type Navigation = NativeStackNavigationProp<SiteNavigation, 'Submissions'>
+type Route = RouteProp<SiteNavigation, 'Submissions'>
 
 type Props = {
   navigation: Navigation

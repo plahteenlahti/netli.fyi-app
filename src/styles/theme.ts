@@ -1,5 +1,11 @@
 import { DefaultTheme } from 'styled-components/native'
 
+const MARGIN_UNIT = 8
+
+export const spacing = (multiplier: number) => {
+  return multiplier * MARGIN_UNIT
+}
+
 export const darkTheme: DefaultTheme = {
   mode: 'dark',
   accentColor: '#de25a8',
@@ -13,7 +19,8 @@ export const darkTheme: DefaultTheme = {
   successColor: '#2CD057',
 
   bonePrimary: '#121212',
-  boneSecondary: '#333333'
+  boneSecondary: '#333333',
+  spacing: multiplier => multiplier * MARGIN_UNIT
 }
 
 export type Color = keyof DefaultTheme
@@ -31,5 +38,6 @@ export const lightTheme: DefaultTheme = {
   successColor: '#36934C',
 
   bonePrimary: '#E1E9EE',
-  boneSecondary: '#F2F8FC'
+  boneSecondary: '#F2F8FC',
+  spacing: multiplier => multiplier * MARGIN_UNIT
 }

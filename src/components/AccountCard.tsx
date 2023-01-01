@@ -3,7 +3,7 @@ import React, { FC } from 'react'
 import { TouchableOpacity } from 'react-native'
 import styled from 'styled-components/native'
 import { usePrefetchAccount } from '../hooks/account'
-import { SiteNavigation } from '../navigators/RootStack'
+import { RootStackParamList } from '../navigators/RootStack'
 import { Account } from '../typings/netlify.d'
 import { UsageCard } from './account/UsageCard'
 import { Card } from './Card'
@@ -12,7 +12,7 @@ import { Text } from './text/Text'
 
 type Props = {
   account: Account
-  navigation: NativeStackNavigationProp<SiteNavigation, 'Profile'>
+  navigation: NativeStackNavigationProp<RootStackParamList, 'Profile'>
 }
 
 export const AccountCard: FC<Props> = ({ account, navigation }) => {
