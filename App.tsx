@@ -20,8 +20,12 @@ import { persistor, store } from './src/store/store'
 import { darkTheme, lightTheme } from './src/styles/theme'
 import analytics from '@react-native-firebase/analytics'
 import { useRemoteConfig } from './src/config/remote-config'
+import configuration from 'react-native-ultimate-config'
+import Purchases from 'react-native-purchases'
 
 enableScreens()
+
+Purchases.configure({ apiKey: configuration.revenuecat_key })
 
 const queryClient = new QueryClient()
 

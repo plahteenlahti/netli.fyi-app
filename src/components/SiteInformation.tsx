@@ -3,40 +3,15 @@ import { Linking, StyleSheet } from 'react-native'
 import FontAwesome5 from 'react-native-vector-icons/FontAwesome5'
 import styled from 'styled-components/native'
 import { NetlifySite } from '../typings/netlify.d'
-import { localizedFormat, localizedRelativeFormat } from '../utilities/time'
+import { localizedRelativeFormat } from '../utilities/time'
 import { Card } from './Card'
 import { CardTitle } from './CardTitle'
+import { NavigationRow } from './row/NavigationRow'
 import { Text } from './text/Text'
 
 type Props = {
   site: NetlifySite | undefined
   name?: string
-}
-
-const Summary: FC<Props> = ({ site }) => {
-  const repoUrl = site?.build_settings?.repo_url
-  const lastPublish = site?.published_deploy?.published_at
-  const ownedBy = site?.account_name
-  const openRepo = () => {
-    Linking.openURL(`${repoUrl}`)
-  }
-
-  return (
-    <SummaryText>
-      {repoUrl ? (
-        <Text type="subtitle">
-          Deploys from{' '}
-          <Link onPress={openRepo}>{site?.build_settings?.provider}</Link>.
-        </Text>
-      ) : null}{' '}
-      {ownedBy ? <Text type="subtitle">Owned by {ownedBy}.</Text> : null}{' '}
-      {lastPublish ? (
-        <Text type="subtitle">
-          Last published on {localizedFormat(new Date(lastPublish), 'MMM co.')}
-        </Text>
-      ) : null}
-    </SummaryText>
-  )
 }
 
 export const SiteInformation: FC<Props> = ({ site, name }) => {
@@ -57,11 +32,9 @@ export const SiteInformation: FC<Props> = ({ site, name }) => {
 
   return (
     <>
-      <CardTitle icon="info-circle" title="Site information" />
+      <CardTitle icon="info-circle" title="Details" />
       <Card>
-        <Row>
-          <Summary site={site} />
-        </Row>
+        <NavigationRow title="Domain" value={name} />
         <Row>
           <LinkIcon />
           <Title onPress={openSite}>{name}</Title>

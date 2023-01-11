@@ -1,15 +1,24 @@
 import { RouteProp } from '@react-navigation/native'
 import { NativeStackNavigationProp } from '@react-navigation/native-stack'
-import React, { FC, useEffect, useState } from 'react'
-import { Dimensions, Platform, RefreshControl } from 'react-native'
+import React, { FC, useEffect, useRef, useState } from 'react'
+import {
+  Dimensions,
+  FlatList,
+  ListRenderItem,
+  Platform,
+  RefreshControl
+} from 'react-native'
+import Animated from 'react-native-reanimated'
 import { SafeAreaView } from 'react-native-safe-area-context'
 import styled from 'styled-components/native'
 import { BuildSettings } from '../components/BuildSettings'
+import { ScrollViewWithHero } from '../components/common/ScrollViewWithHero'
 import { DeploysPreview } from '../components/DeploysPreview'
 import { NoPreview } from '../components/NoPreview'
 import { HooksPreview } from '../components/previews/hook'
 import { SiteInformation } from '../components/SiteInformation'
 import { SubmissionsPreview } from '../components/SubmissionsPreview'
+import { Text } from '../components/text/Text'
 import { useDeploys } from '../hooks/deploy'
 import { useHooks } from '../hooks/hook'
 import { useSite } from '../hooks/site'
@@ -41,88 +50,74 @@ export const Site: FC<Props> = ({ route }) => {
     }
   }, [isLoading, init, isSuccess, isError])
 
+  const sections = [
+    'site information',
+    'build settings',
+    'deploys',
+    'web hooks'
+  ]
+
+  const renderItem: ListRenderItem<string> = ({ item }) => (
+    <Section key={item}>
+      <Text type="subtitle"> {item}</Text>
+    </Section>
+  )
+
   return (
-    <Container
-      edges={
-        Platform.OS === 'ios' ? ['top', 'right', 'left'] : ['right', 'left']
-      }>
-      <ScrollView
-        contentInsetAdjustmentBehavior="automatic"
-        scrollToOverflowEnabled
+    <Container>
+      <ScrollViewWithHero
+        source={{ uri: site?.screenshot_url }}
         refreshControl={
           <RefreshControl
             refreshing={init ? isLoading : false}
             onRefresh={refetch}
           />
         }>
-        <Card>
-          <PreviewContainer>
-            {site?.screenshot_url ? (
-              <SitePreview
-                resizeMode="contain"
-                source={{ uri: site?.screenshot_url }}
-              />
-            ) : (
-              <NoSitePreview />
-            )}
-          </PreviewContainer>
-        </Card>
-
-        <SiteInformation site={site} name={name} />
-
-        <BuildSettings site={site} />
-        {deploys && deploys?.length > 0 ? (
-          <DeploysPreview siteID={siteID} siteName={name} deploys={deploys} />
-        ) : null}
-
-        {hooks && hooks?.length > 0 ? (
-          <HooksPreview siteID={siteID} siteName={name} hooks={hooks} />
-        ) : null}
-
-        {submissions && submissions?.length > 0 ? (
-          <SubmissionsPreview
-            siteID={siteID}
-            siteName={name}
-            submissions={submissions}
+        <Content>
+          <List
+            data={sections}
+            showsHorizontalScrollIndicator={false}
+            horizontal
+            renderItem={renderItem}
           />
-        ) : null}
-      </ScrollView>
+
+          <SiteInformation site={site} name={name} />
+
+          <BuildSettings site={site} />
+          {deploys && deploys?.length > 0 ? (
+            <DeploysPreview siteID={siteID} siteName={name} deploys={deploys} />
+          ) : null}
+
+          {hooks && hooks?.length > 0 ? (
+            <HooksPreview siteID={siteID} siteName={name} hooks={hooks} />
+          ) : null}
+
+          {submissions && submissions?.length > 0 ? (
+            <SubmissionsPreview
+              siteID={siteID}
+              siteName={name}
+              submissions={submissions}
+            />
+          ) : null}
+        </Content>
+      </ScrollViewWithHero>
     </Container>
   )
 }
 
-const Container = styled(SafeAreaView)`
+const Container = styled.View`
   flex: 1;
 `
 
-const ScrollView = styled.ScrollView`
-  background-color: ${({ theme }) => theme.primaryBackground};
-  flex: 1;
+const List = styled(FlatList as new () => FlatList<string>)`
+  padding: 0px 16px;
 `
 
-const Card = styled.View`
+const Section = styled.TouchableOpacity`
   background-color: ${({ theme }) => theme.secondaryBackground};
-  padding: 16px 16px;
-  margin: 8px;
-  border-radius: 8px;
-  box-shadow: rgba(0, 0, 0, 0.06) 0px 0px 1px;
-  elevation: 2;
+  padding: ${({ theme }) => theme.spacing(1)}px;
 `
 
-const SitePreview = styled.Image`
-  width: 100%;
-  height: ${(width - 2 * 16 - 2 * 8) * 0.625}px;
-  background-color: rgba(0, 0, 0, 0.54);
-  border-radius: 8px;
-  overflow: hidden;
-`
-
-const PreviewContainer = styled.View`
-  border-radius: 4px;
-  overflow: hidden;
-  width: 100%;
-`
-
-const NoSitePreview = styled(NoPreview)`
-  height: ${(width - 2 * 16 - 2 * 8) * 0.625}px;
+const Content = styled.View`
+  background-color: ${({ theme }) => theme.primaryBackground};
 `

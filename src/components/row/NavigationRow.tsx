@@ -9,19 +9,27 @@ import { HContainer } from '../layout/Container'
 type Props = {
   title: string
   value?: string | number
+  hideDivider?: boolean
+  type?: 'info' | 'navigation' | 'action'
 } & TouchableOpacityProps
 
-export const NavigationRow = ({ title, value, ...buttonProps }: Props) => {
+export const NavigationRow = ({
+  title,
+  value,
+  type = 'info',
+  hideDivider = false,
+  ...buttonProps
+}: Props) => {
   return (
-    <TouchableOpacity {...buttonProps}>
-      <RowContainer>
+    <TouchableOpacity disabled={type === 'info'} {...buttonProps}>
+      <RowContainer hideDivider={hideDivider}>
         <Text>{title}</Text>
 
         <HContainer alignItems="center">
           <Text fontFamily="Inter-Regular" color="secondaryTextColor">
             {value}
           </Text>
-          <Chevron name="chevron-right" />
+          {type === 'navigation' && <Chevron name="chevron-right" />}
         </HContainer>
       </RowContainer>
     </TouchableOpacity>

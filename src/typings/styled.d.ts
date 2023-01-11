@@ -15,5 +15,6 @@ declare module 'styled-components' {
 
     bonePrimary: string
     boneSecondary: string
+    spacing: (number: number) => number
   }
 }
