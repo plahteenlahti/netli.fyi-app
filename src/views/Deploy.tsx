@@ -1,5 +1,8 @@
 import { RouteProp } from '@react-navigation/native'
-import { NativeStackNavigationProp } from '@react-navigation/native-stack'
+import {
+  NativeStackNavigationProp,
+  NativeStackScreenProps
+} from '@react-navigation/native-stack'
 import React, { FC, useEffect, useState } from 'react'
 import { Platform, RefreshControl } from 'react-native'
 import { SafeAreaView } from 'react-native-safe-area-context'
@@ -8,28 +11,20 @@ import { Card } from '../components/Card'
 import { DataField } from '../components/DataField'
 import { Text } from '../components/text/Text'
 import { useDeploy } from '../hooks/deploy'
-import { SiteNavigation } from '../navigators/RootStack'
+import { SiteNavigation } from '../navigators/SitesStack'
 import { Deploy as TypeDeploy } from '../typings/netlify.d'
-
-type Navigation = NativeStackNavigationProp<SiteNavigation, 'Deploy'>
-type Route = RouteProp<SiteNavigation, 'Deploy'>
-
-type Props = {
-  navigation: Navigation
-  route: Route
-}
 
 type Key = keyof TypeDeploy
 
 const makeRow = (key: Key, value: unknown) => {
-  return <DataField key={key as string} title={key as string} value={value} />
+  return <DataField key={key} title={key as string} value={value} />
 }
 
-export const Deploy: FC<Props> = ({
+export const Deploy = ({
   route: {
     params: { buildID }
   }
-}) => {
+}: NativeStackScreenProps<SiteNavigation, 'Deploy'>) => {
   const [init, setInit] = useState(false)
 
   const { data, isLoading, refetch, isSuccess, isError } = useDeploy(buildID)

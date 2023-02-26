@@ -1,5 +1,8 @@
 import { RouteProp } from '@react-navigation/native'
-import { NativeStackNavigationProp } from '@react-navigation/native-stack'
+import {
+  NativeStackNavigationProp,
+  NativeStackScreenProps
+} from '@react-navigation/native-stack'
 import React, { FC, useEffect, useRef, useState } from 'react'
 import {
   Dimensions,
@@ -23,19 +26,11 @@ import { useDeploys } from '../hooks/deploy'
 import { useHooks } from '../hooks/hook'
 import { useSite } from '../hooks/site'
 import { useSubmissions } from '../hooks/submissions'
-import { SiteNavigation } from '../navigators/RootStack'
+import { SiteNavigation } from '../navigators/SitesStack'
 
-const { width } = Dimensions.get('window')
+type Props = NativeStackScreenProps<SiteNavigation, 'Site'>
 
-type Navigation = NativeStackNavigationProp<SiteNavigation, 'Site'>
-type Route = RouteProp<SiteNavigation, 'Site'>
-
-type Props = {
-  navigation: Navigation
-  route: Route
-}
-
-export const Site: FC<Props> = ({ route }) => {
+export const Site = ({ route }: Props) => {
   const [init, setInit] = useState(false)
 
   const { siteID, name } = route.params

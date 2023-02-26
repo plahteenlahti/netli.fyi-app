@@ -1,3 +1,4 @@
+import { PathConfigMap } from '@react-navigation/native'
 import { createNativeStackNavigator } from '@react-navigation/native-stack'
 import React, { FC } from 'react'
 import { useTheme } from 'styled-components/native'
@@ -7,17 +8,11 @@ import { Authorize } from '../views/Authorize'
 import { FeatureFlags } from '../views/FeatureFlags'
 import { Profiles } from '../views/Profiles'
 import { Subscription } from '../views/Subscription'
-import { TabStack } from './TabStack'
+import { tabNavigatorLinkingConfig, TabStack } from './TabStack'
 
 export type RootStackParamList = {
   Authorize: undefined
-  App: {
-    Sites: undefined
-    Builds: {
-      Builds: { siteID: string; name: string }
-      Build: { name: string; buildID: string }
-    }
-  }
+  App: undefined
   Profile: undefined
   Profiles: undefined
   Account: { accountID: string }
@@ -25,17 +20,13 @@ export type RootStackParamList = {
   Subscription: undefined
 }
 
-export type SiteNavigation = {
-  SiteList: undefined
-  Site: { name: string; url: string; siteID: string }
-  Hook: { name: string; hookID: string }
-  Deploys: { siteID: string; name: string }
-  Deploy: { name: string; buildID: string }
-  Submissions: { siteID: string; name: string }
-  Submission: { submissionID: string; name: string }
-}
-
 const Stack = createNativeStackNavigator<RootStackParamList>()
+
+export const AppLinking: PathConfigMap<RootStackParamList> = {
+  App: {
+    screens: tabNavigatorLinkingConfig
+  }
+}
 
 export const SiteStack: FC = () => {
   const { accentColor, primaryTextColor } = useTheme()

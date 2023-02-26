@@ -52,6 +52,8 @@ export const Profile: FC<Props> = ({ navigation }) => {
     navigation.navigate('Profiles')
   }
 
+  console.log(accounts)
+
   const logout = () => {
     Alert.alert(
       'Logging out?',

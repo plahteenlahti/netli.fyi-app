@@ -1,21 +1,14 @@
-import { RouteProp } from '@react-navigation/native'
-import { NativeStackNavigationProp } from '@react-navigation/native-stack'
+import { NativeStackScreenProps } from '@react-navigation/native-stack'
 import React, { FC } from 'react'
 import styled from 'styled-components/native'
 import { Card } from '../components/Card'
 import { Text } from '../components/text/Text'
 import { useSubmission } from '../hooks/submissions'
-import { SiteNavigation } from '../navigators/RootStack'
+import { SiteNavigation } from '../navigators/SitesStack'
 
-type Navigation = NativeStackNavigationProp<SiteNavigation, 'Submission'>
-type Route = RouteProp<SiteNavigation, 'Submission'>
-
-type Props = {
-  navigation: Navigation
-  route: Route
-}
-
-export const Submission: FC<Props> = ({ route }) => {
+export const Submission = ({
+  route
+}: NativeStackScreenProps<SiteNavigation, 'Submission'>) => {
   const { submissionID } = route.params
   const { data: submission } = useSubmission(submissionID)
 

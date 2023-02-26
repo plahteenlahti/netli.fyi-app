@@ -1,17 +1,18 @@
-import React, { FC } from 'react'
-import { ViewStyle } from 'react-native'
+import React, { ReactNode } from 'react'
+import { View, ViewStyle } from 'react-native'
 import styled from 'styled-components/native'
 
 type Props = {
   style?: ViewStyle
   padding?: boolean
+  children?: ReactNode
 }
 
-export const Card: FC<Props> = ({ children, style, padding = true }) => {
+export const Card = ({ children, style, padding = true }: Props) => {
   return (
-    <Container padding={padding} style={style}>
+    <View style={style} className="px-4 py-2 bg-">
       {children}
-    </Container>
+    </View>
   )
 }
 

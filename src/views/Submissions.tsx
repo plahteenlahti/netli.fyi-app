@@ -1,20 +1,13 @@
-import { RouteProp } from '@react-navigation/native'
-import { NativeStackNavigationProp } from '@react-navigation/native-stack'
+import { NativeStackScreenProps } from '@react-navigation/native-stack'
 import React, { FC } from 'react'
 import { FlatList, ListRenderItem } from 'react-native'
 import styled from 'styled-components/native'
 import { SubmissionItem } from '../components/SubmissionItem'
 import { useSubmissions } from '../hooks/submissions'
-import { SiteNavigation } from '../navigators/RootStack'
+import { SiteNavigation } from '../navigators/SitesStack'
 import { Submission } from '../typings/netlify.d'
 
-type Navigation = NativeStackNavigationProp<SiteNavigation, 'Submissions'>
-type Route = RouteProp<SiteNavigation, 'Submissions'>
-
-type Props = {
-  navigation: Navigation
-  route: Route
-}
+type Props = NativeStackScreenProps<SiteNavigation, 'Submissions'>
 
 export const Submissions: FC<Props> = ({ navigation, route }) => {
   const { siteID } = route.params

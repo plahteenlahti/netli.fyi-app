@@ -1,21 +1,12 @@
-import { RouteProp } from '@react-navigation/native'
-import { NativeStackNavigationProp } from '@react-navigation/native-stack'
-import React, { FC, useEffect, useLayoutEffect, useState } from 'react'
+import { NativeStackScreenProps } from '@react-navigation/native-stack'
+import React, { useLayoutEffect, useState } from 'react'
 import { ListRenderItem, RefreshControl } from 'react-native'
 import Animated, { Layout } from 'react-native-reanimated'
 import styled from 'styled-components/native'
 import { SiteListItem } from './components/SiteListItem'
 import { useSites } from './hooks/site'
-import { SiteNavigation } from './navigators/RootStack'
+import { SiteNavigation } from './navigators/SitesStack'
 import { NetlifySite } from './typings/netlify.d'
-
-type Navigation = NativeStackNavigationProp<SiteNavigation, 'SiteList'>
-type SitesScreenRouteProp = RouteProp<SiteNavigation, 'SiteList'>
-
-type Props = {
-  navigation: Navigation
-  route: SitesScreenRouteProp
-}
 
 type PlaceholderItem = {
   key: string
@@ -28,7 +19,7 @@ type PlaceholderItem = {
 
 const placeHolderItems: Array<PlaceholderItem> = Array.from(
   { length: 10 },
-  (v, i) => i
+  (_v, i) => i
 ).map((_, index) => ({
   key: `${index}`,
   id: `${index}`,
@@ -38,10 +29,11 @@ const placeHolderItems: Array<PlaceholderItem> = Array.from(
   published_deploy: undefined
 }))
 
-export const Sites: FC<Props> = ({ navigation }) => {
-  const [init, setInit] = useState(false)
+export const Sites = ({
+  navigation
+}: NativeStackScreenProps<SiteNavigation, 'SiteList'>) => {
   const [search, setSearch] = useState<string | undefined>('')
-  const { data: sites, isLoading, isSuccess, isError, refetch } = useSites()
+  const sites = useSites()
 
   useLayoutEffect(() => {
     navigation.setOptions({
@@ -51,12 +43,6 @@ export const Sites: FC<Props> = ({ navigation }) => {
       }
     })
   }, [navigation])
-
-  useEffect(() => {
-    if (!init && (isSuccess || isError)) {
-      setInit(true)
-    }
-  }, [isLoading, init, isSuccess, isError])
 
   const renderItem: ListRenderItem<NetlifySite | PlaceholderItem> = ({
     item
@@ -68,7 +54,7 @@ export const Sites: FC<Props> = ({ navigation }) => {
         url: item.custom_domain ?? `${item.default_domain}`
       })
     }
-    if (isLoading) {
+    if (sites.isLoading) {
       return <></>
     }
 
@@ -92,14 +78,14 @@ export const Sites: FC<Props> = ({ navigation }) => {
         scrollToOverflowEnabled
         refreshControl={
           <RefreshControl
-            refreshing={init ? isLoading : false}
-            onRefresh={refetch}
+            refreshing={sites.isRefetching}
+            onRefresh={sites.refetch}
           />
         }
         data={
-          isLoading
+          sites.isLoading && !!sites.data
             ? placeHolderItems
-            : sites?.filter(site => {
+            : sites?.data?.filter(site => {
                 let pattern =
                   '.*' + search?.toLowerCase().split('').join('.*') + '.*'
                 const re = new RegExp(pattern)

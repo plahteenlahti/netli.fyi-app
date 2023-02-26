@@ -1,22 +1,17 @@
-import { RouteProp } from '@react-navigation/native'
-import { NativeStackNavigationProp } from '@react-navigation/native-stack'
-import React, { FC } from 'react'
+import { NativeStackScreenProps } from '@react-navigation/native-stack'
+import React from 'react'
 import { FlatList, ListRenderItem } from 'react-native'
 import styled from 'styled-components/native'
 import { DeployItem } from '../components/DeployItem'
 import { useDeploys } from '../hooks/deploy'
-import { SiteNavigation } from '../navigators/RootStack'
+import { SiteNavigation } from '../navigators/SitesStack'
+
 import { Deploy } from '../typings/netlify.d'
 
-type Navigation = NativeStackNavigationProp<SiteNavigation, 'Deploys'>
-type Route = RouteProp<SiteNavigation, 'Deploys'>
-
-type Props = {
-  navigation: Navigation
-  route: Route
-}
-
-export const Deploys: FC<Props> = ({ route, navigation }) => {
+export const Deploys = ({
+  route,
+  navigation
+}: NativeStackScreenProps<SiteNavigation, 'Deploys'>) => {
   const { siteID } = route.params
   const { data: deploys } = useDeploys(siteID)
 

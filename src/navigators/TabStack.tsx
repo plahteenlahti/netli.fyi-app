@@ -1,18 +1,22 @@
 import React from 'react'
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs'
-import { SitesStack } from './SitesStack'
-import { BuildsStack } from './BuildsStack'
+import { PathConfigMap } from '@react-navigation/native'
 import FontAwesome5 from 'react-native-vector-icons/FontAwesome5'
-import { useTheme } from 'styled-components/native'
-import { Profile } from '../views/Profile'
+import styled, { useTheme } from 'styled-components/native'
 import { useUser } from '../hooks/user'
-import { usePrefetchAccounts } from '../hooks/account'
-import styled from 'styled-components/native'
+import { Profile } from '../views/Profile'
+import { BuildsStack } from './BuildsStack'
+import { siteNavigationLinkingConfig, SitesStack } from './SitesStack'
 
 export type TabParamList = {
   Sites: undefined
   Builds: undefined
   Profile: undefined
+}
+export const tabNavigatorLinkingConfig: PathConfigMap<TabParamList> = {
+  Sites: {
+    screens: siteNavigationLinkingConfig
+  }
 }
 
 const Tab = createBottomTabNavigator<TabParamList>()
@@ -20,7 +24,14 @@ const Tab = createBottomTabNavigator<TabParamList>()
 export const TabStack = () => {
   const theme = useTheme()
   const user = useUser()
-  const prefetchAccounts = usePrefetchAccounts()
+
+  const profilePicture = () => (
+    <ProfilePicture
+      borderRadius={130}
+      resizeMode="contain"
+      source={{ uri: user.data?.avatar_url }}
+    />
+  )
 
   return (
     <Tab.Navigator
@@ -51,13 +62,7 @@ export const TabStack = () => {
         name="Profile"
         component={Profile}
         options={{
-          tabBarIcon: ({}) => (
-            <ProfilePicture
-              borderRadius={130}
-              resizeMode="contain"
-              source={{ uri: user.data?.avatar_url }}
-            />
-          )
+          tabBarIcon: profilePicture
         }}
       />
     </Tab.Navigator>
