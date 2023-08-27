@@ -8,7 +8,6 @@ import React, { useEffect, useRef } from 'react'
 import { StatusBar, useColorScheme } from 'react-native'
 import RNBootSplash from 'react-native-bootsplash'
 import 'react-native-gesture-handler'
-import { LumiThemeProvider } from 'react-native-lumi'
 import { SafeAreaProvider } from 'react-native-safe-area-context'
 import { enableScreens } from 'react-native-screens'
 import { QueryClient, QueryClientProvider } from '@tanstack/react-query'
@@ -18,8 +17,6 @@ import { ThemeProvider } from 'styled-components/native'
 import { RootStackParamList, SiteStack } from './src/navigators/RootStack'
 import { persistor, store } from './src/store/store'
 import { darkTheme, lightTheme } from './src/styles/theme'
-import analytics from '@react-native-firebase/analytics'
-import { useRemoteConfig } from './src/config/remote-config'
 import configuration from 'react-native-ultimate-config'
 import Purchases from 'react-native-purchases'
 
@@ -31,7 +28,6 @@ const queryClient = new QueryClient()
 
 const App = () => {
   const colorScheme = useColorScheme()
-  useRemoteConfig()
 
   useEffect(() => {
     const init = async () => {}
@@ -61,10 +57,7 @@ const App = () => {
                 navigationRef.current?.getCurrentRoute()?.name
 
               if (previousRouteName !== currentRouteName) {
-                await analytics().logScreenView({
-                  screen_name: currentRouteName,
-                  screen_class: currentRouteName
-                })
+                // maybe implement analytics
               }
               routeNameRef.current = currentRouteName
             }}>
@@ -75,12 +68,10 @@ const App = () => {
                   colorScheme === 'dark' ? 'light-content' : 'dark-content'
                 }
               />
-              <LumiThemeProvider>
-                <ThemeProvider
-                  theme={colorScheme === 'dark' ? darkTheme : lightTheme}>
-                  <SiteStack />
-                </ThemeProvider>
-              </LumiThemeProvider>
+              <ThemeProvider
+                theme={colorScheme === 'dark' ? darkTheme : lightTheme}>
+                <SiteStack />
+              </ThemeProvider>
             </QueryClientProvider>
           </NavigationContainer>
         </PersistGate>

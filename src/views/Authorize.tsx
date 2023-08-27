@@ -1,6 +1,7 @@
 import { RouteProp, StackActions } from '@react-navigation/native'
 import { NativeStackNavigationProp } from '@react-navigation/native-stack'
 import React, { FC, useState } from 'react'
+import { View } from 'react-native'
 import {
   Dimensions,
   KeyboardAvoidingView,
@@ -19,6 +20,7 @@ import {
 import configuration from 'react-native-ultimate-config'
 import styled from 'styled-components/native'
 import { AuthorizeButton } from '../components/AuthorizeButton'
+import { OnboardingScroller } from '../components/onboarding/OnboardingScroller'
 import { Text } from '../components/text/Text'
 import { RootStackParamList } from '../navigators/RootStack'
 import { addAccountFirstTime } from '../store/reducers/accounts'
@@ -92,48 +94,8 @@ export const Authorize: FC<Props> = ({ navigation }) => {
       <KeyboardAvoidingView
         behavior={Platform.OS === 'ios' ? 'padding' : 'height'}>
         <ScrollView>
-          <Card>
-            <IconContainer>
-              <Icon resizeMode="cover" source={image} />
-            </IconContainer>
-            <Svg
-              height="50"
-              width="145"
-              style={{
-                transform: [{ scale: 1.3 }]
-              }}>
-              <Defs>
-                <ClipPath id="clip">
-                  <SvgText
-                    fill="red"
-                    stroke="blue"
-                    fontFamily="Avenir Next"
-                    x="10"
-                    y="30"
-                    fontSize="35"
-                    fontWeight="600"
-                    scale="1">
-                    <TSpan>Netli.fyi</TSpan>
-                  </SvgText>
-                </ClipPath>
-              </Defs>
-
-              <Image
-                x="5%"
-                y="5%"
-                width="100%"
-                height="100%"
-                preserveAspectRatio="xMidYMid slice"
-                href={gradient}
-                clipPath="url(#clip)"
-              />
-            </Svg>
-            <Summary>
-              Netli.fyi helps you to manage your Netlify hosted sites on the go.
-              See your sites' settings, manage form submissions, and quickly see
-              your deployments.
-            </Summary>
-          </Card>
+          <OnboardingScroller />
+         
           <ButtonContainer>
             <AuthorizeButton onPress={authenticateWithNetlify} />
           </ButtonContainer>
@@ -232,16 +194,6 @@ const InputContainer = styled.View``
 
 const HelpTextLink = styled(Text)`
   color: ${({ theme }) => theme.accentColor};
-`
-
-const Card = styled.View`
-  border-radius: 8px;
-  background-color: ${({ theme }) => theme.secondaryBackground};
-  margin: 16px;
-  padding: 16px;
-  align-items: center;
-  elevation: 3;
-  max-width: 600px;
 `
 
 const ScrollView = styled.ScrollView.attrs(() => ({

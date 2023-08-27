@@ -1,6 +1,14 @@
-import { RouteProp, StackActions } from '@react-navigation/native'
-import { NativeStackNavigationProp } from '@react-navigation/native-stack'
-import React, { FC } from 'react'
+import { BottomTabScreenProps } from '@react-navigation/bottom-tabs'
+import {
+  CompositeScreenProps,
+  RouteProp,
+  StackActions
+} from '@react-navigation/native'
+import {
+  NativeStackNavigationProp,
+  NativeStackScreenProps
+} from '@react-navigation/native-stack'
+import React, { FC, useEffect } from 'react'
 import { Alert, Linking, RefreshControl } from 'react-native'
 import styled from 'styled-components/native'
 import { AccountCard } from '../components/AccountCard'
@@ -13,40 +21,32 @@ import { InfoRow } from '../components/row/InfoRow'
 import { NavigationRow } from '../components/row/NavigationRow'
 import { ToggleRow } from '../components/row/ToggleRow'
 import { Text } from '../components/text/Text'
-import { useRemoteValue } from '../config/remote-config'
 import { useAccounts } from '../hooks/account'
 import { useUser } from '../hooks/user'
 import { RootStackParamList } from '../navigators/RootStack'
+import { TabParamList } from '../navigators/TabStack'
 import { removeAllAccounts } from '../store/reducers/accounts'
-import { toggleAnalytics } from '../store/reducers/app'
 import { useAppDispatch, useAppSelector } from '../store/store'
 import { sendEmail } from '../utilities/mail'
 import { localizedRelativeFormat } from '../utilities/time'
 
-type Navigation = NativeStackNavigationProp<RootStackParamList, 'Profile'>
-type Route = RouteProp<RootStackParamList, 'Profile'>
+type Props = CompositeScreenProps<
+  NativeStackScreenProps<RootStackParamList>,
+  BottomTabScreenProps<TabParamList, 'Profile'>
+>
 
-type Props = {
-  navigation: Navigation
-  route: Route
-}
-
-export const Profile: FC<Props> = ({ navigation }) => {
+export const Profile = ({ navigation }: Props) => {
   const dispatch = useAppDispatch()
   const user = useUser()
   const accounts = useAccounts()
-  const analyticsEnabled = useAppSelector(({ app }) => app.analyticsEnabled)
 
-  const editableFeatureFlags = useRemoteValue('userEditableFeatureFlagsEnabled')
-  const multiAccountEnabled = useRemoteValue('multiAccountEnabled')
+  useEffect(() => {
+    const unsubscribe = navigation.addListener('tabLongPress', e => {
+      navigation.navigate('DeveloperMenu')
+    })
 
-  const _toggleAnalytics = () => {
-    dispatch(toggleAnalytics(!analyticsEnabled))
-  }
-
-  const navigateToFeatureFlags = () => {
-    navigation.navigate('FeatureFlags')
-  }
+    return unsubscribe
+  }, [navigation])
 
   const navigateToProfiles = () => {
     navigation.navigate('Profiles')
@@ -107,25 +107,6 @@ export const Profile: FC<Props> = ({ navigation }) => {
           <InfoRow title="Last login" value={lastLogin} />
           <InfoRow title="Account created" value={accountCreated} />
           <InfoRow title="Sites created" value={user.data?.site_count} />
-          {editableFeatureFlags && (
-            <NavigationRow
-              title="Feature flags"
-              value={5}
-              onPress={navigateToFeatureFlags}
-            />
-          )}
-          <ToggleRow
-            value={analyticsEnabled}
-            onChange={_toggleAnalytics}
-            title="Analytics"
-            subtitle="I want to help improve the app by sharing my usage statistics."
-          />
-          {multiAccountEnabled && (
-            <NavigationRow
-              title="Add another account"
-              onPress={navigateToProfiles}
-            />
-          )}
           <ButtonRow
             hideDivider
             title="Log out"

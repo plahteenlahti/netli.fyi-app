@@ -10,7 +10,7 @@ type Props = {
 
 export const Card = ({ children, style, padding = true }: Props) => {
   return (
-    <View style={style} className="px-4 py-2 bg-">
+    <View style={style} className="px-4 py-2 bg-white dark:bg-zinc-800 rounded-md mx-2">
       {children}
     </View>
   )

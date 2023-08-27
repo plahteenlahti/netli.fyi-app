@@ -5,7 +5,7 @@ import { useTheme } from 'styled-components/native'
 import { useToken } from '../hooks/useToken'
 import { Account } from '../views/Account'
 import { Authorize } from '../views/Authorize'
-import { FeatureFlags } from '../views/FeatureFlags'
+import { DeveloperMenu } from '../views/DeveloperMenu'
 import { Profiles } from '../views/Profiles'
 import { Subscription } from '../views/Subscription'
 import { tabNavigatorLinkingConfig, TabStack } from './TabStack'
@@ -13,11 +13,11 @@ import { tabNavigatorLinkingConfig, TabStack } from './TabStack'
 export type RootStackParamList = {
   Authorize: undefined
   App: undefined
-  Profile: undefined
   Profiles: undefined
   Account: { accountID: string }
   FeatureFlags: undefined
   Subscription: undefined
+  DeveloperMenu: undefined
 }
 
 const Stack = createNativeStackNavigator<RootStackParamList>()
@@ -58,9 +58,13 @@ export const SiteStack: FC = () => {
       />
 
       <Stack.Screen name="Account" component={Account} />
-      <Stack.Screen name="FeatureFlags" component={FeatureFlags} />
       <Stack.Screen name="Profiles" component={Profiles} />
       <Stack.Screen name="Subscription" component={Subscription} />
+      <Stack.Screen
+        name="DeveloperMenu"
+        options={{ presentation: 'modal' }}
+        component={DeveloperMenu}
+      />
     </Stack.Navigator>
   )
 }

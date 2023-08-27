@@ -1,7 +1,6 @@
 import { useQuery } from '@tanstack/react-query'
 import { Deploy } from '../typings/netlify'
 import { BASE_URL } from '../utilities/constants'
-import { reportError } from '../utilities/error'
 import { useToken } from './useToken'
 
 export const useDeploys = (siteID: string) => {
@@ -19,7 +18,6 @@ export const useDeploys = (siteID: string) => {
 
         return response.json()
       } catch (error) {
-        reportError(error)
         return error
       }
     }
@@ -41,7 +39,6 @@ export const useDeploy = (buildID: string) => {
 
         return response.json()
       } catch (error) {
-        reportError(error)
         return error
       }
     }

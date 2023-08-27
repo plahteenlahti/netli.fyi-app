@@ -26,6 +26,7 @@ export const TabStack = () => {
   const user = useUser()
 
   const profilePicture = () => (
+
     <ProfilePicture
       borderRadius={130}
       resizeMode="contain"
@@ -37,14 +38,16 @@ export const TabStack = () => {
     <Tab.Navigator
       screenOptions={{
         tabBarActiveTintColor: theme.accentColor,
-        tabBarInactiveTintColor: theme.secondaryTextColor
+        tabBarInactiveTintColor: theme.secondaryTextColor,
+      
+
       }}>
       <Tab.Screen
         options={{
           headerShown: false,
           tabBarIcon: ({ color }) => (
             <FontAwesome5 name="list" color={color} size={15} />
-          )
+          ) 
         }}
         name="Sites"
         component={SitesStack}
