@@ -1,11 +1,12 @@
 PODS:
-  - AppAuth (1.4.0):
-    - AppAuth/Core (= 1.4.0)
-    - AppAuth/ExternalUserAgent (= 1.4.0)
-  - AppAuth/Core (1.4.0)
-  - AppAuth/ExternalUserAgent (1.4.0)
+  - AppAuth (1.7.1):
+    - AppAuth/Core (= 1.7.1)
+    - AppAuth/ExternalUserAgent (= 1.7.1)
+  - AppAuth/Core (1.7.1)
+  - AppAuth/ExternalUserAgent (1.7.1):
+    - AppAuth/Core
   - boost (1.76.0)
-  - BVLinearGradient (2.6.2):
+  - BVLinearGradient (2.8.3):
     - React-Core
   - DoubleConversion (1.1.6)
   - FBLazyVector (0.71.3)
@@ -22,23 +23,23 @@ PODS:
     - hermes-engine/Pre-built (= 0.71.3)
   - hermes-engine/Pre-built (0.71.3)
   - libevent (2.1.12)
-  - libwebp (1.3.1):
-    - libwebp/demux (= 1.3.1)
-    - libwebp/mux (= 1.3.1)
-    - libwebp/sharpyuv (= 1.3.1)
-    - libwebp/webp (= 1.3.1)
-  - libwebp/demux (1.3.1):
+  - libwebp (1.3.2):
+    - libwebp/demux (= 1.3.2)
+    - libwebp/mux (= 1.3.2)
+    - libwebp/sharpyuv (= 1.3.2)
+    - libwebp/webp (= 1.3.2)
+  - libwebp/demux (1.3.2):
     - libwebp/webp
-  - libwebp/mux (1.3.1):
+  - libwebp/mux (1.3.2):
     - libwebp/demux
-  - libwebp/sharpyuv (1.3.1)
-  - libwebp/webp (1.3.1):
+  - libwebp/sharpyuv (1.3.2)
+  - libwebp/webp (1.3.2):
     - libwebp/sharpyuv
-  - MMKV (1.3.1):
-    - MMKVCore (~> 1.3.1)
-  - MMKVCore (1.3.1)
-  - PurchasesHybridCommon (4.13.2):
-    - RevenueCat (= 4.17.6)
+  - MMKV (1.3.3):
+    - MMKVCore (~> 1.3.3)
+  - MMKVCore (1.3.3)
+  - PurchasesHybridCommon (9.9.0):
+    - RevenueCat (= 4.37.0)
   - RCT-Folly (2021.07.22.00):
     - boost
     - DoubleConversion
@@ -290,20 +291,16 @@ PODS:
   - React-jsinspector (0.71.3)
   - React-logger (0.71.3):
     - glog
-  - react-native-app-auth (6.4.3):
-    - AppAuth (= 1.4.0)
+  - react-native-app-auth (7.1.3):
+    - AppAuth (~> 1.6)
     - React-Core
-  - react-native-mmkv (2.6.2):
-    - MMKV (>= 1.2.13)
+  - react-native-mmkv (2.12.1):
+    - MMKV (>= 1.3.3)
     - React-Core
-  - react-native-safe-area-context (4.5.0):
-    - RCT-Folly
-    - RCTRequired
-    - RCTTypeSafety
+  - react-native-safe-area-context (4.9.0):
     - React-Core
-    - ReactCommon/turbomodule/core
-  - react-native-ultimate-config (4.0.0):
-    - React
+  - react-native-ultimate-config (6.0.1):
+    - React-Core
   - React-perflogger (0.71.3)
   - React-RCTActionSheet (0.71.3):
     - React-Core/RCTActionSheetHeaders (= 0.71.3)
@@ -388,55 +385,32 @@ PODS:
     - React-jsi (= 0.71.3)
     - React-logger (= 0.71.3)
     - React-perflogger (= 0.71.3)
-  - RevenueCat (4.17.6)
-  - RNBootSplash (4.5.2):
+  - RevenueCat (4.37.0)
+  - RNBootSplash (5.4.1):
     - React-Core
-  - RNCAsyncStorage (1.17.11):
-    - React-Core
-  - RNDeviceInfo (10.4.0):
+  - RNDeviceInfo (10.13.1):
     - React-Core
   - RNFastImage (8.6.3):
     - React-Core
     - SDWebImage (~> 5.11.1)
     - SDWebImageWebPCoder (~> 0.8.4)
-  - RNGestureHandler (2.9.0):
+  - RNGestureHandler (2.15.0):
+    - RCT-Folly (= 2021.07.22.00)
     - React-Core
-  - RNPurchases (5.10.1):
-    - PurchasesHybridCommon (= 4.13.2)
+  - RNPurchases (7.23.0):
+    - PurchasesHybridCommon (= 9.9.0)
     - React-Core
-  - RNReanimated (2.14.4):
-    - DoubleConversion
-    - FBLazyVector
-    - FBReactNativeSpec
-    - glog
-    - RCT-Folly
-    - RCTRequired
-    - RCTTypeSafety
-    - React-callinvoker
+  - RNReanimated (3.8.0):
+    - RCT-Folly (= 2021.07.22.00)
     - React-Core
-    - React-Core/DevSupport
-    - React-Core/RCTWebSocket
-    - React-CoreModules
-    - React-cxxreact
-    - React-jsi
-    - React-jsiexecutor
-    - React-jsinspector
-    - React-RCTActionSheet
-    - React-RCTAnimation
-    - React-RCTBlob
-    - React-RCTImage
-    - React-RCTLinking
-    - React-RCTNetwork
-    - React-RCTSettings
-    - React-RCTText
     - ReactCommon/turbomodule/core
-    - Yoga
-  - RNScreens (3.20.0):
+  - RNScreens (3.29.0):
+    - RCT-Folly (= 2021.07.22.00)
     - React-Core
-    - React-RCTImage
-  - RNSVG (13.8.0):
+  - RNSVG (15.1.0):
     - React-Core
-  - RNVectorIcons (9.2.0):
+  - RNVectorIcons (10.0.3):
+    - RCT-Folly (= 2021.07.22.00)
     - React-Core
   - SDWebImage (5.11.1):
     - SDWebImage/Core (= 5.11.1)
@@ -488,7 +462,6 @@ DEPENDENCIES:
   - React-runtimeexecutor (from `../node_modules/react-native/ReactCommon/runtimeexecutor`)
   - ReactCommon/turbomodule/core (from `../node_modules/react-native/ReactCommon`)
   - RNBootSplash (from `../node_modules/react-native-bootsplash`)
-  - "RNCAsyncStorage (from `../node_modules/@react-native-async-storage/async-storage`)"
   - RNDeviceInfo (from `../node_modules/react-native-device-info`)
   - RNFastImage (from `../node_modules/react-native-fast-image`)
   - RNGestureHandler (from `../node_modules/react-native-gesture-handler`)
@@ -591,8 +564,6 @@ EXTERNAL SOURCES:
     :path: "../node_modules/react-native/ReactCommon"
   RNBootSplash:
     :path: "../node_modules/react-native-bootsplash"
-  RNCAsyncStorage:
-    :path: "../node_modules/@react-native-async-storage/async-storage"
   RNDeviceInfo:
     :path: "../node_modules/react-native-device-info"
   RNFastImage:
@@ -613,9 +584,9 @@ EXTERNAL SOURCES:
     :path: "../node_modules/react-native/ReactCommon/yoga"
 
 SPEC CHECKSUMS:
-  AppAuth: 31bcec809a638d7bd2f86ea8a52bd45f6e81e7c7
+  AppAuth: e93b919be5dbcbba49555011ce94f7d716368574
   boost: 57d2868c099736d80fcd648bf211b4431e51a558
-  BVLinearGradient: 34a999fda29036898a09c6a6b728b0b4189e1a44
+  BVLinearGradient: 880f91a7854faff2df62518f0281afb1c60d49a3
   DoubleConversion: 5189b271737e1565bdce30deb4a08d647e3f5f54
   FBLazyVector: 60195509584153283780abdac5569feffb8f08cc
   FBReactNativeSpec: 9c191fb58d06dc05ab5559a5505fc32139e9e4a2
@@ -623,10 +594,10 @@ SPEC CHECKSUMS:
   glog: 04b94705f318337d7ead9e6d17c019bd9b1f6b1b
   hermes-engine: 38bfe887e456b33b697187570a08de33969f5db7
   libevent: 4049cae6c81cdb3654a443be001fb9bdceff7913
-  libwebp: 33dc822fbbf4503668d09f7885bbfedc76c45e96
-  MMKV: 5a07930c70c70b86cd87761a42c8f3836fb681d7
-  MMKVCore: e50135dbd33235b6ab390635991bab437ab873c0
-  PurchasesHybridCommon: 13aed39e96393747d2416f2a51aeb67ea6bb1786
+  libwebp: 1786c9f4ff8a279e4dac1e8f385004d5fc253009
+  MMKV: f902fb6719da13c2ab0965233d8963a59416f911
+  MMKVCore: d26e4d3edd5cb8588c2569222cbd8be4231374e9
+  PurchasesHybridCommon: 42af1edb779902793424e6fc1c159727f7d56595
   RCT-Folly: 424b8c9a7a0b9ab2886ffe9c3b041ef628fd4fb1
   RCTRequired: bec48f07daf7bcdc2655a0cde84e07d24d2a9e2a
   RCTTypeSafety: 171394eebacf71e1cfad79dbfae7ee8fc16ca80a
@@ -641,10 +612,10 @@ SPEC CHECKSUMS:
   React-jsiexecutor: 515b703d23ffadeac7687bc2d12fb08b90f0aaa1
   React-jsinspector: 9f7c9137605e72ca0343db4cea88006cb94856dd
   React-logger: 957e5dc96d9dbffc6e0f15e0ee4d2b42829ff207
-  react-native-app-auth: fd1eaa667c0bc014199456d14a6440cb74de814e
-  react-native-mmkv: ebf4ca42eb4e3e6d37800bb5c94bce4956b6e1e6
-  react-native-safe-area-context: 39c2d8be3328df5d437ac1700f4f3a4f75716acc
-  react-native-ultimate-config: ff96eb4a4e7b8595814dbc7f1ae8e1291770f591
+  react-native-app-auth: aafaa6e2934ceeb72d1f5a42962937ffeed9566c
+  react-native-mmkv: 124b22209aacdcd172b6ac39071b9647080f0411
+  react-native-safe-area-context: b97eb6f9e3b7f437806c2ce5983f479f8eb5de4b
+  react-native-ultimate-config: bc816775e31bb2056ccfe18b49e76a5ba2d39b6c
   React-perflogger: af8a3d31546077f42d729b949925cc4549f14def
   React-RCTActionSheet: 57cc5adfefbaaf0aae2cf7e10bccd746f2903673
   React-RCTAnimation: 11c61e94da700c4dc915cf134513764d87fc5e2b
@@ -658,21 +629,20 @@ SPEC CHECKSUMS:
   React-RCTVibration: 5199a180d04873366a83855de55ac33ce60fe4d5
   React-runtimeexecutor: 7bf0dafc7b727d93c8cb94eb00a9d3753c446c3e
   ReactCommon: 6f65ea5b7d84deb9e386f670dd11ce499ded7b40
-  RevenueCat: 42769d9dcc26c1294ec8e2e0d58320ab69974f75
-  RNBootSplash: b721af380c81622b03fd67d800675919ee0d8269
-  RNCAsyncStorage: 8616bd5a58af409453ea4e1b246521bb76578d60
-  RNDeviceInfo: 749f2e049dcd79e2e44f134f66b73a06951b5066
+  RevenueCat: b4fb058d7ced6a37327f6bc9636752dbc4a7235b
+  RNBootSplash: eff8239c4f795ce42a0604873aef3733aac0dedd
+  RNDeviceInfo: 4f9c7cfd6b9db1b05eb919620a001cf35b536423
   RNFastImage: 5c9c9fed9c076e521b3f509fe79e790418a544e8
-  RNGestureHandler: 071d7a9ad81e8b83fe7663b303d132406a7d8f39
-  RNPurchases: 19620ffc498c7de07190f4f7def1590431306556
-  RNReanimated: cc5e3aa479cb9170bcccf8204291a6950a3be128
-  RNScreens: 218801c16a2782546d30bd2026bb625c0302d70f
-  RNSVG: c1e76b81c76cdcd34b4e1188852892dc280eb902
-  RNVectorIcons: fcc2f6cb32f5735b586e66d14103a74ce6ad61f8
+  RNGestureHandler: 7909c50383a18f0cb10ce1db7262b9a6da504c03
+  RNPurchases: bffcdc87051998d525f0750632351b8fbeb15b77
+  RNReanimated: 55b0004deb4647b79233b579403e00846db605f5
+  RNScreens: 3c5b9f4a9dcde752466854b6109b79c0e205dad3
+  RNSVG: 50cf2c7018e57cf5d3522d98d0a3a4dd6bf9d093
+  RNVectorIcons: 64e6a523ac30a3241efa9baf1ffbcc5e76ff747a
   SDWebImage: a7f831e1a65eb5e285e3fb046a23fcfbf08e696d
   SDWebImageWebPCoder: 908b83b6adda48effe7667cd2b7f78c897e5111d
   Yoga: 5ed1699acbba8863755998a4245daa200ff3817b
 
 PODFILE CHECKSUM: d69c9014c25da2ae5ed89b040a3881083779abe4
 
-COCOAPODS: 1.12.0
+COCOAPODS: 1.15.2
