@@ -13,7 +13,6 @@ import {
 export const Subscription = () => {
   const customerInfo = useCustomerInfo()
   const offerings = useCurrentOfferings()
-
   const purchase = usePurchasePackage()
 
   console.log(JSON.stringify(purchase, undefined, 2))

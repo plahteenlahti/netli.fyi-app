@@ -4,16 +4,27 @@ import Purchases, { PurchasesPackage } from 'react-native-purchases'
 const ENTITLEMENT_ID = 'pro_large_tip_netli.fyi'
 
 export const useCustomerInfo = () => {
-  return useQuery(
-    ['customerInfo'],
-    async () => await Purchases.getCustomerInfo()
-  )
+  return useQuery({
+    queryKey: ['customerInfo'],
+    queryFn: async () => await Purchases.getCustomerInfo()
+  })
 }
 
 export const useCurrentOfferings = () => {
-  return useQuery(['offerings'], async () => await Purchases.getOfferings())
+  return useQuery({
+    queryKey: ['offerings'],
+    queryFn: async () => await Purchases.getOfferings()
+  })
 }
 
 export const usePurchasePackage = () => {
-  return useMutation((p: PurchasesPackage) => Purchases.purchasePackage(p))
+  return useMutation({
+    onMutate: async (offering: PurchasesPackage) => {
+      const purchase = await Purchases.purchasePackage(offering)
+      return purchase
+    },
+    onError: (error, variables, context) => {
+      console.error(error)
+    }
+  })
 }
