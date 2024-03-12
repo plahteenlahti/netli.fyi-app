@@ -39,10 +39,10 @@ export const usePrefetchAccounts = () => {
   const accessToken = useToken()
 
   const call = async () => {
-    await queryClient.prefetchQuery(
-      ['accounts', { accessToken: `${accessToken}` }],
-      getAccounts
-    )
+    await queryClient.prefetchQuery({
+      queryKey: ['accounts', { accessToken: `${accessToken}` }],
+      queryFn: getAccounts
+    })
   }
 
   return call
@@ -50,7 +50,10 @@ export const usePrefetchAccounts = () => {
 
 export const useAccounts = () => {
   const accessToken = useToken()
-  return useQuery(['accounts', { accessToken: `${accessToken}` }], getAccounts)
+  return useQuery({
+    queryKey: ['accounts', { accessToken: `${accessToken}` }],
+    queryFn: getAccounts
+  })
 }
 
 export const getAccount = async ({
@@ -83,10 +86,10 @@ export const usePrefetchAccount = () => {
   const accessToken = useToken()
 
   const call = async (accountID: string) => {
-    await queryClient.prefetchQuery(
-      ['accounts', { accessToken: `${accessToken}`, accountID }],
-      getAccount
-    )
+    await queryClient.prefetchQuery({
+      queryKey: ['accounts', { accessToken: `${accessToken}`, accountID }],
+      queryFn: getAccount
+    })
   }
 
   return call
@@ -94,11 +97,9 @@ export const usePrefetchAccount = () => {
 
 export const useAccount = (accountID: string) => {
   const accessToken = useToken()
-  return useQuery(
-    ['accounts', { accessToken: `${accessToken}`, accountID }],
-    getAccount,
-    {
-      enabled: false
-    }
-  )
+  return useQuery({
+    queryKey: ['accounts', { accessToken: `${accessToken}`, accountID }],
+    queryFn: getAccount,
+    enabled: false
+  })
 }
