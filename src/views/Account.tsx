@@ -5,7 +5,7 @@ import { Card } from '../components/Card'
 import { Layout } from '../components/layout/Layout'
 import { InfoRow } from '../components/row/InfoRow'
 import { useAccount } from '../hooks/account'
-import { SiteNavigation } from '../navigators/RootStack'
+import { SiteNavigation } from '../navigators/SitesStack'
 
 type Props = {
   navigation: NativeStackNavigationProp<SiteNavigation, 'Account'>

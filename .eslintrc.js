@@ -1,6 +1,6 @@
 module.exports = {
   root: true,
-  extends: '@react-native-community',
+  extends: '@react-native',
   parser: '@typescript-eslint/parser',
   plugins: ['@typescript-eslint'],
   rules: {
@@ -8,7 +8,6 @@ module.exports = {
     semi: [2, 'never'],
     'comma-dangle': 'off',
     'no-unused-vars': 'off',
-
     '@typescript-eslint/no-unused-vars': [
       'warn',
       { argsIgnorePattern: '^_', varsIgnorePattern: '^_' }

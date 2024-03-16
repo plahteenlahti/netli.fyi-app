@@ -1,6 +1,6 @@
 import { NativeStackScreenProps } from '@react-navigation/native-stack'
 import React, { FC } from 'react'
-import { FlatList, ListRenderItem } from 'react-native'
+import { FlatList, ListRenderItem, View } from 'react-native'
 import styled from 'styled-components/native'
 import { SubmissionItem } from '../components/SubmissionItem'
 import { useSubmissions } from '../hooks/submissions'
@@ -30,17 +30,8 @@ export const Submissions: FC<Props> = ({ navigation, route }) => {
   }
 
   return (
-    <Container>
-      <List data={submissions} renderItem={renderItem} />
-    </Container>
+    <View className="bg:white">
+      <FlatList className="px-4" data={submissions} renderItem={renderItem} />
+    </View>
   )
 }
-
-const Container = styled.SafeAreaView`
-  flex: 1;
-  background-color: ${({ theme }) => theme.secondaryBackground};
-`
-
-const List = styled(FlatList as new () => FlatList<Submission>)`
-  padding: 0px 16px;
-`

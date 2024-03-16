@@ -6,9 +6,9 @@ import { useToken } from './useToken'
 export const useSubmissions = (siteID: string) => {
   const accessToken = useToken()
 
-  return useQuery<Array<Submission>, Error>(
-    ['submissions', { siteID, accessToken }],
-    async () => {
+  return useQuery<Array<Submission>, Error>({
+    queryKey: ['submissions', { siteID, accessToken }],
+    queryFn: async () => {
       try {
         const response = await fetch(
           `${BASE_URL}/sites/${siteID}/submissions`,
@@ -24,15 +24,15 @@ export const useSubmissions = (siteID: string) => {
         return error
       }
     }
-  )
+  })
 }
 
 export const useSubmission = (submissionID: string) => {
   const accessToken = useToken()
 
-  return useQuery<Submission, Error>(
-    ['submission', { submissionID, accessToken }],
-    async () => {
+  return useQuery<Submission, Error>({
+    queryKey: ['submission', { submissionID, accessToken }],
+    queryFn: async () => {
       try {
         const response = await fetch(
           `${BASE_URL}/submissions/${submissionID}`,
@@ -48,5 +48,5 @@ export const useSubmission = (submissionID: string) => {
         return error
       }
     }
-  )
+  })
 }

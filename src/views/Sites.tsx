@@ -3,10 +3,10 @@ import React, { useLayoutEffect, useState } from 'react'
 import { ListRenderItem, RefreshControl } from 'react-native'
 import Animated, { Layout } from 'react-native-reanimated'
 import styled from 'styled-components/native'
-import { SiteListItem } from './components/SiteListItem'
-import { useSites } from './hooks/site'
-import { SiteNavigation } from './navigators/SitesStack'
-import { NetlifySite } from './typings/netlify.d'
+import { SiteListItem } from '../components/SiteListItem'
+import { useSites } from '../hooks/site'
+import { SiteNavigation } from '../navigators/SitesStack'
+import { NetlifySite } from '../typings/netlify'
 
 type PlaceholderItem = {
   key: string
