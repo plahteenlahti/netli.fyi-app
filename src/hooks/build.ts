@@ -6,9 +6,9 @@ import { useToken } from './useToken'
 export const useBuilds = (accountID: string) => {
   const accessToken = useToken()
 
-  return useQuery<Array<Build>, Error>(
-    ['builds', { accountID, accessToken }],
-    async () => {
+  return useQuery<Array<Build>, Error>({
+    queryKey: ['builds', { accountID, accessToken }],
+    queryFn: async () => {
       try {
         const response = await fetch(`${BASE_URL}/${accountID}/builds`, {
           headers: {
@@ -21,5 +21,5 @@ export const useBuilds = (accountID: string) => {
         return error
       }
     }
-  )
+  })
 }

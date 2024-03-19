@@ -9,6 +9,7 @@ import { DeveloperMenu } from '../views/DeveloperMenu'
 import { Profiles } from '../views/Profiles'
 import { Subscription } from '../views/Subscription'
 import { tabNavigatorLinkingConfig, TabStack } from './TabStack'
+import Config from 'react-native-config'
 
 export type RootStackParamList = {
   Authorize: undefined
@@ -31,6 +32,10 @@ export const AppLinking: PathConfigMap<RootStackParamList> = {
 export const SiteStack = () => {
   const { accentColor, primaryTextColor } = useTheme()
   const accessToken = useToken()
+
+  console.log(accessToken)
+
+  console.log(Config)
 
   return (
     <Stack.Navigator initialRouteName={!accessToken ? 'Authorize' : 'App'}>

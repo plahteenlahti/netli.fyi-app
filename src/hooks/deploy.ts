@@ -6,9 +6,9 @@ import { useToken } from './useToken'
 export const useDeploys = (siteID: string) => {
   const accessToken = useToken()
 
-  return useQuery<Array<Deploy>, Error>(
-    ['deploys', { siteID, accessToken }],
-    async () => {
+  return useQuery<Array<Deploy>, Error>({
+    queryKey: ['deploys', { siteID, accessToken }],
+    queryFn: async () => {
       try {
         const response = await fetch(`${BASE_URL}/sites/${siteID}/deploys`, {
           headers: {
@@ -21,15 +21,15 @@ export const useDeploys = (siteID: string) => {
         return error
       }
     }
-  )
+  })
 }
 
 export const useDeploy = (buildID: string) => {
   const accessToken = useToken()
 
-  return useQuery<Deploy, Error>(
-    ['build', { accessToken, buildID }],
-    async () => {
+  return useQuery<Deploy, Error>({
+    queryKey: ['build', { accessToken, buildID }],
+    queryFn: async () => {
       try {
         const response = await fetch(`${BASE_URL}/deploys/${buildID}`, {
           headers: {
@@ -42,5 +42,5 @@ export const useDeploy = (buildID: string) => {
         return error
       }
     }
-  )
+  })
 }

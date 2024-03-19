@@ -5,9 +5,9 @@ import { useToken } from './useToken'
 
 export const useSites = () => {
   const accessToken = useToken()
-  return useQuery<Array<NetlifySite>, Error>(
-    ['sites', { accessToken }],
-    async () => {
+  return useQuery<Array<NetlifySite>, Error>({
+    queryKey: ['sites', { accessToken }],
+    queryFn: async () => {
       try {
         const response = await fetch(
           `${BASE_URL}/sites?filter=all&sort_by=updated_at`,
@@ -23,15 +23,15 @@ export const useSites = () => {
         return error
       }
     }
-  )
+  })
 }
 
 export const useSite = (siteID: string) => {
   const accessToken = useToken()
 
-  return useQuery<NetlifySite, Error>(
-    ['site', { siteID, accessToken }],
-    async () => {
+  return useQuery<NetlifySite, Error>({
+    queryKey: ['site', { siteID, accessToken }],
+    queryFn: async () => {
       try {
         const response = await fetch(`${BASE_URL}/sites/${siteID}`, {
           headers: {
@@ -44,5 +44,5 @@ export const useSite = (siteID: string) => {
         return error
       }
     }
-  )
+  })
 }

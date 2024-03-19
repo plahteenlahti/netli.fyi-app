@@ -7,7 +7,13 @@ import {
   ViewStyle
 } from 'react-native'
 import FastImage, { Source } from 'react-native-fast-image'
-import Animated, { Extrapolate, useValue } from 'react-native-reanimated'
+import Animated, {
+  Extrapolate,
+  Extrapolation,
+  interpolate,
+  useAnimatedScrollHandler,
+  useSharedValue
+} from 'react-native-reanimated'
 import { useSafeAreaInsets } from 'react-native-safe-area-context'
 import styled from 'styled-components/native'
 import { widthBreakpoints } from '../../utilities/screen'
@@ -49,30 +55,31 @@ export const ScrollViewWithHero = ({
 }: Props) => {
   const { width, height } = useWindowDimensions()
   const insets = useSafeAreaInsets()
-  const scrollY = useValue(0)
-
+  const scrollY = useSharedValue(0)
+  const handler = useAnimatedScrollHandler({
+    onScroll: event => {
+      scrollY.value = event.contentOffset.y
+    }
+  })
   const _defaultHeaderHeight =
     typeof defaultHeaderHeight === 'number'
       ? defaultHeaderHeight
       : HEADER_HEIGHT + insets.top
   const scrollViewMarginTop = source ? imageHeight : _defaultHeaderHeight
 
-  const imageScale = scrollY.interpolate({
-    inputRange: [
-      -height * 0.66,
-      -NEGATIVE_BOTTOM_MARGIN, // dont start zoom until has scrolled for a bit
-      0
-    ],
-    outputRange: [MAX_IMAGE_SCALE_FACTOR, 1, 1],
-    extrapolate: Extrapolate.CLAMP
-  })
+  const imageScale = interpolate(
+    scrollY.value,
+    [-height * 0.66, -NEGATIVE_BOTTOM_MARGIN, 0],
+    [MAX_IMAGE_SCALE_FACTOR, 1, 1],
+    Extrapolation.CLAMP
+  )
 
-  const imageOverlayOpacity = scrollY.interpolate({
-    // 0.85 modifier is there make fade slightly faster than scrolling
-    inputRange: [0, imageHeight * 0.6],
-    outputRange: [0, 1],
-    extrapolate: Extrapolate.CLAMP
-  })
+  const imageOverlayOpacity = interpolate(
+    scrollY.value,
+    [0, imageHeight * 0.6],
+    [0, 1],
+    Extrapolation.CLAMP
+  )
 
   return (
     <Container>
@@ -80,7 +87,6 @@ export const ScrollViewWithHero = ({
         style={{
           height: imageHeight,
           transform: [
-            // hack: to change origin point, since RN doesn't support transform-origin
             { translateY: -imageHeight / 2 },
             { scale: imageScale },
             { translateY: imageHeight / 2 }
@@ -115,12 +121,7 @@ export const ScrollViewWithHero = ({
           },
           scrollViewContentContainerStyle
         ]}
-        onScroll={Animated.event(
-          [{ nativeEvent: { contentOffset: { y: scrollY } } }],
-          {
-            useNativeDriver: true
-          }
-        )}>
+        onScroll={handler}>
         {children}
       </AnimatedScrollView>
     </Container>
