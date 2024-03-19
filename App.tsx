@@ -1,4 +1,3 @@
-import './global.css'
 import {
   DarkTheme,
   DefaultTheme,
@@ -20,10 +19,12 @@ import { persistor, store } from './src/store/store'
 import { darkTheme, lightTheme } from './src/styles/theme'
 import configuration from 'react-native-ultimate-config'
 import Purchases from 'react-native-purchases'
+import { GestureHandlerRootView } from 'react-native-gesture-handler'
+import { Text } from 'react-native'
 
 enableScreens()
 
-Purchases.configure({ apiKey: configuration.revenuecat_key })
+// Purchases.configure({ apiKey: configuration.revenuecat_key })
 
 const queryClient = new QueryClient()
 
@@ -42,42 +43,44 @@ const App = () => {
   const navigationRef = useRef<NavigationContainerRef<RootStackParamList>>(null)
 
   return (
-    <SafeAreaProvider>
-      <Provider store={store}>
-        <PersistGate loading={null} persistor={persistor}>
-          <NavigationContainer
-            ref={navigationRef}
-            theme={colorScheme === 'dark' ? DarkTheme : DefaultTheme}
-            onReady={() => {
-              routeNameRef.current =
-                navigationRef.current?.getCurrentRoute()?.name
-            }}
-            onStateChange={async () => {
-              const previousRouteName = routeNameRef.current
-              const currentRouteName =
-                navigationRef.current?.getCurrentRoute()?.name
+    <GestureHandlerRootView>
+      <SafeAreaProvider>
+        <Provider store={store}>
+          <PersistGate loading={null} persistor={persistor}>
+            <NavigationContainer
+              ref={navigationRef}
+              theme={colorScheme === 'dark' ? DarkTheme : DefaultTheme}
+              onReady={() => {
+                routeNameRef.current =
+                  navigationRef.current?.getCurrentRoute()?.name
+              }}
+              onStateChange={async () => {
+                const previousRouteName = routeNameRef.current
+                const currentRouteName =
+                  navigationRef.current?.getCurrentRoute()?.name
 
-              if (previousRouteName !== currentRouteName) {
-                // maybe implement analytics
-              }
-              routeNameRef.current = currentRouteName
-            }}>
-            <QueryClientProvider client={queryClient}>
-              <StatusBar
-                translucent
-                barStyle={
-                  colorScheme === 'dark' ? 'light-content' : 'dark-content'
+                if (previousRouteName !== currentRouteName) {
+                  // maybe implement analytics
                 }
-              />
-              <ThemeProvider
-                theme={colorScheme === 'dark' ? darkTheme : lightTheme}>
-                <SiteStack />
-              </ThemeProvider>
-            </QueryClientProvider>
-          </NavigationContainer>
-        </PersistGate>
-      </Provider>
-    </SafeAreaProvider>
+                routeNameRef.current = currentRouteName
+              }}>
+              <QueryClientProvider client={queryClient}>
+                <StatusBar
+                  translucent
+                  barStyle={
+                    colorScheme === 'dark' ? 'light-content' : 'dark-content'
+                  }
+                />
+                <ThemeProvider
+                  theme={colorScheme === 'dark' ? darkTheme : lightTheme}>
+                  <SiteStack />
+                </ThemeProvider>
+              </QueryClientProvider>
+            </NavigationContainer>
+          </PersistGate>
+        </Provider>
+      </SafeAreaProvider>
+    </GestureHandlerRootView>
   )
 }
 

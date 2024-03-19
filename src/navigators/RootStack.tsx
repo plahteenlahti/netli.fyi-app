@@ -28,27 +28,13 @@ export const AppLinking: PathConfigMap<RootStackParamList> = {
   }
 }
 
-export const SiteStack: FC = () => {
+export const SiteStack = () => {
   const { accentColor, primaryTextColor } = useTheme()
   const accessToken = useToken()
 
   return (
-    <Stack.Navigator
-      initialRouteName={!accessToken ? 'Authorize' : 'App'}
-      screenOptions={{
-        headerTintColor: accentColor,
-        headerTitleStyle: {
-          color: primaryTextColor
-        }
-      }}>
-      <Stack.Screen
-        options={{
-          headerShown: false,
-          presentation: 'fullScreenModal'
-        }}
-        name="Authorize"
-        component={Authorize}
-      />
+    <Stack.Navigator initialRouteName={!accessToken ? 'Authorize' : 'App'}>
+      <Stack.Screen name="Authorize" component={Authorize} />
       <Stack.Screen
         options={{
           headerShown: false
@@ -56,7 +42,6 @@ export const SiteStack: FC = () => {
         name="App"
         component={TabStack}
       />
-
       <Stack.Screen name="Account" component={Account} />
       <Stack.Screen name="Profiles" component={Profiles} />
       <Stack.Screen name="Subscription" component={Subscription} />

@@ -1,22 +1,18 @@
 import { RouteProp, StackActions } from '@react-navigation/native'
 import { NativeStackNavigationProp } from '@react-navigation/native-stack'
 import React, { FC, useState } from 'react'
-import { View } from 'react-native'
 import {
   Dimensions,
   KeyboardAvoidingView,
   Linking,
-  Platform
+  Platform,
+  SafeAreaView,
+  ScrollView,
+  TextInput,
+  TouchableOpacity,
+  View
 } from 'react-native'
 import { authorize } from 'react-native-app-auth'
-import {
-  ClipPath,
-  Defs,
-  Image,
-  Svg,
-  Text as SvgText,
-  TSpan
-} from 'react-native-svg'
 import configuration from 'react-native-ultimate-config'
 import styled from 'styled-components/native'
 import { AuthorizeButton } from '../components/AuthorizeButton'
@@ -90,152 +86,54 @@ export const Authorize: FC<Props> = ({ navigation }) => {
   }
 
   return (
-    <Container>
+    <SafeAreaView className="flex-1 items-center w-full bg-white">
       <KeyboardAvoidingView
-        behavior={Platform.OS === 'ios' ? 'padding' : 'height'}>
-        <ScrollView>
+        behavior={Platform.OS === 'ios' ? 'padding' : 'height'}
+        className="flex-1 w-full">
+        <ScrollView
+          contentContainerclassName="items-center bg-white"
+          className="w-full">
           <OnboardingScroller />
-         
-          <ButtonContainer>
+
+          <View className="my-8 px-4 flex-row max-w-xs w-full">
             <AuthorizeButton onPress={authenticateWithNetlify} />
-          </ButtonContainer>
+          </View>
 
-          <DividerContainer>
-            <Divider />
-            <DividerText>Or authorize with</DividerText>
-          </DividerContainer>
+          <View className="justify-center items-center flex-1 w-full px-5 mb-8">
+            <View className="absolute h-px bg-gray-200 w-full my-4" />
+            <Text className="bg-white text-gray-500 px-5">
+              Or authorize with
+            </Text>
+          </View>
 
-          <ORSection>
-            <InputContainer>
-              <Input
+          <View className="w-full px-4">
+            <View className="">
+              <TextInput
+                className="px-4 bg-gray-200 rounded-lg py-4"
                 onChangeText={text => setPersonalAccessToken(text)}
                 placeholder="Personal access token"
               />
-              <AuthorizeButtonSmall onPress={authenticateWithToken}>
-                <ButtonText>Authorize</ButtonText>
-              </AuthorizeButtonSmall>
-            </InputContainer>
-            <HelpText>
+              <TouchableOpacity
+                className="absolute right-0 bg-blue-500 justify-center items-center px-2 py-1 m-2 rounded-lg"
+                onPress={authenticateWithToken}>
+                <Text className="text-white">Authorize</Text>
+              </TouchableOpacity>
+            </View>
+            <Text className="mt-4 text-sm text-gray-500 text-center">
               You can create a personal access token{' '}
-              <HelpTextLink
+              <Text
+                className="text-blue-500"
                 onPress={() =>
                   Linking.openURL(
                     'https://app.netlify.com/user/applications#personal-access-tokens'
                   )
                 }>
                 here.
-              </HelpTextLink>
-            </HelpText>
-          </ORSection>
+              </Text>
+            </Text>
+          </View>
         </ScrollView>
       </KeyboardAvoidingView>
-    </Container>
+    </SafeAreaView>
   )
 }
-
-const DividerContainer = styled.View`
-  justify-content: center;
-  align-items: center;
-  flex: 1;
-  width: 100%;
-  padding: 0px 20px;
-  margin-bottom: 32px;
-`
-
-const Divider = styled.View`
-  height: 1px;
-  background-color: ${({ theme }) => theme.borderColor};
-  width: 100%;
-  margin: 16px;
-  position: absolute;
-`
-
-const DividerText = styled(Text)`
-  background-color: ${({ theme }) => theme.primaryBackground};
-  color: ${({ theme }) => theme.secondaryTextColor};
-  padding: 0px 20px;
-`
-
-const ORSection = styled.View`
-  width: 100%;
-  padding: 0px 16px;
-`
-
-const AuthorizeButtonSmall = styled.TouchableOpacity`
-  position: absolute;
-  right: 0;
-  background-color: ${({ theme }) => theme.accentColor};
-  justify-content: center;
-  align-items: center;
-  padding: 8px;
-  margin: 8px;
-  border-radius: 8px;
-`
-
-const ButtonText = styled(Text)`
-  color: white;
-`
-
-const Input = styled.TextInput`
-  padding: 16px;
-  background-color: ${({ theme }) => theme.secondaryBackground};
-  border-radius: 8px;
-  font-family: 'Inter-Medium';
-`
-
-const HelpText = styled(Text)`
-  margin-top: 16px;
-  font-size: 13px;
-  color: ${({ theme }) => theme.secondaryTextColor};
-  text-align: center;
-`
-
-const InputContainer = styled.View``
-
-const HelpTextLink = styled(Text)`
-  color: ${({ theme }) => theme.accentColor};
-`
-
-const ScrollView = styled.ScrollView.attrs(() => ({
-  contentContainerStyle: {
-    alignItems: 'center'
-  }
-}))`
-  background-color: ${({ theme }) => theme.primaryBackground};
-`
-
-const Container = styled.SafeAreaView`
-  flex: 1;
-  align-items: center;
-  width: ${width}px;
-  background-color: ${({ theme }) => theme.primaryBackground};
-`
-
-const Summary = styled(Text)`
-  margin-top: 16px;
-  text-align: center;
-  color: ${({ theme }) => theme.primaryTextColor};
-  margin-bottom: 16px;
-  line-height: 24px;
-`
-
-const IconContainer = styled.View`
-  margin-top: 50px;
-  height: 64px;
-  width: 64px;
-  overflow: hidden;
-  border-radius: 18px;
-  margin-bottom: 30px;
-`
-
-const Icon = styled.Image`
-  height: 100%;
-  width: 100%;
-`
-
-const ButtonContainer = styled.View`
-  margin: 32px 0px;
-  padding: 0px 16px;
-  flex-direction: row;
-  max-width: 400px;
-`
