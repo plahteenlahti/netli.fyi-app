@@ -57,9 +57,6 @@ jobs:
           echo revenuecat_key=${{ secrets.REVENUECAT_KEY }} >> .env
           cat .env
 
-      - name: Run rnuc
-        run: yarn env
-
       - uses: futureware-tech/simulator-action@v1
         with:
           model: 'iPhone 13 Pro'

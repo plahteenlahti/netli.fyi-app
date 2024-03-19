@@ -17,7 +17,6 @@ import { ThemeProvider } from 'styled-components/native'
 import { RootStackParamList, SiteStack } from './src/navigators/RootStack'
 import { persistor, store } from './src/store/store'
 import { darkTheme, lightTheme } from './src/styles/theme'
-import configuration from 'react-native-ultimate-config'
 import Purchases from 'react-native-purchases'
 import { GestureHandlerRootView } from 'react-native-gesture-handler'
 import { Text } from 'react-native'
@@ -43,8 +42,8 @@ const App = () => {
   const navigationRef = useRef<NavigationContainerRef<RootStackParamList>>(null)
 
   return (
-    <GestureHandlerRootView>
-      <SafeAreaProvider>
+    <SafeAreaProvider>
+      <GestureHandlerRootView style={{ flex: 1 }}>
         <Provider store={store}>
           <PersistGate loading={null} persistor={persistor}>
             <NavigationContainer
@@ -79,8 +78,8 @@ const App = () => {
             </NavigationContainer>
           </PersistGate>
         </Provider>
-      </SafeAreaProvider>
-    </GestureHandlerRootView>
+      </GestureHandlerRootView>
+    </SafeAreaProvider>
   )
 }
 

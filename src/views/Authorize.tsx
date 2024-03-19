@@ -13,7 +13,7 @@ import {
   View
 } from 'react-native'
 import { authorize } from 'react-native-app-auth'
-import configuration from 'react-native-ultimate-config'
+import Config from 'react-native-config'
 import styled from 'styled-components/native'
 import { AuthorizeButton } from '../components/AuthorizeButton'
 import { OnboardingScroller } from '../components/onboarding/OnboardingScroller'
@@ -39,9 +39,9 @@ const image = require('../assets/images/icon.png')
 const gradient = require('../assets/images/gradient.png')
 
 const config = {
-  clientId: configuration.client_id,
-  clientSecret: configuration.client_secret,
-  redirectUrl: configuration.redirect_url,
+  clientId: Config.client_id,
+  clientSecret: Config.client_secret,
+  redirectUrl: Config.redirect_url,
   usePKCE: false,
   scopes: [],
   serviceConfiguration: {
@@ -90,24 +90,20 @@ export const Authorize: FC<Props> = ({ navigation }) => {
       <KeyboardAvoidingView
         behavior={Platform.OS === 'ios' ? 'padding' : 'height'}
         className="flex-1 w-full">
-        <ScrollView
-          contentContainerclassName="items-center bg-white"
-          className="w-full">
+        <ScrollView>
           <OnboardingScroller />
 
-          <View className="my-8 px-4 flex-row max-w-xs w-full">
-            <AuthorizeButton onPress={authenticateWithNetlify} />
-          </View>
+          <AuthorizeButton onPress={authenticateWithNetlify} />
 
           <View className="justify-center items-center flex-1 w-full px-5 mb-8">
             <View className="absolute h-px bg-gray-200 w-full my-4" />
-            <Text className="bg-white text-gray-500 px-5">
+            <Text className="bg-white text-gray-500 px-5 font-display">
               Or authorize with
             </Text>
           </View>
 
           <View className="w-full px-4">
-            <View className="">
+            <View>
               <TextInput
                 className="px-4 bg-gray-200 rounded-lg py-4"
                 onChangeText={text => setPersonalAccessToken(text)}
@@ -119,6 +115,7 @@ export const Authorize: FC<Props> = ({ navigation }) => {
                 <Text className="text-white">Authorize</Text>
               </TouchableOpacity>
             </View>
+
             <Text className="mt-4 text-sm text-gray-500 text-center">
               You can create a personal access token{' '}
               <Text

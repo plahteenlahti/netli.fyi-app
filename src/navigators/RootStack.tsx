@@ -34,7 +34,14 @@ export const SiteStack = () => {
 
   return (
     <Stack.Navigator initialRouteName={!accessToken ? 'Authorize' : 'App'}>
-      <Stack.Screen name="Authorize" component={Authorize} />
+      <Stack.Screen
+        options={{
+          headerShown: false,
+          presentation: 'fullScreenModal'
+        }}
+        name="Authorize"
+        component={Authorize}
+      />
       <Stack.Screen
         options={{
           headerShown: false
@@ -42,6 +49,7 @@ export const SiteStack = () => {
         name="App"
         component={TabStack}
       />
+
       <Stack.Screen name="Account" component={Account} />
       <Stack.Screen name="Profiles" component={Profiles} />
       <Stack.Screen name="Subscription" component={Subscription} />

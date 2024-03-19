@@ -65,8 +65,7 @@ yarn-error.log
 # Temporary files created by Metro to check the health of the file watcher
 .metro-health-check*
 
-# react-native-ultimate-config
-rnuc.xcconfig
+# config files
 .env
 android/app/release.keystore.properties
 ios/authKey.json
