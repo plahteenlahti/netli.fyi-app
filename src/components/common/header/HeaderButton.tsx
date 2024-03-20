@@ -1,4 +1,3 @@
-import React from 'react'
 import styled from 'styled-components/native'
 import FontAwesome5 from 'react-native-vector-icons/FontAwesome5'
 import { Icon } from '../Icon'

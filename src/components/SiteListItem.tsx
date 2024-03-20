@@ -1,11 +1,8 @@
-import React, { FC } from 'react'
+import { Image, Text, TouchableOpacity, View } from 'react-native'
 import FontAwesome5 from 'react-native-vector-icons/FontAwesome5'
-import { TouchableOpacity } from 'react-native'
 import styled from 'styled-components/native'
 import { localizedRelativeFormat } from '../utilities/time'
 import { NoPreview } from './NoPreview'
-import { Text } from './text/Text'
-import FastImage from 'react-native-fast-image'
 
 type Props = {
   navigateToSite: () => void
@@ -13,87 +10,53 @@ type Props = {
   updated_at?: string
   custom_domain?: string
   default_domain?: string
+  framework?: string
 }
 
-export const SiteListItem: FC<Props> = ({
+export const SiteListItem = ({
   navigateToSite,
   screenshot_url,
   updated_at,
   custom_domain,
-  default_domain
-}) => {
-  return (
-    <RowContainer>
-      <TouchableOpacity onPress={navigateToSite}>
-        <Card>
-          <PreviewContainer>
-            {screenshot_url ? (
-              <Preview resizeMode="cover" source={{ uri: screenshot_url }} />
-            ) : (
-              <NoPreview />
-            )}
-          </PreviewContainer>
+  default_domain,
+  framework
+}: Props) => {
+  const lastDeploy = localizedRelativeFormat(
+    new Date(`${updated_at}`),
+    new Date()
+  )
 
-          <Column>
-            <SiteName type="body">{custom_domain || default_domain}</SiteName>
-            <Domain numberOfLines={2}>
-              {`Last deploy ${localizedRelativeFormat(
-                new Date(`${updated_at}`),
-                new Date()
-              )}`}
-            </Domain>
-          </Column>
+  return (
+    <TouchableOpacity onPress={navigateToSite}>
+      <View className="p-2 bg-gray-100 flex-row items-center">
+        <View className="h-10 w-14 overflow-hidden rounded-sm">
+          {screenshot_url ? (
+            <Image
+              className="h-full w-full overflow-hidden"
+              resizeMode="cover"
+              source={{ uri: screenshot_url }}
+            />
+          ) : (
+            <NoPreview />
+          )}
+        </View>
+
+        <View className="border-b border-gray-200 flex-row flex-1 pb-2 items-center">
+          <View className="pl-2 flex-1 ">
+            <Text className="text-sm text-gray-700 font-semibold">
+              {custom_domain || default_domain}
+            </Text>
+            <Text className="text-xs text-gray-500">
+              {`Last deploy ${lastDeploy}`}- {framework}
+            </Text>
+          </View>
           <Chevron name="chevron-right" size={15} solid />
-        </Card>
-      </TouchableOpacity>
-    </RowContainer>
+        </View>
+      </View>
+    </TouchableOpacity>
   )
 }
-
-const RowContainer = styled.View``
-
-const Card = styled.View`
-  padding: 16px;
-  background-color: ${({ theme }) => theme.secondaryBackground};
-  border-bottom-width: 1px;
-  border-bottom-color: ${({ theme }) => theme.borderColor};
-  flex-direction: row;
-  align-items: center;
-`
 
 const Chevron = styled(FontAwesome5).attrs(({ theme }) => ({
   color: theme.secondaryTextColor
 }))``
-
-const Column = styled.View`
-  padding-left: 16px;
-  flex: 1;
-`
-
-const Preview = styled(FastImage)`
-  height: 100%;
-  width: 100%;
-  border-radius: 4px;
-  overflow: hidden;
-  border-width: 1px;
-  border-color: ${({ theme }) => theme.borderColor};
-`
-
-const SiteName = styled(Text)`
-  font-size: 15px;
-  font-weight: 500;
-  margin-bottom: 8px;
-`
-
-const Domain = styled(Text)`
-  font-size: 13px;
-  color: ${({ theme }) => theme.secondaryTextColor};
-  flex: 1;
-`
-const PreviewContainer = styled.View`
-  border-radius: 8px;
-  overflow: hidden;
-  height: 45px;
-  width: 76px;
-  background-color: ${({ theme }) => theme.primaryBackground};
-`

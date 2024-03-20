@@ -7,7 +7,7 @@ import { localizedRelativeFormat } from '../utilities/time'
 import { Card } from './Card'
 import { CardTitle } from './CardTitle'
 import { NavigationRow } from './row/NavigationRow'
-import { Text } from './text/Text'
+import { Text } from 'react-native'
 
 type Props = {
   site: NetlifySite | undefined
@@ -37,19 +37,19 @@ export const SiteInformation: FC<Props> = ({ site, name }) => {
         <NavigationRow title="Domain" value={name} />
         <Row>
           <LinkIcon />
-          <Title onPress={openSite}>{name}</Title>
+          <Text onPress={openSite}>{name}</Text>
         </Row>
         <Row>
           <HistoryIcon />
-          {site?.created_at && <Title>{`Site created ${createdAt}`}</Title>}
+          {site?.created_at && <Text>{`Site created ${createdAt}`}</Text>}
         </Row>
         <Row>
           <ClockIcon />
-          {site?.updated_at && <Title>{`Last publish ${updatedAt}`}</Title>}
+          {site?.updated_at && <Text>{`Last publish ${updatedAt}`}</Text>}
         </Row>
         <Row last>
           <ToolsIcon />
-          <Title onPress={openManage}>Manage site</Title>
+          <Text onPress={openManage}>Manage site</Text>
         </Row>
       </Card>
     </>
@@ -99,17 +99,4 @@ const ToolsIcon = styled(FontAwesome5).attrs(({ theme }) => ({
   color: theme.secondaryTextColor
 }))`
   margin-right: 8px;
-`
-
-const Title = styled(Text)`
-  color: ${({ theme }) => theme.primaryTextColor};
-`
-
-const Link = styled(Text)`
-  color: ${({ theme }) => theme.accentColor};
-  text-transform: capitalize;
-`
-
-const SummaryText = styled(Text)`
-  line-height: 20px;
 `

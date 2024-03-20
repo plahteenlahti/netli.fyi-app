@@ -1,4 +1,3 @@
-import React from 'react'
 import { Switch, SwitchProps } from 'react-native'
 import styled from 'styled-components/native'
 import { Text } from '../text/Text'

@@ -7,5 +7,9 @@
 		<string>applinks:lahteenlahti.com</string>
 		<string>applinks:netli.fyi</string>
 	</array>
+	<key>keychain-access-groups</key>
+	<array>
+		<string>$(AppIdentifierPrefix)app.nyxo.netli.fyi</string>
+	</array>
 </dict>
 </plist>

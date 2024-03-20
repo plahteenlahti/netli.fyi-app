@@ -44,13 +44,15 @@ export const SitesStack: FC = () => {
   )
 
   return (
-    <Stack.Navigator
-      screenOptions={{
-        headerShown: false
-      }}>
+    <Stack.Navigator>
       <Stack.Screen
         options={{
-          title: 'Netli.fyi'
+          headerLargeTitle: true,
+          title: 'Netli.fyi',
+          headerBlurEffect: 'light',
+          headerStyle: {
+            backgroundColor: 'transparent'
+          }
         }}
         name="SiteList"
         component={Sites}

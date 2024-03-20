@@ -3,6 +3,7 @@ import FontAwesome5 from 'react-native-vector-icons/FontAwesome5'
 import styled from 'styled-components/native'
 import { Build } from '../../typings/netlify'
 import { Text } from '../text/Text'
+import { View } from 'react-native'
 
 type Props = {
   build: Build
@@ -12,30 +13,22 @@ export const BuildItem: FC<Props> = ({ build }) => {
   const domain = build.custom_domain ? build.custom_domain : build.subdomain
 
   return (
-    <Container>
+    <View className="bg-white px-1 py-2 border-b border-b-gray-200 flex-row">
       {build.state === 'done' ? <Success /> : <Failure />}
       <Details>
-        <Title>
+        <Text className="text-gray-800 text-xs mb-1">
           <Bold>{domain}: </Bold>
           <Normal>{build.context}</Normal>
-        </Title>
+        </Text>
         <Description>
           {!!build.committer && <Committer>{build.committer}: </Committer>}
 
           {build.title ?? 'No deploy message'}
         </Description>
       </Details>
-    </Container>
+    </View>
   )
 }
-
-const Container = styled.View`
-  background: ${({ theme }) => theme.secondaryBackground};
-  padding: 8px 0px;
-  border-bottom-width: 1px;
-  border-bottom-color: ${({ theme }) => theme.borderColor};
-  flex-direction: row;
-`
 
 const Title = styled(Text)`
   color: ${({ theme }) => theme.primaryTextColor};

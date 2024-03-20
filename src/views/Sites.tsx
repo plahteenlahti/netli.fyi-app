@@ -1,33 +1,11 @@
 import { NativeStackScreenProps } from '@react-navigation/native-stack'
 import React, { useLayoutEffect, useState } from 'react'
 import { ListRenderItem, RefreshControl } from 'react-native'
-import Animated, { Layout } from 'react-native-reanimated'
-import styled from 'styled-components/native'
+import Animated, { FadeInLeft, FadeOutRight } from 'react-native-reanimated'
 import { SiteListItem } from '../components/SiteListItem'
 import { useSites } from '../hooks/site'
 import { SiteNavigation } from '../navigators/SitesStack'
 import { NetlifySite } from '../typings/netlify'
-
-type PlaceholderItem = {
-  key: string
-  id: string
-  custom_domain: 'domain'
-  default_domain: 'default'
-  screenshot_url: undefined
-  published_deploy: undefined
-}
-
-const placeHolderItems: Array<PlaceholderItem> = Array.from(
-  { length: 10 },
-  (_v, i) => i
-).map((_, index) => ({
-  key: `${index}`,
-  id: `${index}`,
-  custom_domain: 'domain',
-  default_domain: 'default',
-  screenshot_url: undefined,
-  published_deploy: undefined
-}))
 
 export const Sites = ({
   navigation
@@ -44,18 +22,13 @@ export const Sites = ({
     })
   }, [navigation])
 
-  const renderItem: ListRenderItem<NetlifySite | PlaceholderItem> = ({
-    item
-  }) => {
+  const renderItem: ListRenderItem<NetlifySite> = ({ item }) => {
     const navigateToSite = () => {
       navigation.navigate('Site', {
         siteID: `${item.id}`,
         name: item.custom_domain ?? `${item.default_domain}`,
         url: item.custom_domain ?? `${item.default_domain}`
       })
-    }
-    if (sites.isLoading) {
-      return <></>
     }
 
     return (
@@ -66,52 +39,33 @@ export const Sites = ({
         custom_domain={item.custom_domain}
         default_domain={item.default_domain}
         updated_at={item?.published_deploy?.published_at}
+        framework={item?.published_deploy?.framework}
       />
     )
   }
 
+  console.log(JSON.stringify(sites.data, null, 2))
+
+  const data = sites?.data?.filter(site => {
+    let pattern = '.*' + search?.toLowerCase().split('').join('.*') + '.*'
+    const re = new RegExp(pattern)
+    return re.test(`${site?.name}`.toLowerCase())
+  })
+
   return (
-    <Container>
-      <List
-        layout={Layout.springify()}
-        contentInsetAdjustmentBehavior="automatic"
-        scrollToOverflowEnabled
-        refreshControl={
-          <RefreshControl
-            refreshing={sites.isRefetching}
-            onRefresh={sites.refetch}
-          />
-        }
-        data={
-          sites.isLoading && !!sites.data
-            ? placeHolderItems
-            : sites?.data?.filter(site => {
-                let pattern =
-                  '.*' + search?.toLowerCase().split('').join('.*') + '.*'
-                const re = new RegExp(pattern)
-                return re.test(`${site?.name}`.toLowerCase())
-              })
-        }
-        renderItem={renderItem}
-      />
-    </Container>
+    <Animated.FlatList
+      className="px-2"
+      contentInsetAdjustmentBehavior="automatic"
+      entering={FadeInLeft}
+      exiting={FadeOutRight}
+      refreshControl={
+        <RefreshControl
+          refreshing={sites.isRefetching}
+          onRefresh={sites.refetch}
+        />
+      }
+      data={data}
+      renderItem={renderItem}
+    />
   )
 }
-
-const List = styled(
-  Animated.FlatList as new () => Animated.FlatList<
-    NetlifySite | PlaceholderItem
-  >
-).attrs(() => ({
-  contentContainerStyle: {
-    borderRadius: 8,
-    overflow: 'hidden'
-  }
-}))`
-  padding: 16px;
-  border-radius: 8px;
-`
-
-const Container = styled.View`
-  flex: 1;
-`

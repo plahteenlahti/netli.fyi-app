@@ -1,4 +1,3 @@
-import React from 'react'
 import { TouchableOpacity, TouchableOpacityProps } from 'react-native'
 import { Text } from '../text/Text'
 import { RowContainer, RowContainerProps } from './RowContainer'

@@ -86,6 +86,7 @@ export type NetlifySite = {
     locked: boolean
     review_url: string
     site_capabilities: {}
+    framework?: string
   }
 
   ssl?: boolean

@@ -1,4 +1,3 @@
-import React from 'react'
 import { StyleProp, TextProps, TextStyle, Text as RNText } from 'react-native'
 import styled, { css } from 'styled-components/native'
 import { Color } from '../../styles/theme'

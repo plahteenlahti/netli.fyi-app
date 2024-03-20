@@ -1,34 +1,27 @@
 import { BottomTabScreenProps } from '@react-navigation/bottom-tabs'
-import {
-  CompositeScreenProps,
-  RouteProp,
-  StackActions
-} from '@react-navigation/native'
-import {
-  NativeStackNavigationProp,
-  NativeStackScreenProps
-} from '@react-navigation/native-stack'
-import React, { FC, useEffect } from 'react'
+import { CompositeScreenProps, StackActions } from '@react-navigation/native'
+import { NativeStackScreenProps } from '@react-navigation/native-stack'
+import React, { useEffect } from 'react'
 import { Alert, Linking, RefreshControl } from 'react-native'
 import styled from 'styled-components/native'
 import { AccountCard } from '../components/AccountCard'
 import { Card } from '../components/Card'
 import { CardTitle } from '../components/CardTitle'
-import { ProfileSubscriptionPrompt } from '../components/iap/ProfileSubscriptionPrompt'
 import { IconRow } from '../components/IconRow'
+import { ProfileSubscriptionPrompt } from '../components/iap/ProfileSubscriptionPrompt'
 import { ButtonRow } from '../components/row/ButtonRow'
 import { InfoRow } from '../components/row/InfoRow'
-import { NavigationRow } from '../components/row/NavigationRow'
-import { ToggleRow } from '../components/row/ToggleRow'
 import { Text } from '../components/text/Text'
 import { useAccounts } from '../hooks/account'
 import { useUser } from '../hooks/user'
 import { RootStackParamList } from '../navigators/RootStack'
 import { TabParamList } from '../navigators/TabStack'
 import { removeAllAccounts } from '../store/reducers/accounts'
-import { useAppDispatch, useAppSelector } from '../store/store'
+import { useAppDispatch } from '../store/store'
 import { sendEmail } from '../utilities/mail'
 import { localizedRelativeFormat } from '../utilities/time'
+import { useKeychain } from '../hooks/keychain'
+import Config from 'react-native-config'
 
 type Props = CompositeScreenProps<
   NativeStackScreenProps<RootStackParamList>,
@@ -39,7 +32,7 @@ export const Profile = ({ navigation }: Props) => {
   const dispatch = useAppDispatch()
   const user = useUser()
   const accounts = useAccounts()
-
+  const { setAuthToken, getAuthToken } = useKeychain()
   useEffect(() => {
     const unsubscribe = navigation.addListener('tabLongPress', e => {
       navigation.navigate('DeveloperMenu')
@@ -52,7 +45,12 @@ export const Profile = ({ navigation }: Props) => {
     navigation.navigate('Profiles')
   }
 
-  console.log(accounts)
+  useEffect(() => {
+    const getaaa = async () => {
+      console.log(await getAuthToken())
+    }
+    getaaa()
+  }, [])
 
   const logout = () => {
     Alert.alert(
@@ -112,6 +110,10 @@ export const Profile = ({ navigation }: Props) => {
             title="Log out"
             type="destructive"
             onPress={logout}
+          />
+          <ButtonRow
+            title="Set token"
+            onPress={() => setAuthToken(Config.test_token)}
           />
         </Card>
 

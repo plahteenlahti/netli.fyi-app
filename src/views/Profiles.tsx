@@ -1,4 +1,3 @@
-import React from 'react'
 import { VContainer } from '../components/layout/Container'
 import { Layout } from '../components/layout/Layout'
 import { Text } from '../components/text/Text'

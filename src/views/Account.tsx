@@ -1,6 +1,6 @@
 import { RouteProp } from '@react-navigation/native'
 import { NativeStackNavigationProp } from '@react-navigation/native-stack'
-import React from 'react'
+
 import { Card } from '../components/Card'
 import { Layout } from '../components/layout/Layout'
 import { InfoRow } from '../components/row/InfoRow'

@@ -1,5 +1,5 @@
 import { NativeStackScreenProps } from '@react-navigation/native-stack'
-import React from 'react'
+
 import { FlatList, ListRenderItem } from 'react-native'
 import styled from 'styled-components/native'
 import { DeployItem } from '../components/DeployItem'

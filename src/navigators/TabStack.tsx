@@ -1,8 +1,9 @@
-import React from 'react'
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs'
 import { PathConfigMap } from '@react-navigation/native'
+
+import { Image } from 'react-native'
 import FontAwesome5 from 'react-native-vector-icons/FontAwesome5'
-import styled, { useTheme } from 'styled-components/native'
+import { useTheme } from 'styled-components/native'
 import { useUser } from '../hooks/user'
 import { Profile } from '../views/Profile'
 import { BuildsStack } from './BuildsStack'
@@ -26,7 +27,8 @@ export const TabStack = () => {
   const user = useUser()
 
   const profilePicture = () => (
-    <ProfilePicture
+    <Image
+      className="h-6 w-6 rounded-full"
       borderRadius={130}
       resizeMode="contain"
       source={{ uri: user.data?.avatar_url }}
@@ -68,9 +70,3 @@ export const TabStack = () => {
     </Tab.Navigator>
   )
 }
-
-const ProfilePicture = styled.Image`
-  height: 20px;
-  width: 20px;
-  border-radius: 130px;
-`

@@ -1,6 +1,6 @@
 import { useNavigation } from '@react-navigation/native'
 import { StackNavigationProp } from '@react-navigation/stack'
-import React from 'react'
+
 import { useCurrentOfferings } from '../../hooks/iap/subscription'
 
 import { RootStackParamList } from '../../navigators/RootStack'

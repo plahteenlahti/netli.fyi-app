@@ -1,7 +1,6 @@
-import React, { FC } from 'react'
-import styled from 'styled-components/native'
+import { Text, View } from 'react-native'
 import FontAwesome5 from 'react-native-vector-icons/FontAwesome5'
-import { Text } from './text/Text'
+import styled from 'styled-components/native'
 
 type Props = {
   icon: string
@@ -9,18 +8,18 @@ type Props = {
   title: string
 }
 
-export const CardTitle: FC<Props> = ({ icon, title, extra }) => {
+export const CardTitle = ({ icon, title, extra }: Props) => {
   return (
-    <Container>
-      <Row>
+    <View className="mb-2 mt-4 px-4">
+      <View className="flex-row items-center">
         <ThemedIcon name={icon} size={12} solid />
-        <Title fontFamily="Inter-Medium" type="title-3">
+        <Text className="text-xs text-gray-600 font-medium uppercase ml-2">
           {title}
-        </Title>
-      </Row>
+        </Text>
+      </View>
 
       {extra && <CardDetail>{extra}</CardDetail>}
-    </Container>
+    </View>
   )
 }
 
