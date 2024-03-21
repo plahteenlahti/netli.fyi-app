@@ -1,8 +1,8 @@
 import React, { FC } from 'react'
 import styled from 'styled-components/native'
 import words from 'lodash/words'
-import { Linking } from 'react-native'
-import { Text } from './text/Text'
+import { Linking, TouchableOpacity } from 'react-native'
+import { Text } from 'react-native'
 
 type Props = {
   title: string
@@ -62,9 +62,11 @@ export const DataField: FC<Props> = ({ title, value }) => {
       return (
         <Row>
           <Key>{words(title).join(' ')}</Key>
-          <Link onPress={handleLinkPress}>
-            <Value adjustsFontSizeToFit>{fiedValue}</Value>
-          </Link>
+          <TouchableOpacity className="flex-1" onPress={handleLinkPress}>
+            <Text className="text-xs text-right" adjustsFontSizeToFit>
+              {fiedValue}
+            </Text>
+          </TouchableOpacity>
         </Row>
       )
     default:
@@ -80,10 +82,6 @@ const Value = styled(Text)`
   text-align: right;
   flex: 1;
   color: ${({ theme }) => theme.primaryTextColor};
-`
-
-const Link = styled.TouchableOpacity`
-  flex: 1;
 `
 
 const Row = styled.View`

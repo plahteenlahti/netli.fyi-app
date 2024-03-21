@@ -6,8 +6,9 @@ import FontAwesome5 from 'react-native-vector-icons/FontAwesome5'
 import { useTheme } from 'styled-components/native'
 import { useUser } from '../hooks/user'
 import { Profile } from '../views/Profile'
+import { Sites } from '../views/Sites'
 import { BuildsStack } from './BuildsStack'
-import { siteNavigationLinkingConfig, SitesStack } from './SitesStack'
+import { siteNavigationLinkingConfig } from './SitesStack'
 
 export type TabParamList = {
   Sites: undefined
@@ -43,13 +44,18 @@ export const TabStack = () => {
       }}>
       <Tab.Screen
         options={{
-          headerShown: false,
+          headerLargeTitle: true,
+          title: 'Netli.fyi',
+          headerBlurEffect: 'light',
+          headerStyle: {
+            backgroundColor: 'transparent'
+          },
           tabBarIcon: ({ color }) => (
             <FontAwesome5 name="list" color={color} size={15} />
           )
         }}
         name="Sites"
-        component={SitesStack}
+        component={Sites}
       />
       <Tab.Screen
         name="Builds"

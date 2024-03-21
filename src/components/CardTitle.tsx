@@ -18,32 +18,11 @@ export const CardTitle = ({ icon, title, extra }: Props) => {
         </Text>
       </View>
 
-      {extra && <CardDetail>{extra}</CardDetail>}
+      {extra && <Text className="font-xs text-gray-600">{extra}</Text>}
     </View>
   )
 }
 
-const Container = styled.View`
-  padding: 0px 16px;
-  margin: 16px 0px;
-`
-
-const Title = styled(Text)`
-  font-size: 13px;
-  text-transform: uppercase;
-  margin: 8px 8px;
-`
 const ThemedIcon = styled(FontAwesome5).attrs(({ theme }) => ({
   color: theme.secondaryTextColor
 }))``
-
-const CardDetail = styled(Text)`
-  font-size: 12px;
-  line-height: 16px;
-  color: ${({ theme }) => theme.secondaryTextColor};
-`
-
-const Row = styled.View`
-  flex-direction: row;
-  align-items: center;
-`

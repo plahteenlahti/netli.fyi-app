@@ -2,38 +2,27 @@ import {
   Duration,
   format,
   formatDuration,
+  FormatDurationOptions,
+  FormatOptions,
   formatRelative,
-  Locale
+  FormatRelativeOptions
 } from 'date-fns'
 import isDate from 'lodash/isDate'
 
 export const localizedFormat = (
   date: Date | number,
   f: string,
-  options?: {
-    locale?: Locale
-    weekStartsOn?: 0 | 1 | 2 | 3 | 4 | 5 | 6
-    firstWeekContainsDate?: number
-    useAdditionalWeekYearTokens?: boolean
-    useAdditionalDayOfYearTokens?: boolean
-  }
+  options?: FormatOptions
 ): string => {
   if (!isDate(date)) {
     return '-'
   }
-  return format(date, f, {
-    ...options
-  })
+  return format(date, f, options)
 }
 
 export const localizedDuration = (
   duration: Duration,
-  options?: {
-    format?: string[]
-    zero?: boolean
-    delimiter?: string
-    locale?: Locale
-  }
+  options?: FormatDurationOptions
 ): string => {
   return formatDuration(duration, {
     ...options
@@ -43,15 +32,10 @@ export const localizedDuration = (
 export const localizedRelativeFormat = (
   date: Date | number,
   baseDate: Date | number,
-  options?: {
-    locale?: Locale
-    weekStartsOn?: 0 | 1 | 2 | 3 | 4 | 5 | 6
-  }
+  options?: FormatRelativeOptions
 ) => {
   if (!isDate(date)) {
     return '-'
   }
-  return formatRelative(date, baseDate, {
-    ...options
-  })
+  return formatRelative(date, baseDate, options)
 }

@@ -1,15 +1,10 @@
-import { RouteProp } from '@react-navigation/native'
-import {
-  NativeStackNavigationProp,
-  NativeStackScreenProps
-} from '@react-navigation/native-stack'
-import React, { FC, useEffect, useState } from 'react'
-import { Platform, RefreshControl } from 'react-native'
+import { NativeStackScreenProps } from '@react-navigation/native-stack'
+import React from 'react'
+import { Linking, Platform, RefreshControl, Text, View } from 'react-native'
 import { SafeAreaView } from 'react-native-safe-area-context'
 import styled from 'styled-components/native'
 import { Card } from '../components/Card'
 import { DataField } from '../components/DataField'
-import { Text } from '../components/text/Text'
 import { useDeploy } from '../hooks/deploy'
 import { SiteNavigation } from '../navigators/SitesStack'
 import { Deploy as TypeDeploy } from '../typings/netlify.d'
@@ -20,20 +15,52 @@ const makeRow = (key: Key, value: unknown) => {
   return <DataField key={key} title={key as string} value={value} />
 }
 
+type MarkdownSegment = {
+  content: string
+  link?: string
+}
+
+function extractContentAndLinks(markdown?: string): MarkdownSegment[] {
+  const regex = /\[([^\]]+)\]\((https?:\/\/[^\s)]+)\)/g
+  let lastIndex = 0
+  let match
+  const segments: MarkdownSegment[] = []
+
+  if (!markdown) {
+    return segments
+  }
+
+  while ((match = regex.exec(markdown)) !== null) {
+    if (match.index > lastIndex) {
+      const contentSegment: MarkdownSegment = {
+        content: markdown.substring(lastIndex, match.index)
+      }
+      segments.push(contentSegment)
+    }
+    const linkSegment: MarkdownSegment = {
+      content: match[1],
+      link: match[2]
+    }
+    segments.push(linkSegment)
+    lastIndex = regex.lastIndex
+  }
+
+  if (lastIndex < markdown.length) {
+    const finalContentSegment: MarkdownSegment = {
+      content: markdown.substring(lastIndex)
+    }
+    segments.push(finalContentSegment)
+  }
+
+  return segments
+}
+
 export const Deploy = ({
   route: {
     params: { buildID }
   }
 }: NativeStackScreenProps<SiteNavigation, 'Deploy'>) => {
-  const [init, setInit] = useState(false)
-
-  const { data, isLoading, refetch, isSuccess, isError } = useDeploy(buildID)
-
-  useEffect(() => {
-    if (!init && (isSuccess || isError)) {
-      setInit(true)
-    }
-  }, [isLoading, init, isSuccess, isError])
+  const { data, isRefetching, refetch } = useDeploy(buildID)
 
   return (
     <Container
@@ -44,19 +71,37 @@ export const Deploy = ({
         contentInsetAdjustmentBehavior="automatic"
         scrollToOverflowEnabled
         refreshControl={
-          <RefreshControl
-            refreshing={init ? isLoading : false}
-            onRefresh={refetch}
-          />
+          <RefreshControl refreshing={isRefetching} onRefresh={refetch} />
         }>
-        <CardTitle type="title-3">Deploy summary</CardTitle>
+        <CardTitle>Deploy summary</CardTitle>
         <Summary>
-          {data?.summary?.messages?.map(message => (
-            <Row key={message.title}>
-              <Title>{message.title}</Title>
-              <Description>{message.description}</Description>
-            </Row>
-          ))}
+          {data?.summary?.messages?.map(message => {
+            const links = extractContentAndLinks(message.description)
+            return (
+              <View
+                className="border-b border-b-gray-200 py-2"
+                key={message.title}>
+                <Text className="font-semibold text-gray-800 text-sm">
+                  {message.title}
+                </Text>
+                <Text className="text-sm">
+                  {links.map((segment, index) => {
+                    if (segment.link) {
+                      return (
+                        <Text
+                          className="text-blue-500 underline"
+                          onPress={() => Linking.openURL(segment.link)}
+                          key={index}>
+                          {segment.content}
+                        </Text>
+                      )
+                    }
+                    return segment.content
+                  })}
+                </Text>
+              </View>
+            )
+          })}
           {data?.summary?.status === 'unavailable' ? (
             <Row>
               <Title>Error in deployment</Title>

@@ -1,8 +1,8 @@
-import React, { FC } from 'react'
+import React from 'react'
+import { Text, TouchableOpacity } from 'react-native'
 import FontAwesome5 from 'react-native-vector-icons/FontAwesome5'
-import styled, { css } from 'styled-components/native'
+import styled from 'styled-components/native'
 import { Hook } from '../../typings/netlify.d'
-import { Text } from '../text/Text'
 
 type Props = {
   last: boolean
@@ -10,9 +10,12 @@ type Props = {
   navigate: () => void
 }
 
-export const HookItem: FC<Props> = ({ last, hook, navigate }) => {
+export const HookItem = ({ last, hook, navigate }: Props) => {
   return (
-    <Container last={last} onPress={navigate} key={hook?.id}>
+    <TouchableOpacity
+      className="py-2 flex-row items-center justify-between"
+      onPress={navigate}
+      key={hook?.id}>
       <IconContainer>
         {!hook?.success ? <Failure /> : <Success />}
       </IconContainer>
@@ -20,30 +23,16 @@ export const HookItem: FC<Props> = ({ last, hook, navigate }) => {
         <DeployText numberOfLines={1} lineBreakMode="clip">
           <Type>{hook.type}: </Type>
         </DeployText>
+        <Text>{hook.actor}</Text>
       </Column>
       <Chevron name="chevron-right" size={15} solid />
-    </Container>
+    </TouchableOpacity>
   )
 }
 
 type ItemProps = {
   last: boolean
 }
-
-const Container = styled.TouchableOpacity<ItemProps>`
-  ${({ last }) =>
-    last
-      ? css``
-      : css`
-          border-bottom-width: 1px;
-          border-bottom-color: ${({ theme }) => theme.borderColor};
-        `}
-
-  padding: 8px 0px;
-  flex-direction: row;
-  align-items: center;
-  justify-content: space-between;
-`
 
 const DeployText = styled(Text)`
   padding-right: 16px;

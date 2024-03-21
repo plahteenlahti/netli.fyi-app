@@ -1,6 +1,7 @@
 {
   "extends": "@react-native/typescript-config/tsconfig.json",
   "compilerOptions": {
+    "noUnusedLocals": true,
     "skipLibCheck": true,
     "plugins": [
       {
