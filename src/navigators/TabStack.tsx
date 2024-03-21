@@ -9,6 +9,7 @@ import { Profile } from '../views/Profile'
 import { Sites } from '../views/Sites'
 import { BuildsStack } from './BuildsStack'
 import { siteNavigationLinkingConfig } from './SitesStack'
+import { Builds } from '../views/Builds'
 
 export type TabParamList = {
   Sites: undefined
@@ -59,7 +60,7 @@ export const TabStack = () => {
       />
       <Tab.Screen
         name="Builds"
-        component={BuildsStack}
+        component={Builds}
         options={{
           tabBarIcon: ({ color }) => (
             <FontAwesome5 name="hammer" color={color} size={15} />

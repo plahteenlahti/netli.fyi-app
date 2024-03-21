@@ -127,6 +127,15 @@ export const SiteStack = () => {
       />
 
       <Stack.Screen
+        name="Build"
+        component={Deploy}
+        options={({ route }) => ({
+          stackAnimation: 'slide_from_right',
+          title: route.params.name
+        })}
+      />
+
+      <Stack.Screen
         name="DeveloperMenu"
         options={{ presentation: 'modal' }}
         component={DeveloperMenu}
