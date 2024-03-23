@@ -21,17 +21,15 @@ export const HookItem = ({ last, hook, navigate }: Props) => {
       </IconContainer>
       <Column>
         <DeployText numberOfLines={1} lineBreakMode="clip">
-          <Type>{hook.type}: </Type>
+          <Type>
+            {hook.type}: {hook.actor}
+          </Type>
         </DeployText>
         <Text>{hook.actor}</Text>
       </Column>
       <Chevron name="chevron-right" size={15} solid />
     </TouchableOpacity>
   )
-}
-
-type ItemProps = {
-  last: boolean
 }
 
 const DeployText = styled(Text)`

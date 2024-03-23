@@ -31,7 +31,7 @@ export const localizedDuration = (
 
 export const localizedRelativeFormat = (
   date: Date | number,
-  baseDate: Date | number,
+  baseDate: Date | number = new Date(),
   options?: FormatRelativeOptions
 ) => {
   if (!isDate(date)) {

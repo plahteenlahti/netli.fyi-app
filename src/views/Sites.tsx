@@ -44,7 +44,7 @@ export const Sites = ({
     )
   }
 
-  console.log(JSON.stringify(sites.data, null, 2))
+  // console.log(JSON.stringify(sites.data, null, 2))
 
   const data = sites?.data?.filter(site => {
     let pattern = '.*' + search?.toLowerCase().split('').join('.*') + '.*'

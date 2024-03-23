@@ -43,7 +43,7 @@ export const AppLinking: PathConfigMap<RootStackParamList> = {
   }
 }
 
-export const SiteStack = () => {
+export const RootStack = () => {
   const accessToken = useToken()
 
   const openSite = (url: string) => {

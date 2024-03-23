@@ -2,11 +2,21 @@ import React, { FC } from 'react'
 import FontAwesome5 from 'react-native-vector-icons/FontAwesome5'
 import styled from 'styled-components/native'
 import { Build } from '../../typings/netlify'
-import { Text } from '../text/Text'
-import { View } from 'react-native'
+import { Text, View } from 'react-native'
+import { localizedFormat, localizedRelativeFormat } from '../../utilities/time'
+import { formatDuration, intervalToDuration } from 'date-fns'
 
 type Props = {
   build: Build
+}
+
+const buildTimeToMinutes = (buildTime: number) => {
+  const duration = intervalToDuration({ start: 0, end: buildTime * 1000 })
+
+  const formatted = formatDuration(duration, {
+    format: ['minutes', 'seconds']
+  })
+  return formatted
 }
 
 export const BuildItem: FC<Props> = ({ build }) => {
@@ -17,37 +27,25 @@ export const BuildItem: FC<Props> = ({ build }) => {
       {build.state === 'done' ? <Success /> : <Failure />}
       <Details>
         <Text className="text-gray-800 text-xs mb-1">
-          <Bold>{domain}: </Bold>
-          <Normal>{build.context}</Normal>
+          <Text>{domain}: </Text>
+          <Text>{build.context}</Text>
         </Text>
-        <Description>
-          {!!build.committer && <Committer>{build.committer}: </Committer>}
-
+        <Text className="text-xs text-gray-600">
+          Deployed in {buildTimeToMinutes(build.deploy_time)}
+        </Text>
+        <Text
+          className="text-xs text-gray-600"
+          ellipsizeMode="tail"
+          numberOfLines={1}>
+          {!!build.committer && (
+            <Text className="text-blue-500">{build.committer}: </Text>
+          )}
           {build.title ?? 'No deploy message'}
-        </Description>
+        </Text>
       </Details>
     </View>
   )
 }
-
-const Title = styled(Text)`
-  color: ${({ theme }) => theme.primaryTextColor};
-  font-size: 14px;
-  margin-bottom: 4px;
-`
-
-const Bold = styled(Text)`
-  font-weight: bold;
-`
-
-const Normal = styled(Text)`
-  font-weight: 400;
-`
-
-const Description = styled(Text)`
-  color: ${({ theme }) => theme.secondaryTextColor};
-  font-size: 12px;
-`
 
 const Committer = styled(Text)`
   font-size: 12px;

@@ -104,7 +104,9 @@ export type Hook = {
   user_id: string
   type: string
   event: string
-  data: unknown
+  data: {
+    email?: string
+  }
   success: boolean
   created_at: string
   updated_at: string

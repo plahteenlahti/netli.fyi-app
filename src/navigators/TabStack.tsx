@@ -1,15 +1,15 @@
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs'
 import { PathConfigMap } from '@react-navigation/native'
 
-import { Image } from 'react-native'
+import { Image, StyleSheet } from 'react-native'
 import FontAwesome5 from 'react-native-vector-icons/FontAwesome5'
 import { useTheme } from 'styled-components/native'
 import { useUser } from '../hooks/user'
 import { Profile } from '../views/Profile'
 import { Sites } from '../views/Sites'
-import { BuildsStack } from './BuildsStack'
-import { siteNavigationLinkingConfig } from './SitesStack'
+
 import { Builds } from '../views/Builds'
+import { BlurView } from '@react-native-community/blur'
 
 export type TabParamList = {
   Sites: undefined
@@ -18,7 +18,7 @@ export type TabParamList = {
 }
 export const tabNavigatorLinkingConfig: PathConfigMap<TabParamList> = {
   Sites: {
-    screens: siteNavigationLinkingConfig
+    screens: undefined
   }
 }
 
@@ -41,13 +41,23 @@ export const TabStack = () => {
     <Tab.Navigator
       screenOptions={{
         tabBarActiveTintColor: theme.accentColor,
-        tabBarInactiveTintColor: theme.secondaryTextColor
+        tabBarInactiveTintColor: theme.secondaryTextColor,
+        tabBarStyle: {
+          borderTopColor: 'transparent'
+        },
+        tabBarBackground: () => (
+          <BlurView
+            blurAmount={1}
+            blurType="prominent"
+            style={{
+              ...StyleSheet.absoluteFillObject
+            }}
+          />
+        )
       }}>
       <Tab.Screen
         options={{
-          headerLargeTitle: true,
           title: 'Netli.fyi',
-          headerBlurEffect: 'light',
           headerStyle: {
             backgroundColor: 'transparent'
           },

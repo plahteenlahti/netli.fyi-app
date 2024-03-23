@@ -11,6 +11,7 @@ type Props = {
 }
 
 export const BuildSettings: FC<Props> = ({ site }) => {
+  // console.log(JSON.stringify(site?.build_settings, undefined, 2))
   return (
     <>
       <CardTitle icon="info-circle" title="Build settings" />
@@ -21,7 +22,7 @@ export const BuildSettings: FC<Props> = ({ site }) => {
         </Row>
         <Row>
           <Icon name="terminal" />
-          <Title>{site?.build_settings?.base_rel_dir}</Title>
+          <Title>{site?.build_settings?.dir}</Title>
         </Row>
         <Row last>
           <Icon name="server" />

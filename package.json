@@ -21,6 +21,7 @@
     "url": "git+https://github.com/plahteenlahti/netli.fyi-app.git"
   },
   "dependencies": {
+    "@react-native-community/blur": "^4.4.0",
     "@react-navigation/bottom-tabs": "^6.5.17",
     "@react-navigation/native": "^6.1.15",
     "@react-navigation/native-stack": "^6.9.23",
