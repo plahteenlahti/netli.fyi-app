@@ -1,13 +1,12 @@
 import { useNavigation } from '@react-navigation/native'
 import { NativeStackNavigationProp } from '@react-navigation/native-stack'
 import React, { FC } from 'react'
-import styled from 'styled-components/native'
+import { Text, TouchableOpacity, View } from 'react-native'
 import { SiteNavigation } from '../navigators/RootStack'
 import { Deploy } from '../typings/netlify.d'
 import { Card } from './Card'
 import { CardTitle } from './CardTitle'
 import { DeployItem } from './DeployItem'
-import { Text } from './text/Text'
 
 type Props = {
   deploys?: Array<Deploy>
@@ -51,28 +50,17 @@ export const DeploysPreview: FC<Props> = ({ deploys, siteID, siteName }) => {
           )
         })}
         {deploys && deploys?.length > 5 ? (
-          <Container>
-            <ShowMoreButton onPress={goToDeploys}>
-              <ButtonText>Show more</ButtonText>
-            </ShowMoreButton>
-          </Container>
+          <View>
+            <TouchableOpacity
+              className="justify-center items-center p-4"
+              onPress={goToDeploys}>
+              <Text className="text-center text-blue-500 text-sm font-semibold">
+                Show more
+              </Text>
+            </TouchableOpacity>
+          </View>
         ) : null}
       </Card>
     </>
   )
 }
-
-const Container = styled.View``
-
-const ShowMoreButton = styled.TouchableOpacity`
-  justify-content: center;
-  align-items: center;
-  padding: 16px;
-`
-
-const ButtonText = styled(Text)`
-  text-align: center;
-  color: ${({ theme }) => theme.accentColor};
-  font-size: 13px;
-  font-weight: bold;
-`
