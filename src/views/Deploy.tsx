@@ -6,8 +6,8 @@ import styled from 'styled-components/native'
 import { Card } from '../components/Card'
 import { DataField } from '../components/DataField'
 import { useDeploy } from '../hooks/deploy'
-import { SiteNavigation } from '../navigators/SitesStack'
 import { Deploy as TypeDeploy } from '../typings/netlify.d'
+import { RootStackParamList } from '../navigators/RootStack'
 
 type Key = keyof TypeDeploy
 
@@ -59,7 +59,7 @@ export const Deploy = ({
   route: {
     params: { buildID }
   }
-}: NativeStackScreenProps<SiteNavigation, 'Deploy'>) => {
+}: NativeStackScreenProps<RootStackParamList, 'Deploy'>) => {
   const { data, isRefetching, refetch } = useDeploy(buildID)
 
   return (

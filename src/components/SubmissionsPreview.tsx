@@ -6,7 +6,7 @@ import { SubmissionItem } from './SubmissionItem'
 import { useNavigation } from '@react-navigation/native'
 import { NativeStackNavigationProp } from '@react-navigation/native-stack'
 import { Text } from './text/Text'
-import { SiteNavigation } from '../navigators/RootStack'
+import { RootStackParamList } from '../navigators/RootStack'
 
 type Props = {
   submissions?: Array<Submission>
@@ -14,7 +14,7 @@ type Props = {
   siteName: string
 }
 
-type Navigation = NativeStackNavigationProp<SiteNavigation, 'Site'>
+type Navigation = NativeStackNavigationProp<RootStackParamList, 'Site'>
 
 export const SubmissionsPreview: FC<Props> = ({
   submissions,

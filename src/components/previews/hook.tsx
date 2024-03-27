@@ -2,13 +2,12 @@ import { useNavigation } from '@react-navigation/native'
 import { NativeStackNavigationProp } from '@react-navigation/native-stack'
 import React, { FC } from 'react'
 import styled from 'styled-components/native'
-import { SiteNavigation } from '../../navigators/SitesStack'
 import { Hook } from '../../typings/netlify'
 import { Card } from '../Card'
 import { CardTitle } from '../CardTitle'
-import { HookItem } from '../list-items/hook'
 import { Text } from '../text/Text'
 import { View } from 'react-native'
+import { RootStackParamList } from '../../navigators/RootStack'
 
 type Props = {
   hooks?: Array<Hook>
@@ -16,9 +15,9 @@ type Props = {
   siteName: string
 }
 
-type Navigation = NativeStackNavigationProp<SiteNavigation, 'Site'>
+type Navigation = NativeStackNavigationProp<RootStackParamList, 'Site'>
 
-export const HooksPreview: FC<Props> = ({ hooks, siteName }) => {
+export const HooksPreview: FC<Props> = ({ hooks }) => {
   const navigation = useNavigation<Navigation>()
   const shownHooks = hooks?.slice(0, 5)
 
@@ -32,7 +31,7 @@ export const HooksPreview: FC<Props> = ({ hooks, siteName }) => {
     <>
       <CardTitle title="Web hooks" icon="code-branch" />
       <Card>
-        {rows?.map((hook, index) => {
+        {rows?.map(hook => {
           // const navigate = () => {
           //   navigation.navigate('Hook', {
           //     name: siteName,
@@ -58,9 +57,9 @@ export const HooksPreview: FC<Props> = ({ hooks, siteName }) => {
   )
 }
 
-function buildInfoRows(events: Hook[]): string[] {
+function buildInfoRows(events?: Hook[]): string[] | undefined {
   return events
-    .map(event => {
+    ?.map(event => {
       switch (event.type) {
         case 'github_app_commit_status':
           switch (event.event) {

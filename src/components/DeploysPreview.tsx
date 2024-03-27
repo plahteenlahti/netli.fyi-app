@@ -2,11 +2,11 @@ import { useNavigation } from '@react-navigation/native'
 import { NativeStackNavigationProp } from '@react-navigation/native-stack'
 import React, { FC } from 'react'
 import { Text, TouchableOpacity, View } from 'react-native'
-import { SiteNavigation } from '../navigators/RootStack'
 import { Deploy } from '../typings/netlify.d'
 import { Card } from './Card'
 import { CardTitle } from './CardTitle'
 import { DeployItem } from './DeployItem'
+import { RootStackParamList } from '../navigators/RootStack'
 
 type Props = {
   deploys?: Array<Deploy>
@@ -14,7 +14,7 @@ type Props = {
   siteName: string
 }
 
-type Navigation = NativeStackNavigationProp<SiteNavigation, 'Site'>
+type Navigation = NativeStackNavigationProp<RootStackParamList, 'Site'>
 
 export const DeploysPreview: FC<Props> = ({ deploys, siteID, siteName }) => {
   const navigation = useNavigation<Navigation>()

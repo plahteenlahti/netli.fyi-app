@@ -4,12 +4,12 @@ import { ListRenderItem, RefreshControl } from 'react-native'
 import Animated, { FadeInLeft, FadeOutRight } from 'react-native-reanimated'
 import { SiteListItem } from '../components/SiteListItem'
 import { useSites } from '../hooks/site'
-import { SiteNavigation } from '../navigators/SitesStack'
 import { NetlifySite } from '../typings/netlify'
+import { RootStackParamList } from '../navigators/RootStack'
 
 export const Sites = ({
   navigation
-}: NativeStackScreenProps<SiteNavigation, 'SiteList'>) => {
+}: NativeStackScreenProps<RootStackParamList, 'SiteList'>) => {
   const [search, setSearch] = useState<string | undefined>('')
   const sites = useSites()
 

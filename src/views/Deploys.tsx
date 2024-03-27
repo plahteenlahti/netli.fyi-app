@@ -1,17 +1,18 @@
+import React from 'react'
 import { NativeStackScreenProps } from '@react-navigation/native-stack'
 
 import { FlatList, ListRenderItem } from 'react-native'
 import styled from 'styled-components/native'
 import { DeployItem } from '../components/DeployItem'
 import { useDeploys } from '../hooks/deploy'
-import { SiteNavigation } from '../navigators/SitesStack'
 
 import { Deploy } from '../typings/netlify.d'
+import { RootStackParamList } from '../navigators/RootStack'
 
 export const Deploys = ({
   route,
   navigation
-}: NativeStackScreenProps<SiteNavigation, 'Deploys'>) => {
+}: NativeStackScreenProps<RootStackParamList, 'Deploys'>) => {
   const { siteID } = route.params
   const { data: deploys } = useDeploys(siteID)
 

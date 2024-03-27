@@ -9,7 +9,6 @@ import { DeveloperMenu } from '../views/DeveloperMenu'
 import { Profiles } from '../views/Profiles'
 import { Subscription } from '../views/Subscription'
 import { tabNavigatorLinkingConfig, TabStack } from './TabStack'
-import { SiteNavigation } from './SitesStack'
 import { Linking, Pressable } from 'react-native'
 import { Deploy } from '../views/Deploy'
 import { Deploys } from '../views/Deploys'
@@ -51,7 +50,7 @@ export const RootStack = () => {
   }
 
   const headerRight = useCallback(
-    (route: RouteProp<SiteNavigation, 'Site'>) => (
+    (route: RouteProp<RootStackParamList, 'Site'>) => (
       <Pressable onPress={() => openSite(route.params.url)}>
         <IconBrowser size={20} name="safari" brand />
       </Pressable>

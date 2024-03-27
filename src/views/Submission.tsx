@@ -1,14 +1,14 @@
 import { NativeStackScreenProps } from '@react-navigation/native-stack'
-import React, { FC } from 'react'
+import React from 'react'
 import styled from 'styled-components/native'
 import { Card } from '../components/Card'
 import { Text } from '../components/text/Text'
 import { useSubmission } from '../hooks/submissions'
-import { SiteNavigation } from '../navigators/SitesStack'
+import { RootStackParamList } from '../navigators/RootStack'
 
 export const Submission = ({
   route
-}: NativeStackScreenProps<SiteNavigation, 'Submission'>) => {
+}: NativeStackScreenProps<RootStackParamList, 'Submission'>) => {
   const { submissionID } = route.params
   const { data: submission } = useSubmission(submissionID)
 

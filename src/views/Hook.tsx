@@ -5,10 +5,10 @@ import styled from 'styled-components/native'
 import { Card } from '../components/Card'
 import { Text } from '../components/text/Text'
 import { useHook } from '../hooks/hook'
-import { SiteNavigation } from '../navigators/RootStack'
+import { RootStackParamList } from '../navigators/RootStack'
 
-type Navigation = NativeStackNavigationProp<SiteNavigation, 'Hook'>
-type Route = RouteProp<SiteNavigation, 'Hook'>
+type Navigation = NativeStackNavigationProp<RootStackParamList, 'Hook'>
+type Route = RouteProp<RootStackParamList, 'Hook'>
 
 type Props = {
   navigation: Navigation

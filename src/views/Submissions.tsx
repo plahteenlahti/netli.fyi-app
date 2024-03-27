@@ -1,13 +1,12 @@
 import { NativeStackScreenProps } from '@react-navigation/native-stack'
 import React, { FC } from 'react'
 import { FlatList, ListRenderItem, View } from 'react-native'
-import styled from 'styled-components/native'
 import { SubmissionItem } from '../components/SubmissionItem'
 import { useSubmissions } from '../hooks/submissions'
-import { SiteNavigation } from '../navigators/SitesStack'
+import { RootStackParamList } from '../navigators/RootStack'
 import { Submission } from '../typings/netlify.d'
 
-type Props = NativeStackScreenProps<SiteNavigation, 'Submissions'>
+type Props = NativeStackScreenProps<RootStackParamList, 'Submissions'>
 
 export const Submissions: FC<Props> = ({ navigation, route }) => {
   const { siteID } = route.params

@@ -1,3 +1,4 @@
+import React from 'react'
 import { NativeStackScreenProps } from '@react-navigation/native-stack'
 
 import { FlatList, ListRenderItem, RefreshControl, View } from 'react-native'
@@ -13,9 +14,9 @@ import { useDeploys } from '../hooks/deploy'
 import { useHooks } from '../hooks/hook'
 import { useSite } from '../hooks/site'
 import { useSubmissions } from '../hooks/submissions'
-import { SiteNavigation } from '../navigators/SitesStack'
+import { RootStackParamList } from '../navigators/RootStack'
 
-type Props = NativeStackScreenProps<SiteNavigation, 'Site'>
+type Props = NativeStackScreenProps<RootStackParamList, 'Site'>
 
 export const Site = ({
   route: {

@@ -1,3 +1,4 @@
+import React from 'react'
 import { RouteProp } from '@react-navigation/native'
 import { NativeStackNavigationProp } from '@react-navigation/native-stack'
 
@@ -5,11 +6,11 @@ import { Card } from '../components/Card'
 import { Layout } from '../components/layout/Layout'
 import { InfoRow } from '../components/row/InfoRow'
 import { useAccount } from '../hooks/account'
-import { SiteNavigation } from '../navigators/SitesStack'
+import { RootStackParamList } from '../navigators/RootStack'
 
 type Props = {
-  navigation: NativeStackNavigationProp<SiteNavigation, 'Account'>
-  route: RouteProp<SiteNavigation, 'Account'>
+  navigation: NativeStackNavigationProp<RootStackParamList, 'Account'>
+  route: RouteProp<RootStackParamList, 'Account'>
 }
 
 export const Account = ({ route }: Props) => {
