@@ -6,10 +6,11 @@ import { SiteListItem } from '../components/SiteListItem'
 import { useSites } from '../hooks/site'
 import { NetlifySite } from '../typings/netlify'
 import { RootStackParamList } from '../navigators/RootStack'
+import { TabParamList } from '../navigators/TabStack'
 
 export const Sites = ({
   navigation
-}: NativeStackScreenProps<RootStackParamList, 'SiteList'>) => {
+}: NativeStackScreenProps<TabParamList, 'Sites'>) => {
   const [search, setSearch] = useState<string | undefined>('')
   const sites = useSites()
 
@@ -43,8 +44,6 @@ export const Sites = ({
       />
     )
   }
-
-  // console.log(JSON.stringify(sites.data, null, 2))
 
   const data = sites?.data?.filter(site => {
     let pattern = '.*' + search?.toLowerCase().split('').join('.*') + '.*'

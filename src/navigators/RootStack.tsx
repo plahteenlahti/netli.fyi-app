@@ -34,6 +34,8 @@ export type RootStackParamList = {
   Submission: { submissionID: string; name: string }
 }
 
+export type CompositeStackParamList = RootStackParamList & TabStackParamList
+
 const Stack = createNativeStackNavigator<RootStackParamList>()
 
 export const AppLinking: PathConfigMap<RootStackParamList> = {

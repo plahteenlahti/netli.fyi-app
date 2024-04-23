@@ -7,7 +7,6 @@ import {
 } from 'react-native'
 import FastImage, { Source } from 'react-native-fast-image'
 import Animated, {
-  Extrapolate,
   Extrapolation,
   interpolate,
   useAnimatedScrollHandler,
