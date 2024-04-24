@@ -2,7 +2,13 @@ import { BottomTabScreenProps } from '@react-navigation/bottom-tabs'
 import { CompositeScreenProps, StackActions } from '@react-navigation/native'
 import { NativeStackScreenProps } from '@react-navigation/native-stack'
 import { useEffect } from 'react'
-import { Alert, Linking, RefreshControl } from 'react-native'
+import {
+  Alert,
+  Linking,
+  RefreshControl,
+  SafeAreaView,
+  View
+} from 'react-native'
 import styled from 'styled-components/native'
 import { AccountCard } from '../components/AccountCard'
 import { Card } from '../components/Card'
@@ -22,6 +28,13 @@ import { sendEmail } from '../utilities/mail'
 import { localizedRelativeFormat } from '../utilities/time'
 import { useKeychain } from '../hooks/keychain'
 import Config from 'react-native-config'
+import Animated, {
+  Extrapolation,
+  interpolate,
+  useAnimatedScrollHandler,
+  useAnimatedStyle,
+  useSharedValue
+} from 'react-native-reanimated'
 
 type Props = CompositeScreenProps<
   NativeStackScreenProps<RootStackParamList>,
@@ -29,12 +42,28 @@ type Props = CompositeScreenProps<
 >
 
 export const Profile = ({ navigation }: Props) => {
+  const scrollY = useSharedValue(0)
+  const scrollHandler = useAnimatedScrollHandler(event => {
+    scrollY.value = event.contentOffset.y
+  })
+
+  const largeTitleStyle = useAnimatedStyle(() => {
+    const scale = interpolate(scrollY.value, [10, -60], [1, 1.2], {
+      extrapolateRight: Extrapolation.CLAMP,
+      extrapolateLeft: Extrapolation.CLAMP
+    })
+
+    return {
+      transform: [{ scale }]
+    }
+  })
+
   const dispatch = useAppDispatch()
   const user = useUser()
   const accounts = useAccounts()
-  const { setAuthToken, getAuthToken } = useKeychain()
+
   useEffect(() => {
-    const unsubscribe = navigation.addListener('tabLongPress', e => {
+    const unsubscribe = navigation.addListener('tabLongPress', () => {
       navigation.navigate('DeveloperMenu')
     })
 
@@ -44,13 +73,6 @@ export const Profile = ({ navigation }: Props) => {
   const navigateToProfiles = () => {
     navigation.navigate('Profiles')
   }
-
-  useEffect(() => {
-    const getaaa = async () => {
-      console.log(await getAuthToken())
-    }
-    getaaa()
-  }, [])
 
   const logout = () => {
     Alert.alert(
@@ -82,20 +104,30 @@ export const Profile = ({ navigation }: Props) => {
     : ''
 
   return (
-    <Container>
-      <ScrollView
+    <SafeAreaView className="flex-1">
+      <Animated.ScrollView
+        onScroll={scrollHandler}
         refreshControl={
           <RefreshControl
             refreshing={user.isLoading}
             onRefresh={user.refetch}
           />
         }>
-        <Card>
-          <Row>
+        <View className="h-24">
+          <Animated.View
+            className="origin-left absolute left-2"
+            style={largeTitleStyle}>
             <Avatar
               resizeMode="contain"
               source={{ uri: user.data?.avatar_url }}
             />
+            <Animated.Text className="text-3xl font-display">
+              {user.data?.full_name}
+            </Animated.Text>
+          </Animated.View>
+        </View>
+        <Card>
+          <Row>
             <Information>
               <Name>{user.data?.full_name}</Name>
               <Detail>{user.data?.email}</Detail>
@@ -105,16 +137,7 @@ export const Profile = ({ navigation }: Props) => {
           <InfoRow title="Last login" value={lastLogin} />
           <InfoRow title="Account created" value={accountCreated} />
           <InfoRow title="Sites created" value={user.data?.site_count} />
-          <ButtonRow
-            hideDivider
-            title="Log out"
-            type="destructive"
-            onPress={logout}
-          />
-          <ButtonRow
-            title="Set token"
-            onPress={() => setAuthToken(Config.test_token)}
-          />
+          <ButtonRow title="Log out" type="destructive" onPress={logout} />
         </Card>
 
         <ProfileSubscriptionPrompt />
@@ -170,8 +193,8 @@ export const Profile = ({ navigation }: Props) => {
             }
           />
         </Card>
-      </ScrollView>
-    </Container>
+      </Animated.ScrollView>
+    </SafeAreaView>
   )
 }
 

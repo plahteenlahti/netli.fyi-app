@@ -90,6 +90,7 @@ export const TabStack = () => {
         name="Profile"
         component={Profile}
         options={{
+          headerShown: false,
           tabBarIcon: profilePicture
         }}
       />
