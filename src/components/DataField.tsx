@@ -1,7 +1,7 @@
-import React, { FC } from 'react'
+import { FC } from 'react'
 import styled from 'styled-components/native'
 import words from 'lodash/words'
-import { Linking, TouchableOpacity } from 'react-native'
+import { Linking, TouchableOpacity, View } from 'react-native'
 import { Text } from 'react-native'
 
 type Props = {
@@ -45,29 +45,27 @@ export const DataField: FC<Props> = ({ title, value }) => {
   switch (type) {
     case 'boolean':
       return (
-        <Row>
+        <View className="flex-row justify-between p-2">
           <Key>{words(title).join(' ')}</Key>
           <Value adjustsFontSizeToFit>{fiedValue}</Value>
-        </Row>
+        </View>
       )
 
     case 'string':
       return (
-        <Row>
-          <Key>{words(title).join(' ')}</Key>
+        <View className="flex-row justify-between p-2">
+          <Text className="text-xs text-left">{words(title).join(' ')}</Text>
           <Value adjustsFontSizeToFit>{fiedValue}</Value>
-        </Row>
+        </View>
       )
     case 'url':
       return (
-        <Row>
+        <View className="flex-row justify-between p-2">
           <Key>{words(title).join(' ')}</Key>
           <TouchableOpacity className="flex-1" onPress={handleLinkPress}>
-            <Text className="text-xs text-right" adjustsFontSizeToFit>
-              {fiedValue}
-            </Text>
+            <Text className="text-xs text-right">{fiedValue}</Text>
           </TouchableOpacity>
-        </Row>
+        </View>
       )
     default:
       return null
@@ -82,14 +80,4 @@ const Value = styled(Text)`
   text-align: right;
   flex: 1;
   color: ${({ theme }) => theme.primaryTextColor};
-`
-
-const Row = styled.View`
-  flex: 1;
-  background-color: ${({ theme }) => theme.secondaryBackground};
-  flex-direction: row;
-  justify-content: space-between;
-  padding: 16px 16px;
-  border-bottom-width: 1px;
-  border-bottom-color: ${({ theme }) => theme.borderColor};
 `

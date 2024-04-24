@@ -1,5 +1,4 @@
 import { NativeStackScreenProps } from '@react-navigation/native-stack'
-import React from 'react'
 import styled from 'styled-components/native'
 import { Card } from '../components/Card'
 import { Text } from '../components/text/Text'

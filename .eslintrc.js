@@ -3,7 +3,7 @@ module.exports = {
   env: {
     es2021: true
   },
-  extends: '@react-native',
+  extends: ['@react-native', 'plugin:react/jsx-runtime'],
   parser: '@typescript-eslint/parser',
   plugins: ['@typescript-eslint', 'react', 'react-native'],
   rules: {

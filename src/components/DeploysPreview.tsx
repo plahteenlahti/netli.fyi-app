@@ -1,6 +1,6 @@
 import { useNavigation } from '@react-navigation/native'
 import { NativeStackNavigationProp } from '@react-navigation/native-stack'
-import React, { FC } from 'react'
+import { FC } from 'react'
 import { Text, TouchableOpacity, View } from 'react-native'
 import { Deploy } from '../typings/netlify.d'
 import { Card } from './Card'

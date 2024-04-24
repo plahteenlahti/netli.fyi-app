@@ -1,4 +1,4 @@
-import React, { FC } from 'react'
+import { FC } from 'react'
 import { Easing } from 'react-native-reanimated'
 import styled from 'styled-components/native'
 import { AnimatedBone } from './AnimatedBone'

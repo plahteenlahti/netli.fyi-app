@@ -4,7 +4,7 @@ import {
   NavigationContainer,
   NavigationContainerRef
 } from '@react-navigation/native'
-import React, { useEffect, useRef } from 'react'
+import { useEffect, useRef } from 'react'
 import { StatusBar, useColorScheme } from 'react-native'
 import RNBootSplash from 'react-native-bootsplash'
 import 'react-native-gesture-handler'

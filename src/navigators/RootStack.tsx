@@ -1,7 +1,7 @@
 import { PathConfigMap, RouteProp } from '@react-navigation/native'
 import FontAwesome5 from 'react-native-vector-icons/FontAwesome5'
 import { createNativeStackNavigator } from '@react-navigation/native-stack'
-import React, { useCallback } from 'react'
+import { useCallback } from 'react'
 import { useToken } from '../hooks/useToken'
 import { Account } from '../views/Account'
 import { Authorize } from '../views/Authorize'
@@ -123,7 +123,8 @@ export const RootStack = () => {
         component={Deploy}
         options={({ route }) => ({
           stackAnimation: 'slide_from_right',
-          title: route.params.name
+          title: 'Build',
+          headerBackTitle: 'Back'
         })}
       />
 

@@ -1,6 +1,6 @@
 import { RouteProp, StackActions } from '@react-navigation/native'
 import { NativeStackNavigationProp } from '@react-navigation/native-stack'
-import React, { FC, useState } from 'react'
+import { FC, useState } from 'react'
 import {
   Dimensions,
   KeyboardAvoidingView,

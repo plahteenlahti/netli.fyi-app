@@ -1,6 +1,6 @@
 import { RouteProp } from '@react-navigation/native'
 import { NativeStackNavigationProp } from '@react-navigation/native-stack'
-import React, { FC } from 'react'
+import { FC } from 'react'
 import styled from 'styled-components/native'
 import { Card } from '../components/Card'
 import { Text } from '../components/text/Text'

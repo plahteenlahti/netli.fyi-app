@@ -1,4 +1,4 @@
-import React, { FC } from 'react'
+import { FC } from 'react'
 import Svg, { Path } from 'react-native-svg'
 
 export const PlaceholderIcon: FC = () => {

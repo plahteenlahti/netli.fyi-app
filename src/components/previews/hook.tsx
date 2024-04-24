@@ -1,13 +1,13 @@
 import { useNavigation } from '@react-navigation/native'
 import { NativeStackNavigationProp } from '@react-navigation/native-stack'
-import React, { FC } from 'react'
-import styled from 'styled-components/native'
+import { FC } from 'react'
 import { Hook } from '../../typings/netlify'
 import { Card } from '../Card'
 import { CardTitle } from '../CardTitle'
 import { Text } from '../text/Text'
 import { View } from 'react-native'
 import { RootStackParamList } from '../../navigators/RootStack'
+import { TouchableOpacity } from 'react-native-gesture-handler'
 
 type Props = {
   hooks?: Array<Hook>
@@ -46,11 +46,13 @@ export const HooksPreview: FC<Props> = ({ hooks }) => {
           )
         })}
         {hooks && hooks?.length > 5 ? (
-          <Container>
-            <ShowMoreButton onPress={goToDeploys}>
-              <ButtonText>Show more</ButtonText>
-            </ShowMoreButton>
-          </Container>
+          <View>
+            <TouchableOpacity
+              className="flex items-center justify-center w-full h-12 bg-gray-100 rounded-md"
+              onPress={goToDeploys}>
+              <Text className="text-sm font-bold text-accent">Show more</Text>
+            </TouchableOpacity>
+          </View>
         ) : null}
       </Card>
     </>
@@ -111,18 +113,3 @@ function buildInfoRows(events?: Hook[]): string[] | undefined {
     })
     .filter(row => row !== '')
 }
-
-const Container = styled.View``
-
-const ShowMoreButton = styled.TouchableOpacity`
-  justify-content: center;
-  align-items: center;
-  padding: 16px;
-`
-
-const ButtonText = styled(Text)`
-  text-align: center;
-  color: ${({ theme }) => theme.accentColor};
-  font-size: 13px;
-  font-weight: bold;
-`

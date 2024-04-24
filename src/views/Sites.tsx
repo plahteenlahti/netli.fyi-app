@@ -1,27 +1,16 @@
 import { NativeStackScreenProps } from '@react-navigation/native-stack'
-import React, { useLayoutEffect, useState } from 'react'
+import { useLayoutEffect, useState } from 'react'
 import { ListRenderItem, RefreshControl } from 'react-native'
 import Animated, { FadeInLeft, FadeOutRight } from 'react-native-reanimated'
 import { SiteListItem } from '../components/SiteListItem'
 import { useSites } from '../hooks/site'
-import { NetlifySite } from '../typings/netlify'
-import { RootStackParamList } from '../navigators/RootStack'
 import { TabParamList } from '../navigators/TabStack'
+import { NetlifySite } from '../typings/netlify'
 
 export const Sites = ({
   navigation
 }: NativeStackScreenProps<TabParamList, 'Sites'>) => {
-  const [search, setSearch] = useState<string | undefined>('')
   const sites = useSites()
-
-  useLayoutEffect(() => {
-    navigation.setOptions({
-      headerSearchBarOptions: {
-        onChangeText: event => setSearch(event.nativeEvent.text),
-        onCancelButtonPress: () => setSearch('')
-      }
-    })
-  }, [navigation])
 
   const renderItem: ListRenderItem<NetlifySite> = ({ item }) => {
     const navigateToSite = () => {
@@ -45,12 +34,6 @@ export const Sites = ({
     )
   }
 
-  const data = sites?.data?.filter(site => {
-    let pattern = '.*' + search?.toLowerCase().split('').join('.*') + '.*'
-    const re = new RegExp(pattern)
-    return re.test(`${site?.name}`.toLowerCase())
-  })
-
   return (
     <Animated.FlatList
       className="px-2"
@@ -63,7 +46,7 @@ export const Sites = ({
           onRefresh={sites.refetch}
         />
       }
-      data={data}
+      data={sites.data}
       renderItem={renderItem}
     />
   )

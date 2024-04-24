@@ -1,4 +1,4 @@
-import React, { FC } from 'react'
+import { FC } from 'react'
 import { TouchableOpacity } from 'react-native'
 import Svg, { Path } from 'react-native-svg'
 import { Text } from './text/Text'

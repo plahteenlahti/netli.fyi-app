@@ -1,9 +1,9 @@
 import { TouchableOpacity, TouchableOpacityProps } from 'react-native'
+import FontAwesome5 from 'react-native-vector-icons/FontAwesome5'
 import styled from 'styled-components/native'
+import { HStack } from '../layout/HStack'
 import { Text } from '../text/Text'
 import { RowContainer } from './RowContainer'
-import FontAwesome5 from 'react-native-vector-icons/FontAwesome5'
-import { HContainer } from '../layout/Container'
 
 type Props = {
   title: string
@@ -24,12 +24,12 @@ export const NavigationRow = ({
       <RowContainer hideDivider={hideDivider}>
         <Text>{title}</Text>
 
-        <HContainer alignItems="center">
+        <HStack alignItems="center">
           <Text fontFamily="Inter-Regular" color="secondaryTextColor">
             {value}
           </Text>
           {type === 'navigation' && <Chevron name="chevron-right" />}
-        </HContainer>
+        </HStack>
       </RowContainer>
     </TouchableOpacity>
   )

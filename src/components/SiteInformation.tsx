@@ -1,4 +1,4 @@
-import React, { FC } from 'react'
+import { FC } from 'react'
 import { Linking, StyleSheet } from 'react-native'
 import FontAwesome5 from 'react-native-vector-icons/FontAwesome5'
 import styled from 'styled-components/native'
@@ -34,19 +34,19 @@ export const SiteInformation: FC<Props> = ({ site, name }) => {
     <>
       <CardTitle icon="info-circle" title="Details" />
       <Card>
-        <NavigationRow title="Domain" value={name} />
-        <Row>
-          <LinkIcon />
-          <Text onPress={openSite}>{name}</Text>
-        </Row>
-        <Row>
-          <HistoryIcon />
-          {site?.created_at && <Text>{`Site created ${createdAt}`}</Text>}
-        </Row>
-        <Row>
-          <ClockIcon />
-          {site?.updated_at && <Text>{`Last publish ${updatedAt}`}</Text>}
-        </Row>
+        <NavigationRow
+          type="navigation"
+          title="Domain"
+          value={name}
+          onPress={openSite}
+        />
+        <NavigationRow title="Created" value={createdAt} />
+        <NavigationRow title="Last Publish" value={updatedAt} />
+        <NavigationRow
+          title="Published Deploy"
+          value={site?.published_deploy?.name}
+        />
+
         <Row last>
           <ToolsIcon />
           <Text onPress={openManage}>Manage site</Text>

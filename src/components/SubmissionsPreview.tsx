@@ -1,4 +1,4 @@
-import React, { FC } from 'react'
+import { FC } from 'react'
 import styled from 'styled-components/native'
 import { Submission } from '../typings/netlify.d'
 import FontAwesome5 from 'react-native-vector-icons/FontAwesome5'

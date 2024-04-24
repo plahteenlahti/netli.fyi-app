@@ -1,4 +1,4 @@
-import React from 'react'
+import { useCallback } from 'react'
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs'
 import { PathConfigMap } from '@react-navigation/native'
 
@@ -29,13 +29,29 @@ export const TabStack = () => {
   const theme = useTheme()
   const user = useUser()
 
-  const profilePicture = () => (
-    <Image
-      className="h-6 w-6 rounded-full"
-      borderRadius={130}
-      resizeMode="contain"
-      source={{ uri: user.data?.avatar_url }}
-    />
+  const profilePicture = useCallback(
+    () => (
+      <Image
+        className="h-6 w-6 rounded-full"
+        borderRadius={130}
+        resizeMode="contain"
+        source={{ uri: user.data?.avatar_url }}
+      />
+    ),
+    [user.data?.avatar_url]
+  )
+
+  const tabBarBackground = useCallback(
+    () => (
+      <BlurView
+        blurAmount={1}
+        blurType="prominent"
+        style={{
+          ...StyleSheet.absoluteFillObject
+        }}
+      />
+    ),
+    []
   )
 
   return (
@@ -46,15 +62,7 @@ export const TabStack = () => {
         tabBarStyle: {
           borderTopColor: 'transparent'
         },
-        tabBarBackground: () => (
-          <BlurView
-            blurAmount={1}
-            blurType="prominent"
-            style={{
-              ...StyleSheet.absoluteFillObject
-            }}
-          />
-        )
+        tabBarBackground: tabBarBackground
       }}>
       <Tab.Screen
         options={{

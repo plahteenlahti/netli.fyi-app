@@ -1,7 +1,7 @@
 import { BottomTabScreenProps } from '@react-navigation/bottom-tabs'
 import { CompositeScreenProps, StackActions } from '@react-navigation/native'
 import { NativeStackScreenProps } from '@react-navigation/native-stack'
-import React, { useEffect } from 'react'
+import { useEffect } from 'react'
 import { Alert, Linking, RefreshControl } from 'react-native'
 import styled from 'styled-components/native'
 import { AccountCard } from '../components/AccountCard'

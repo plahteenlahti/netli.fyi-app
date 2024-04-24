@@ -1,4 +1,4 @@
-import React, { FC, useCallback, useState } from 'react'
+import { FC, useCallback, useState } from 'react'
 import { ViewStyle } from 'react-native'
 import LinearGradient from 'react-native-linear-gradient'
 import Animated from 'react-native-reanimated'

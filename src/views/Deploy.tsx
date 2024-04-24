@@ -1,13 +1,11 @@
 import { NativeStackScreenProps } from '@react-navigation/native-stack'
-import React from 'react'
-import { Linking, Platform, RefreshControl, Text, View } from 'react-native'
-import { SafeAreaView } from 'react-native-safe-area-context'
+import { Linking, RefreshControl, ScrollView, Text, View } from 'react-native'
 import styled from 'styled-components/native'
 import { Card } from '../components/Card'
 import { DataField } from '../components/DataField'
 import { useDeploy } from '../hooks/deploy'
-import { Deploy as TypeDeploy } from '../typings/netlify.d'
 import { RootStackParamList } from '../navigators/RootStack'
+import { Deploy as TypeDeploy } from '../typings/netlify.d'
 
 type Key = keyof TypeDeploy
 
@@ -63,80 +61,65 @@ export const Deploy = ({
   const { data, isRefetching, refetch } = useDeploy(buildID)
 
   return (
-    <Container
-      edges={
-        Platform.OS === 'ios' ? ['top', 'right', 'left'] : ['right', 'left']
+    <ScrollView
+      refreshControl={
+        <RefreshControl refreshing={isRefetching} onRefresh={refetch} />
       }>
-      <ScrollView
-        contentInsetAdjustmentBehavior="automatic"
-        scrollToOverflowEnabled
-        refreshControl={
-          <RefreshControl refreshing={isRefetching} onRefresh={refetch} />
-        }>
-        <CardTitle>Deploy summary</CardTitle>
-        <Summary>
-          {data?.summary?.messages?.map(message => {
-            const links = extractContentAndLinks(message.description)
-            return (
-              <View
-                className="border-b border-b-gray-200 py-2"
-                key={message.title}>
-                <Text className="font-semibold text-gray-800 text-sm">
-                  {message.title}
-                </Text>
-                <Text className="text-sm">
-                  {links.map((segment, index) => {
-                    if (segment.link) {
-                      return (
-                        <Text
-                          className="text-blue-500 underline"
-                          onPress={() => Linking.openURL(segment.link)}
-                          key={index}>
-                          {segment.content}
-                        </Text>
-                      )
-                    }
-                    return segment.content
-                  })}
-                </Text>
-              </View>
-            )
-          })}
-          {data?.summary?.status === 'unavailable' ? (
-            <Row>
-              <Title>Error in deployment</Title>
-              <Description>
-                Netlify couldn’t deploy your site. Check out Netlify Build docs
-                for tips on troubleshooting your build, or ask Netlify for
-                debugging advice.
-              </Description>
-            </Row>
-          ) : null}
-        </Summary>
+      <CardTitle>Deploy summary</CardTitle>
+      <Summary>
+        {data?.summary?.messages?.map(message => {
+          const links = extractContentAndLinks(message.description)
+          return (
+            <View
+              className="border-b border-b-gray-200 py-2"
+              key={message.title}>
+              <Text className="font-semibold text-gray-800 text-sm">
+                {message.title}
+              </Text>
+              <Text className="text-sm">
+                {links.map((segment, index) => {
+                  if (segment.link) {
+                    return (
+                      <Text
+                        className="text-blue-500 underline"
+                        onPress={() => Linking.openURL(segment.link)}
+                        key={index}>
+                        {segment.content}
+                      </Text>
+                    )
+                  }
+                  return segment.content
+                })}
+              </Text>
+            </View>
+          )
+        })}
+        {data?.summary?.status === 'unavailable' ? (
+          <Row>
+            <Title>Error in deployment</Title>
+            <Description>
+              Netlify couldn’t deploy your site. Check out Netlify Build docs
+              for tips on troubleshooting your build, or ask Netlify for
+              debugging advice.
+            </Description>
+          </Row>
+        ) : null}
+      </Summary>
 
-        <Card>
-          {data
-            ? Object.keys(data).map((value: string) => {
-                const key = value as Key
-                return makeRow(key, data[key])
-              })
-            : null}
-        </Card>
-      </ScrollView>
-    </Container>
+      <Card>
+        {data
+          ? Object.keys(data).map((value: string) => {
+              const key = value as Key
+              return makeRow(key, data[key])
+            })
+          : null}
+      </Card>
+    </ScrollView>
   )
 }
 
 const Summary = styled(Card)`
   min-height: 250px;
-`
-
-const Container = styled(SafeAreaView)`
-  flex: 1;
-`
-
-const ScrollView = styled.ScrollView`
-  background-color: ${({ theme }) => theme.primaryBackground};
 `
 
 const Row = styled.View`

@@ -1,5 +1,4 @@
-import { Switch, SwitchProps } from 'react-native'
-import styled from 'styled-components/native'
+import { Switch, SwitchProps, View } from 'react-native'
 import { Text } from '../text/Text'
 import { RowContainer } from './RowContainer'
 
@@ -16,24 +15,17 @@ export const ToggleRow = ({
 }: Props) => {
   return (
     <RowContainer>
-      <Column>
+      <View className="pr-4 flex-1">
         <Text>{title}</Text>
-        <Subtitle lineHeight="looser" size={12} color="secondaryTextColor">
+        <Text
+          className="mt-2"
+          lineHeight="looser"
+          size={12}
+          color="secondaryTextColor">
           {subtitle}
-        </Subtitle>
-      </Column>
-      <Toggle onChange={onChange} {...switchProps} />
+        </Text>
+      </View>
+      <Switch onChange={onChange} {...switchProps} />
     </RowContainer>
   )
 }
-
-const Toggle = styled(Switch)``
-
-const Column = styled.View`
-  flex: 1;
-  padding-right: 24px;
-`
-
-const Subtitle = styled(Text)`
-  margin-top: 4px;
-`
