@@ -1,11 +1,25 @@
 import { NativeStackScreenProps } from '@react-navigation/native-stack'
-import { Linking, RefreshControl, ScrollView, Text, View } from 'react-native'
+import {
+  Linking,
+  RefreshControl,
+  ScrollView,
+  Text,
+  View,
+  ViewBase
+} from 'react-native'
 import styled from 'styled-components/native'
 import { Card } from '../components/Card'
 import { DataField } from '../components/DataField'
 import { useDeploy } from '../hooks/deploy'
 import { RootStackParamList } from '../navigators/RootStack'
 import { Deploy as TypeDeploy } from '../typings/netlify.d'
+import { InfoRow } from '../components/row/InfoRow'
+import { NavigationRow } from '../components/row/NavigationRow'
+import { HStack } from '../components/layout/HStack'
+
+function shortenGitSha(sha?: string, length: number = 7): string | undefined {
+  return sha?.substring(0, length)
+}
 
 type Key = keyof TypeDeploy
 
@@ -66,6 +80,24 @@ export const Deploy = ({
         <RefreshControl refreshing={isRefetching} onRefresh={refetch} />
       }>
       <CardTitle>Deploy summary</CardTitle>
+
+      <View className="py-2">
+        <Card>
+          <InfoRow title="Project" value={data?.name} />
+          <InfoRow title="Status" value={data?.state} />
+          <InfoRow hideDivider title="Branch" value={data?.branch} />
+        </Card>
+      </View>
+
+      <View className="py-2">
+        <Card>
+          <InfoRow
+            title={data?.title}
+            value={shortenGitSha(data?.commit_ref)}
+          />
+          <NavigationRow type="navigation" title="Open in Github" />
+        </Card>
+      </View>
       <Summary>
         {data?.summary?.messages?.map(message => {
           const links = extractContentAndLinks(message.description)
@@ -94,6 +126,7 @@ export const Deploy = ({
             </View>
           )
         })}
+
         {data?.summary?.status === 'unavailable' ? (
           <Row>
             <Title>Error in deployment</Title>

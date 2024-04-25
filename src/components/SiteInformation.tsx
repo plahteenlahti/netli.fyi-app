@@ -7,7 +7,6 @@ import { localizedRelativeFormat } from '../utilities/time'
 import { Card } from './Card'
 import { CardTitle } from './CardTitle'
 import { NavigationRow } from './row/NavigationRow'
-import { Text } from 'react-native'
 
 type Props = {
   site: NetlifySite | undefined
@@ -46,11 +45,13 @@ export const SiteInformation: FC<Props> = ({ site, name }) => {
           title="Published Deploy"
           value={site?.published_deploy?.name}
         />
-
-        <Row last>
-          <ToolsIcon />
-          <Text onPress={openManage}>Manage site</Text>
-        </Row>
+        <NavigationRow
+          type="navigation"
+          hideDivider
+          title="Manage site"
+          value="netlify.com"
+          onPress={openManage}
+        />
       </Card>
     </>
   )

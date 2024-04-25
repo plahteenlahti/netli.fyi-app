@@ -35,6 +35,7 @@ import Animated, {
   useAnimatedStyle,
   useSharedValue
 } from 'react-native-reanimated'
+import { Image } from 'react-native'
 
 type Props = CompositeScreenProps<
   NativeStackScreenProps<RootStackParamList>,
@@ -48,7 +49,7 @@ export const Profile = ({ navigation }: Props) => {
   })
 
   const largeTitleStyle = useAnimatedStyle(() => {
-    const scale = interpolate(scrollY.value, [10, -60], [1, 1.2], {
+    const scale = interpolate(scrollY.value, [10, -60], [1, 1.4], {
       extrapolateRight: Extrapolation.CLAMP,
       extrapolateLeft: Extrapolation.CLAMP
     })
@@ -115,9 +116,10 @@ export const Profile = ({ navigation }: Props) => {
         }>
         <View className="h-24">
           <Animated.View
-            className="origin-left absolute left-2"
+            className="origin-left absolute left-4 flex-row items-center gap-2"
             style={largeTitleStyle}>
-            <Avatar
+            <Image
+              className="h-8 w-8 rounded-full"
               resizeMode="contain"
               source={{ uri: user.data?.avatar_url }}
             />
@@ -222,12 +224,6 @@ const Detail = styled(Text)`
   font-size: 13px;
   color: ${({ theme }) => theme.secondaryTextColor};
   margin-bottom: 4px;
-`
-
-const Avatar = styled.Image`
-  height: 60px;
-  width: 60px;
-  border-radius: 60px;
 `
 
 const Information = styled.View`

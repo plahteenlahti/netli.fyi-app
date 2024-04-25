@@ -15,8 +15,6 @@ export const Subscription = () => {
   const offerings = useCurrentOfferings()
   const purchase = usePurchasePackage()
 
-  console.log(JSON.stringify(purchase, undefined, 2))
-
   return (
     <ScrollView>
       <Text type="title-1">Offerings</Text>

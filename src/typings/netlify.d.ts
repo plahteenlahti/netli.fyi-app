@@ -32,6 +32,7 @@ export type NetlifySite = {
     stop_builds?: boolean
     untrusted_flow?: string
     updated_at?: string
+    package_path?: string
   }
 
   capabilities?: {

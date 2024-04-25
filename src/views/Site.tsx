@@ -1,11 +1,16 @@
 import { NativeStackScreenProps } from '@react-navigation/native-stack'
 
-import { FlatList, ListRenderItem, RefreshControl, View } from 'react-native'
+import {
+  FlatList,
+  ListRenderItem,
+  RefreshControl,
+  ScrollView,
+  View
+} from 'react-native'
 import { BuildSettings } from '../components/BuildSettings'
 import { DeploysPreview } from '../components/DeploysPreview'
 import { SiteInformation } from '../components/SiteInformation'
 import { SubmissionsPreview } from '../components/SubmissionsPreview'
-import { ScrollViewWithHero } from '../components/common/ScrollViewWithHero'
 import { HooksPreview } from '../components/previews/hook'
 import { Text } from '../components/text/Text'
 import { useDeploys } from '../hooks/deploy'
@@ -13,6 +18,7 @@ import { useHooks } from '../hooks/hook'
 import { useSite } from '../hooks/site'
 import { useSubmissions } from '../hooks/submissions'
 import { RootStackParamList } from '../navigators/RootStack'
+import Animated from 'react-native-reanimated'
 
 type Props = NativeStackScreenProps<RootStackParamList, 'Site'>
 
@@ -26,23 +32,9 @@ export const Site = ({
   const submissions = useSubmissions(siteID)
   const hooks = useHooks(siteID)
 
-  const sections = [
-    'site information',
-    'build settings',
-    'deploys',
-    'web hooks'
-  ]
-
-  const renderItem: ListRenderItem<string> = ({ item }) => (
-    <View key={item}>
-      <Text type="subtitle"> {item}</Text>
-    </View>
-  )
-
   return (
     <View className="flex-1">
-      <ScrollViewWithHero
-        source={{ uri: site.data?.screenshot_url }}
+      <ScrollView
         refreshControl={
           <RefreshControl
             refreshing={site.isRefetching}
@@ -50,15 +42,11 @@ export const Site = ({
           />
         }>
         <View>
-          <FlatList
-            data={sections}
-            showsHorizontalScrollIndicator={false}
-            horizontal
-            renderItem={renderItem}
-          />
-
+          <Animated.View>
+            <Text />
+          </Animated.View>
           <SiteInformation site={site.data} name={name} />
-          <BuildSettings site={site.data} />
+          <BuildSettings siteID={siteID} />
 
           {deploys.data && deploys.data.length > 0 && (
             <DeploysPreview
@@ -80,7 +68,7 @@ export const Site = ({
             />
           )}
         </View>
-      </ScrollViewWithHero>
+      </ScrollView>
     </View>
   )
 }

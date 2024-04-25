@@ -1,8 +1,9 @@
-import { Image, Text, TouchableOpacity, View } from 'react-native'
+import { Image, TouchableOpacity, View } from 'react-native'
 import FontAwesome5 from 'react-native-vector-icons/FontAwesome5'
 import styled from 'styled-components/native'
 import { localizedRelativeFormat } from '../utilities/time'
 import { NoPreview } from './NoPreview'
+import { Typography } from './layout/Typography'
 
 type Props = {
   navigateToSite: () => void
@@ -41,14 +42,17 @@ export const SiteListItem = ({
           )}
         </View>
 
-        <View className="border-b border-gray-200 flex-row flex-1 pb-2 items-center">
-          <View className="pl-2 flex-1 ">
-            <Text className="text-sm text-gray-700 font-semibold">
+        <View className="border-b border-gray-200 flex-row flex-1 pb-2 items-center gap-4">
+          <View className="pl-2 flex-1">
+            <Typography
+              numberOfLines={1}
+              lineBreakMode="clip"
+              className="text-base text-gray-700 font-semibold flex-1">
               {custom_domain || default_domain}
-            </Text>
-            <Text className="text-xs text-gray-500">
+            </Typography>
+            <Typography className="text-sm text-gray-500">
               {`Last deploy ${lastDeploy}`}- {framework}
-            </Text>
+            </Typography>
           </View>
           <Chevron name="chevron-right" size={15} solid />
         </View>

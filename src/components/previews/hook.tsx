@@ -21,8 +21,6 @@ export const HooksPreview: FC<Props> = ({ hooks }) => {
   const navigation = useNavigation<Navigation>()
   const shownHooks = hooks?.slice(0, 5)
 
-  console.log(JSON.stringify(hooks, null, 2))
-
   const rows = buildInfoRows(shownHooks)
 
   const goToDeploys = () => {}

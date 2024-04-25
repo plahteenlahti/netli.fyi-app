@@ -4,26 +4,20 @@ import {
   NavigationContainer,
   NavigationContainerRef
 } from '@react-navigation/native'
+import { QueryClient, QueryClientProvider } from '@tanstack/react-query'
 import { useEffect, useRef } from 'react'
 import { StatusBar, useColorScheme } from 'react-native'
 import RNBootSplash from 'react-native-bootsplash'
 import 'react-native-gesture-handler'
+import { GestureHandlerRootView } from 'react-native-gesture-handler'
 import { SafeAreaProvider } from 'react-native-safe-area-context'
 import { enableScreens } from 'react-native-screens'
-import { QueryClient, QueryClientProvider } from '@tanstack/react-query'
 import { Provider } from 'react-redux'
 import { PersistGate } from 'redux-persist/integration/react'
 import { ThemeProvider } from 'styled-components/native'
-import {
-  RootStack,
-  RootStackParamList,
-  SiteStack
-} from './src/navigators/RootStack'
+import { RootStack, RootStackParamList } from './src/navigators/RootStack'
 import { persistor, store } from './src/store/store'
 import { darkTheme, lightTheme } from './src/styles/theme'
-import Purchases from 'react-native-purchases'
-import { GestureHandlerRootView } from 'react-native-gesture-handler'
-import { Text } from 'react-native'
 
 enableScreens()
 
