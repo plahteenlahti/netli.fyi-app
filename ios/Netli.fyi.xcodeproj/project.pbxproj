@@ -289,7 +289,7 @@
 					13B07F861A680F5B00A75B9A = {
 						DevelopmentTeam = 68A7FT779W;
 						LastSwiftMigration = 1300;
-						ProvisioningStyle = Manual;
+						ProvisioningStyle = Automatic;
 					};
 				};
 			};
@@ -673,8 +673,8 @@
 				ASSETCATALOG_COMPILER_INCLUDE_ALL_APPICON_ASSETS = NO;
 				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_ENTITLEMENTS = Netlifyi/Netlifyi.entitlements;
-				CODE_SIGN_IDENTITY = "iPhone Distribution";
-				CODE_SIGN_STYLE = Manual;
+				CODE_SIGN_IDENTITY = "Apple Development";
+				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 10;
 				DEVELOPMENT_TEAM = 68A7FT779W;
 				ENABLE_BITCODE = NO;
@@ -690,7 +690,7 @@
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = app.nyxo.netli.fyi.dev;
 				PRODUCT_NAME = Netli.fyi;
-				PROVISIONING_PROFILE_SPECIFIER = "match AppStore app.nyxo.netli.fyi.dev";
+				PROVISIONING_PROFILE_SPECIFIER = "";
 				SWIFT_OBJC_BRIDGING_HEADER = "Netlifyi-Bridging-Header.h";
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 				SWIFT_VERSION = 5.0;
@@ -707,8 +707,8 @@
 				ASSETCATALOG_COMPILER_INCLUDE_ALL_APPICON_ASSETS = NO;
 				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_ENTITLEMENTS = Netlifyi/Netlifyi.entitlements;
-				CODE_SIGN_IDENTITY = "iPhone Distribution";
-				CODE_SIGN_STYLE = Manual;
+				CODE_SIGN_IDENTITY = "Apple Development";
+				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 10;
 				DEVELOPMENT_TEAM = 68A7FT779W;
 				ENABLE_BITCODE = NO;
@@ -724,7 +724,7 @@
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = app.nyxo.netli.fyi;
 				PRODUCT_NAME = Netli.fyi;
-				PROVISIONING_PROFILE_SPECIFIER = "match AppStore app.nyxo.netli.fyi";
+				PROVISIONING_PROFILE_SPECIFIER = "";
 				SWIFT_OBJC_BRIDGING_HEADER = "Netlifyi-Bridging-Header.h";
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
@@ -803,11 +803,10 @@
 				ASSETCATALOG_COMPILER_INCLUDE_ALL_APPICON_ASSETS = NO;
 				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_ENTITLEMENTS = Netlifyi/Netlifyi.entitlements;
-				CODE_SIGN_IDENTITY = "iPhone Distribution";
-				CODE_SIGN_STYLE = Manual;
+				CODE_SIGN_IDENTITY = "Apple Development";
+				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 10;
 				DEVELOPMENT_TEAM = 68A7FT779W;
-				"DEVELOPMENT_TEAM[sdk=iphoneos*]" = 68A7FT779W;
 				ENABLE_BITCODE = NO;
 				INFOPLIST_FILE = Netlifyi/Info.plist;
 				INFOPLIST_KEY_CFBundleDisplayName = Netli.fyi;
@@ -821,8 +820,7 @@
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = app.nyxo.netli.fyi.dev;
 				PRODUCT_NAME = Netli.fyi;
-				PROVISIONING_PROFILE_SPECIFIER = "match AppStore app.nyxo.netli.fyi.dev";
-				"PROVISIONING_PROFILE_SPECIFIER[sdk=iphoneos*]" = "match AppStore app.nyxo.netli.fyi.dev";
+				PROVISIONING_PROFILE_SPECIFIER = "";
 				SWIFT_OBJC_BRIDGING_HEADER = "Netlifyi-Bridging-Header.h";
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";

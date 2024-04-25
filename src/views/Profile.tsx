@@ -36,6 +36,7 @@ import Animated, {
   useSharedValue
 } from 'react-native-reanimated'
 import { Image } from 'react-native'
+import useTimeAgo from '../hooks/time/useTimeFrom'
 
 type Props = CompositeScreenProps<
   NativeStackScreenProps<RootStackParamList>,
@@ -96,9 +97,7 @@ export const Profile = ({ navigation }: Props) => {
     )
   }
 
-  const lastLogin = user.data?.last_login
-    ? localizedRelativeFormat(new Date(`${user.data?.last_login}`), new Date())
-    : ''
+  const lastLogin = useTimeAgo(new Date(user.data?.last_login ?? new Date()))
 
   const accountCreated = user.data?.created_at
     ? localizedRelativeFormat(new Date(`${user.data?.created_at}`), new Date())
@@ -114,28 +113,28 @@ export const Profile = ({ navigation }: Props) => {
             onRefresh={user.refetch}
           />
         }>
-        <View className="h-24">
+        <View className="h-24 bg-green-200">
           <Animated.View
-            className="origin-left absolute left-4 flex-row items-center gap-2"
-            style={largeTitleStyle}>
+            className="absolute flex-row items-center gap-2 bg-red-200"
+            style={[
+              largeTitleStyle,
+              {
+                transformOrigin: 'left'
+              }
+            ]}>
             <Image
               className="h-8 w-8 rounded-full"
               resizeMode="contain"
               source={{ uri: user.data?.avatar_url }}
             />
-            <Animated.Text className="text-3xl font-display">
+            <Animated.Text className="text-3xl font-display font-semibold">
               {user.data?.full_name}
             </Animated.Text>
           </Animated.View>
         </View>
-        <Card>
-          <Row>
-            <Information>
-              <Name>{user.data?.full_name}</Name>
-              <Detail>{user.data?.email}</Detail>
-            </Information>
-          </Row>
 
+        <View className="h-20" />
+        <Card>
           <InfoRow title="Last login" value={lastLogin} />
           <InfoRow title="Account created" value={accountCreated} />
           <InfoRow title="Sites created" value={user.data?.site_count} />

@@ -12,14 +12,14 @@ export type NetlifySite = {
   build_image?: string
   build_settings?: {
     allowed_branches?: string[]
-    base?: null
+    base?: null | string
     base_rel_dir?: boolean
-    cmd?: string
+    cmd?: string | null
     created_at?: string
     deploy_key_id?: string
     dir?: string
     env?: {}
-    functions_dir?: null
+    functions_dir?: null | string
     installation_id?: number
     private_logs?: null
     provider?: string
@@ -32,7 +32,7 @@ export type NetlifySite = {
     stop_builds?: boolean
     untrusted_flow?: string
     updated_at?: string
-    package_path?: string
+    package_path?: string | null
   }
 
   capabilities?: {

@@ -36,10 +36,7 @@ export const Site = ({
     <View className="flex-1">
       <ScrollView
         refreshControl={
-          <RefreshControl
-            refreshing={site.isRefetching}
-            onRefresh={site.refetch}
-          />
+          <RefreshControl refreshing={false} onRefresh={site.refetch} />
         }>
         <View>
           <Animated.View>

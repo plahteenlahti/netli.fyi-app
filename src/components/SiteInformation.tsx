@@ -7,6 +7,7 @@ import { localizedRelativeFormat } from '../utilities/time'
 import { Card } from './Card'
 import { CardTitle } from './CardTitle'
 import { NavigationRow } from './row/NavigationRow'
+import useTimeAgo from '../hooks/time/useTimeFrom'
 
 type Props = {
   site: NetlifySite | undefined
@@ -25,9 +26,7 @@ export const SiteInformation: FC<Props> = ({ site, name }) => {
     ? localizedRelativeFormat(new Date(`${site?.created_at}`), new Date())
     : ''
 
-  const updatedAt = site?.updated_at
-    ? localizedRelativeFormat(new Date(`${site?.updated_at}`), new Date())
-    : ' '
+  const updatedAt = useTimeAgo(new Date(site?.updated_at ?? new Date()))
 
   return (
     <>
