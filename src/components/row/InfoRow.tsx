@@ -18,7 +18,7 @@ export const InfoRow = ({
     <View
       className={`${
         hideDivider ? '' : 'border-b border-gray-200'
-      } pt-2 pb-2 pr-4 ml-2`}>
+      } py-4 pr-4 ml-2`}>
       <View className={'flex-row justify-between items-center gap-1'}>
         <Typography className="font-medium text-base flex-1 text-gray-800">
           {title}
@@ -30,9 +30,11 @@ export const InfoRow = ({
           </Typography>
         </View>
       </View>
-      <Typography className="text-xs font-normal text-gray-400">
-        {editHint}
-      </Typography>
+      {!!editHint && (
+        <Typography className="text-xs font-normal text-gray-400">
+          {editHint}
+        </Typography>
+      )}
     </View>
   )
 }

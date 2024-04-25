@@ -37,6 +37,7 @@ import Animated, {
 } from 'react-native-reanimated'
 import { Image } from 'react-native'
 import useTimeAgo from '../hooks/time/useTimeFrom'
+import { useSafeAreaInsets } from 'react-native-safe-area-context'
 
 type Props = CompositeScreenProps<
   NativeStackScreenProps<RootStackParamList>,
@@ -44,13 +45,14 @@ type Props = CompositeScreenProps<
 >
 
 export const Profile = ({ navigation }: Props) => {
+  const { top } = useSafeAreaInsets()
   const scrollY = useSharedValue(0)
   const scrollHandler = useAnimatedScrollHandler(event => {
     scrollY.value = event.contentOffset.y
   })
 
   const largeTitleStyle = useAnimatedStyle(() => {
-    const scale = interpolate(scrollY.value, [10, -60], [1, 1.4], {
+    const scale = interpolate(scrollY.value, [top, -60], [1, 1.4], {
       extrapolateRight: Extrapolation.CLAMP,
       extrapolateLeft: Extrapolation.CLAMP
     })
@@ -104,98 +106,96 @@ export const Profile = ({ navigation }: Props) => {
     : ''
 
   return (
-    <SafeAreaView className="flex-1">
-      <Animated.ScrollView
-        onScroll={scrollHandler}
-        refreshControl={
-          <RefreshControl
-            refreshing={user.isLoading}
-            onRefresh={user.refetch}
+    <Animated.ScrollView
+      contentOffset={{ y: -top, x: 0 }}
+      onScroll={scrollHandler}
+      refreshControl={
+        <RefreshControl refreshing={user.isLoading} onRefresh={user.refetch} />
+      }>
+      <Animated.View
+        className="flex-row ml-4 mt-8 mb-8"
+        style={[
+          largeTitleStyle,
+          {
+            transformOrigin: 'left top'
+          }
+        ]}>
+        <Image
+          className="h-8 w-8 mr-2 rounded-full"
+          resizeMode="contain"
+          source={{ uri: user.data?.avatar_url }}
+        />
+        <Animated.Text className="text-3xl font-display font-semibold">
+          {user.data?.full_name}
+        </Animated.Text>
+      </Animated.View>
+
+      <Card>
+        <InfoRow title="Last login" value={lastLogin} />
+        <InfoRow title="Account created" value={accountCreated} />
+        <InfoRow title="Sites created" value={user.data?.site_count} />
+        <ButtonRow
+          hideDivider
+          title="Log out"
+          type="destructive"
+          onPress={logout}
+        />
+      </Card>
+
+      <ProfileSubscriptionPrompt />
+
+      <CardTitle icon="user" title="Accounts" />
+      {accounts.data?.map(account => {
+        return (
+          <AccountCard
+            navigation={navigation}
+            key={account.id}
+            account={account}
           />
-        }>
-        <View className="h-24 bg-green-200">
-          <Animated.View
-            className="absolute flex-row items-center gap-2 bg-red-200"
-            style={[
-              largeTitleStyle,
-              {
-                transformOrigin: 'left'
-              }
-            ]}>
-            <Image
-              className="h-8 w-8 rounded-full"
-              resizeMode="contain"
-              source={{ uri: user.data?.avatar_url }}
-            />
-            <Animated.Text className="text-3xl font-display font-semibold">
-              {user.data?.full_name}
-            </Animated.Text>
-          </Animated.View>
-        </View>
+        )
+      })}
 
-        <View className="h-20" />
-        <Card>
-          <InfoRow title="Last login" value={lastLogin} />
-          <InfoRow title="Account created" value={accountCreated} />
-          <InfoRow title="Sites created" value={user.data?.site_count} />
-          <ButtonRow title="Log out" type="destructive" onPress={logout} />
-        </Card>
-
-        <ProfileSubscriptionPrompt />
-
-        <CardTitle icon="user" title="Accounts" />
-        {accounts.data?.map(account => {
-          return (
-            <AccountCard
-              navigation={navigation}
-              key={account.id}
-              account={account}
-            />
-          )
-        })}
-
-        <CardTitle
-          icon="meteor"
-          title="Extras"
-          extra="Netli.fyi is a free service that helps you manage your websites. It's
+      <CardTitle
+        icon="meteor"
+        title="Extras"
+        extra="Netli.fyi is a free service that helps you manage your websites. It's
           built by a single person (Perttu Lähteenlahti), and is fully open
           source. Below you can find some links to the source code and the
           documentation."
-        />
+      />
 
-        <Card>
-          <IconRow
-            icon="twitter"
-            brands
-            title="Twitter"
-            action={() => Linking.openURL('https://twitter.com/plahteenlahti')}
-          />
-          <IconRow
-            icon="envelope"
-            title="Contact"
-            solid
-            action={() =>
-              sendEmail('perttu@lahteenlahti.com', 'About Netli.fyi', 'Hello!')
-            }
-          />
-          <IconRow
-            icon="heart"
-            title="Rate Netli.fyi"
-            solid
-            action={() => {}} // TODO add rating link
-          />
-          <IconRow
-            icon="code"
-            title="Source Code"
-            solid
-            hideDivider
-            action={() =>
-              Linking.openURL('https://github.com/plahteenlahti/netli.fyi-app')
-            }
-          />
-        </Card>
-      </Animated.ScrollView>
-    </SafeAreaView>
+      <Card>
+        <IconRow
+          icon="twitter"
+          brands
+          title="Twitter"
+          action={() => Linking.openURL('https://twitter.com/plahteenlahti')}
+        />
+        <IconRow
+          icon="envelope"
+          title="Contact"
+          solid
+          action={() =>
+            sendEmail('perttu@lahteenlahti.com', 'About Netli.fyi', 'Hello!')
+          }
+        />
+        <IconRow
+          icon="heart"
+          title="Rate Netli.fyi"
+          solid
+          action={() => {}} // TODO add rating link
+        />
+        <IconRow
+          icon="code"
+          title="Source Code"
+          solid
+          hideDivider
+          action={() =>
+            Linking.openURL('https://github.com/plahteenlahti/netli.fyi-app')
+          }
+        />
+      </Card>
+    </Animated.ScrollView>
   )
 }
 

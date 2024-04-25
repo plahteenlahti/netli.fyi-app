@@ -1,6 +1,6 @@
-import { TouchableOpacity, TouchableOpacityProps } from 'react-native'
-import { Text } from '../text/Text'
-import { RowContainer, RowContainerProps } from './RowContainer'
+import { TouchableHighlight, TouchableOpacityProps, View } from 'react-native'
+import { Typography } from '../layout/Typography'
+import { RowContainerProps } from './RowContainer'
 
 type ButtonType = 'action' | 'destructive'
 
@@ -17,12 +17,21 @@ export const ButtonRow = ({
   ...buttonProps
 }: Props) => {
   return (
-    <TouchableOpacity {...buttonProps}>
-      <RowContainer hideDivider={hideDivider}>
-        <Text color={type === 'destructive' ? 'errorColor' : 'accentColor'}>
+    <TouchableHighlight {...buttonProps} underlayColor="#fff">
+      <View
+        className={`${
+          hideDivider ? '' : 'border-b border-gray-200'
+        } pt-4 pb-4 pr-4 ml-2`}>
+        <Typography
+          className={`
+            font-medium
+            text-base
+            flex-1
+            ${type === 'action' ? 'text-blue-500' : 'text-red-500'}
+        `}>
           {title}
-        </Text>
-      </RowContainer>
-    </TouchableOpacity>
+        </Typography>
+      </View>
+    </TouchableHighlight>
   )
 }

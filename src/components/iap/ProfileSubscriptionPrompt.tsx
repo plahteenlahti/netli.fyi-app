@@ -6,6 +6,7 @@ import { useCurrentOfferings } from '../../hooks/iap/subscription'
 import { RootStackParamList } from '../../navigators/RootStack'
 import { Card } from '../Card'
 import { NavigationRow } from '../row/NavigationRow'
+import { View } from 'react-native'
 
 export const ProfileSubscriptionPrompt = () => {
   const offerings = useCurrentOfferings()
@@ -16,7 +17,7 @@ export const ProfileSubscriptionPrompt = () => {
   }
 
   return (
-    <Card>
+    <View className="m-2 flex-1 bg-white rounded-md">
       <NavigationRow
         hideDivider
         title="Netli.fyi Pro"
@@ -24,6 +25,6 @@ export const ProfileSubscriptionPrompt = () => {
         type="navigation"
         onPress={goToSubscription}
       />
-    </Card>
+    </View>
   )
 }

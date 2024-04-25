@@ -14,11 +14,13 @@ export const Typography = ({
 }: Props) => {
   return (
     <Text
-      className={`text-base font-medium ${className} ${
+      className={`text-base font-medium ${
         secondary
           ? 'text-gray-500 dark:text-gray-300'
           : 'text-gray-800 dark:text-gray-100'
-      }`}
+      }
+      ${className} 
+      `}
       {...rest}>
       {children}
     </Text>
