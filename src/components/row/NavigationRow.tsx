@@ -3,12 +3,14 @@ import FontAwesome5 from 'react-native-vector-icons/FontAwesome5'
 import styled from 'styled-components/native'
 import { HStack } from '../layout/HStack'
 import { Typography } from '../layout/Typography'
+import { LoadingView } from '../Loader'
 
 type Props = {
   title: string
   value?: string | number
   hideDivider?: boolean
   type?: 'info' | 'navigation' | 'action'
+  loading?: boolean
 } & TouchableOpacityProps
 
 export const NavigationRow = ({
@@ -16,6 +18,7 @@ export const NavigationRow = ({
   value,
   type = 'info',
   hideDivider = false,
+  loading,
   ...buttonProps
 }: Props) => {
   return (
@@ -27,9 +30,13 @@ export const NavigationRow = ({
         <Typography className="">{title}</Typography>
 
         <HStack alignItems="center">
-          <Typography secondary className="text-right font-normal">
-            {value}
-          </Typography>
+          {loading ? (
+            <LoadingView style={{ height: 20, width: 100, borderRadius: 10 }} />
+          ) : (
+            <Typography secondary className="text-right font-normal">
+              {value}
+            </Typography>
+          )}
           {type === 'navigation' && <Chevron name="chevron-right" />}
         </HStack>
       </View>

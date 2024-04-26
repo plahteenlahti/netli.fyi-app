@@ -8,13 +8,15 @@ import { Card } from './Card'
 import { CardTitle } from './CardTitle'
 import { NavigationRow } from './row/NavigationRow'
 import useTimeAgo from '../hooks/time/useTimeFrom'
+import { InfoRow } from './row/InfoRow'
 
 type Props = {
   site: NetlifySite | undefined
   name?: string
+  loading: boolean
 }
 
-export const SiteInformation: FC<Props> = ({ site, name }) => {
+export const SiteInformation: FC<Props> = ({ site, name, loading }) => {
   const openSite = () => {
     Linking.openURL(`${site?.url}`)
   }
@@ -38,13 +40,15 @@ export const SiteInformation: FC<Props> = ({ site, name }) => {
           value={name}
           onPress={openSite}
         />
-        <NavigationRow title="Created" value={createdAt} />
-        <NavigationRow title="Last Publish" value={updatedAt} />
+        <InfoRow title="Created" value={createdAt} />
+        <InfoRow title="Last Publish" value={updatedAt} />
         <NavigationRow
+          loading={loading}
           title="Published Deploy"
           value={site?.published_deploy?.name}
         />
         <NavigationRow
+          loading={loading}
           type="navigation"
           hideDivider
           title="Manage site"
@@ -55,48 +59,3 @@ export const SiteInformation: FC<Props> = ({ site, name }) => {
     </>
   )
 }
-
-type RowProps = {
-  readonly last?: boolean
-}
-
-const Row = styled.View<RowProps>`
-  flex-direction: row;
-  align-items: center;
-  margin: 6px 0px;
-  padding-bottom: 8px;
-  border-bottom-width: ${({ last }) => (last ? 0 : StyleSheet.hairlineWidth)}px;
-  border-bottom-color: ${({ theme }) => theme.borderColor};
-`
-
-const LinkIcon = styled(FontAwesome5).attrs(({ theme }) => ({
-  name: 'link',
-  size: 12,
-  color: theme.secondaryTextColor
-}))`
-  margin-right: 8px;
-`
-
-const ClockIcon = styled(FontAwesome5).attrs(({ theme }) => ({
-  name: 'clock',
-  size: 12,
-  color: theme.secondaryTextColor
-}))`
-  margin-right: 8px;
-`
-
-const HistoryIcon = styled(FontAwesome5).attrs(({ theme }) => ({
-  name: 'history',
-  size: 12,
-  color: theme.secondaryTextColor
-}))`
-  margin-right: 8px;
-`
-
-const ToolsIcon = styled(FontAwesome5).attrs(({ theme }) => ({
-  name: 'tools',
-  size: 12,
-  color: theme.secondaryTextColor
-}))`
-  margin-right: 8px;
-`

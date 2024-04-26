@@ -42,7 +42,11 @@ export const Site = ({
           <Animated.View>
             <Text />
           </Animated.View>
-          <SiteInformation site={site.data} name={name} />
+          <SiteInformation
+            loading={site.isLoading}
+            site={site.data}
+            name={name}
+          />
           <BuildSettings siteID={siteID} />
 
           {deploys.data && deploys.data.length > 0 && (

@@ -1,5 +1,4 @@
 import { NativeStackScreenProps } from '@react-navigation/native-stack'
-import { useLayoutEffect, useState } from 'react'
 import { ListRenderItem, RefreshControl } from 'react-native'
 import Animated, { FadeInLeft, FadeOutRight } from 'react-native-reanimated'
 import { SiteListItem } from '../components/SiteListItem'
