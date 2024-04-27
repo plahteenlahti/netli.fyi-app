@@ -1,26 +1,16 @@
-import { FC } from 'react'
+import { View, ViewProps } from 'react-native'
 import FontAwesome5 from 'react-native-vector-icons/FontAwesome5'
 import styled from 'styled-components/native'
 
-type Props = {
-  style?: any
-}
-
-export const NoPreview: FC<Props> = ({ style }) => {
+export const NoPreview = ({ className, ...rest }: ViewProps) => {
   return (
-    <Container style={style}>
+    <View
+      className={`bg-gray-500 h-full w-full justify-center items-center ${className}`}
+      {...rest}>
       <IconBrowser size={25} name="safari" brands />
-    </Container>
+    </View>
   )
 }
-
-const Container = styled.View`
-  background-color: rgba(0, 0, 0, 0.54);
-  width: 100%;
-  height: 100%;
-  justify-content: center;
-  align-items: center;
-`
 
 const IconBrowser = styled(FontAwesome5).attrs(({ theme }) => ({
   color: theme.primaryTextColor

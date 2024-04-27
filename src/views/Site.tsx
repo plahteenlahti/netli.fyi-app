@@ -2,6 +2,7 @@ import { NativeStackScreenProps } from '@react-navigation/native-stack'
 
 import {
   FlatList,
+  Image,
   ListRenderItem,
   RefreshControl,
   ScrollView,
@@ -19,6 +20,10 @@ import { useSite } from '../hooks/site'
 import { useSubmissions } from '../hooks/submissions'
 import { RootStackParamList } from '../navigators/RootStack'
 import Animated from 'react-native-reanimated'
+import { CardTitle } from '../components/CardTitle'
+import { Card } from '../components/Card'
+import { NoPreview } from '../components/NoPreview'
+import { HStack } from '../components/layout/HStack'
 
 type Props = NativeStackScreenProps<RootStackParamList, 'Site'>
 
@@ -39,9 +44,21 @@ export const Site = ({
           <RefreshControl refreshing={false} onRefresh={site.refetch} />
         }>
         <View>
-          <Animated.View>
-            <Text />
-          </Animated.View>
+          <Card.Title className="mb-2">Preview</Card.Title>
+          <Card>
+            <View className="h-40 w-full p-2">
+              {site.data?.screenshot_url ? (
+                <Image
+                  className="h-full w-full overflow-hidden rounded-sm"
+                  resizeMode="cover"
+                  source={{ uri: site.data?.screenshot_url }}
+                />
+              ) : (
+                <NoPreview className="rounded-sm" />
+              )}
+            </View>
+          </Card>
+
           <SiteInformation
             loading={site.isLoading}
             site={site.data}
