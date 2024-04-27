@@ -1,7 +1,7 @@
 import { NativeStackScreenProps } from '@react-navigation/native-stack'
-import { ListRenderItem, RefreshControl } from 'react-native'
-import Animated, { FadeInLeft, FadeOutRight } from 'react-native-reanimated'
+import { ListRenderItem } from 'react-native'
 import { SiteListItem } from '../components/SiteListItem'
+import { AnimatedFlatList } from '../components/layout/AnimatedFlatList'
 import { useSites } from '../hooks/site'
 import { TabParamList } from '../navigators/TabStack'
 import { NetlifySite } from '../typings/netlify'
@@ -34,17 +34,11 @@ export const Sites = ({
   }
 
   return (
-    <Animated.FlatList
-      className="px-2"
+    <AnimatedFlatList
+      title="Netli.fyi"
       contentInsetAdjustmentBehavior="automatic"
-      entering={FadeInLeft}
-      exiting={FadeOutRight}
-      refreshControl={
-        <RefreshControl
-          refreshing={sites.isRefetching}
-          onRefresh={sites.refetch}
-        />
-      }
+      onRefresh={sites.refetch}
+      refreshing={sites.isRefetching}
       data={sites.data}
       renderItem={renderItem}
     />

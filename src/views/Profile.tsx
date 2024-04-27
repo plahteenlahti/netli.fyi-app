@@ -38,6 +38,7 @@ import Animated, {
 import { Image } from 'react-native'
 import useTimeAgo from '../hooks/time/useTimeFrom'
 import { useSafeAreaInsets } from 'react-native-safe-area-context'
+import { AnimatedScrollView } from '../components/layout/ScrollView'
 
 type Props = CompositeScreenProps<
   NativeStackScreenProps<RootStackParamList>,
@@ -45,23 +46,6 @@ type Props = CompositeScreenProps<
 >
 
 export const Profile = ({ navigation }: Props) => {
-  const { top } = useSafeAreaInsets()
-  const scrollY = useSharedValue(0)
-  const scrollHandler = useAnimatedScrollHandler(event => {
-    scrollY.value = event.contentOffset.y
-  })
-
-  const largeTitleStyle = useAnimatedStyle(() => {
-    const scale = interpolate(scrollY.value, [top, -60], [1, 1.4], {
-      extrapolateRight: Extrapolation.CLAMP,
-      extrapolateLeft: Extrapolation.CLAMP
-    })
-
-    return {
-      transform: [{ scale }]
-    }
-  })
-
   const dispatch = useAppDispatch()
   const user = useUser()
   const accounts = useAccounts()
@@ -106,30 +90,17 @@ export const Profile = ({ navigation }: Props) => {
     : ''
 
   return (
-    <Animated.ScrollView
-      contentOffset={{ y: -top, x: 0 }}
-      onScroll={scrollHandler}
-      refreshControl={
-        <RefreshControl refreshing={user.isLoading} onRefresh={user.refetch} />
-      }>
-      <Animated.View
-        className="flex-row ml-4 mt-8 mb-8"
-        style={[
-          largeTitleStyle,
-          {
-            transformOrigin: 'left top'
-          }
-        ]}>
+    <AnimatedScrollView
+      extraElement={
         <Image
-          className="h-8 w-8 mr-2 rounded-full"
+          className="h-8 w-8 rounded-full bg-gray-500"
           resizeMode="contain"
           source={{ uri: user.data?.avatar_url }}
         />
-        <Animated.Text className="text-3xl font-display font-semibold">
-          {user.data?.full_name}
-        </Animated.Text>
-      </Animated.View>
-
+      }
+      onRefresh={user.refetch}
+      refreshing={user.isRefetching}
+      title="Profile">
       <Card>
         <InfoRow title="Last login" value={lastLogin} />
         <InfoRow title="Account created" value={accountCreated} />
@@ -195,37 +166,6 @@ export const Profile = ({ navigation }: Props) => {
           }
         />
       </Card>
-    </Animated.ScrollView>
+    </AnimatedScrollView>
   )
 }
-
-const Container = styled.SafeAreaView`
-  flex: 1;
-`
-
-const ScrollView = styled.ScrollView`
-  background-color: ${({ theme }) => theme.primaryBackground};
-  flex: 1;
-  padding-bottom: 32px;
-`
-
-const Row = styled.View`
-  flex-direction: row;
-  margin-bottom: 8px;
-`
-
-const Name = styled(Text)`
-  font-size: 16px;
-  color: ${({ theme }) => theme.primaryTextColor};
-`
-
-const Detail = styled(Text)`
-  font-size: 13px;
-  color: ${({ theme }) => theme.secondaryTextColor};
-  margin-bottom: 4px;
-`
-
-const Information = styled.View`
-  margin-left: 8px;
-  justify-content: center;
-`

@@ -1,14 +1,12 @@
 import { FC } from 'react'
-import { Linking, StyleSheet } from 'react-native'
-import FontAwesome5 from 'react-native-vector-icons/FontAwesome5'
-import styled from 'styled-components/native'
+import { Linking } from 'react-native'
+import useTimeAgo from '../hooks/time/useTimeFrom'
 import { NetlifySite } from '../typings/netlify.d'
 import { localizedRelativeFormat } from '../utilities/time'
 import { Card } from './Card'
 import { CardTitle } from './CardTitle'
-import { NavigationRow } from './row/NavigationRow'
-import useTimeAgo from '../hooks/time/useTimeFrom'
 import { InfoRow } from './row/InfoRow'
+import { NavigationRow } from './row/NavigationRow'
 
 type Props = {
   site: NetlifySite | undefined

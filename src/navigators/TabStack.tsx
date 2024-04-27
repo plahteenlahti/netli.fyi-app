@@ -66,6 +66,7 @@ export const TabStack = () => {
       }}>
       <Tab.Screen
         options={{
+          headerShown: false,
           title: 'Netli.fyi',
           headerStyle: {
             backgroundColor: 'transparent'
