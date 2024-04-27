@@ -35,8 +35,7 @@ export const Sites = ({
 
   return (
     <AnimatedFlatList
-      title="Netli.fyi"
-      contentInsetAdjustmentBehavior="automatic"
+      title="Sites"
       onRefresh={sites.refetch}
       refreshing={sites.isRefetching}
       data={sites.data}

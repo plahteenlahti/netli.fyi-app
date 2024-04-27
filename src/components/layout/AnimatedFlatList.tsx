@@ -3,8 +3,6 @@ import { FlatListProps, RefreshControl, StyleSheet, View } from 'react-native'
 import { TouchableOpacity } from 'react-native-gesture-handler'
 import Animated, {
   Extrapolation,
-  FadeInLeft,
-  FadeOutRight,
   interpolate,
   interpolateColor,
   useAnimatedScrollHandler,
@@ -12,11 +10,22 @@ import Animated, {
   useSharedValue
 } from 'react-native-reanimated'
 import { useSafeAreaInsets } from 'react-native-safe-area-context'
+import {
+  Defs,
+  LinearGradient,
+  Mask,
+  Rect,
+  Stop,
+  Svg,
+  Text,
+  Use
+} from 'react-native-svg'
 
 type Props<T> = {
   refreshing: boolean
   onRefresh: () => void
   extraElement?: React.ReactNode
+  withLogo?: boolean
   title: string
 } & FlatListProps<T>
 
@@ -30,6 +39,7 @@ export const AnimatedFlatList = <T,>({
   extraElement,
   refreshing,
   onRefresh,
+  withLogo,
   ...rest
 }: Props<T>) => {
   const { top } = useSafeAreaInsets()
@@ -72,24 +82,64 @@ export const AnimatedFlatList = <T,>({
   return (
     <View className="flex-1">
       <Animated.FlatList
-        className="bg-blue-500"
+        className="bg-white"
         onScroll={scrollHandler}
-        // refreshControl={
-        //   <RefreshControl refreshing={refreshing} onRefresh={onRefresh} />
-        // }
-        ListFooterComponent={<View className="h-28" />}
+        refreshControl={
+          <RefreshControl refreshing={refreshing} onRefresh={onRefresh} />
+        }
         ListHeaderComponent={
-          <Animated.View
-            className="flex-row mb-12 pl-2 bg-red-300"
-            style={[largeTitleStyle, s.largeTitleContainer, { paddingTop }]}>
-            {extraElement}
-            <Animated.Text
-              className={`text-3xl font-display font-semibold ${
-                !!extraElement && 'ml-2'
-              }`}>
-              {title}
-            </Animated.Text>
-          </Animated.View>
+          <>
+            <Animated.View
+              className="mb-12 pl-2"
+              style={[largeTitleStyle, s.largeTitleContainer, { paddingTop }]}>
+              <Svg height={30} width={80} viewBox="0 0 800 300">
+                <Defs>
+                  <LinearGradient
+                    id="Gradient"
+                    gradientUnits="userSpaceOnUse"
+                    x1="0"
+                    y1="0"
+                    x2="0"
+                    y2="300">
+                    <Stop offset="0" stopColor="white" stopOpacity="0.8" />
+                    <Stop offset="1" stopColor="white" stopOpacity="1" />
+                  </LinearGradient>
+                  <Mask
+                    id="Mask"
+                    maskUnits="userSpaceOnUse"
+                    x="0"
+                    y="0"
+                    width="800"
+                    height="300">
+                    <Rect
+                      x="0"
+                      y="0"
+                      width="800"
+                      height="300"
+                      fill="url(#Gradient)"
+                    />
+                  </Mask>
+                  <Text
+                    id="Text"
+                    x="400"
+                    y="200"
+                    fontFamily="Verdana"
+                    fontSize="100"
+                    textAnchor="middle">
+                    Netli.fyi
+                  </Text>
+                </Defs>
+                <Use href="#Text" fill="#333" mask="url(#Mask)" />
+              </Svg>
+
+              <Animated.Text
+                className={`text-3xl font-display font-semibold text-gray-800 ${
+                  !!extraElement && 'ml-2'
+                }`}>
+                {title}
+              </Animated.Text>
+            </Animated.View>
+          </>
         }
         {...rest}
       />
@@ -108,7 +158,7 @@ export const AnimatedFlatList = <T,>({
           <View className="flex-1 justify-center">
             <TouchableOpacity />
           </View>
-          <View className="flex-1 justify-center items-center">
+          <View className="flex-1">
             <Animated.Text className="text-gray-800 font-medium text-base">
               {title}
             </Animated.Text>

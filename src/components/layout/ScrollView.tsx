@@ -79,14 +79,13 @@ export const AnimatedScrollView = ({
   return (
     <View className="flex-1">
       <Animated.ScrollView
-        className="bg-blue-400"
         onScroll={scrollHandler}
-        // refreshControl={
-        //   <RefreshControl refreshing={refreshing} onRefresh={onRefresh} />
-        // }
+        refreshControl={
+          <RefreshControl refreshing={refreshing} onRefresh={onRefresh} />
+        }
         {...rest}>
         <Animated.View
-          className="flex-row pl-2 mb-12 bg-red-200"
+          className="flex-row pl-2 mb-1"
           style={[largeTitleStyle, s.largeTitleContainer, { paddingTop }]}>
           {extraElement}
           <Animated.Text
