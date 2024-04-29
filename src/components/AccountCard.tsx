@@ -1,14 +1,15 @@
 import { NativeStackNavigationProp } from '@react-navigation/native-stack'
 import { FC } from 'react'
-import { TouchableOpacity } from 'react-native'
-import styled from 'styled-components/native'
+import { Image, TouchableOpacity, View } from 'react-native'
 import { usePrefetchAccount } from '../hooks/account'
 import { RootStackParamList } from '../navigators/RootStack'
 import { Account } from '../typings/netlify.d'
-import { UsageCard } from './account/UsageCard'
 import { Card } from './Card'
 import { PlaceholderIcon } from './PlaceholderIcon'
-import { Text } from './text/Text'
+import { UsageCard } from './account/UsageCard'
+import { HStack } from './layout/HStack'
+import { Typography } from './layout/Typography'
+import { VStack } from './layout/VStack'
 
 type Props = {
   account: Account
@@ -29,20 +30,23 @@ export const AccountCard: FC<Props> = ({ account, navigation }) => {
   return (
     <TouchableOpacity onPressIn={onPressIn} onPress={navigateToAccount}>
       <Card>
-        <TypeContainer>
-          <Type>{account.type_name}</Type>
-        </TypeContainer>
-        <HContainer>
-          <VContainer>
-            <CardTitle>
+        <View className="absolute bg-gray-400 p-2 rounded-tl-lg rounded-br-lg left-0 top-0">
+          <Typography>{account.type_name}</Typography>
+        </View>
+        <HStack>
+          <VStack>
+            <HStack>
               {account?.team_logo_url ? (
-                <TeamLogo source={{ uri: account?.team_logo_url }} />
+                <Image
+                  className="h-8 w-8 mr-2"
+                  source={{ uri: account?.team_logo_url }}
+                />
               ) : (
                 <PlaceholderIcon />
               )}
 
-              <AccountName>{account.name}</AccountName>
-            </CardTitle>
+              <Typography>{account.name}</Typography>
+            </HStack>
 
             <UsageCard
               min={0}
@@ -62,53 +66,9 @@ export const AccountCard: FC<Props> = ({ account, navigation }) => {
               value={account.capabilities.sites.used}
               title="Sites"
             />
-          </VContainer>
-        </HContainer>
+          </VStack>
+        </HStack>
       </Card>
     </TouchableOpacity>
   )
 }
-
-const TeamLogo = styled.Image`
-  height: 30px;
-  width: 30px;
-  margin-right: 8px;
-`
-
-const TypeContainer = styled.View`
-  position: absolute;
-  background-color: ${({ theme }) => theme.secondaryTextColor};
-  padding: 8px 16px;
-  border-top-left-radius: 8px;
-  border-bottom-right-radius: 8px;
-  left: 0px;
-  top: 0px;
-`
-
-const HContainer = styled.View`
-  flex-direction: row;
-`
-
-const VContainer = styled.View`
-  flex: 1;
-`
-
-const Type = styled(Text)`
-  text-transform: uppercase;
-  font-size: 10px;
-  padding: 0px 5px;
-  color: ${({ theme }) => theme.primaryBackground};
-`
-
-const CardTitle = styled.View`
-  flex-direction: row;
-  align-items: center;
-  margin-top: 32px;
-  margin-bottom: 16px;
-`
-
-const AccountName = styled(Text)`
-  color: ${({ theme }) => theme.primaryTextColor};
-  font-size: 15px;
-  margin-left: 8px;
-`
