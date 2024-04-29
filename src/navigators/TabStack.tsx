@@ -44,8 +44,8 @@ export const TabStack = () => {
   const tabBarBackground = useCallback(
     () => (
       <BlurView
-        blurAmount={1}
-        blurType="prominent"
+        blurType="light"
+        className="bg-reg-500"
         style={{
           ...StyleSheet.absoluteFillObject
         }}
@@ -56,13 +56,15 @@ export const TabStack = () => {
 
   return (
     <Tab.Navigator
+      sceneContainerStyle={{ backgroundColor: 'red' }}
       screenOptions={{
         tabBarActiveTintColor: theme.accentColor,
         tabBarInactiveTintColor: theme.secondaryTextColor,
         tabBarStyle: {
-          borderTopColor: 'transparent'
-        },
-        tabBarBackground: tabBarBackground
+          borderTopColor: 'transparent',
+          backgroundColor: 'transparent'
+        }
+        // tabBarBackground: tabBarBackground
       }}>
       <Tab.Screen
         options={{

@@ -29,7 +29,7 @@ export const SiteListItem = ({
 
   return (
     <TouchableOpacity onPress={navigateToSite}>
-      <View className="p-2 bg-gray-100 flex-row items-center">
+      <View className="p-2 bg-white flex-row items-center">
         <View className="h-10 w-14 overflow-hidden rounded-sm">
           {screenshot_url ? (
             <Image
