@@ -42,7 +42,7 @@ export const SiteListItem = ({
           )}
         </View>
 
-        <View className="border-b border-gray-200 flex-row flex-1 pb-2 items-center gap-4">
+        <View className="flex-row flex-1 pb-2 items-center gap-4">
           <View className="pl-2 flex-1">
             <Typography
               numberOfLines={1}

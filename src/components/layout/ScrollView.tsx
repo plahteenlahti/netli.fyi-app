@@ -1,10 +1,5 @@
-import {
-  Image,
-  RefreshControl,
-  ScrollViewProps,
-  StyleSheet,
-  View
-} from 'react-native'
+import { BlurView } from '@react-native-community/blur'
+import { RefreshControl, ScrollViewProps, StyleSheet, View } from 'react-native'
 import { TouchableOpacity } from 'react-native-gesture-handler'
 import Animated, {
   Extrapolation,
@@ -15,8 +10,7 @@ import Animated, {
   useSharedValue
 } from 'react-native-reanimated'
 import { useSafeAreaInsets } from 'react-native-safe-area-context'
-import { Typography } from './Typography'
-import { BlurView } from '@react-native-community/blur'
+import { GradientText } from '../GradientText'
 
 type Props = {
   children: React.ReactNode
@@ -75,7 +69,7 @@ export const AnimatedScrollView = ({
   })
 
   const paddingTop = HEADER_HEIGHT + HEADER_PADDING + top
-
+  console.log('AnimatedScrollView', paddingTop)
   return (
     <View className="flex-1">
       <Animated.ScrollView
@@ -88,12 +82,8 @@ export const AnimatedScrollView = ({
           className="flex-row pl-2 mb-1"
           style={[largeTitleStyle, s.largeTitleContainer, { paddingTop }]}>
           {extraElement}
-          <Animated.Text
-            className={`text-3xl font-display font-semibold ${
-              !!extraElement && 'ml-2'
-            }`}>
-            {title}
-          </Animated.Text>
+          {extraElement ? <View className="w-2" /> : null}
+          <GradientText className="text-4xl font-bold">{title}</GradientText>
         </Animated.View>
         {children}
       </Animated.ScrollView>
@@ -113,9 +103,9 @@ export const AnimatedScrollView = ({
             <TouchableOpacity />
           </View>
           <View className="flex-1 justify-center items-center">
-            <Animated.Text className="text-gray-800 font-medium text-base">
+            <GradientText className="text-base font-medium">
               {title}
-            </Animated.Text>
+            </GradientText>
           </View>
           <View className="flex-1 flex-row-reverse items-center">
             {extraElement}

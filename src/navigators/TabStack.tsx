@@ -56,15 +56,14 @@ export const TabStack = () => {
 
   return (
     <Tab.Navigator
-      sceneContainerStyle={{ backgroundColor: 'red' }}
       screenOptions={{
         tabBarActiveTintColor: theme.accentColor,
         tabBarInactiveTintColor: theme.secondaryTextColor,
         tabBarStyle: {
           borderTopColor: 'transparent',
           backgroundColor: 'transparent'
-        }
-        // tabBarBackground: tabBarBackground
+        },
+        tabBarBackground: tabBarBackground
       }}>
       <Tab.Screen
         options={{

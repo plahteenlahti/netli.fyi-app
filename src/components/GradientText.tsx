@@ -1,3 +1,4 @@
+import { styled } from 'nativewind'
 import { Fragment, useCallback, useMemo, useState } from 'react'
 import {
   LayoutChangeEvent,
@@ -7,6 +8,7 @@ import {
   View
 } from 'react-native'
 import { Defs, LinearGradient, Stop, Svg, Text } from 'react-native-svg'
+import colors from 'tailwindcss/colors'
 
 interface Props {
   uppercase?: boolean
@@ -14,49 +16,28 @@ interface Props {
   children: string
   gradientStart?: string
   gradientEnd?: string
-  fontFamily?: TextStyle['fontFamily']
-  fontSize?: TextStyle['fontSize']
-  fontWeight?: TextStyle['fontWeight']
+  style?: TextStyle[][]
 }
 
-type TextTransforOption =
-  | 'uppercase'
-  | 'none'
-  | 'capitalize'
-  | 'lowercase'
-  | undefined
-
-export const GradientText = ({
+export const _GradientText = ({
   children,
-  fontSize = 16,
-  fontWeight = '600',
-  fontFamily = 'Inter',
-  uppercase,
-  gradientStart = '#CACACA',
-  gradientEnd = '#000'
+  style,
+  gradientStart = colors.gray[800],
+  gradientEnd = colors.gray[400]
 }: Props) => {
   const [dimensions, setDimensions] = useState({ height: 0, width: 0 })
-
-  // no LineHeight on Svg Text
 
   const onLayout = useCallback((event: LayoutChangeEvent) => {
     const { width, height } = event.nativeEvent.layout
     setDimensions({ width, height })
   }, [])
 
-  const styles: TextStyle = useMemo(
-    () => ({
-      fontSize: fontSize,
-      fontWeight: `${fontWeight}`,
-      fontFamily,
-      textTransform: uppercase ? 'uppercase' : ('none' as TextTransforOption)
-    }),
-
-    [fontSize, fontWeight, uppercase]
-  )
+  // the style returned from styled() is an array containging an array of styles
+  const properties: TextStyle = Object.assign({}, ...(style?.flat() ?? []))
 
   // react-native-svg Text does not support uppercase
-  const text = uppercase ? children.toUpperCase() : children
+  const text =
+    properties.textTransform === 'uppercase' ? children.toUpperCase() : children
 
   return (
     <Fragment>
@@ -64,11 +45,17 @@ export const GradientText = ({
       This is done so that the GradientText aligns vertically with Text elements,
       and also so it grows horizontally for longer texts */}
       <View style={hiddenStyles.container} onLayout={onLayout}>
-        <RNText style={[styles, hiddenStyles.text]}>{children}</RNText>
+        <RNText aria-hidden style={[style, hiddenStyles.text]}>
+          {text}
+        </RNText>
       </View>
-      <Svg height={dimensions.height} width={dimensions.width * 2}>
+      <Svg
+        aria-label={children}
+        role="heading"
+        height={dimensions.height}
+        width={dimensions.width}>
         <Defs>
-          <LinearGradient id="gradient" x1="0%" x2="100%" y1="0%" y2="0%">
+          <LinearGradient id="gradient" x1="0%" x2="0%" y1="0%" y2="100%">
             <Stop offset="0%" stopColor={gradientStart} />
             <Stop offset="100%" stopColor={gradientEnd} />
           </LinearGradient>
@@ -76,9 +63,9 @@ export const GradientText = ({
         <Text
           dy="25%"
           fill="url(#gradient)"
-          fontFamily={styles.fontFamily}
-          fontSize={styles.fontSize}
-          fontWeight={styles.fontWeight}
+          fontFamily={properties.fontFamily}
+          fontSize={properties.fontSize}
+          fontWeight={properties.fontWeight}
           x="0"
           y="50%">
           {text}
@@ -87,6 +74,10 @@ export const GradientText = ({
     </Fragment>
   )
 }
+
+export const GradientText = styled(_GradientText, {
+  baseClassName: 'font-display'
+})
 
 const hiddenStyles = StyleSheet.create({
   container: {

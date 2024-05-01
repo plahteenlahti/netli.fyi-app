@@ -1,10 +1,11 @@
 import { NativeStackScreenProps } from '@react-navigation/native-stack'
-import { ListRenderItem } from 'react-native'
+import { ListRenderItem, View } from 'react-native'
 import { SiteListItem } from '../components/SiteListItem'
 import { AnimatedFlatList } from '../components/layout/AnimatedFlatList'
 import { useSites } from '../hooks/site'
 import { TabParamList } from '../navigators/TabStack'
 import { NetlifySite } from '../typings/netlify'
+import { useCallback } from 'react'
 
 export const Sites = ({
   navigation
@@ -40,6 +41,11 @@ export const Sites = ({
       refreshing={sites.isRefetching}
       data={sites.data}
       renderItem={renderItem}
+      ItemSeparatorComponent={ItemSeparatorComponent}
     />
   )
+}
+
+const ItemSeparatorComponent = () => {
+  return <View className="h-px ml-16 bg-gray-200" />
 }

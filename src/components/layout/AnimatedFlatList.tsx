@@ -1,5 +1,12 @@
 import { BlurView } from '@react-native-community/blur'
-import { FlatListProps, RefreshControl, StyleSheet, View } from 'react-native'
+import {
+  FlatListProps,
+  ListRenderItem,
+  ListRenderItemInfo,
+  RefreshControl,
+  StyleSheet,
+  View
+} from 'react-native'
 import { TouchableOpacity } from 'react-native-gesture-handler'
 import Animated, {
   Extrapolation,
@@ -10,16 +17,6 @@ import Animated, {
   useSharedValue
 } from 'react-native-reanimated'
 import { useSafeAreaInsets } from 'react-native-safe-area-context'
-import {
-  Defs,
-  LinearGradient,
-  Mask,
-  Rect,
-  Stop,
-  Svg,
-  Text,
-  Use
-} from 'react-native-svg'
 import { GradientText } from '../GradientText'
 
 type Props<T> = {
@@ -41,6 +38,7 @@ export const AnimatedFlatList = <T,>({
   refreshing,
   onRefresh,
   withLogo,
+  renderItem,
   ...rest
 }: Props<T>) => {
   const { top } = useSafeAreaInsets()
@@ -79,12 +77,14 @@ export const AnimatedFlatList = <T,>({
   })
 
   const paddingTop = HEADER_HEIGHT + HEADER_PADDING + top
+  console.log('AnimatedFlatlist', paddingTop)
 
   return (
     <View className="flex-1">
       <Animated.FlatList
         className="bg-white"
         onScroll={scrollHandler}
+        renderItem={renderItem}
         refreshControl={
           <RefreshControl refreshing={refreshing} onRefresh={onRefresh} />
         }
@@ -93,13 +93,9 @@ export const AnimatedFlatList = <T,>({
             <Animated.View
               className="mb-12 pl-2"
               style={[largeTitleStyle, s.largeTitleContainer, { paddingTop }]}>
-              <GradientText fontSize={40}>Netli.fyi</GradientText>
-              <Animated.Text
-                className={`text-3xl font-display font-semibold text-gray-800 ${
-                  !!extraElement && 'ml-2'
-                }`}>
+              <GradientText className="text-4xl font-bold">
                 {title}
-              </Animated.Text>
+              </GradientText>
             </Animated.View>
           </>
         }
@@ -120,10 +116,10 @@ export const AnimatedFlatList = <T,>({
           <View className="flex-1 justify-center">
             <TouchableOpacity />
           </View>
-          <View className="flex-1">
-            <Animated.Text className="text-gray-800 font-medium text-base">
+          <View className="flex-1 justify-center items-center">
+            <GradientText className="text-base font-medium">
               {title}
-            </Animated.Text>
+            </GradientText>
           </View>
           <View className="flex-1 flex-row-reverse items-center">
             {extraElement}

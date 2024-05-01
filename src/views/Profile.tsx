@@ -2,23 +2,17 @@ import { BottomTabScreenProps } from '@react-navigation/bottom-tabs'
 import { CompositeScreenProps, StackActions } from '@react-navigation/native'
 import { NativeStackScreenProps } from '@react-navigation/native-stack'
 import { useEffect } from 'react'
-import {
-  Alert,
-  Linking,
-  RefreshControl,
-  SafeAreaView,
-  View
-} from 'react-native'
-import styled from 'styled-components/native'
+import { Alert, Image, Linking, Text, View } from 'react-native'
 import { AccountCard } from '../components/AccountCard'
 import { Card } from '../components/Card'
 import { CardTitle } from '../components/CardTitle'
 import { IconRow } from '../components/IconRow'
 import { ProfileSubscriptionPrompt } from '../components/iap/ProfileSubscriptionPrompt'
+import { AnimatedScrollView } from '../components/layout/ScrollView'
 import { ButtonRow } from '../components/row/ButtonRow'
 import { InfoRow } from '../components/row/InfoRow'
-import { Text } from '../components/text/Text'
 import { useAccounts } from '../hooks/account'
+import useTimeAgo from '../hooks/time/useTimeFrom'
 import { useUser } from '../hooks/user'
 import { RootStackParamList } from '../navigators/RootStack'
 import { TabParamList } from '../navigators/TabStack'
@@ -26,19 +20,7 @@ import { removeAllAccounts } from '../store/reducers/accounts'
 import { useAppDispatch } from '../store/store'
 import { sendEmail } from '../utilities/mail'
 import { localizedRelativeFormat } from '../utilities/time'
-import { useKeychain } from '../hooks/keychain'
-import Config from 'react-native-config'
-import Animated, {
-  Extrapolation,
-  interpolate,
-  useAnimatedScrollHandler,
-  useAnimatedStyle,
-  useSharedValue
-} from 'react-native-reanimated'
-import { Image } from 'react-native'
-import useTimeAgo from '../hooks/time/useTimeFrom'
-import { useSafeAreaInsets } from 'react-native-safe-area-context'
-import { AnimatedScrollView } from '../components/layout/ScrollView'
+import { Typography } from '../components/layout/Typography'
 
 type Props = CompositeScreenProps<
   NativeStackScreenProps<RootStackParamList>,
@@ -101,6 +83,7 @@ export const Profile = ({ navigation }: Props) => {
       onRefresh={user.refetch}
       refreshing={user.isRefetching}
       title="Profile">
+      <Text />
       <Card>
         <InfoRow title="Last login" value={lastLogin} />
         <InfoRow title="Account created" value={accountCreated} />
