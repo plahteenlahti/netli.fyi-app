@@ -20,6 +20,7 @@ import {
   Text,
   Use
 } from 'react-native-svg'
+import { GradientText } from '../GradientText'
 
 type Props<T> = {
   refreshing: boolean
@@ -92,46 +93,7 @@ export const AnimatedFlatList = <T,>({
             <Animated.View
               className="mb-12 pl-2"
               style={[largeTitleStyle, s.largeTitleContainer, { paddingTop }]}>
-              <Svg height={30} width={80} viewBox="0 0 800 300">
-                <Defs>
-                  <LinearGradient
-                    id="Gradient"
-                    gradientUnits="userSpaceOnUse"
-                    x1="0"
-                    y1="0"
-                    x2="0"
-                    y2="300">
-                    <Stop offset="0" stopColor="white" stopOpacity="0.8" />
-                    <Stop offset="1" stopColor="white" stopOpacity="1" />
-                  </LinearGradient>
-                  <Mask
-                    id="Mask"
-                    maskUnits="userSpaceOnUse"
-                    x="0"
-                    y="0"
-                    width="800"
-                    height="300">
-                    <Rect
-                      x="0"
-                      y="0"
-                      width="800"
-                      height="300"
-                      fill="url(#Gradient)"
-                    />
-                  </Mask>
-                  <Text
-                    id="Text"
-                    x="400"
-                    y="200"
-                    fontFamily="Verdana"
-                    fontSize="100"
-                    textAnchor="middle">
-                    Netli.fyi
-                  </Text>
-                </Defs>
-                <Use href="#Text" fill="#333" mask="url(#Mask)" />
-              </Svg>
-
+              <GradientText fontSize={40}>Netli.fyi</GradientText>
               <Animated.Text
                 className={`text-3xl font-display font-semibold text-gray-800 ${
                   !!extraElement && 'ml-2'
