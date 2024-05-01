@@ -87,6 +87,7 @@ export const RootStack = () => {
         component={Site}
         options={({ route }) => ({
           title: route.params.name,
+          headerShown: false,
           headerBackTitle: 'Sites',
           stackAnimation: 'slide_from_right',
           headerRight: () => headerRight(route)
@@ -122,9 +123,7 @@ export const RootStack = () => {
         name="Deploy"
         component={Deploy}
         options={({ route }) => ({
-          stackAnimation: 'slide_from_right',
-          title: 'Build',
-          headerBackTitle: 'Back'
+          presentation: 'modal'
         })}
       />
 

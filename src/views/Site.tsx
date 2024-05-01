@@ -13,10 +13,12 @@ import { useHooks } from '../hooks/hook'
 import { useSite } from '../hooks/site'
 import { useSubmissions } from '../hooks/submissions'
 import { RootStackParamList } from '../navigators/RootStack'
+import { AnimatedScrollView } from '../components/layout/ScrollView'
 
 type Props = NativeStackScreenProps<RootStackParamList, 'Site'>
 
 export const Site = ({
+  navigation,
   route: {
     params: { siteID, name }
   }
@@ -28,10 +30,11 @@ export const Site = ({
 
   return (
     <View className="flex-1">
-      <ScrollView
-        refreshControl={
-          <RefreshControl refreshing={false} onRefresh={site.refetch} />
-        }>
+      <AnimatedScrollView
+        goBack={navigation.goBack}
+        title={name}
+        onRefresh={site.refetch}
+        refreshing={site.isRefetching}>
         <View>
           <Card.Title className="mb-2">Preview</Card.Title>
           <Card>
@@ -75,7 +78,7 @@ export const Site = ({
             />
           )}
         </View>
-      </ScrollView>
+      </AnimatedScrollView>
     </View>
   )
 }

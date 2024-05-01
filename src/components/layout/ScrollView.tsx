@@ -11,12 +11,15 @@ import Animated, {
 } from 'react-native-reanimated'
 import { useSafeAreaInsets } from 'react-native-safe-area-context'
 import { GradientText } from '../GradientText'
+import FontAwesome5 from 'react-native-vector-icons/FontAwesome5'
+import colors from 'tailwindcss/colors'
 
 type Props = {
   children: React.ReactNode
   refreshing: boolean
   onRefresh: () => void
   extraElement?: React.ReactNode
+  goBack?: () => void
   title: string
 } & ScrollViewProps
 
@@ -28,6 +31,7 @@ const HEADER_PADDING = 16
 export const AnimatedScrollView = ({
   title,
   extraElement,
+  goBack,
   children,
   refreshing,
   onRefresh,
@@ -69,7 +73,8 @@ export const AnimatedScrollView = ({
   })
 
   const paddingTop = HEADER_HEIGHT + HEADER_PADDING + top
-  console.log('AnimatedScrollView', paddingTop)
+  const ellipsedTitle = title.length > 10 ? `${title.slice(0, 10)}...` : title
+
   return (
     <View className="flex-1">
       <Animated.ScrollView
@@ -78,13 +83,28 @@ export const AnimatedScrollView = ({
           <RefreshControl refreshing={refreshing} onRefresh={onRefresh} />
         }
         {...rest}>
-        <Animated.View
-          className="flex-row pl-2 mb-1"
-          style={[largeTitleStyle, s.largeTitleContainer, { paddingTop }]}>
-          {extraElement}
-          {extraElement ? <View className="w-2" /> : null}
-          <GradientText className="text-4xl font-bold">{title}</GradientText>
-        </Animated.View>
+        <View style={{ paddingTop }}>
+          {!!goBack && (
+            <TouchableOpacity
+              onPress={goBack}
+              className="ml-2 mb-2 bg-gray-200 rounded-full h-9 w-9 justify-center items-center">
+              <FontAwesome5
+                color={colors.gray[700]}
+                name="chevron-left"
+                size={20}
+              />
+            </TouchableOpacity>
+          )}
+          <Animated.View
+            className="flex-row pl-2 mb-1"
+            style={[largeTitleStyle, s.largeTitleContainer]}>
+            {extraElement}
+            {extraElement ? <View className="w-2" /> : null}
+            <GradientText className="text-4xl font-bold">
+              {ellipsedTitle}
+            </GradientText>
+          </Animated.View>
+        </View>
         {children}
       </Animated.ScrollView>
       <AnimatedBlurView
@@ -100,11 +120,17 @@ export const AnimatedScrollView = ({
         ]}>
         <View className="flex-row items-center justify-between">
           <View className="flex-1 justify-center">
-            <TouchableOpacity />
+            {goBack ? (
+              <TouchableOpacity>
+                <GradientText className="text-base font-medium">
+                  Back
+                </GradientText>
+              </TouchableOpacity>
+            ) : null}
           </View>
           <View className="flex-1 justify-center items-center">
             <GradientText className="text-base font-medium">
-              {title}
+              {ellipsedTitle}
             </GradientText>
           </View>
           <View className="flex-1 flex-row-reverse items-center">
