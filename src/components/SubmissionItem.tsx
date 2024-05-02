@@ -1,5 +1,5 @@
 import FontAwesome5 from 'react-native-vector-icons/FontAwesome5'
-import { FC } from 'react'
+
 import styled from 'styled-components/native'
 import { Submission } from '../typings/netlify.d'
 import { Text } from './text/Text'
@@ -9,7 +9,7 @@ type Props = {
   navigate: () => void
 }
 
-export const SubmissionItem: FC<Props> = ({ submission, navigate }) => {
+export const SubmissionItem = ({ submission, navigate }: Props) => {
   return (
     <Button onPress={navigate}>
       <Container>

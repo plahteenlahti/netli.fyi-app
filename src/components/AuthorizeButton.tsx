@@ -1,4 +1,3 @@
-import { FC } from 'react'
 import { TouchableOpacity } from 'react-native'
 import Svg, { Path } from 'react-native-svg'
 import { Text } from './text/Text'
@@ -7,7 +6,7 @@ type Props = {
   onPress: () => void
 }
 
-export const AuthorizeButton: FC<Props> = ({ onPress }) => {
+export const AuthorizeButton = ({ onPress }: Props) => {
   return (
     <TouchableOpacity
       className="rounded-md p-4 shadow-sm items-center flex-row bg-gray-800 justify-center m-4 "

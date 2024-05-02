@@ -1,4 +1,3 @@
-import { FC } from 'react'
 import { ViewStyle } from 'react-native'
 import { SvgXml } from 'react-native-svg'
 
@@ -10,7 +9,7 @@ export type Props = {
   style?: ViewStyle
 }
 
-const Icon: FC<Props> = ({ svgXml, size = 30, stroke = 'none', fill }) => (
+const Icon = ({ svgXml, size = 30, stroke = 'none', fill }: Props) => (
   <SvgXml xml={svgXml} width={size} height={size} fill={fill} stroke={stroke} />
 )
 

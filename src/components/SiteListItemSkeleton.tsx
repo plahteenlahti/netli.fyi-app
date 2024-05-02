@@ -1,4 +1,3 @@
-import { FC } from 'react'
 import { Easing } from 'react-native-reanimated'
 import styled from 'styled-components/native'
 import { AnimatedBone } from './AnimatedBone'
@@ -12,7 +11,7 @@ type Props = {
   isLoading: boolean
 }
 
-export const SiteListItemSkeleton: FC<Props> = ({}) => {
+export const SiteListItemSkeleton = ({}: Props) => {
   return (
     <Card>
       <PreviewSkeleton />

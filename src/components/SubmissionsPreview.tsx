@@ -1,4 +1,3 @@
-import { FC } from 'react'
 import styled from 'styled-components/native'
 import { Submission } from '../typings/netlify.d'
 import FontAwesome5 from 'react-native-vector-icons/FontAwesome5'
@@ -16,11 +15,11 @@ type Props = {
 
 type Navigation = NativeStackNavigationProp<RootStackParamList, 'Site'>
 
-export const SubmissionsPreview: FC<Props> = ({
+export const SubmissionsPreview = ({
   submissions,
   siteID,
   siteName
-}) => {
+}: Props) => {
   const shownSubmissions = submissions?.slice(0, 3)
   const navigation = useNavigation<Navigation>()
 

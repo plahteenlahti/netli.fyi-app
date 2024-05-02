@@ -1,4 +1,3 @@
-import { FC } from 'react'
 import FontAwesome5 from 'react-native-vector-icons/FontAwesome5'
 import styled from 'styled-components/native'
 import { HContainer } from './layout/Container'
@@ -14,14 +13,14 @@ type Props = {
   hideDivider?: boolean
 }
 
-export const IconRow: FC<Props> = ({
+export const IconRow = ({
   icon,
   title,
   action,
   brands,
   solid,
   hideDivider
-}) => {
+}: Props) => {
   return (
     <CardRow onPress={action}>
       <RowContainer hideDivider={hideDivider}>

@@ -21,7 +21,7 @@ type Props = {
   style?: any
 }
 
-export const AnimatedBone: FC<Props> = ({ animatedStyle, style }) => {
+export const AnimatedBone = ({ animatedStyle, style }: Props) => {
   return (
     <Bone style={style}>
       <AnimationContainer style={[animatedStyle]}>

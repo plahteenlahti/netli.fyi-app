@@ -10,7 +10,7 @@ type Props = {
   selected: boolean
 }
 
-export const Toggle: FC<Props> = ({ selected }) => {
+export const Toggle = ({ selected }: Props) => {
   const scale = useSharedValue(0)
 
   useEffect(() => {

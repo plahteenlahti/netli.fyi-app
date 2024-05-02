@@ -50,7 +50,7 @@ const config = {
   }
 }
 
-export const Authorize: FC<Props> = ({ navigation }) => {
+export const Authorize = ({ navigation }: Props) => {
   const dispatch = useAppDispatch()
   const [personalAccessToken, setPersonalAccessToken] = useState('')
 

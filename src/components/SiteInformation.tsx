@@ -1,4 +1,3 @@
-import { FC } from 'react'
 import { Linking } from 'react-native'
 import useTimeAgo from '../hooks/time/useTimeFrom'
 import { NetlifySite } from '../typings/netlify.d'
@@ -14,7 +13,7 @@ type Props = {
   loading: boolean
 }
 
-export const SiteInformation: FC<Props> = ({ site, name, loading }) => {
+export const SiteInformation = ({ site, name, loading }: Props) => {
   const openSite = () => {
     Linking.openURL(`${site?.url}`)
   }

@@ -1,6 +1,6 @@
 import { useNavigation } from '@react-navigation/native'
 import { NativeStackNavigationProp } from '@react-navigation/native-stack'
-import { FC } from 'react'
+
 import { Hook } from '../../typings/netlify'
 import { Card } from '../Card'
 import { CardTitle } from '../CardTitle'
@@ -17,7 +17,7 @@ type Props = {
 
 type Navigation = NativeStackNavigationProp<RootStackParamList, 'Site'>
 
-export const HooksPreview: FC<Props> = ({ hooks }) => {
+export const HooksPreview = ({ hooks }: Props) => {
   const navigation = useNavigation<Navigation>()
   const shownHooks = hooks?.slice(0, 5)
 

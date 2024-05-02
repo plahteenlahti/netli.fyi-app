@@ -1,7 +1,6 @@
-import { FC } from 'react'
 import Svg, { Path } from 'react-native-svg'
 
-export const PlaceholderIcon: FC = () => {
+export const PlaceholderIcon = () => {
   return (
     <Svg width="25" height="25" viewBox="0 0 40 40">
       <Path

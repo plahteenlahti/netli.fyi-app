@@ -1,4 +1,3 @@
-import { FC } from 'react'
 import { useForm } from 'react-hook-form'
 import { TouchableOpacity, View } from 'react-native'
 import { useBuildSettings, useUpdateBuildSettings } from '../hooks/site'
@@ -19,7 +18,7 @@ type Form = {
   functions_dir?: string | null
 }
 
-export const BuildSettings: FC<Props> = ({ siteID }) => {
+export const BuildSettings = ({ siteID }: Props) => {
   const buildSettings = useBuildSettings(siteID)
   const updateBuildSettings = useUpdateBuildSettings(siteID)
 

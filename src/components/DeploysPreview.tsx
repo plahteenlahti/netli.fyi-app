@@ -1,6 +1,6 @@
 import { useNavigation } from '@react-navigation/native'
 import { NativeStackNavigationProp } from '@react-navigation/native-stack'
-import { FC } from 'react'
+
 import { Text, TouchableOpacity, View } from 'react-native'
 import { Deploy } from '../typings/netlify.d'
 import { Card } from './Card'
@@ -16,7 +16,7 @@ type Props = {
 
 type Navigation = NativeStackNavigationProp<RootStackParamList, 'Site'>
 
-export const DeploysPreview: FC<Props> = ({ deploys, siteID, siteName }) => {
+export const DeploysPreview = ({ deploys, siteID, siteName }: Props) => {
   const navigation = useNavigation<Navigation>()
 
   const shownDeploys = deploys?.slice(0, 5)

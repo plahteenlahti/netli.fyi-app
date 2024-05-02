@@ -1,10 +1,8 @@
-import { FC } from 'react'
+import { formatDuration, intervalToDuration } from 'date-fns'
+import { Text, View } from 'react-native'
 import FontAwesome5 from 'react-native-vector-icons/FontAwesome5'
 import styled from 'styled-components/native'
 import { Build } from '../../typings/netlify'
-import { Text, View } from 'react-native'
-import { localizedFormat, localizedRelativeFormat } from '../../utilities/time'
-import { formatDuration, intervalToDuration } from 'date-fns'
 
 type Props = {
   build: Build
@@ -19,7 +17,7 @@ const buildTimeToMinutes = (buildTime: number) => {
   return formatted
 }
 
-export const BuildItem: FC<Props> = ({ build }) => {
+export const BuildItem = ({ build }: Props) => {
   const domain = build.custom_domain ? build.custom_domain : build.subdomain
 
   return (

@@ -1,4 +1,3 @@
-import { FC } from 'react'
 import styled from 'styled-components/native'
 import words from 'lodash/words'
 import { Linking, TouchableOpacity, View } from 'react-native'
@@ -33,7 +32,7 @@ const getValue = (v: unknown): FieldPresentation => {
   }
 }
 
-export const DataField: FC<Props> = ({ title, value }) => {
+export const DataField = ({ title, value }: Props) => {
   const { value: fiedValue, type } = getValue(value)
 
   const handleLinkPress = () => {

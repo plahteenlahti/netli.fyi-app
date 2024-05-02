@@ -1,4 +1,3 @@
-import { FC } from 'react'
 import FontAwesome5 from 'react-native-vector-icons/FontAwesome5'
 import styled, { css } from 'styled-components/native'
 import { Deploy } from '../typings/netlify.d'
@@ -11,7 +10,7 @@ type Props = {
   navigate: () => void
 }
 
-export const DeployItem: FC<Props> = ({ last, deploy, navigate }) => {
+export const DeployItem = ({ last, deploy, navigate }: Props) => {
   const deploydIn = localizedDuration(
     {
       minutes: Math.floor((deploy?.deploy_time ?? 0) / 60),

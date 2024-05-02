@@ -1,5 +1,5 @@
 import { NativeStackNavigationProp } from '@react-navigation/native-stack'
-import { FC } from 'react'
+
 import { Image, TouchableOpacity, View } from 'react-native'
 import { usePrefetchAccount } from '../hooks/account'
 import { RootStackParamList } from '../navigators/RootStack'
@@ -16,7 +16,7 @@ type Props = {
   navigation: NativeStackNavigationProp<RootStackParamList, 'Profile'>
 }
 
-export const AccountCard: FC<Props> = ({ account, navigation }) => {
+export const AccountCard = ({ account, navigation }: Props) => {
   const prefetchAccount = usePrefetchAccount()
 
   const navigateToAccount = () => {

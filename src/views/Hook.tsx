@@ -1,6 +1,6 @@
 import { RouteProp } from '@react-navigation/native'
 import { NativeStackNavigationProp } from '@react-navigation/native-stack'
-import { FC } from 'react'
+
 import styled from 'styled-components/native'
 import { Card } from '../components/Card'
 import { Text } from '../components/text/Text'
@@ -15,7 +15,7 @@ type Props = {
   route: Route
 }
 
-export const Submission: FC<Props> = ({ route }) => {
+export const Submission = ({ route }: Props) => {
   const { hookID } = route.params
   const { data: hook } = useHook(hookID)
 
