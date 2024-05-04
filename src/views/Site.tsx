@@ -1,19 +1,19 @@
 import { NativeStackScreenProps } from '@react-navigation/native-stack'
 
-import { Image, RefreshControl, ScrollView, View } from 'react-native'
+import { Image, View } from 'react-native'
 import { BuildSettings } from '../components/BuildSettings'
 import { Card } from '../components/Card'
 import { DeploysPreview } from '../components/DeploysPreview'
 import { NoPreview } from '../components/NoPreview'
 import { SiteInformation } from '../components/SiteInformation'
 import { SubmissionsPreview } from '../components/SubmissionsPreview'
+import { AnimatedScrollView } from '../components/layout/ScrollView'
 import { HooksPreview } from '../components/previews/hook'
 import { useDeploys } from '../hooks/deploy'
 import { useHooks } from '../hooks/hook'
 import { useSite } from '../hooks/site'
 import { useSubmissions } from '../hooks/submissions'
 import { RootStackParamList } from '../navigators/RootStack'
-import { AnimatedScrollView } from '../components/layout/ScrollView'
 
 type Props = NativeStackScreenProps<RootStackParamList, 'Site'>
 
