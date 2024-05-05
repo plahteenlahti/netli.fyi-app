@@ -8,7 +8,7 @@ import {
   useCurrentOfferings,
   useCustomerInfo,
   usePurchasePackage
-} from '../hooks/iap/subscription'
+} from '@hooks/iap/subscription'
 
 export const Subscription = () => {
   const customerInfo = useCustomerInfo()

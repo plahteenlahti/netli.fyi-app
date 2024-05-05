@@ -2,7 +2,7 @@ import { NativeStackScreenProps } from '@react-navigation/native-stack'
 
 import { FlatList, ListRenderItem, View } from 'react-native'
 import { SubmissionItem } from '../components/SubmissionItem'
-import { useSubmissions } from '../hooks/submissions'
+import { useSubmissions } from '@hooks/submissions'
 import { RootStackParamList } from '../navigators/RootStack'
 import { Submission } from '../typings/netlify.d'
 
