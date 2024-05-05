@@ -2,7 +2,7 @@ import { NativeStackScreenProps } from '@react-navigation/native-stack'
 import styled from 'styled-components/native'
 import { Card } from '../components/Card'
 import { Text } from '../components/text/Text'
-import { useSubmission } from '../hooks/submissions'
+import { useSubmission } from '@hooks/submissions'
 import { RootStackParamList } from '../navigators/RootStack'
 
 export const Submission = ({
