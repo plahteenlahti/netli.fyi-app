@@ -1,7 +1,7 @@
 import styled from 'styled-components/native'
 import { Card } from '../components/Card'
 import { BuildItem } from '../components/list-items/build'
-import { useBuilds } from '../hooks/build'
+import { useBuilds } from '@hooks/build'
 
 export const Builds = () => {
   const { data } = useBuilds('plahteenlahti-6nrl7-g')

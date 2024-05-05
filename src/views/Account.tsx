@@ -4,7 +4,7 @@ import { NativeStackNavigationProp } from '@react-navigation/native-stack'
 import { Card } from '../components/Card'
 import { Layout } from '../components/layout/Layout'
 import { InfoRow } from '../components/row/InfoRow'
-import { useAccount } from '../hooks/account'
+import { useAccount } from '@hooks/account'
 import { RootStackParamList } from '../navigators/RootStack'
 
 type Props = {
