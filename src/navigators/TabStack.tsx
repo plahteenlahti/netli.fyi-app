@@ -5,7 +5,7 @@ import { PathConfigMap } from '@react-navigation/native'
 import { Image, StyleSheet } from 'react-native'
 import FontAwesome5 from 'react-native-vector-icons/FontAwesome5'
 import { useTheme } from 'styled-components/native'
-import { useUser } from '../hooks/user'
+import { useUser } from '@hooks/user'
 import { Profile } from '../views/Profile'
 import { Sites } from '../views/Sites'
 
