@@ -1,5 +1,5 @@
 import { Linking } from 'react-native'
-import useTimeAgo from '../hooks/time/useTimeFrom'
+import useTimeAgo from '@hooks/time/useTimeFrom'
 import { NetlifySite } from '../typings/netlify.d'
 import { localizedRelativeFormat } from '../utilities/time'
 import { Card } from './Card'
