@@ -10,7 +10,7 @@ import {
 import styled from 'styled-components/native'
 import { Card } from '../components/Card'
 import { DataField } from '../components/DataField'
-import { useDeploy } from '../hooks/deploy'
+import { useDeploy } from '@hooks/deploy'
 import { RootStackParamList } from '../navigators/RootStack'
 import { Deploy as TypeDeploy } from '../typings/netlify.d'
 import { InfoRow } from '../components/row/InfoRow'
