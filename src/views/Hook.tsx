@@ -4,7 +4,7 @@ import { NativeStackNavigationProp } from '@react-navigation/native-stack'
 import styled from 'styled-components/native'
 import { Card } from '../components/Card'
 import { Text } from '../components/text/Text'
-import { useHook } from '../hooks/hook'
+import { useHook } from '@hooks/hook'
 import { RootStackParamList } from '../navigators/RootStack'
 
 type Navigation = NativeStackNavigationProp<RootStackParamList, 'Hook'>
