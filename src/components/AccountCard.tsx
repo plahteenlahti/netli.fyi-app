@@ -1,7 +1,7 @@
 import { NativeStackNavigationProp } from '@react-navigation/native-stack'
 
 import { Image, TouchableOpacity, View } from 'react-native'
-import { usePrefetchAccount } from '../hooks/account'
+import { usePrefetchAccount } from '@hooks/account'
 import { RootStackParamList } from '../navigators/RootStack'
 import { Account } from '../typings/netlify.d'
 import { Card } from './Card'
