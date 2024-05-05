@@ -1,6 +1,6 @@
 import { ReactNode } from 'react'
 import { FlexStyle, StyleProp, View, ViewStyle } from 'react-native'
-import { DimensionType, useSpacingStyle } from '../../hooks/useSpacing'
+import { DimensionType, useSpacingStyle } from '@hooks/useSpacing'
 
 interface Props {
   spacing?: number
