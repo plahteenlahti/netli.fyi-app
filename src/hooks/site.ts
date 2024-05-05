@@ -1,8 +1,8 @@
 import { useMutation, useQuery, useQueryClient } from '@tanstack/react-query'
 import { NetlifySite } from '../typings/netlify'
 import { BASE_URL } from '../utilities/constants'
-import { useToken } from './useToken'
 import { creatQueryKey } from '../utilities/queryKey'
+import { useToken } from './useToken'
 
 export const useSites = () => {
   const accessToken = useToken()
