@@ -1,7 +1,7 @@
 import { useNavigation } from '@react-navigation/native'
 import { StackNavigationProp } from '@react-navigation/stack'
 
-import { useCurrentOfferings } from '../../hooks/iap/subscription'
+import { useCurrentOfferings } from '@hooks/iap/subscription'
 
 import { RootStackParamList } from '../../navigators/RootStack'
 import { Card } from '../Card'
