@@ -1,6 +1,6 @@
 import { useForm } from 'react-hook-form'
 import { TouchableOpacity, View } from 'react-native'
-import { useBuildSettings, useUpdateBuildSettings } from '../hooks/site'
+import { useBuildSettings, useUpdateBuildSettings } from '@hooks/site'
 import { Card } from './Card'
 import { CardTitle } from './CardTitle'
 import { Typography } from './layout/Typography'
