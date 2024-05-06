@@ -1,8 +1,19 @@
 {
   "extends": "@react-native/typescript-config/tsconfig.json",
   "compilerOptions": {
+    "rootDir": ".",
+    "baseUrl": ".",
     "paths": {
-      "react": ["./node_modules/@types/react"]
+      "react": ["./node_modules/@types/react"],
+      "@components/*": ["src/components/*"],
+      "@utilities/*": ["src/utilities/*"],
+      "@assets/*": ["src/assets/*"],
+      "@store/*": ["src/store/*"],
+      "@navigators/*": ["src/navigators/*"],
+      "@styles/*": ["src/styles/*"],
+      "@views/*": ["src/views/*"],
+      "@hooks/*": ["src/hooks/*"],
+      "@typings/*": ["src/typings/*"]
     },
     "noUnusedLocals": true,
     "skipLibCheck": true,
