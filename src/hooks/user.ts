@@ -3,7 +3,7 @@ import {
   useQuery,
   useQueryClient
 } from '@tanstack/react-query'
-import { User } from '../typings/netlify'
+import { User } from '@typings/netlify'
 import { BASE_URL } from '../utilities/constants'
 import { useToken } from './useToken'
 
