@@ -1,7 +1,7 @@
 import FontAwesome5 from 'react-native-vector-icons/FontAwesome5'
 
 import styled from 'styled-components/native'
-import { Submission } from '../typings/netlify.d'
+import { Submission } from '@typings/netlify.d'
 import { Text } from './text/Text'
 
 type Props = {

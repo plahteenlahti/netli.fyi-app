@@ -1,11 +1,11 @@
 import styled from 'styled-components/native'
-import { Submission } from '../typings/netlify.d'
+import { Submission } from '@typings/netlify.d'
 import FontAwesome5 from 'react-native-vector-icons/FontAwesome5'
 import { SubmissionItem } from './SubmissionItem'
 import { useNavigation } from '@react-navigation/native'
 import { NativeStackNavigationProp } from '@react-navigation/native-stack'
 import { Text } from './text/Text'
-import { RootStackParamList } from '../navigators/RootStack'
+import { RootStackParamList } from '@navigators/RootStack'
 
 type Props = {
   submissions?: Array<Submission>
