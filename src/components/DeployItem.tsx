@@ -1,6 +1,6 @@
 import FontAwesome5 from 'react-native-vector-icons/FontAwesome5'
 import styled, { css } from 'styled-components/native'
-import { Deploy } from '../typings/netlify.d'
+import { Deploy } from '@typings/netlify.d'
 import { localizedDuration } from '../utilities/time'
 import { Text } from './text/Text'
 

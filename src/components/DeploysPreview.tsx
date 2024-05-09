@@ -2,11 +2,11 @@ import { useNavigation } from '@react-navigation/native'
 import { NativeStackNavigationProp } from '@react-navigation/native-stack'
 
 import { Text, TouchableOpacity, View } from 'react-native'
-import { Deploy } from '../typings/netlify.d'
+import { Deploy } from '@typings/netlify.d'
 import { Card } from './Card'
 import { CardTitle } from './CardTitle'
 import { DeployItem } from './DeployItem'
-import { RootStackParamList } from '../navigators/RootStack'
+import { RootStackParamList } from '@navigators/RootStack'
 
 type Props = {
   deploys?: Array<Deploy>
