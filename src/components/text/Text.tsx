@@ -1,6 +1,6 @@
 import { StyleProp, TextProps, TextStyle, Text as RNText } from 'react-native'
 import styled, { css } from 'styled-components/native'
-import { Color } from '../../styles/theme'
+import { Color } from '@styles/theme'
 
 export type Type =
   | 'hero'
