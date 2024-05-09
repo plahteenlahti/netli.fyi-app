@@ -2,8 +2,8 @@ import { formatRelative } from 'date-fns'
 
 import { TouchableOpacity } from 'react-native'
 import styled from 'styled-components/native'
-import { Card } from '../components/Card'
-import { Text } from '../components/text/Text'
+import { Card } from '@components/Card'
+import { Text } from '@components/text/Text'
 import {
   useCurrentOfferings,
   useCustomerInfo,
