@@ -1,6 +1,6 @@
 import { TouchableOpacity, View } from 'react-native'
-import { CardTitle } from '../components/CardTitle'
-import { Text } from '../components/text/Text'
+import { CardTitle } from '@components/CardTitle'
+import { Text } from '@components/text/Text'
 import { removeAllAccounts } from '../store/reducers/accounts'
 import { useAppDispatch, useAppSelector } from '../store/store'
 

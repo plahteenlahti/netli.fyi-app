@@ -8,14 +8,14 @@ import {
   ViewBase
 } from 'react-native'
 import styled from 'styled-components/native'
-import { Card } from '../components/Card'
-import { DataField } from '../components/DataField'
+import { Card } from '@components/Card'
+import { DataField } from '@components/DataField'
 import { useDeploy } from '@hooks/deploy'
-import { RootStackParamList } from '../navigators/RootStack'
-import { Deploy as TypeDeploy } from '../typings/netlify.d'
-import { InfoRow } from '../components/row/InfoRow'
-import { NavigationRow } from '../components/row/NavigationRow'
-import { HStack } from '../components/layout/HStack'
+import { RootStackParamList } from '@navigators/RootStack'
+import { Deploy as TypeDeploy } from '@typings/netlify.d'
+import { InfoRow } from '@components/row/InfoRow'
+import { NavigationRow } from '@components/row/NavigationRow'
+import { HStack } from '@components/layout/HStack'
 
 function shortenGitSha(sha?: string, length: number = 7): string | undefined {
   return sha?.substring(0, length)

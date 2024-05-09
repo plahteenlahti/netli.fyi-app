@@ -2,11 +2,11 @@ import { NativeStackScreenProps } from '@react-navigation/native-stack'
 
 import { FlatList, ListRenderItem } from 'react-native'
 import styled from 'styled-components/native'
-import { DeployItem } from '../components/DeployItem'
+import { DeployItem } from '@components/DeployItem'
 import { useDeploys } from '@hooks/deploy'
 
-import { Deploy } from '../typings/netlify.d'
-import { RootStackParamList } from '../navigators/RootStack'
+import { Deploy } from '@typings/netlify.d'
+import { RootStackParamList } from '@navigators/RootStack'
 
 export const Deploys = ({
   route,
