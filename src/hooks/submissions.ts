@@ -1,5 +1,5 @@
 import { useQuery } from '@tanstack/react-query'
-import { Submission } from '../typings/netlify'
+import { Submission } from '@typings/netlify'
 import { BASE_URL } from '../utilities/constants'
 import { useToken } from './useToken'
 

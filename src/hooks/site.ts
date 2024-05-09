@@ -1,5 +1,5 @@
 import { useMutation, useQuery, useQueryClient } from '@tanstack/react-query'
-import { NetlifySite } from '../typings/netlify'
+import { NetlifySite } from '@typings/netlify'
 import { BASE_URL } from '../utilities/constants'
 import { creatQueryKey } from '../utilities/queryKey'
 import { useToken } from './useToken'
