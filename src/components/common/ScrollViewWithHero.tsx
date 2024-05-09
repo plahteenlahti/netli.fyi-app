@@ -14,7 +14,7 @@ import Animated, {
 } from 'react-native-reanimated'
 import { useSafeAreaInsets } from 'react-native-safe-area-context'
 import styled from 'styled-components/native'
-import { widthBreakpoints } from '../../utilities/screen'
+import { widthBreakpoints } from '@utilities/screen'
 
 const MAX_IMAGE_SCALE_FACTOR = 3
 const DEFAULT_MAX_IMAGE_HEIGHT = 240

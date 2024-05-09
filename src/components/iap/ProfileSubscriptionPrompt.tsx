@@ -3,8 +3,7 @@ import { StackNavigationProp } from '@react-navigation/stack'
 
 import { useCurrentOfferings } from '@hooks/iap/subscription'
 
-import { RootStackParamList } from '../../navigators/RootStack'
-import { Card } from '../Card'
+import { RootStackParamList } from '@navigators/RootStack'
 import { NavigationRow } from '../row/NavigationRow'
 import { View } from 'react-native'
 
