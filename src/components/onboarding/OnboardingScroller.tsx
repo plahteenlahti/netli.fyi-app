@@ -10,8 +10,8 @@ import {
   TSpan
 } from 'react-native-svg'
 
-const image = require('../../assets/images/icon.png')
-const gradient = require('../../assets/images/gradient.png')
+const image = require('@assets/images/icon.png')
+const gradient = require('@assets/images/gradient.png')
 
 export const OnboardingScroller = () => {
   return (

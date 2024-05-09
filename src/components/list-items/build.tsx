@@ -1,7 +1,7 @@
 import { formatDuration, intervalToDuration } from 'date-fns'
 import { Text, View } from 'react-native'
 import FontAwesome5Icon from 'react-native-vector-icons/FontAwesome5'
-import { Build } from '../../typings/netlify'
+import { Build } from '@typings/netlify'
 
 type Props = {
   build: Build
