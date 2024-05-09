@@ -1,12 +1,12 @@
 import { useNavigation } from '@react-navigation/native'
 import { NativeStackNavigationProp } from '@react-navigation/native-stack'
 
-import { Hook } from '../../typings/netlify'
+import { Hook } from '@typings/netlify'
 import { Card } from '../Card'
 import { CardTitle } from '../CardTitle'
 import { Text } from '../text/Text'
 import { View } from 'react-native'
-import { RootStackParamList } from '../../navigators/RootStack'
+import { RootStackParamList } from '@navigators/RootStack'
 import { TouchableOpacity } from 'react-native-gesture-handler'
 
 type Props = {
