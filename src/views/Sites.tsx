@@ -1,11 +1,10 @@
-import { NativeStackScreenProps } from '@react-navigation/native-stack'
-import { ListRenderItem, View } from 'react-native'
 import { SiteListItem } from '@components/SiteListItem'
 import { AnimatedFlatList } from '@components/layout/AnimatedFlatList'
 import { useSites } from '@hooks/site'
 import { TabParamList } from '@navigators/TabStack'
+import { NativeStackScreenProps } from '@react-navigation/native-stack'
 import { NetlifySite } from '@typings/netlify'
-import { useCallback } from 'react'
+import { ListRenderItem, View } from 'react-native'
 
 export const Sites = ({
   navigation

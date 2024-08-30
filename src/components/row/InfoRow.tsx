@@ -25,7 +25,11 @@ export const InfoRow = ({
         </Typography>
 
         <View className="flex-1">
-          <Typography className="font-regular text-gray-500 flex-1 text-right text-base">
+          <Typography
+            className="font-regular text-gray-500 flex-1 text-right text-base"
+            style={{
+              fontVariant: ['tabular-nums']
+            }}>
             {value}
           </Typography>
         </View>

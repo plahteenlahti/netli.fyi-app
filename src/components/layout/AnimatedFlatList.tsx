@@ -77,7 +77,6 @@ export const AnimatedFlatList = <T,>({
   })
 
   const paddingTop = HEADER_HEIGHT + HEADER_PADDING + top
-  console.log('AnimatedFlatlist', paddingTop)
 
   return (
     <View className="flex-1">

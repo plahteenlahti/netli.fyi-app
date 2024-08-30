@@ -23,7 +23,7 @@ export const SiteListItem = ({
   framework
 }: Props) => {
   const lastDeploy = localizedRelativeFormat(
-    new Date(`${updated_at}`),
+    updated_at ? new Date(updated_at) : new Date(),
     new Date()
   )
 
@@ -51,7 +51,7 @@ export const SiteListItem = ({
               {custom_domain || default_domain}
             </Typography>
             <Typography className="text-sm text-gray-500">
-              {`Last deploy ${lastDeploy}`}- {framework}
+              {`Last deploy ${lastDeploy}`} {framework}
             </Typography>
           </View>
           <Chevron name="chevron-right" size={15} solid />

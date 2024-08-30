@@ -14,6 +14,8 @@ type Props = {
 
 export const Account = ({ route }: Props) => {
   const account = useAccount(route.params.accountID)
+
+  console.log(JSON.stringify(account.data, null, 2))
   return (
     <Layout>
       <Card>
@@ -27,11 +29,8 @@ export const Account = ({ route }: Props) => {
       </Card>
 
       <Card>
-        <InfoRow title="Title" value={account.data?.site_capabilities.title} />
-        <InfoRow
-          title="Asset acceleration"
-          value={account.data?.site_capabilities.cdn_propagation}
-        />
+        <InfoRow title="Capa" value={account.data?.billing_email} />
+
         <InfoRow
           title="Billing email"
           hideDivider

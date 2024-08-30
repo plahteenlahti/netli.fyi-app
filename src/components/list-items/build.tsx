@@ -2,6 +2,7 @@ import { formatDuration, intervalToDuration } from 'date-fns'
 import { Text, View } from 'react-native'
 import FontAwesome5Icon from 'react-native-vector-icons/FontAwesome5'
 import { Build } from '@typings/netlify'
+import { formatUrl } from '@utilities/url'
 
 type Props = {
   build: Build
@@ -17,16 +18,16 @@ const buildTimeToMinutes = (buildTime: number) => {
 }
 
 export const BuildItem = ({ build }: Props) => {
-  const domain = build.custom_domain ? build.custom_domain : build.subdomain
+  const domain = formatUrl(build.custom_domain ?? build.subdomain)
 
   return (
-    <View className="bg-white px-1 py-2 border-b border-b-gray-200 flex-row">
+    <View className="bg-white px-2 py-2 border-b border-b-gray-200 flex-row gap-1 ">
       {build.state === 'done' ? (
         <FontAwesome5Icon name="check-circle" />
       ) : (
         <FontAwesome5Icon name="exclamation-triangle" />
       )}
-      <View className="mr-2">
+      <View className="mr-2 flex-1">
         <Text className="text-gray-800 text-xs mb-1">
           <Text>{domain}: </Text>
           <Text>{build.context}</Text>
