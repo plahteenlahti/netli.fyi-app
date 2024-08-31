@@ -13,20 +13,23 @@ import Animated, {
   withTiming
 } from 'react-native-reanimated'
 
-interface Props {
+type Props = {
   style?: StyleProp<ViewStyle>
   disableAnimation?: boolean
   shadowWidth?: number
+  className?: string
 }
 
 const DEFAULT_SHADOW_WIDTH = 150
+
 export const LoadingView = ({
   style,
   disableAnimation,
-  shadowWidth = DEFAULT_SHADOW_WIDTH
+  shadowWidth = DEFAULT_SHADOW_WIDTH,
+  className
 }: Props) => {
   const window = useWindowDimensions()
-  const initialXValue = -window.width
+  const initialXValue = -150
   const translateX = useSharedValue(initialXValue)
 
   useEffect(() => {
@@ -48,7 +51,7 @@ export const LoadingView = ({
   }, [disableAnimation, initialXValue, translateX, window])
 
   return (
-    <View style={[s.loading, style]}>
+    <View style={[s.loading, style]} className={className}>
       <Animated.View
         style={[
           s.shadow,

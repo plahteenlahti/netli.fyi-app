@@ -1,4 +1,9 @@
-import { TouchableOpacity, TouchableOpacityProps, View } from 'react-native'
+import {
+  StyleSheet,
+  TouchableOpacity,
+  TouchableOpacityProps,
+  View
+} from 'react-native'
 import FontAwesome5 from 'react-native-vector-icons/FontAwesome5'
 import styled from 'styled-components/native'
 import { HStack } from '../layout/HStack'
@@ -31,13 +36,15 @@ export const NavigationRow = ({
 
         <HStack alignItems="center">
           {loading ? (
-            <LoadingView style={{ height: 20, width: 100, borderRadius: 10 }} />
+            <LoadingView className="w-[100] h-[20] rounded-lg" />
           ) : (
             <Typography secondary className="font-regular text-right text-base">
               {value}
             </Typography>
           )}
-          {type === 'navigation' && <Chevron name="chevron-right" />}
+          {!loading && type === 'navigation' && (
+            <Chevron name="chevron-right" />
+          )}
         </HStack>
       </View>
     </TouchableOpacity>
@@ -49,3 +56,5 @@ const Chevron = styled(FontAwesome5).attrs(({ theme }) => ({
 }))`
   margin-left: 8px;
 `
+
+const s = StyleSheet.create({})

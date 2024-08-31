@@ -1,8 +1,8 @@
 import FontAwesome5 from 'react-native-vector-icons/FontAwesome5'
 import styled from 'styled-components/native'
-import { HContainer } from './layout/Container'
 import { RowContainer } from './row/RowContainer'
 import { Text } from './text/Text'
+import { View } from 'react-native'
 
 type Props = {
   icon: string
@@ -24,14 +24,14 @@ export const IconRow = ({
   return (
     <CardRow onPress={action}>
       <RowContainer hideDivider={hideDivider}>
-        <HContainer justifyContent="space-between" flex={1}>
-          <HContainer>
+        <View>
+          <View>
             <CardIcon name={icon} size={16} brands={brands} solid={solid} />
             <CardText>{title}</CardText>
-          </HContainer>
+          </View>
 
           <Chevron name="chevron-right" size={15} brands />
-        </HContainer>
+        </View>
       </RowContainer>
     </CardRow>
   )

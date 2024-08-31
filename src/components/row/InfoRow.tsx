@@ -1,18 +1,21 @@
 import { View } from 'react-native'
 import { Typography } from '../layout/Typography'
+import { LoadingView } from '@components/Loader'
 
 type Props = {
   title: string
   editHint?: string
   value?: string | number
   hideDivider?: boolean
+  loading?: boolean
 }
 
 export const InfoRow = ({
   title,
   editHint,
   value,
-  hideDivider = false
+  hideDivider = false,
+  loading
 }: Props) => {
   return (
     <View
@@ -24,14 +27,18 @@ export const InfoRow = ({
           {title}
         </Typography>
 
-        <View className="flex-1">
-          <Typography
-            className="font-regular text-gray-500 flex-1 text-right text-base"
-            style={{
-              fontVariant: ['tabular-nums']
-            }}>
-            {value}
-          </Typography>
+        <View className="">
+          {loading ? (
+            <LoadingView className="w-[100] h-[20] rounded-lg" />
+          ) : (
+            <Typography
+              className="font-regular text-gray-500 flex-1 text-right text-base"
+              style={{
+                fontVariant: ['tabular-nums']
+              }}>
+              {value}
+            </Typography>
+          )}
         </View>
       </View>
       {!!editHint && (

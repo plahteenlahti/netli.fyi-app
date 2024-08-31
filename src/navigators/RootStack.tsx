@@ -4,7 +4,7 @@ import { createNativeStackNavigator } from '@react-navigation/native-stack'
 import { useCallback } from 'react'
 import { useToken } from '@hooks/useToken'
 
-import { tabNavigatorLinkingConfig, TabStack } from './TabStack'
+import { tabNavigatorLinkingConfig, TabParamList, TabStack } from './TabStack'
 import { Linking, Pressable } from 'react-native'
 
 import styled from 'styled-components/native'
@@ -27,7 +27,6 @@ export type RootStackParamList = {
   FeatureFlags: undefined
   Subscription: undefined
   DeveloperMenu: undefined
-
   Site: { name: string; url: string; siteID: string }
   Hook: { name: string; hookID: string }
   Deploys: { siteID: string; name: string }
@@ -36,7 +35,7 @@ export type RootStackParamList = {
   Submission: { submissionID: string; name: string }
 }
 
-export type CompositeStackParamList = RootStackParamList & TabStackParamList
+export type CompositeStackParamList = RootStackParamList & TabParamList
 
 const Stack = createNativeStackNavigator<RootStackParamList>()
 

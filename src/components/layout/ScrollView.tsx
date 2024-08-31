@@ -75,12 +75,17 @@ export const AnimatedScrollView = ({
   const paddingTop = HEADER_HEIGHT + HEADER_PADDING + top
   const ellipsedTitle = title.length > 10 ? `${title.slice(0, 10)}...` : title
 
+  const hasRefreshControl =
+    typeof onRefresh !== 'undefined' && typeof refreshing !== 'undefined'
+
   return (
     <View className="flex-1">
       <Animated.ScrollView
         onScroll={scrollHandler}
         refreshControl={
-          <RefreshControl refreshing={refreshing} onRefresh={onRefresh} />
+          hasRefreshControl ? (
+            <RefreshControl refreshing={refreshing} onRefresh={onRefresh} />
+          ) : undefined
         }
         {...rest}>
         <View style={{ paddingTop }}>

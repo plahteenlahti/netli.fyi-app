@@ -4,6 +4,7 @@ import styled from 'styled-components/native'
 import { localizedRelativeFormat } from '../utilities/time'
 import { NoPreview } from './NoPreview'
 import { Typography } from './layout/Typography'
+import { formatUrl } from '@utilities/url'
 
 type Props = {
   navigateToSite: () => void
@@ -27,6 +28,8 @@ export const SiteListItem = ({
     new Date()
   )
 
+  const domain = formatUrl(custom_domain ?? default_domain)
+
   return (
     <TouchableOpacity onPress={navigateToSite}>
       <View className="p-2 bg-white flex-row items-center">
@@ -48,7 +51,7 @@ export const SiteListItem = ({
               numberOfLines={1}
               lineBreakMode="clip"
               className="text-base text-gray-700 font-semibold flex-1">
-              {custom_domain || default_domain}
+              {domain}
             </Typography>
             <Typography className="text-sm text-gray-500">
               {`Last deploy ${lastDeploy}`} {framework}

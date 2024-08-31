@@ -107,47 +107,6 @@ export const Profile = ({ navigation }: Props) => {
           />
         )
       })}
-
-      <CardTitle
-        icon="meteor"
-        title="Extras"
-        extra="Netli.fyi is a free service that helps you manage your websites. It's
-          built by a single person (Perttu Lähteenlahti), and is fully open
-          source. Below you can find some links to the source code and the
-          documentation."
-      />
-
-      <Card>
-        <IconRow
-          icon="twitter"
-          brands
-          title="Twitter"
-          action={() => Linking.openURL('https://twitter.com/plahteenlahti')}
-        />
-        <IconRow
-          icon="envelope"
-          title="Contact"
-          solid
-          action={() =>
-            sendEmail('perttu@lahteenlahti.com', 'About Netli.fyi', 'Hello!')
-          }
-        />
-        <IconRow
-          icon="heart"
-          title="Rate Netli.fyi"
-          solid
-          action={() => {}} // TODO add rating link
-        />
-        <IconRow
-          icon="code"
-          title="Source Code"
-          solid
-          hideDivider
-          action={() =>
-            Linking.openURL('https://github.com/plahteenlahti/netli.fyi-app')
-          }
-        />
-      </Card>
     </AnimatedScrollView>
   )
 }

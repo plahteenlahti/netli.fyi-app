@@ -4,6 +4,7 @@ import { useSites } from '@hooks/site'
 import { TabParamList } from '@navigators/TabStack'
 import { NativeStackScreenProps } from '@react-navigation/native-stack'
 import { NetlifySite } from '@typings/netlify'
+import { formatUrl } from '@utilities/url'
 import { ListRenderItem, View } from 'react-native'
 
 export const Sites = ({
@@ -15,7 +16,7 @@ export const Sites = ({
     const navigateToSite = () => {
       navigation.navigate('Site', {
         siteID: `${item.id}`,
-        name: item.custom_domain ?? `${item.default_domain}`,
+        name: formatUrl(item.custom_domain ?? item.default_domain),
         url: item.custom_domain ?? `${item.default_domain}`
       })
     }
