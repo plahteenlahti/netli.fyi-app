@@ -70,3 +70,5 @@ yarn-error.log
 android/app/release.keystore.properties
 ios/authKey.json
 
+
+coverage/

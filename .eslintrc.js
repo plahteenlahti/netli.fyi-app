@@ -5,7 +5,7 @@ module.exports = {
   },
   extends: ['@react-native', 'plugin:react/jsx-runtime'],
   parser: '@typescript-eslint/parser',
-  plugins: ['@typescript-eslint', 'react', 'react-native'],
+  plugins: ['@typescript-eslint', 'react', 'react-native', 'jest'],
   rules: {
     'no-undef': 'off',
     semi: [2, 'never'],

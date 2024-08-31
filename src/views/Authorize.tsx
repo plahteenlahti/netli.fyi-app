@@ -1,10 +1,14 @@
+import { AuthorizeButton } from '@components/AuthorizeButton'
+import { OnboardingScroller } from '@components/onboarding/OnboardingScroller'
+import { Text } from '@components/text/Text'
+import { RootStackParamList } from '@navigators/RootStack'
 import { RouteProp, StackActions } from '@react-navigation/native'
 import { NativeStackNavigationProp } from '@react-navigation/native-stack'
-import { FC, useState } from 'react'
+import { openURL } from '@utilities/url'
+import { useState } from 'react'
 import {
   Dimensions,
   KeyboardAvoidingView,
-  Linking,
   Platform,
   SafeAreaView,
   ScrollView,
@@ -14,15 +18,8 @@ import {
 } from 'react-native'
 import { authorize } from 'react-native-app-auth'
 import Config from 'react-native-config'
-import styled from 'styled-components/native'
-import { AuthorizeButton } from '@components/AuthorizeButton'
-import { OnboardingScroller } from '@components/onboarding/OnboardingScroller'
-import { Text } from '@components/text/Text'
-import { RootStackParamList } from '@navigators/RootStack'
 import { addAccountFirstTime } from '../store/reducers/accounts'
 import { useAppDispatch } from '../store/store'
-
-const { width } = Dimensions.get('window')
 
 type AuthorizationScreenNavigationProp = NativeStackNavigationProp<
   RootStackParamList,
@@ -34,9 +31,6 @@ type Props = {
   navigation: AuthorizationScreenNavigationProp
   route: AuthorizationScreenRouteProp
 }
-
-const image = require('../assets/images/icon.png')
-const gradient = require('../assets/images/gradient.png')
 
 const config = {
   clientId: Config.client_id,
@@ -121,7 +115,7 @@ export const Authorize = ({ navigation }: Props) => {
               <Text
                 className="text-blue-500"
                 onPress={() =>
-                  Linking.openURL(
+                  openURL(
                     'https://app.netlify.com/user/applications#personal-access-tokens'
                   )
                 }>
