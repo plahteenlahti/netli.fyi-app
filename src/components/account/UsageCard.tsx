@@ -1,13 +1,12 @@
 import { View } from 'react-native'
-import Animated from 'react-native-reanimated'
 import { Text } from '../text/Text'
 
-const getBarWidth = (val: number, max: number, min: number) => {
+const getBarWidth = (val: number, max: number, min: number): `${number}%` => {
   const normalized = (val - min) / (max - min)
   if (normalized < 0.05) {
     return '1%'
   } else {
-    return normalized * 100 + '%'
+    return `${normalized * 100}%`
   }
 }
 
@@ -25,7 +24,7 @@ export const UsageCard = ({ max, min, value, title }: Props) => {
         {title} {`${value} / ${max}`}
       </Text>
       <View className="h-1 bg-gray-200 rounded-md overflow mb-2">
-        <Animated.View
+        <View
           className="rounded-md h-full bg-blue-600"
           style={{
             width: getBarWidth(value, max, min)

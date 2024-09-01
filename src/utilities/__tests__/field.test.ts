@@ -5,6 +5,10 @@ import { localizedRelativeFormat } from '../time'
 jest.mock('lodash/isDate')
 jest.mock('../time')
 
+const isDateMock = isDate as jest.MockedFunction<typeof isDate>
+const localizedRelativeFormatMock =
+  localizedRelativeFormat as jest.MockedFunction<typeof localizedRelativeFormat>
+
 describe('getField', () => {
   beforeEach(() => {
     jest.clearAllMocks()
@@ -12,8 +16,8 @@ describe('getField', () => {
 
   it("should return localized relative format for 'date' field with a valid date", () => {
     const dateValue = new Date('2024-08-29T09:35:34.845548+00:00')
-    isDate.mockReturnValue(true)
-    localizedRelativeFormat.mockReturnValue('3 days ago')
+    isDateMock.mockReturnValue(true)
+    localizedRelativeFormatMock.mockReturnValue('3 days ago')
 
     const result = getField(dateValue, 'date')
     expect(isDate).toHaveBeenCalledWith(dateValue)
@@ -26,7 +30,7 @@ describe('getField', () => {
 
   it("should return an empty string for 'date' field with an invalid date", () => {
     const invalidDateValue = 'not-a-date'
-    isDate.mockReturnValue(false)
+    isDateMock.mockReturnValue(false)
 
     const result = getField(invalidDateValue, 'date')
     expect(isDate).toHaveBeenCalledWith(invalidDateValue)
@@ -36,8 +40,8 @@ describe('getField', () => {
 
   it("should return localized relative format for 'url' field with a valid date", () => {
     const dateValue = new Date('2024-08-29T09:35:34.845548+00:00')
-    isDate.mockReturnValue(true)
-    localizedRelativeFormat.mockReturnValue('3 days ago')
+    isDateMock.mockReturnValue(true)
+    localizedRelativeFormatMock.mockReturnValue('3 days ago')
 
     const result = getField(dateValue, 'url')
     expect(isDate).toHaveBeenCalledWith(dateValue)
@@ -50,7 +54,7 @@ describe('getField', () => {
 
   it("should return an empty string for 'url' field with an invalid date", () => {
     const invalidDateValue = 'not-a-date'
-    isDate.mockReturnValue(false)
+    isDateMock.mockReturnValue(false)
 
     const result = getField(invalidDateValue, 'url')
     expect(isDate).toHaveBeenCalledWith(invalidDateValue)

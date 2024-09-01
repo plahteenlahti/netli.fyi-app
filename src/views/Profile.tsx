@@ -1,12 +1,6 @@
-import { BottomTabScreenProps } from '@react-navigation/bottom-tabs'
-import { CompositeScreenProps, StackActions } from '@react-navigation/native'
-import { NativeStackScreenProps } from '@react-navigation/native-stack'
-import { useEffect } from 'react'
-import { Alert, Image, Linking, Text } from 'react-native'
 import { AccountCard } from '@components/AccountCard'
 import { Card } from '@components/Card'
 import { CardTitle } from '@components/CardTitle'
-import { IconRow } from '@components/IconRow'
 import { ProfileSubscriptionPrompt } from '@components/iap/ProfileSubscriptionPrompt'
 import { AnimatedScrollView } from '@components/layout/ScrollView'
 import { ButtonRow } from '@components/row/ButtonRow'
@@ -16,9 +10,13 @@ import useTimeAgo from '@hooks/time/useTimeFrom'
 import { useUser } from '@hooks/user'
 import { RootStackParamList } from '@navigators/RootStack'
 import { TabParamList } from '@navigators/TabStack'
+import { BottomTabScreenProps } from '@react-navigation/bottom-tabs'
+import { CompositeScreenProps, StackActions } from '@react-navigation/native'
+import { NativeStackScreenProps } from '@react-navigation/native-stack'
+import { useEffect } from 'react'
+import { Alert, Image, Text } from 'react-native'
 import { removeAllAccounts } from '../store/reducers/accounts'
 import { useAppDispatch } from '../store/store'
-import { sendEmail } from '../utilities/mail'
 import { localizedRelativeFormat } from '../utilities/time'
 
 type Props = CompositeScreenProps<
@@ -38,10 +36,6 @@ export const Profile = ({ navigation }: Props) => {
 
     return unsubscribe
   }, [navigation])
-
-  const navigateToProfiles = () => {
-    navigation.navigate('Profiles')
-  }
 
   const logout = () => {
     Alert.alert(

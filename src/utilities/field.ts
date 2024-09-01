@@ -3,7 +3,10 @@ import { localizedRelativeFormat } from './time'
 
 type Field = 'url' | 'date' | 'boolean'
 
-export const getField = (value: string | boolean | number, field: Field) => {
+export const getField = (
+  value: string | boolean | number | Date,
+  field: Field
+) => {
   switch (field) {
     case 'date':
       return isDate(value)

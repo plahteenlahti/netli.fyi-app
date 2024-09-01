@@ -1,12 +1,5 @@
 import { BlurView } from '@react-native-community/blur'
-import {
-  FlatListProps,
-  ListRenderItem,
-  ListRenderItemInfo,
-  RefreshControl,
-  StyleSheet,
-  View
-} from 'react-native'
+import { FlatListProps, RefreshControl, StyleSheet, View } from 'react-native'
 import { TouchableOpacity } from 'react-native-gesture-handler'
 import Animated, {
   Extrapolation,

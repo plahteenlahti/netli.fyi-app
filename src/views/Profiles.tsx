@@ -1,6 +1,6 @@
-import { VContainer } from '@components/layout/Container'
 import { Layout } from '@components/layout/Layout'
 import { Text } from '@components/text/Text'
+import { View } from 'react-native'
 import { useAppSelector } from '../store/store'
 
 export const Profiles = () => {
@@ -10,9 +10,9 @@ export const Profiles = () => {
     <Layout>
       <Text type="hero">Profiles</Text>
       {profiles.map(profile => (
-        <VContainer>
+        <View>
           <Text>{profile.name}</Text>
-        </VContainer>
+        </View>
       ))}
     </Layout>
   )

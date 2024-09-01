@@ -1,13 +1,9 @@
-import { useNavigation } from '@react-navigation/native'
-import { NativeStackNavigationProp } from '@react-navigation/native-stack'
-
 import { Hook } from '@typings/netlify'
+import { View } from 'react-native'
+import { TouchableOpacity } from 'react-native-gesture-handler'
 import { Card } from '../Card'
 import { CardTitle } from '../CardTitle'
 import { Text } from '../text/Text'
-import { View } from 'react-native'
-import { RootStackParamList } from '@navigators/RootStack'
-import { TouchableOpacity } from 'react-native-gesture-handler'
 
 type Props = {
   hooks?: Array<Hook>
@@ -15,10 +11,7 @@ type Props = {
   siteName: string
 }
 
-type Navigation = NativeStackNavigationProp<RootStackParamList, 'Site'>
-
 export const HooksPreview = ({ hooks }: Props) => {
-  const navigation = useNavigation<Navigation>()
   const shownHooks = hooks?.slice(0, 5)
 
   const rows = buildInfoRows(shownHooks)

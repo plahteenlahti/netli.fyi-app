@@ -1,9 +1,4 @@
-import {
-  StyleSheet,
-  TouchableOpacity,
-  TouchableOpacityProps,
-  View
-} from 'react-native'
+import { TouchableOpacity, TouchableOpacityProps, View } from 'react-native'
 import FontAwesome5 from 'react-native-vector-icons/FontAwesome5'
 import styled from 'styled-components/native'
 import { HStack } from '../layout/HStack'
@@ -56,5 +51,3 @@ const Chevron = styled(FontAwesome5).attrs(({ theme }) => ({
 }))`
   margin-left: 8px;
 `
-
-const s = StyleSheet.create({})

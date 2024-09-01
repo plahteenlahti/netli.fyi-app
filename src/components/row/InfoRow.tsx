@@ -3,7 +3,7 @@ import { Typography } from '../layout/Typography'
 import { LoadingView } from '@components/Loader'
 
 type Props = {
-  title: string
+  title?: string
   editHint?: string
   value?: string | number
   hideDivider?: boolean

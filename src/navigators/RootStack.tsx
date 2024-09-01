@@ -123,13 +123,13 @@ export const RootStack = () => {
       <Stack.Screen
         name="Deploy"
         component={Deploy}
-        options={({ route }) => ({
+        options={() => ({
           presentation: 'modal'
         })}
       />
 
       <Stack.Screen
-        name="Build"
+        name="Deploy"
         component={Deploy}
         options={({ route }) => ({
           stackAnimation: 'slide_from_right',

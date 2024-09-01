@@ -1,5 +1,5 @@
 import { styled } from 'nativewind'
-import { Fragment, useCallback, useMemo, useState } from 'react'
+import { Fragment, useCallback, useState } from 'react'
 import {
   LayoutChangeEvent,
   Text as RNText,

@@ -1,10 +1,10 @@
-import { FC, useEffect } from 'react'
-import styled from 'styled-components/native'
+import { useEffect } from 'react'
 import Animated, {
   useAnimatedStyle,
   useSharedValue,
   withSpring
 } from 'react-native-reanimated'
+import styled from 'styled-components/native'
 
 type Props = {
   selected: boolean

@@ -3,7 +3,12 @@ import {
   localizedDuration,
   localizedRelativeFormat
 } from '../time'
-import { format, formatDuration, formatRelative } from 'date-fns'
+import {
+  format,
+  formatDuration,
+  FormatDurationOptions,
+  formatRelative
+} from 'date-fns'
 import isDate from 'lodash/isDate'
 
 jest.mock('lodash/isDate')
@@ -13,6 +18,15 @@ jest.mock('date-fns', () => ({
   formatRelative: jest.fn()
 }))
 
+const isDateMock = isDate as jest.MockedFunction<typeof isDate>
+const formatRelativeMock = formatRelative as jest.MockedFunction<
+  typeof formatRelative
+>
+const formatMock = format as jest.MockedFunction<typeof format>
+const formatDurationMock = formatDuration as jest.MockedFunction<
+  typeof formatDuration
+>
+
 describe('localizedFormat', () => {
   beforeEach(() => {
     jest.clearAllMocks()
@@ -20,8 +34,8 @@ describe('localizedFormat', () => {
 
   it('should return formatted date when a valid date is provided', () => {
     const dateValue = new Date('2024-08-29T09:35:34.845548+00:00')
-    isDate.mockReturnValue(true)
-    format.mockReturnValue('formatted-date')
+    isDateMock.mockReturnValue(true)
+    formatMock.mockReturnValue('formatted-date')
 
     const result = localizedFormat(dateValue, 'yyyy-MM-dd')
     expect(isDate).toHaveBeenCalledWith(dateValue)
@@ -30,8 +44,9 @@ describe('localizedFormat', () => {
   })
 
   it('should return "-" when an invalid date is provided', () => {
-    isDate.mockReturnValue(false)
+    isDateMock.mockReturnValue(false)
 
+    //@ts-expect-error test invalid date
     const result = localizedFormat('invalid-date', 'yyyy-MM-dd')
     expect(isDate).toHaveBeenCalledWith('invalid-date')
     expect(format).not.toHaveBeenCalled()
@@ -46,7 +61,7 @@ describe('localizedDuration', () => {
 
   it('should return formatted duration', () => {
     const duration = { hours: 1, minutes: 30 }
-    formatDuration.mockReturnValue('1 hour 30 minutes')
+    formatDurationMock.mockReturnValue('1 hour 30 minutes')
 
     const result = localizedDuration(duration)
     expect(formatDuration).toHaveBeenCalledWith(duration, {})
@@ -55,8 +70,11 @@ describe('localizedDuration', () => {
 
   it('should return formatted duration with options', () => {
     const duration = { hours: 1, minutes: 30 }
-    const options = { format: ['hours', 'minutes'], zero: true }
-    formatDuration.mockReturnValue('01:30')
+    const options = {
+      format: ['hours', 'minutes'],
+      zero: true
+    } satisfies FormatDurationOptions
+    formatDurationMock.mockReturnValue('01:30')
 
     const result = localizedDuration(duration, options)
     expect(formatDuration).toHaveBeenCalledWith(duration, options)
@@ -71,8 +89,8 @@ describe('localizedRelativeFormat', () => {
 
   it('should return relative formatted date when a valid date is provided', () => {
     const dateValue = new Date('2024-08-29T09:35:34.845548+00:00')
-    isDate.mockReturnValue(true)
-    formatRelative.mockReturnValue('3 days ago')
+    isDateMock.mockReturnValue(true)
+    formatRelativeMock.mockReturnValue('3 days ago')
 
     const result = localizedRelativeFormat(dateValue)
     expect(isDate).toHaveBeenCalledWith(dateValue)
@@ -85,24 +103,24 @@ describe('localizedRelativeFormat', () => {
   })
 
   it('should return "-" when an invalid date is provided', () => {
-    isDate.mockReturnValue(false)
+    isDateMock.mockReturnValue(false)
 
+    //@ts-expect-error test invalid date
     const result = localizedRelativeFormat('invalid-date')
     expect(isDate).toHaveBeenCalledWith('invalid-date')
     expect(formatRelative).not.toHaveBeenCalled()
     expect(result).toBe('-')
   })
 
-  it('should use provided baseDate and options', () => {
+  it('should use provided baseDate', () => {
     const dateValue = new Date('2024-08-29T09:35:34.845548+00:00')
     const baseDate = new Date('2024-08-28T09:35:34.845548+00:00')
-    const options = { locale: 'en-US' }
-    isDate.mockReturnValue(true)
-    formatRelative.mockReturnValue('1 day ago')
+    isDateMock.mockReturnValue(true)
+    formatRelativeMock.mockReturnValue('1 day ago')
 
-    const result = localizedRelativeFormat(dateValue, baseDate, options)
+    const result = localizedRelativeFormat(dateValue, baseDate)
     expect(isDate).toHaveBeenCalledWith(dateValue)
-    expect(formatRelative).toHaveBeenCalledWith(dateValue, baseDate, options)
+    expect(formatRelative).toHaveBeenCalledWith(dateValue, baseDate, undefined)
     expect(result).toBe('1 day ago')
   })
 })
