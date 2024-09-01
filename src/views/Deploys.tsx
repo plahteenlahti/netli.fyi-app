@@ -35,7 +35,7 @@ export const Deploys = ({
 
   return (
     <Container>
-      <List data={deploys} renderItem={renderItem} />
+      <FlatList data={deploys} renderItem={renderItem} />
     </Container>
   )
 }
@@ -43,8 +43,4 @@ export const Deploys = ({
 const Container = styled.SafeAreaView`
   flex: 1;
   background-color: ${({ theme }) => theme.secondaryBackground};
-`
-
-const List = styled(FlatList as new () => FlatList<Deploy>)`
-  padding: 0px 16px;
 `

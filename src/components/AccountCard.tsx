@@ -1,7 +1,10 @@
-import { NativeStackNavigationProp } from '@react-navigation/native-stack'
+import { NativeStackScreenProps } from '@react-navigation/native-stack'
 
 import { usePrefetchAccount } from '@hooks/account'
-import { CompositeStackParamList } from '@navigators/RootStack'
+import { RootStackParamList } from '@navigators/RootStack'
+import { TabParamList } from '@navigators/TabStack'
+import { BottomTabScreenProps } from '@react-navigation/bottom-tabs'
+import { CompositeScreenProps } from '@react-navigation/native'
 import { Account } from '@typings/netlify.d'
 import { TouchableOpacity, View } from 'react-native'
 import { Card } from './Card'
@@ -10,7 +13,10 @@ import { Typography } from './layout/Typography'
 
 type Props = {
   account: Account
-  navigation: NativeStackNavigationProp<CompositeStackParamList, 'Profile'>
+  navigation: CompositeScreenProps<
+    NativeStackScreenProps<RootStackParamList>,
+    BottomTabScreenProps<TabParamList, 'Profile'>
+  >['navigation']
 }
 
 export const AccountCard = ({ account, navigation }: Props) => {

@@ -20,7 +20,7 @@ export const darkTheme: DefaultTheme = {
 
   bonePrimary: '#121212',
   boneSecondary: '#333333',
-  spacing: multiplier => multiplier * MARGIN_UNIT
+  spacing: (multiplier: number) => multiplier * MARGIN_UNIT
 }
 
 export type Color = keyof DefaultTheme
@@ -39,5 +39,5 @@ export const lightTheme: DefaultTheme = {
 
   bonePrimary: '#E1E9EE',
   boneSecondary: '#F2F8FC',
-  spacing: multiplier => multiplier * MARGIN_UNIT
+  spacing: (multiplier: number) => multiplier * MARGIN_UNIT
 }
