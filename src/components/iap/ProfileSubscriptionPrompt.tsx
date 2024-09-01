@@ -1,14 +1,11 @@
 import { useNavigation } from '@react-navigation/native'
 import { StackNavigationProp } from '@react-navigation/stack'
 
-import { useCurrentOfferings } from '@hooks/iap/subscription'
-
 import { RootStackParamList } from '@navigators/RootStack'
-import { NavigationRow } from '../row/NavigationRow'
 import { View } from 'react-native'
+import { NavigationRow } from '../row/NavigationRow'
 
 export const ProfileSubscriptionPrompt = () => {
-  const offerings = useCurrentOfferings()
   const navigation = useNavigation<StackNavigationProp<RootStackParamList>>()
 
   const goToSubscription = () => {

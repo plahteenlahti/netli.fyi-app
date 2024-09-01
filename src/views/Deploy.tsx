@@ -6,7 +6,8 @@ import { useDeploy } from '@hooks/deploy'
 import { RootStackParamList } from '@navigators/RootStack'
 import { NativeStackScreenProps } from '@react-navigation/native-stack'
 import { Deploy as TypeDeploy } from '@typings/netlify.d'
-import { Linking, RefreshControl, ScrollView, Text, View } from 'react-native'
+import { openURL } from '@utilities/url'
+import { RefreshControl, ScrollView, Text, View } from 'react-native'
 import styled from 'styled-components/native'
 
 function shortenGitSha(sha?: string, length: number = 7): string | undefined {
@@ -103,15 +104,17 @@ export const Deploy = ({
               <Text className="text-sm">
                 {links.map((segment, index) => {
                   if (segment.link) {
+                    const link = segment.link
                     return (
                       <Text
                         className="text-blue-500 underline"
-                        onPress={() => Linking.openURL(segment.link)}
+                        onPress={() => openURL(link)}
                         key={index}>
                         {segment.content}
                       </Text>
                     )
                   }
+
                   return segment.content
                 })}
               </Text>

@@ -15,7 +15,7 @@ import {
   ScrollView,
   View
 } from 'react-native'
-import { authorize } from 'react-native-app-auth'
+import { AuthConfiguration, authorize } from 'react-native-app-auth'
 import Config from 'react-native-config'
 import { addAccountFirstTime } from '../store/reducers/accounts'
 import { useAppDispatch } from '../store/store'
@@ -31,11 +31,11 @@ type Props = {
   route: AuthorizationScreenRouteProp
 }
 
-const config = {
+const config: AuthConfiguration = {
   issuer: 'https://app.netlify.com',
-  clientId: Config.client_id,
+  clientId: Config.client_id ?? '',
   clientSecret: Config.client_secret,
-  redirectUrl: Config.redirect_url,
+  redirectUrl: Config.redirect_url ?? 'com.netlify.app://oauth',
   usePKCE: false,
   scopes: [],
   serviceConfiguration: {

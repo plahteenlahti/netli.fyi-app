@@ -22,7 +22,11 @@ export const DeployItem = ({ last, deploy, navigate }: Props) => {
   return (
     <Container last={last} onPress={navigate} key={deploy?.id}>
       <IconContainer>
-        {deploy?.state === 'error' ? <Failure /> : <Success />}
+        {deploy?.state === 'error' ? (
+          <FontAwesome5 name="exclamation-triangle" color="red" />
+        ) : (
+          <FontAwesome5 name="check-circle" color="green" />
+        )}
       </IconContainer>
       <Column>
         <DeployText numberOfLines={1} lineBreakMode="clip">
@@ -108,16 +112,6 @@ const SkippedText = styled(Text)`
 
 const Chevron = styled(FontAwesome5).attrs(({ theme }) => ({
   color: theme.secondaryTextColor
-}))``
-
-const Success = styled(FontAwesome5).attrs(({ theme }) => ({
-  name: 'check-circle',
-  color: theme.successColor
-}))``
-
-const Failure = styled(FontAwesome5).attrs(({ theme }) => ({
-  name: 'exclamation-triangle',
-  color: theme.errorColor
 }))``
 
 const IconContainer = styled.View`

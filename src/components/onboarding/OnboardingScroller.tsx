@@ -1,6 +1,5 @@
-import { Dimensions, Text, View } from 'react-native'
+import { Text, View } from 'react-native'
 import { ScrollView } from 'react-native-gesture-handler'
-import styled from 'styled-components/native'
 import {
   ClipPath,
   Defs,
@@ -9,6 +8,7 @@ import {
   Text as SvgText,
   TSpan
 } from 'react-native-svg'
+import styled from 'styled-components/native'
 
 const image = require('@assets/images/icon.png')
 const gradient = require('@assets/images/gradient.png')

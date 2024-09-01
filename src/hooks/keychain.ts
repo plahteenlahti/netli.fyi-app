@@ -30,6 +30,7 @@ export const useKeychain = () => {
       return credentials
     } catch (error) {
       console.log('[KEYCHAIN]:', error)
+      return null
     }
   }
 

@@ -1,8 +1,6 @@
 import { useMutation, useQuery } from '@tanstack/react-query'
 import Purchases, { PurchasesPackage } from 'react-native-purchases'
 
-const ENTITLEMENT_ID = 'pro_large_tip_netli.fyi'
-
 export const useCustomerInfo = () => {
   return useQuery({
     queryKey: ['customerInfo'],
@@ -23,7 +21,7 @@ export const usePurchasePackage = () => {
       const purchase = await Purchases.purchasePackage(offering)
       return purchase
     },
-    onError: (error, variables, context) => {
+    onError: error => {
       console.error(error)
     }
   })

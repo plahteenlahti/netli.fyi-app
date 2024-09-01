@@ -1,7 +1,7 @@
 import { NativeStackNavigationProp } from '@react-navigation/native-stack'
 
 import { usePrefetchAccount } from '@hooks/account'
-import { RootStackParamList } from '@navigators/RootStack'
+import { CompositeStackParamList } from '@navigators/RootStack'
 import { Account } from '@typings/netlify.d'
 import { TouchableOpacity, View } from 'react-native'
 import { Card } from './Card'
@@ -10,7 +10,7 @@ import { Typography } from './layout/Typography'
 
 type Props = {
   account: Account
-  navigation: NativeStackNavigationProp<RootStackParamList, 'Profile'>
+  navigation: NativeStackNavigationProp<CompositeStackParamList, 'Profile'>
 }
 
 export const AccountCard = ({ account, navigation }: Props) => {

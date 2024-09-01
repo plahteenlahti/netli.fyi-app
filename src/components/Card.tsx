@@ -8,7 +8,7 @@ type Props = {
   children?: ReactNode
 }
 
-export const Card = ({ children, style, padding = true }: Props) => {
+export const Card = ({ children, style }: Props) => {
   return (
     <View style={style} className="bg-white dark:bg-zinc-800 rounded-md mx-2">
       {children}

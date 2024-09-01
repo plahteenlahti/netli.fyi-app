@@ -109,7 +109,7 @@ export const useUpdateBuildSettings = (siteID: string) => {
       }))
       return { previousData }
     },
-    onError: (_err, newData, context) => {
+    onError: (_err, _newData, context) => {
       queryClient.setQueryData(queryKey, context.previousData)
     },
     onSettled: () => {

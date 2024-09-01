@@ -26,11 +26,11 @@ export const IconRow = ({
       <RowContainer hideDivider={hideDivider}>
         <View>
           <View>
-            <CardIcon name={icon} size={16} brands={brands} solid={solid} />
+            <CardIcon name={icon} size={16} brand={brands} solid={solid} />
             <CardText>{title}</CardText>
           </View>
 
-          <Chevron name="chevron-right" size={15} brands />
+          <Chevron name="chevron-right" size={15} brand />
         </View>
       </RowContainer>
     </CardRow>

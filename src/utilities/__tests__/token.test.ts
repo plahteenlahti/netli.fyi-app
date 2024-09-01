@@ -2,9 +2,10 @@ import { validateToken } from '../token'
 
 global.fetch = jest.fn(() =>
   Promise.resolve({
-    json: () => Promise.resolve({ test: 100 })
+    ok: true
   })
 )
+
 describe('validateToken', () => {
   beforeEach(() => {
     jest.clearAllMocks()
