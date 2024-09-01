@@ -1,7 +1,7 @@
 import { useMutation, useQuery, useQueryClient } from '@tanstack/react-query'
 import { NetlifySite } from '@typings/netlify'
-import { BASE_URL } from '../utilities/constants'
-import { creatQueryKey } from '../utilities/queryKey'
+import { BASE_URL } from '@utilities/constants'
+import { createQueryKey } from '@utilities/queryKey'
 import { useToken } from './useToken'
 
 export const useSites = () => {
@@ -29,7 +29,7 @@ export const useSites = () => {
 
 export const useSite = (siteID: string) => {
   const accessToken = useToken()
-  const queryKey = creatQueryKey('site', { siteID, accessToken })
+  const queryKey = createQueryKey('site', { siteID, accessToken })
 
   return useQuery<NetlifySite, Error>({
     queryKey,
@@ -51,7 +51,7 @@ export const useSite = (siteID: string) => {
 
 export const useBuildSettings = (siteID: string) => {
   const accessToken = useToken()
-  const queryKey = creatQueryKey('site', { siteID, accessToken })
+  const queryKey = createQueryKey('site', { siteID, accessToken })
 
   return useQuery<NetlifySite, Error, NetlifySite['build_settings']>({
     queryKey,
@@ -75,7 +75,7 @@ export const useBuildSettings = (siteID: string) => {
 export const useUpdateBuildSettings = (siteID: string) => {
   const accessToken = useToken()
   const queryClient = useQueryClient()
-  const queryKey = creatQueryKey('site', { siteID, accessToken })
+  const queryKey = createQueryKey('site', { siteID, accessToken })
 
   return useMutation<NetlifySite, Error, NetlifySite['build_settings']>({
     mutationFn: async buildSettings => {

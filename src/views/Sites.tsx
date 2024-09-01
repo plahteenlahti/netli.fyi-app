@@ -1,7 +1,7 @@
 import { SiteListItem } from '@components/SiteListItem'
 import { AnimatedFlatList } from '@components/layout/AnimatedFlatList'
 import { useSites } from '@hooks/site'
-import { TabParamList } from '@navigators/TabStack'
+import { CompositeStackParamList } from '@navigators/RootStack'
 import { NativeStackScreenProps } from '@react-navigation/native-stack'
 import { NetlifySite } from '@typings/netlify'
 import { formatUrl } from '@utilities/url'
@@ -9,15 +9,21 @@ import { ListRenderItem, View } from 'react-native'
 
 export const Sites = ({
   navigation
-}: NativeStackScreenProps<TabParamList, 'Sites'>) => {
+}: NativeStackScreenProps<CompositeStackParamList, 'Sites'>) => {
   const sites = useSites()
 
   const renderItem: ListRenderItem<NetlifySite> = ({ item }) => {
     const navigateToSite = () => {
+      if (!item.id) {
+        return
+      }
+
       navigation.navigate('Site', {
-        siteID: `${item.id}`,
-        name: formatUrl(item.custom_domain ?? item.default_domain),
-        url: item.custom_domain ?? `${item.default_domain}`
+        siteID: item.id,
+        name:
+          formatUrl(item.custom_domain ?? item.default_domain) ??
+          'Netlify Site',
+        url: item.custom_domain ?? item.default_domain ?? 'google.com'
       })
     }
 

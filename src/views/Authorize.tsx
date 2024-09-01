@@ -1,4 +1,6 @@
 import { AuthorizeButton } from '@components/AuthorizeButton'
+import { Divider } from '@components/common/Divider'
+import { TextFieldWithButton } from '@components/input/TextFieldWithButton'
 import { OnboardingScroller } from '@components/onboarding/OnboardingScroller'
 import { Text } from '@components/text/Text'
 import { RootStackParamList } from '@navigators/RootStack'
@@ -7,13 +9,10 @@ import { NativeStackNavigationProp } from '@react-navigation/native-stack'
 import { openURL } from '@utilities/url'
 import { useState } from 'react'
 import {
-  Dimensions,
   KeyboardAvoidingView,
   Platform,
   SafeAreaView,
   ScrollView,
-  TextInput,
-  TouchableOpacity,
   View
 } from 'react-native'
 import { authorize } from 'react-native-app-auth'
@@ -33,6 +32,7 @@ type Props = {
 }
 
 const config = {
+  issuer: 'https://app.netlify.com',
   clientId: Config.client_id,
   clientSecret: Config.client_secret,
   redirectUrl: Config.redirect_url,
@@ -58,7 +58,7 @@ export const Authorize = ({ navigation }: Props) => {
           accessToken: newAccessToken
         })
       )
-      navigation.dispatch(StackActions.replace('App'))
+      navigation.replace('App')
     } catch (error) {
       console.warn(error)
     }
@@ -79,38 +79,31 @@ export const Authorize = ({ navigation }: Props) => {
     }
   }
 
+  const onChangeText = (token: string) => {
+    setPersonalAccessToken(token)
+  }
+
   return (
     <SafeAreaView className="flex-1 items-center w-full bg-white">
       <KeyboardAvoidingView
         behavior={Platform.OS === 'ios' ? 'padding' : 'height'}
         className="flex-1 w-full">
-        <ScrollView>
+        <ScrollView className="">
           <OnboardingScroller />
 
-          <AuthorizeButton onPress={authenticateWithNetlify} />
+          <View className="px-4 gap-y-4 flex-col">
+            <AuthorizeButton onPress={authenticateWithNetlify} />
+            <Divider text="or authorize with" />
+            <TextFieldWithButton
+              buttonText="Authorize"
+              onPress={authenticateWithToken}
+              placeholder="Personal Access Token"
+              onChangeText={onChangeText}
+              buttonDisabled={personalAccessToken.length > 5}
+              maxLength={100}
+            />
 
-          <View className="justify-center items-center flex-1 w-full px-5 mb-8">
-            <View className="absolute h-px bg-gray-200 w-full my-4" />
-            <Text className="bg-white text-gray-500 px-5 font-display">
-              Or authorize with
-            </Text>
-          </View>
-
-          <View className="w-full px-4">
-            <View>
-              <TextInput
-                className="px-4 bg-gray-200 rounded-lg py-4"
-                onChangeText={text => setPersonalAccessToken(text)}
-                placeholder="Personal access token"
-              />
-              <TouchableOpacity
-                className="absolute right-0 bg-blue-500 justify-center items-center px-2 py-1 m-2 rounded-lg"
-                onPress={authenticateWithToken}>
-                <Text className="text-white">Authorize</Text>
-              </TouchableOpacity>
-            </View>
-
-            <Text className="mt-4 text-sm text-gray-500 text-center">
+            <Text className="text-sm text-gray-500 text-center">
               You can create a personal access token{' '}
               <Text
                 className="text-blue-500"

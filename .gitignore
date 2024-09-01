@@ -72,3 +72,4 @@ ios/authKey.json
 
 
 coverage/
+.yarn/*

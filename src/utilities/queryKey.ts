@@ -1,4 +1,4 @@
-export const creatQueryKey = (
+export const createQueryKey = (
   key: string,
   params: Record<string, string | number | undefined>
 ) => {

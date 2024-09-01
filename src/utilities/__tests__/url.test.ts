@@ -1,4 +1,3 @@
-import { jest } from '@jest/globals'
 import { openURL } from '../url'
 import { Linking } from 'react-native'
 

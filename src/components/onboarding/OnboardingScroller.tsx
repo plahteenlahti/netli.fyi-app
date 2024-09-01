@@ -15,10 +15,7 @@ const gradient = require('@assets/images/gradient.png')
 
 export const OnboardingScroller = () => {
   return (
-    <ScrollView
-      horizontal
-      showsHorizontalScrollIndicator={false}
-      className="flex flex-row">
+    <ScrollView horizontal showsHorizontalScrollIndicator={false}>
       <View className="items-center flex flex-col p-4 mb-4 w-[100vw]">
         <IconContainer>
           <Icon resizeMode="cover" source={image} />
@@ -61,9 +58,6 @@ export const OnboardingScroller = () => {
           deployments.
         </Summary>
       </View>
-      <View className="w-64 h-64 bg-gray-300 rounded-lg mr-4" />
-      <View className="w-64 h-64 bg-gray-300 rounded-lg mr-4" />
-      <View className="w-64 h-64 bg-gray-300 rounded-lg mr-4" />
     </ScrollView>
   )
 }
