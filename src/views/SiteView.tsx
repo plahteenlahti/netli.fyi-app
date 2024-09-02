@@ -38,7 +38,7 @@ export const Site = ({
         <View>
           <Card.Title className="mb-2">Preview</Card.Title>
           <Card>
-            <View className="h-40 w-full p-2">
+            <View className="h-48 w-full p-2">
               {site.data?.screenshot_url ? (
                 <Image
                   className="h-full w-full overflow-hidden rounded-sm"
@@ -46,7 +46,7 @@ export const Site = ({
                   source={{ uri: site.data?.screenshot_url }}
                 />
               ) : (
-                <NoPreview className="rounded-sm" />
+                <NoPreview className="rounded-md" />
               )}
             </View>
           </Card>

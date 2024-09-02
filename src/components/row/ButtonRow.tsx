@@ -26,7 +26,6 @@ export const ButtonRow = ({
           className={`
             font-medium
             text-base
-            flex-1
             ${type === 'action' ? 'text-blue-500' : 'text-red-500'}
         `}>
           {title}

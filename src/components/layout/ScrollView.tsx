@@ -119,7 +119,7 @@ export const AnimatedScrollView = ({
         {children}
       </Animated.ScrollView>
       <AnimatedBlurView
-        blurType="light"
+        blurType="regular"
         className="absolute top-0 left-0 right-0 px-4"
         style={[
           {
@@ -132,7 +132,14 @@ export const AnimatedScrollView = ({
         <View className="flex-row items-center justify-between">
           <View className="flex-1 justify-center">
             {goBack ? (
-              <TouchableOpacity>
+              <TouchableOpacity
+                onPress={goBack}
+                className="flex-row gap-x-2 items-center">
+                <FontAwesome5
+                  color={colors.gray[700]}
+                  name="chevron-left"
+                  size={20}
+                />
                 <Text className="text-base font-medium">Back</Text>
               </TouchableOpacity>
             ) : null}
