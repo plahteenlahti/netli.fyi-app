@@ -49,6 +49,7 @@ export const Authorize = ({ navigation }: Props) => {
   const [personalAccessToken, setPersonalAccessToken] = useState('')
 
   const authenticateWithNetlify = async () => {
+    console.log('Authenticating with Netlify')
     try {
       const { accessToken: newAccessToken } = await authorize(config)
       dispatch(
@@ -65,6 +66,7 @@ export const Authorize = ({ navigation }: Props) => {
   }
 
   const authenticateWithToken = async () => {
+    console.log('Authenticating with Personal Access Token')
     try {
       dispatch(
         addAccountFirstTime({
@@ -99,7 +101,7 @@ export const Authorize = ({ navigation }: Props) => {
               onPress={authenticateWithToken}
               placeholder="Personal Access Token"
               onChangeText={onChangeText}
-              buttonDisabled={personalAccessToken.length > 5}
+              buttonDisabled={personalAccessToken.length < 5}
               maxLength={100}
             />
 

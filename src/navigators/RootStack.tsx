@@ -120,13 +120,6 @@ export const RootStack = () => {
           title: route.params.name
         })}
       />
-      <Stack.Screen
-        name="Deploy"
-        component={Deploy}
-        options={() => ({
-          presentation: 'modal'
-        })}
-      />
 
       <Stack.Screen
         name="Deploy"

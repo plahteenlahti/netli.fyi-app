@@ -1,5 +1,11 @@
 import { BlurView } from '@react-native-community/blur'
-import { RefreshControl, ScrollViewProps, StyleSheet, View } from 'react-native'
+import {
+  RefreshControl,
+  ScrollViewProps,
+  StyleSheet,
+  Text,
+  View
+} from 'react-native'
 import { TouchableOpacity } from 'react-native-gesture-handler'
 import Animated, {
   Extrapolation,
@@ -73,7 +79,7 @@ export const AnimatedScrollView = ({
   })
 
   const paddingTop = HEADER_HEIGHT + HEADER_PADDING + top
-  const ellipsedTitle = title.length > 10 ? `${title.slice(0, 10)}...` : title
+  const ellipsedTitle = title.length > 16 ? `${title.slice(0, 16)}...` : title
 
   const hasRefreshControl =
     typeof onRefresh !== 'undefined' && typeof refreshing !== 'undefined'
@@ -88,7 +94,7 @@ export const AnimatedScrollView = ({
           ) : undefined
         }
         {...rest}>
-        <View style={{ paddingTop }}>
+        <View style={{ paddingTop, marginBottom: 50 }}>
           {!!goBack && (
             <TouchableOpacity
               onPress={goBack}
@@ -127,16 +133,12 @@ export const AnimatedScrollView = ({
           <View className="flex-1 justify-center">
             {goBack ? (
               <TouchableOpacity>
-                <GradientText className="text-base font-medium">
-                  Back
-                </GradientText>
+                <Text className="text-base font-medium">Back</Text>
               </TouchableOpacity>
             ) : null}
           </View>
           <View className="flex-1 justify-center items-center">
-            <GradientText className="text-base font-medium">
-              {ellipsedTitle}
-            </GradientText>
+            <Text className="text-base font-medium">{ellipsedTitle}</Text>
           </View>
           <View className="flex-1 flex-row-reverse items-center">
             {extraElement}
