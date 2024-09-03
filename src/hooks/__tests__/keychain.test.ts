@@ -3,9 +3,12 @@ import * as Keychain from 'react-native-keychain'
 
 jest.mock('react-native-keychain')
 
+const KeychainMock = Keychain as jest.Mocked<typeof Keychain>
+
 describe('useKeychain', () => {
   beforeEach(() => {
     jest.clearAllMocks()
+    jest.spyOn(console, 'log').mockImplementation(() => {})
   })
 
   it('should set the auth token', async () => {
@@ -21,9 +24,14 @@ describe('useKeychain', () => {
 
   it('should get the auth token', async () => {
     const { getAuthToken } = useKeychain()
-    const mockCredentials = { username: 'netlify-token', password: 'my-token' }
+    const mockCredentials: Keychain.UserCredentials = {
+      username: 'netlify-token',
+      password: 'my-token',
+      service: 'netlify',
+      storage: 'keychain'
+    }
 
-    Keychain.getGenericPassword.mockResolvedValue(mockCredentials)
+    KeychainMock.getGenericPassword.mockResolvedValue(mockCredentials)
 
     const credentials = await getAuthToken()
 
@@ -36,7 +44,7 @@ describe('useKeychain', () => {
   it('should return null if getting the auth token fails', async () => {
     const { getAuthToken } = useKeychain()
 
-    Keychain.getGenericPassword.mockRejectedValue(
+    KeychainMock.getGenericPassword.mockRejectedValue(
       new Error('Failed to get token')
     )
 
@@ -61,7 +69,7 @@ describe('useKeychain', () => {
     const { setAuthToken } = useKeychain()
 
     const consoleSpy = jest.spyOn(console, 'log')
-    Keychain.setGenericPassword.mockRejectedValue(
+    KeychainMock.setGenericPassword.mockRejectedValue(
       new Error('Failed to set token')
     )
 
@@ -74,12 +82,16 @@ describe('useKeychain', () => {
     const { resetAuthToken } = useKeychain()
 
     const consoleSpy = jest.spyOn(console, 'log')
-    Keychain.resetGenericPassword.mockRejectedValue(
+    KeychainMock.resetGenericPassword.mockRejectedValue(
       new Error('Failed to reset token')
     )
 
     await resetAuthToken()
 
     expect(consoleSpy).toHaveBeenCalledWith('[KEYCHAIN]:', expect.any(Error))
+  })
+
+  afterAll(() => {
+    jest.restoreAllMocks() // Restores console.log after all tests are done
   })
 })

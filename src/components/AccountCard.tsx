@@ -14,8 +14,8 @@ import { Typography } from './layout/Typography'
 type Props = {
   account: Account
   navigation: CompositeScreenProps<
-    NativeStackScreenProps<RootStackParamList>,
-    BottomTabScreenProps<TabParamList, 'Profile'>
+    BottomTabScreenProps<TabParamList, 'Profile'>,
+    NativeStackScreenProps<RootStackParamList>
   >['navigation']
 }
 

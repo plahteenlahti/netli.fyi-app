@@ -20,8 +20,8 @@ import { useAppDispatch } from '../store/store'
 import { localizedRelativeFormat } from '../utilities/time'
 
 type Props = CompositeScreenProps<
-  NativeStackScreenProps<RootStackParamList>,
-  BottomTabScreenProps<TabParamList, 'Profile'>
+  BottomTabScreenProps<TabParamList, 'Profile'>,
+  NativeStackScreenProps<RootStackParamList>
 >
 
 export const Profile = ({ navigation }: Props) => {

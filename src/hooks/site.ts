@@ -106,14 +106,25 @@ export const useUpdateBuildSettings = (siteID: string) => {
     onMutate: async newData => {
       await queryClient.cancelQueries({ queryKey })
       const previousData = queryClient.getQueryData(queryKey)
-      queryClient.setQueryData(queryKey, oldData => ({
+      queryClient.setQueryData<
+        NetlifySite,
+        readonly unknown[],
+        NetlifySite['build_settings']
+      >(queryKey, oldData => ({
         ...oldData,
         ...newData
       }))
       return { previousData }
     },
     onError: (_err, _newData, context) => {
-      queryClient.setQueryData(queryKey, context.previousData)
+      // TODO add zod validation
+      const { previousData } = context as { previousData: NetlifySite }
+
+      queryClient.setQueryData<
+        NetlifySite,
+        readonly unknown[],
+        NetlifySite['build_settings']
+      >(queryKey, previousData)
     },
     onSettled: () => {
       queryClient.invalidateQueries({
