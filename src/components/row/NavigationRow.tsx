@@ -33,7 +33,9 @@ export const NavigationRow = ({
           {loading ? (
             <LoadingView className="w-[100] h-[20] rounded-lg" />
           ) : (
-            <Typography secondary className="font-regular text-right text-base">
+            <Typography
+              secondary
+              className="font-regular text-right text-base max-w-[200]">
               {value}
             </Typography>
           )}

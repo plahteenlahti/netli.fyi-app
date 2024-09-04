@@ -3,18 +3,20 @@ import { NetlifySite } from '@typings/netlify'
 import { BASE_URL } from '@utilities/constants'
 import { createQueryKey } from '@utilities/queryKey'
 import { useToken } from './useToken'
+import { useGetToken } from './keychain'
 
 export const useSites = () => {
-  const accessToken = useToken()
+  const token = useGetToken()
+
   return useQuery<Array<NetlifySite>, Error>({
-    queryKey: createQueryKey('sites', { accessToken }),
+    queryKey: createQueryKey('sites', { accessToken: token.data }),
     queryFn: async () => {
       try {
         const response = await fetch(
           `${BASE_URL}/sites?filter=all&sort_by=updated_at`,
           {
             headers: {
-              Authorization: `Bearer ${accessToken}`
+              Authorization: `Bearer ${token.data}`
             }
           }
         )

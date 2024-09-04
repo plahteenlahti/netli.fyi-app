@@ -9,6 +9,8 @@ import {
 import { TouchableOpacity } from 'react-native-gesture-handler'
 import Animated, {
   Extrapolation,
+  FadeIn,
+  FadeOut,
   interpolate,
   interpolateColor,
   useAnimatedScrollHandler,

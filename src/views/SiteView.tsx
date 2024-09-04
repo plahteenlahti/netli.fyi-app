@@ -9,11 +9,14 @@ import { SiteInformation } from '@components/SiteInformation'
 import { SubmissionsPreview } from '@components/SubmissionsPreview'
 import { AnimatedScrollView } from '@components/layout/ScrollView'
 import { HooksPreview } from '@components/previews/hook'
-import { useDeploys } from '@hooks/deploy'
+import { useActiveDeploy, useDeploys } from '@hooks/deploy'
 import { useHooks } from '@hooks/hook'
 import { useSite } from '@hooks/site'
 import { useSubmissions } from '@hooks/submissions'
 import { RootStackParamList } from '@navigators/RootStack'
+import { Text } from 'react-native'
+import useTimeAgo from '@hooks/time/useTimeFrom'
+import { buildTimeToMinutes } from '@utilities/time'
 
 type Props = NativeStackScreenProps<RootStackParamList, 'Site'>
 
@@ -25,8 +28,13 @@ export const Site = ({
 }: Props) => {
   const site = useSite(siteID)
   const deploys = useDeploys(siteID)
+  const activeDeploy = useActiveDeploy(siteID)
   const submissions = useSubmissions(siteID)
   const hooks = useHooks(siteID)
+
+  const timeFrom = useTimeAgo(
+    new Date(activeDeploy.data?.created_at ?? new Date())
+  )
 
   return (
     <View className="flex-1">
@@ -36,6 +44,19 @@ export const Site = ({
         onRefresh={site.refetch}
         refreshing={site.isRefetching}>
         <View>
+          <Card.Title className="mb-2">Deploy status</Card.Title>
+
+          <Card>
+            <Text>{activeDeploy.data?.state}</Text>
+            <Text>Started {timeFrom}</Text>
+            {activeDeploy.data?.state === 'ready' && (
+              <Text>
+                Deployed in{' '}
+                {buildTimeToMinutes(activeDeploy.data?.deploy_time ?? 0)}
+              </Text>
+            )}
+          </Card>
+
           <Card.Title className="mb-2">Preview</Card.Title>
           <Card>
             <View className="h-48 w-full p-2">

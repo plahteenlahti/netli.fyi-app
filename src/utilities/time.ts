@@ -5,7 +5,8 @@ import {
   FormatDurationOptions,
   FormatOptions,
   formatRelative,
-  FormatRelativeOptions
+  FormatRelativeOptions,
+  intervalToDuration
 } from 'date-fns'
 import isDate from 'lodash/isDate'
 
@@ -55,4 +56,13 @@ export const ensureMinLoadingTime = async (
   }
 
   return result
+}
+
+export const buildTimeToMinutes = (buildTime: number) => {
+  const duration = intervalToDuration({ start: 0, end: buildTime * 1000 })
+
+  const formatted = formatDuration(duration, {
+    format: ['minutes', 'seconds']
+  })
+  return formatted
 }

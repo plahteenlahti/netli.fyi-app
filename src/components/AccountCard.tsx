@@ -30,6 +30,8 @@ export const AccountCard = ({ account, navigation }: Props) => {
     prefetchAccount(account.id)
   }
 
+  console.log(JSON.stringify(account, null, 2))
+
   return (
     <TouchableOpacity onPressIn={onPressIn} onPress={navigateToAccount}>
       <Card>

@@ -38,7 +38,7 @@ export const SiteInformation = ({ site, name, loading }: Props) => {
           onPress={openSite}
         />
         <InfoRow title="Created" value={createdAt} loading={loading} />
-        <InfoRow title="Last Publish" value={updatedAt} loading={loading} />
+        <InfoRow title="Updated" value={updatedAt} loading={loading} />
         <NavigationRow
           loading={loading}
           title="Published Deploy"

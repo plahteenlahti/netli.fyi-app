@@ -79,15 +79,21 @@ export const TabStack = () => {
         name="Sites"
         component={Sites}
       />
-      <Tab.Screen
-        name="Builds"
-        component={Builds}
-        options={{
-          tabBarIcon: ({ color }) => (
-            <FontAwesome5 name="hammer" color={color} size={15} />
-          )
-        }}
-      />
+
+      {
+        // TODO Only on DEV builds for now
+        __DEV__ && (
+          <Tab.Screen
+            name="Builds"
+            component={Builds}
+            options={{
+              tabBarIcon: ({ color }) => (
+                <FontAwesome5 name="hammer" color={color} size={15} />
+              )
+            }}
+          />
+        )
+      }
       <Tab.Screen
         name="Profile"
         component={Profile}

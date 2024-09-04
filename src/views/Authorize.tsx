@@ -20,7 +20,7 @@ import { AuthConfiguration, authorize } from 'react-native-app-auth'
 import Config from 'react-native-config'
 import { addAccountFirstTime } from '../store/reducers/accounts'
 import { useAppDispatch } from '../store/store'
-import { useKeychain } from '@hooks/keychain'
+import { useGetToken, useSetToken } from '@hooks/keychain'
 
 type AuthorizationScreenNavigationProp = NativeStackNavigationProp<
   RootStackParamList,
@@ -49,7 +49,7 @@ const config: AuthConfiguration = {
 export const Authorize = ({ navigation }: Props) => {
   const dispatch = useAppDispatch()
   const { state, validate, reset } = useValidateToken()
-  const { setAuthToken } = useKeychain()
+  const { mutate } = useSetToken()
   const [personalAccessToken, setPersonalAccessToken] = useState('')
 
   const authenticateWithNetlify = async () => {
@@ -70,9 +70,14 @@ export const Authorize = ({ navigation }: Props) => {
   }
 
   const authenticateWithToken = async () => {
-    const valid = await validate(personalAccessToken)
-    if (valid) {
-      await setAuthToken(personalAccessToken)
+    try {
+      const valid = await validate(personalAccessToken)
+      if (valid) {
+        mutate(personalAccessToken)
+        navigation.replace('App')
+      }
+    } catch (error) {
+      console.warn(error)
     }
   }
 

@@ -4,6 +4,8 @@ import { TouchableOpacity } from 'react-native-gesture-handler'
 import { Card } from '../Card'
 import { CardTitle } from '../CardTitle'
 import { Text } from '../text/Text'
+import FontAwesome5Icon from 'react-native-vector-icons/FontAwesome5'
+import colors from 'tailwindcss/colors'
 
 type Props = {
   hooks?: Array<Hook>
@@ -11,8 +13,23 @@ type Props = {
   siteName: string
 }
 
+const getIcon = (type: string) => {
+  switch (type) {
+    case 'github_app_commit_status':
+      return 'code-branch'
+    case 'github_app_checks':
+      return 'code-branch'
+    case 'email':
+      return 'envelope'
+    case 'github_app_review_comment':
+      return 'comments'
+    default:
+      return 'code-branch'
+  }
+}
+
 export const HooksPreview = ({ hooks }: Props) => {
-  const shownHooks = hooks?.slice(0, 5)
+  const shownHooks = hooks
 
   const rows = buildInfoRows(shownHooks)
 
@@ -22,21 +39,23 @@ export const HooksPreview = ({ hooks }: Props) => {
     <>
       <CardTitle title="Web hooks" icon="code-branch" />
       <Card>
-        {rows?.map(hook => {
-          // const navigate = () => {
-          //   navigation.navigate('Hook', {
-          //     name: siteName,
-          //     hookID: hook?.id
-          //   })
-          // }
-
+        {rows?.map(({ message, hook }) => {
           return (
-            <View key={hook}>
-              <Text className="text-xs font-normal tex">{hook}</Text>
+            <View
+              className="px-2 pt-3 pb-2 border-b border-b-gray-200 flex-1"
+              key={hook.id}>
+              <View className="flex-row gap-2 flex-1 mr-4">
+                <FontAwesome5Icon
+                  name={getIcon(hook.type)}
+                  size={14}
+                  color={colors.gray[400]}
+                />
+                <Text className="text-md font-normal tex">{message}</Text>
+              </View>
             </View>
           )
         })}
-        {hooks && hooks?.length > 5 ? (
+        {hooks && hooks.length > 5 ? (
           <View>
             <TouchableOpacity
               className="flex items-center justify-center w-full h-12 bg-gray-100 rounded-md"
@@ -50,57 +69,95 @@ export const HooksPreview = ({ hooks }: Props) => {
   )
 }
 
-function buildInfoRows(events?: Hook[]): string[] | undefined {
+type HookInfo = {
+  message: string
+  hook: Hook
+}
+
+function buildInfoRows(events?: Hook[]): HookInfo[] | undefined {
   return events
     ?.map(event => {
+      let message = ''
+
       switch (event.type) {
         case 'github_app_commit_status':
           switch (event.event) {
             case 'deploy_building':
-              return 'Add deploy state commit checks when Deploy Preview starts'
+              message =
+                'Add deploy state commit checks when Deploy Preview starts'
+              break
             case 'deploy_created':
-              return 'Add deploy state commit checks when Deploy Preview succeeds'
+              message =
+                'Add deploy state commit checks when Deploy Preview succeeds'
+              break
             case 'deploy_failed':
-              return 'Add deploy state commit checks when Deploy Preview fails'
+              message =
+                'Add deploy state commit checks when Deploy Preview fails'
+              break
             default:
-              return ''
+              message = ''
           }
+          break
         case 'github_app_checks':
           switch (event.event) {
             case 'deploy_building':
-              return 'Add deploy summary commit checks when Deploy Preview starts'
+              message =
+                'Add deploy summary commit checks when Deploy Preview starts'
+              break
             case 'deploy_created':
-              return 'Add deploy summary commit checks when Deploy Preview succeeds'
+              message =
+                'Add deploy summary commit checks when Deploy Preview succeeds'
+              break
             case 'deploy_failed':
-              return 'Add deploy summary commit checks when Deploy Preview fails'
+              message =
+                'Add deploy summary commit checks when Deploy Preview fails'
+              break
             default:
-              return ''
+              message = ''
           }
+          break
         case 'email':
           switch (event.event) {
             case 'deploy_request_pending':
-              return `Email ${event.data.email} when deploy request is pending`
+              message = `Email ${event.data.email} when deploy request is pending`
+              break
             case 'deploy_request_accepted':
-              return `Email ${event.data.email} when deploy request is accepted`
+              message = `Email ${event.data.email} when deploy request is accepted`
+              break
             case 'deploy_request_rejected':
-              return `Email ${event.data.email} when deploy request is rejected`
+              message = `Email ${event.data.email} when deploy request is rejected`
+              break
             default:
-              return ''
+              message = ''
           }
+          break
         case 'github_app_review_comment':
           switch (event.event) {
             case 'deploy_request_pending':
-              return 'Add Deploy Preview links to pull request comments when deploy request is pending'
+              message =
+                'Add Deploy Preview links to pull request comments when deploy request is pending'
+              break
             case 'deploy_request_accepted':
-              return 'Add Deploy Preview links to pull request comments when deploy request is accepted'
+              message =
+                'Add Deploy Preview links to pull request comments when deploy request is accepted'
+              break
             case 'deploy_request_rejected':
-              return 'Add Deploy Preview links to pull request comments when deploy request is rejected'
+              message =
+                'Add Deploy Preview links to pull request comments when deploy request is rejected'
+              break
             default:
-              return ''
+              message = ''
           }
+          break
         default:
-          return ''
+          message = ''
+      }
+
+      if (message) {
+        return { message, hook: event }
+      } else {
+        return null
       }
     })
-    .filter(row => row !== '')
+    .filter(row => row !== null) as HookInfo[]
 }
