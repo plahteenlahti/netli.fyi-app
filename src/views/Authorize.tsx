@@ -3,8 +3,9 @@ import { Divider } from '@components/common/Divider'
 import { TextFieldWithButton } from '@components/input/TextFieldWithButton'
 import { OnboardingScroller } from '@components/onboarding/OnboardingScroller'
 import { Text } from '@components/text/Text'
+import { useValidateToken } from '@hooks/useValidateToken'
 import { RootStackParamList } from '@navigators/RootStack'
-import { RouteProp, StackActions } from '@react-navigation/native'
+import { RouteProp } from '@react-navigation/native'
 import { NativeStackNavigationProp } from '@react-navigation/native-stack'
 import { openURL } from '@utilities/url'
 import { useState } from 'react'
@@ -19,6 +20,7 @@ import { AuthConfiguration, authorize } from 'react-native-app-auth'
 import Config from 'react-native-config'
 import { addAccountFirstTime } from '../store/reducers/accounts'
 import { useAppDispatch } from '../store/store'
+import { useKeychain } from '@hooks/keychain'
 
 type AuthorizationScreenNavigationProp = NativeStackNavigationProp<
   RootStackParamList,
@@ -46,6 +48,8 @@ const config: AuthConfiguration = {
 
 export const Authorize = ({ navigation }: Props) => {
   const dispatch = useAppDispatch()
+  const { state, validate, reset } = useValidateToken()
+  const { setAuthToken } = useKeychain()
   const [personalAccessToken, setPersonalAccessToken] = useState('')
 
   const authenticateWithNetlify = async () => {
@@ -66,23 +70,10 @@ export const Authorize = ({ navigation }: Props) => {
   }
 
   const authenticateWithToken = async () => {
-    console.log('Authenticating with Personal Access Token')
-    try {
-      dispatch(
-        addAccountFirstTime({
-          name: 'New Personal Access Token',
-          createdAt: new Date().toISOString(),
-          accessToken: personalAccessToken
-        })
-      )
-      navigation.dispatch(StackActions.replace('App'))
-    } catch (error) {
-      console.warn(error)
+    const valid = await validate(personalAccessToken)
+    if (valid) {
+      await setAuthToken(personalAccessToken)
     }
-  }
-
-  const onChangeText = (token: string) => {
-    setPersonalAccessToken(token)
   }
 
   return (
@@ -90,17 +81,23 @@ export const Authorize = ({ navigation }: Props) => {
       <KeyboardAvoidingView
         behavior={Platform.OS === 'ios' ? 'padding' : 'height'}
         className="flex-1 w-full">
-        <ScrollView className="">
+        <ScrollView className="" keyboardShouldPersistTaps="handled">
           <OnboardingScroller />
 
           <View className="px-4 gap-y-4 flex-col">
             <AuthorizeButton onPress={authenticateWithNetlify} />
             <Divider text="or authorize with" />
+
+            {/* TODO remove this as there seems to be some kind of bug with the flex gap */}
+            <View className="h-0" />
+
             <TextFieldWithButton
+              onFocus={reset}
+              state={state}
               buttonText="Authorize"
               onPress={authenticateWithToken}
               placeholder="Personal Access Token"
-              onChangeText={onChangeText}
+              onChangeText={setPersonalAccessToken}
               buttonDisabled={personalAccessToken.length < 5}
               maxLength={100}
             />

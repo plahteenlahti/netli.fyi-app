@@ -1,10 +1,13 @@
 import * as Keychain from 'react-native-keychain'
 
+// TODO - Update the service name
+const SERVICE = 'deploy.nyxo.app'
+
 export const useKeychain = () => {
   const resetAuthToken = async () => {
     try {
       await Keychain.resetGenericPassword({
-        service: 'netlify'
+        service: SERVICE
       })
     } catch (error) {
       console.log('[KEYCHAIN]:', error)
@@ -14,7 +17,7 @@ export const useKeychain = () => {
   const setAuthToken = async (token: string) => {
     try {
       await Keychain.setGenericPassword('netlify-token', token, {
-        service: 'netlify'
+        service: SERVICE
       })
     } catch (error) {
       console.log('[KEYCHAIN]:', error)
@@ -24,7 +27,7 @@ export const useKeychain = () => {
   const getAuthToken = async () => {
     try {
       const credentials = await Keychain.getGenericPassword({
-        service: 'netlify'
+        service: SERVICE
       })
 
       return credentials

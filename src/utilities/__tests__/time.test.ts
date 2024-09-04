@@ -1,7 +1,8 @@
 import {
   localizedFormat,
   localizedDuration,
-  localizedRelativeFormat
+  localizedRelativeFormat,
+  ensureMinLoadingTime
 } from '../time'
 import {
   format,
@@ -122,5 +123,66 @@ describe('localizedRelativeFormat', () => {
     expect(isDate).toHaveBeenCalledWith(dateValue)
     expect(formatRelative).toHaveBeenCalledWith(dateValue, baseDate, undefined)
     expect(result).toBe('1 day ago')
+  })
+})
+
+describe('ensureMinLoadingTime', () => {
+  jest.useFakeTimers() // Mock the timers
+
+  it('should resolve the promise and wait for the minimum time if promise resolves too fast', async () => {
+    const mockPromise = Promise.resolve('result')
+    const minTime = 2000
+
+    const promise = ensureMinLoadingTime(mockPromise, minTime)
+
+    // Fast-forward time by less than the minTime to simulate fast promise resolution
+    jest.advanceTimersByTime(1000)
+
+    // Ensure the promise hasn't resolved yet since minTime hasn't passed
+    expect(await Promise.race([promise, Promise.resolve('not yet')])).toBe(
+      'not yet'
+    )
+
+    // Fast-forward time to the minTime
+    jest.advanceTimersByTime(1000)
+
+    // Now the promise should resolve
+    const result = await promise
+    expect(result).toBe('result')
+  })
+
+  it('should resolve immediately if the promise takes longer than the minimum time', async () => {
+    const mockPromise = new Promise(resolve => {
+      setTimeout(() => resolve('delayed result'), 3000)
+    })
+    const minTime = 2000
+
+    const promise = ensureMinLoadingTime(mockPromise, minTime)
+
+    // Fast-forward time by 3000ms to simulate slow promise resolution
+    jest.advanceTimersByTime(3000)
+
+    const result = await promise
+    expect(result).toBe('delayed result')
+
+    // Ensure no extra delay after promise resolution
+    jest.advanceTimersByTime(1000) // Fast-forward some extra time to ensure no additional wait.
+  })
+
+  it('should not wait if the promise resolves after the minimum time', async () => {
+    const mockPromise = new Promise(resolve =>
+      setTimeout(() => resolve('result'), 2500)
+    )
+    const minTime = 2000
+
+    const promise = ensureMinLoadingTime(mockPromise, minTime)
+
+    // Fast-forward time beyond the time taken by the promise (2500ms)
+    jest.advanceTimersByTime(2500)
+
+    const result = await promise
+    expect(result).toBe('result')
+
+    // No need to assert setTimeout calls; we just need to ensure the result is returned after the actual promise time.
   })
 })

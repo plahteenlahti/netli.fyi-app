@@ -6,10 +6,8 @@ import { useToken } from './useToken'
 
 export const useSites = () => {
   const accessToken = useToken()
-
-  console.log('accessToken', accessToken)
   return useQuery<Array<NetlifySite>, Error>({
-    queryKey: ['sites', { accessToken }],
+    queryKey: createQueryKey('sites', { accessToken }),
     queryFn: async () => {
       try {
         const response = await fetch(

@@ -39,3 +39,20 @@ export const localizedRelativeFormat = (
   }
   return formatRelative(date, baseDate, options)
 }
+
+export const ensureMinLoadingTime = async (
+  promise: Promise<any>,
+  minTime: number
+): Promise<any> => {
+  const start = Date.now()
+  const result = await promise
+  const end = Date.now()
+  const timeElapsed = end - start
+  const remainingTime = minTime - timeElapsed
+
+  if (remainingTime > 0) {
+    await new Promise(resolve => setTimeout(resolve, remainingTime))
+  }
+
+  return result
+}
