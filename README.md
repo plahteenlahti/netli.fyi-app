@@ -1,3 +1,12 @@
+> [!IMPORTANT]
+> **This repository is no longer maintained.** Netli.fyi has been rebuilt from scratch and lives on as a new app.
+>
+> - Website: [netli.fyi](https://netli.fyi)
+> - iPhone and iPad: [App Store](https://apps.apple.com/app/netli-fyi-netlify-client/id6741714545)
+> - Android: [Google Play](https://play.google.com/store/apps/details?id=com.perttumainen.netlifyi)
+>
+> The code below is the original 2021–2022 React Native app. It's kept here for reference only.
+
 <p align="center">
   <h1 align="center">Netli.fyi</h1>
   <h4 align="center">React Native app for managing Netlify sites</h4>
